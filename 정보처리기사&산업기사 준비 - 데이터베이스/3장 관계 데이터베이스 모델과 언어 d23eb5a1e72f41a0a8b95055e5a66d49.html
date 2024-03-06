@@ -1,0 +1,838 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3장 관계 데이터베이스 모델과 언어</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d23eb5a1-e72f-41a0-a8b9-5055e5a66d49" class="page sans"><header><h1 class="page-title">3장 관계 데이터베이스 모델과 언어</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 14일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="09a32da5-012c-43be-a910-560dbcdde6ce" class=""><strong>관계형 데이터베이스의 구조</strong></blockquote><ol type="1" id="d1aa3592-7f6b-456a-b8ea-b38d97a0646c" class="numbered-list" start="1"><li>데이터베이스에 관련된 용어의 설명으로 옳지 않은것</li></ol><ul id="23632a61-942d-4353-8833-8c87a68ac65d" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">튜플(Tuple) - 테이블에서 열에 해당된다.</span><ul id="058fa7ce-95e7-462f-ba48-d4dfcdc40e2f" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background"><strong>튜플</strong></mark>은 테이블에서 <mark class="highlight-yellow_background"><strong>행에 해당</strong></mark>된다. <mark class="highlight-yellow_background"><strong>애트리뷰트</strong></mark>가 <mark class="highlight-yellow_background"><strong>테이블에서 열에 해당</strong></mark>된다.</li></ul></li></ul><ul id="e0ddc9c4-a31b-463b-b5a9-a9d804b1aa91" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>애트리뷰트</strong></mark>(Attribute) - 데이터의 <mark class="highlight-yellow_background"><strong>가장 작은 논리적 단위</strong></mark>로서 <strong>파일 구조상의 </strong><mark class="highlight-yellow_background"><strong>데이터 항목</strong></mark><strong> </strong>또는 <mark class="highlight-yellow_background"><strong>데이터 필드</strong></mark><strong>에 해당</strong>된다.</li></ul><ul id="fea3f43b-4a37-427c-a781-2fb0d51d32d2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>릴레이션</strong></mark>(Relation) - <mark class="highlight-yellow_background"><strong>릴레이션 스킴</strong></mark>과 <mark class="highlight-yellow_background"><strong>릴레이션 인스턴스</strong></mark>로 <strong>구성</strong>된다.</li></ul><ul id="01a588af-81de-4c41-9e9c-8996a27ba464" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>도메인</strong></mark>(Domain) - <mark class="highlight-yellow_background"><strong>애트리뷰트</strong></mark><strong>가 </strong><mark class="highlight-yellow_background"><strong>취할 수 있는 값들의 집합</strong></mark>이다.</li></ul><p id="1b433975-f7ce-49ae-a900-ede297f8cea5" class="">
+</p><p id="7b77f004-0662-453d-9645-3017a68f6b60" class="">
+</p><ol type="1" id="42c05c47-1d3b-433a-bca3-f0a9d724608c" class="numbered-list" start="2"><li>릴레이션에서 속성의 수와 튜플의 수를 의미하는 것으로 순서대로 옳게 짝지어진것은</li></ol><ul id="48f263a8-9019-4d89-b3ef-f88c08d44347" class="bulleted-list"><li style="list-style-type:disc">디그리(Dgree), 카디너리티(Cardinality)<ul id="fc07557b-6e51-49ed-b2cc-8d3bca7c5652" class="bulleted-list"><li style="list-style-type:circle"><strong>차수(Degree) = 속성(Attribute)의 수 = 열의 수</strong></li></ul><ul id="d641786d-7988-4afa-ad8f-4ffddfcb51da" class="bulleted-list"><li style="list-style-type:circle"><strong>기수 (Cardinality) = 튜플(Tuple)의 수 = 행의 수</strong></li></ul></li></ul><p id="78b4291b-0223-4e18-a703-930a6805e657" class="">
+</p><ol type="1" id="3fb0f998-7107-4c4c-a6ab-d31dd014e080" class="numbered-list" start="3"><li><strong>관계 데이터베이스</strong>에서 <strong>릴레이션을 구성</strong>하고 있는 <strong>각각의 속성(Attribute)</strong>에서 <strong>취할 수 있는 원자값</strong>들의 <strong>집합</strong>을 무엇이라 하는가</li></ol><ul id="f065a5e5-369a-48f2-99a5-ceeb80a82279" class="bulleted-list"><li style="list-style-type:disc"><strong>도메인 </strong></li></ul><ul id="8c80f4a7-dde1-4e64-a4ff-da7752ea2a6f" class="bulleted-list"><li style="list-style-type:disc">도메인이란 학년은 1~4, 성별은 남, 여 처럼 속성에 지정할 수 있는 값의 범위를 의미한다.</li></ul><p id="b393ff94-8aba-47db-ae37-57190c84082c" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c710b6aa-8674-47d5-b524-83fdfcd74e8d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>차수</strong>(Degree) = <strong>속성(Attribute)의 수 </strong>= <strong>열</strong>의 수<p id="4277f40f-a306-4682-91c0-a1c8ff55d7e9" class=""><strong>기수</strong>(Cardinality) = <strong>튜플(Tuple)의 수 </strong>= <strong>행</strong>의 수</p><p id="4443fe72-df6a-44a6-9892-3b43fd29e79a" class=""><mark class="highlight-yellow_background"><strong>속성은 데이터베이스를 구성하는 가장 작은 논리적 단위이다</strong></mark></p></div></figure><p id="03c12553-3818-45f9-afa0-045b4268a917" class="">
+</p><ol type="1" id="e9bcefa7-e1a5-4553-b335-437eb66ddb12" class="numbered-list" start="5"><li>속성(Attribute)에 대한 설명으로 틀린것</li></ol><ul id="1334d30b-37d0-466a-b288-e20bfc00f959" class="bulleted-list"><li style="list-style-type:disc">속성은 개체의 특성을 기술한다.</li></ul><ul id="ee89fb28-ac2c-491e-9135-d94059b532bb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>속성은 데이터베이스를 구성하는 가장 작은 논리적 단위이다</strong></mark><span style="border-bottom:0.05em solid">.</span></li></ul><ul id="18edd422-f7d7-4a2f-95ff-5ce15f373573" class="bulleted-list"><li style="list-style-type:disc">속성은 파일 구조상 데이터 항목 또는 데이터 필드에 해당된다.</li></ul><ul id="d20494d6-ce0f-46b9-a679-ac28b36db7d0" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">속성의 수를 Cardinality 라고 한다</span>.<ul id="fbf59aae-88c8-46aa-b2cf-d5706eb9019a" class="bulleted-list"><li style="list-style-type:circle"><strong>속성의 수</strong>는 <strong>Degree 차수</strong>라고 한다.</li></ul><ul id="2e249cce-89e6-484a-b113-44f16929323b" class="bulleted-list"><li style="list-style-type:circle"><strong>튜플</strong>의 수를 <strong>Cardinality 기수 </strong>라고 한다. = <strong>행의 수</strong></li></ul></li></ul><p id="37b868b6-8487-4b48-a9d3-0adb2e04a61b" class="">
+</p><ol type="1" id="f50fc75e-2f57-4db6-9fa3-117fc8d0d184" class="numbered-list" start="6"><li>What is the <strong>degree of a relation</strong>?</li></ol><ul id="62bd38e1-5251-4bf4-b39f-4f5429c45ddd" class="bulleted-list"><li style="list-style-type:disc">the number of <strong>attributes n</strong> of <strong>its relation schema</strong><ul id="a5afadbd-7dcf-4e9c-8bd9-cf043f231b92" class="bulleted-list"><li style="list-style-type:circle"><strong>릴레이션</strong>은 <strong>테이블</strong>을 의미한다. <strong>디그리</strong>(Degree)는 <strong>테이블에서 열에 해당하는속성</strong>의 수를 말한다.</li></ul></li></ul><p id="a69b980b-e60b-40df-8599-eca39055c744" class="">
+</p><ol type="1" id="b40fb20c-5bb4-4b08-adce-54330a9effd0" class="numbered-list" start="7"><li>다음 설명 중 릴레이션의 특징으로 옳은 내용 모두를 나열한 것은</li></ol><ul id="8429b8e3-1100-447f-97ce-fb07873ff678" class="bulleted-list"><li style="list-style-type:disc"><strong>모든 튜플은 서로 다른 값을 갖는다</strong>.</li></ul><ul id="0e634018-bff9-4f5d-a59e-7e8401cfa499" class="bulleted-list"><li style="list-style-type:disc"><strong>각 속성은 릴레이션 내에서 유일한 이름을 가지며</strong>, <strong>속성의 순서는 의미가 없다 </strong></li></ul><ul id="031b22fa-1977-4061-afb5-a44721673094" class="bulleted-list"><li style="list-style-type:disc"><strong>하나의 릴레이션에서 튜플의 순서는 없다</strong></li></ul><ul id="d1df1b7f-24b9-4fbb-9b82-225c00dee817" class="bulleted-list"><li style="list-style-type:disc"><strong>모든 속성의 값은 원자값이다</strong>.</li></ul><p id="fcf9e4af-bb3a-4720-9082-88b845de38c3" class="">
+</p><ol type="1" id="7893768b-fab1-4d28-96a1-68457fefc52f" class="numbered-list" start="8"><li>릴레이션에 대한 설명으로 적합하지 않은것은</li></ol><ul id="f07645ee-7005-479b-a1c0-1c5413e8b3cc" class="bulleted-list"><li style="list-style-type:disc"><strong>릴레이션</strong>은 <strong>릴레이션 스키마</strong>와 <strong>릴레이션 인스턴스</strong>로 구성된다.</li></ul><ul id="34a32e98-fbc3-4317-ac78-7fb3548de99d" class="bulleted-list"><li style="list-style-type:disc"><strong>릴레이션 스키마</strong>는 한 <strong>릴레이션의 논리적 구조</strong>를 기술한것이다.</li></ul><ul id="5a9f3dc0-1607-443f-a1e6-26dcbe103900" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">릴레이션 인스턴스는 구조를 나타내며 릴레이션 스키마는 실제 값들을 나타낸다</span>.<ul id="f27e5fd8-20bc-4c35-be1d-d30d6582e328" class="bulleted-list"><li style="list-style-type:circle"><strong>릴레이션 인스턴스</strong>는 <strong>실제 값</strong>들을 나타내며 <strong>릴레이션 스키마</strong>는 <strong>구조</strong>를 나타낸다.</li></ul></li></ul><ul id="dec68e92-d6db-493d-a7af-2b40828b8cd2" class="bulleted-list"><li style="list-style-type:disc"><strong>릴레이션 스키마</strong>는 <strong>정적인 성질</strong>을 가지며 <strong>릴레이션 인스턴스</strong>는 <strong>동적인 성질</strong>을 가진다.</li></ul><p id="1bc0df93-66ee-478d-824c-6c0dcdd51d68" class="">
+</p><p id="f8f83b6c-0de7-4a3c-8498-679e81ef42fb" class="">
+</p><p id="e7f79d03-9e61-4d73-a6d6-d256be21375f" class="">
+</p><p id="ea8ec0ac-74fe-42eb-9696-42733e8f3188" class="">
+</p><p id="ec5dd3b8-6409-4184-9e55-6035aaff18a7" class="">
+</p><blockquote id="add132f2-2229-4a55-b709-ed73722b47ff" class=""><strong>관계형 데잍베이스의 제약 조건</strong></blockquote><p id="07212cf1-05ed-42ea-9e50-6535ca2e60a1" class="">
+</p><ol type="1" id="55efaf72-1b7c-4467-963d-a9bc5cce28a5" class="numbered-list" start="1"><li><strong>키는 개체 집합에서 고유하게 개체를 식별할 수 있는 속성</strong>이다. 데이터베이스에서 사용되는 키의 종류에 대한 설명 중 옳지 않은 것은</li></ol><ul id="92e7d87b-6e1d-46be-a187-eaaa092c0370" class="bulleted-list"><li style="list-style-type:disc"><strong>후보키(Candidate Key) </strong>: 개체들을 <strong>고유하게 식별할 수 있는 속성 </strong></li></ul><ul id="f309aee3-3a4c-46ee-9318-904b8d7116cb" class="bulleted-list"><li style="list-style-type:disc"><strong>슈퍼키(Super Key)</strong> : <strong>한개 이상의 속성들의 집합으로 구성된 키</strong></li></ul><ul id="411fd4dd-56d1-4517-b5e5-abe9905a52ec" class="bulleted-list"><li style="list-style-type:disc"><strong>외래키 (Foreign Key) </strong>: <strong>다른 테이블</strong>의 <strong>기본키로 </strong>사용되는 속성</li></ul><ul id="972100ff-bd02-4e84-9a08-c517f9a8aec6" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">대채키(Alternative Key) : 후보키 중에서 대표로 선정된 키</span><ul id="112e8bc4-354d-443d-965a-da87bbbea76b" class="bulleted-list"><li style="list-style-type:circle"><strong>대체키</strong>는 <strong>후보키들 중에서 기본키를 제외한 나머지 후보키</strong>를 의미한다. </li></ul></li></ul><p id="2e4b9204-12dc-4973-89d5-4acb165cf78c" class="">
+</p><p id="4e555e91-794f-42d1-8860-5e1b5316ac0a" class="">
+</p><ol type="1" id="4aa93cc8-a304-4ba3-aa57-eab62f937a19" class="numbered-list" start="2"><li>다음 설명이 의미하는 것은</li></ol><p id="e30444d9-6791-481f-aeaa-9962ff979b34" class="">It is a <strong>single field </strong>or <strong>combination of fields </strong>that uniquley defines a database record. It is also acalled a <strong>major key</strong>. It is mainly used when records are <strong>searched or sorted </strong>.</p><ul id="50d59e74-3445-4c58-81e6-31d3ec2adb01" class="bulleted-list"><li style="list-style-type:disc"><strong>Primary Key</strong><ul id="d597742b-8917-445e-a20d-da9c577f3c0f" class="bulleted-list"><li style="list-style-type:circle">ㅇ=주 키라고도 부르며 레코드를 검색하거나 정렬할때로 주로 사용하는 키는 Primary Key 라고 부른다. </li></ul><ul id="45a39a75-7b7e-409d-94ae-350140772b0d" class="bulleted-list"><li style="list-style-type:circle"></li></ul></li></ul><ol type="1" id="0019f704-6a69-4ab9-b15d-29441c813ba8" class="numbered-list" start="3"><li>데이터베이스에서 사용되는 <strong>널 값 </strong>( Null Value)에 대한 설명으로 옳지 않은 것은</li></ol><ul id="51f32b5a-0a31-4829-bafd-a11c9103470c" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">공백 또는 영을 의미한다.</span><ul id="8de397d1-8e9d-4251-bee2-b3671f1553a2" class="bulleted-list"><li style="list-style-type:circle">공백은 문자 데이터이고 0은 숫자 데이터이다. 널 값이 아니다.</li></ul></li></ul><ul id="3106a7c9-8689-4612-a9e8-24470fcd636f" class="bulleted-list"><li style="list-style-type:disc"><strong>아직 알려지지 않거나 모르는 값</strong>이다.</li></ul><ul id="e9490225-39c3-4903-8d61-3d83ec85118f" class="bulleted-list"><li style="list-style-type:disc">이론적으로 <strong>아무것도 없는 특수한 데이터</strong>를 의미한다.</li></ul><ul id="8c02af90-8390-4ff4-be74-5615cd15a344" class="bulleted-list"><li style="list-style-type:disc"><strong>정보 부재</strong>를 나타내기 위해 사용한다. </li></ul><p id="962e269a-a962-415b-b3b0-1535a12a0160" class="">
+</p><ol type="1" id="5b59d98f-3c75-4d43-a1b9-8243563b5657" class="numbered-list" start="4"><li>다음 두 릴레이션간의 관계에서 교수 릴레이션에 존재하는 외래키는 (단 교수릴레이션의 기본키는 교수번호이고 학과 릴레이션의 기본키는 학과번호이다)</li></ol><ul id="77ef3555-3cd2-4208-90f9-51cba168b9b1" class="bulleted-list"><li style="list-style-type:disc">교수(교수 번호, 교수이름, 학과번호, 직급)</li></ul><ul id="4adfd302-e755-4e13-9c5a-1256fc0f7758" class="bulleted-list"><li style="list-style-type:disc">학과(학과 번호, 학과 이름, 학과장 교수번호, 학생수)</li></ul><p id="6f7547eb-c79e-4102-93f9-28dd5fc9dbdb" class="">외래키는 <strong>학과번호</strong>이다.<div class="indented"><ul id="f5cc9264-9627-46f1-8935-d644e97aceeb" class="bulleted-list"><li style="list-style-type:disc">한 학과에 여러명의 교수가 있을 수있지만 하 교수가 여러 학과에 소속될 수 없다. 그러므로 위의 <strong>&lt;교수&gt;와 &lt;학과&gt; 릴레이션</strong>은 &lt;교수&gt;가 &lt;학과&gt;를 참조하는 <strong>N:1의 관계</strong>이다. <strong>학과 릴레이션의 학과 번호</strong>는 <strong>기본키</strong>이고 학과를 참조하는 <strong>교수 릴레이션</strong>의 <strong>학과 번호</strong>는 <strong>외래키</strong>가 된다.</li></ul></div></p><p id="95df3b1d-5693-4e01-ab0d-2537d54c76aa" class="">
+</p><ol type="1" id="497b396a-7507-45c1-adeb-12a8f3f244a5" class="numbered-list" start="5"><li>한 <strong>릴레이션의 기본키를 구성하는 어떠한 속성값도 널 (NULL)값이나 중복값을 가질 수 없다</strong>는 것을 의미하는것은</li></ol><ul id="3b3eef50-58d9-41fd-8c2c-73a3b8933a08" class="bulleted-list"><li style="list-style-type:disc"><strong>개체 무결성 제약 조건</strong></li></ul><p id="0298f9c7-3902-43d2-b5f4-80698064d17b" class="">
+</p><p id="f64912cb-b991-4922-9e69-79a5d6cbe7c7" class="">
+</p><ol type="1" id="1af6d048-7ae6-4f3d-82cb-aa9a2fa50226" class="numbered-list" start="6"><li><strong>릴레이션은 참조할 수 없는 외래키 값을 가질 수없음</strong>을 의미하는 제약조건은</li></ol><ul id="62a3d142-3255-460c-8fea-40b1614d2fb4" class="bulleted-list"><li style="list-style-type:disc">개체 무결성 (x)</li></ul><ul id="cba47877-307d-4be4-89c7-4db9de50ca43" class="bulleted-list"><li style="list-style-type:disc"><strong>참조 무결성</strong></li></ul><p id="1a59e6a3-bef6-4683-ac42-4e4da1dca556" class="">
+</p><ol type="1" id="f66ca935-0e3c-4fa4-ab7a-f00c2b6b74d6" class="numbered-list" start="7"><li><strong>후보키(Candidate Key)</strong>가 되기 위한 <strong>두가지 성질</strong>로 가장 타당한 것은</li></ol><ul id="40874acc-36c4-4b83-8ad9-d1ecff4a7584" class="bulleted-list"><li style="list-style-type:disc"><strong>유일성, 최소성</strong><ul id="7ca253c5-1c4d-4c98-b25f-688add4d04a4" class="bulleted-list"><li style="list-style-type:circle">유일성은 튜플을 유일하게 구분할 수 있는 속성이다. 최소성은 예를 들어 학번 + 주민번호를 사용하여 슈퍼키를 만들면 다른 튜플들과 구분 할 수 있는 유일성은 만족하지만 학번이나 주민번호 하나만 가지고도 다른 튜플들을 구분할 수 없으므로 최소성은 만족시키지 못한다.</li></ul></li></ul><p id="78e0d9a1-ea11-4efe-85ed-dc9833e6bdeb" class="">
+</p><ol type="1" id="c4f58231-a9b4-47ec-8d8b-a22bd84e5aa1" class="numbered-list" start="8"><li>외리캐와 가장 직접적으로 관련된 제약조건은 어느것인가</li></ol><ul id="ef9c9caa-8dec-4648-bc76-209cfc0ef2cf" class="bulleted-list"><li style="list-style-type:disc"><strong>참조 무결성</strong><ul id="abd8f009-3f7f-4ed5-bd66-eb707318abb2" class="bulleted-list"><li style="list-style-type:circle">외래키는 참조되는 릴레이션의 기본키와 대응되는 키이다.</li></ul></li></ul><p id="bd37e93d-5368-4349-b44a-39e978826ad0" class="">
+</p><p id="5f0631df-81a8-45f3-8fff-4227aa820d60" class="">
+</p><blockquote id="96ca6ed3-b9f9-4d41-9b23-4b712b21423c" class="">관계대수 및 관계해석</blockquote><p id="be2dfae9-61bc-4464-bf56-4d9ac178bb4e" class="">
+</p><ol type="1" id="23fade44-5b17-4722-9dc9-4fbe116c23ea" class="numbered-list" start="1"><li>조건을 만족하는 리레이션이 수평적 부분집합으로 구성하며 연산자의 기호는 그리스 문자 시그마를 사용하는 관계대수 연산자는 </li></ol><ul id="62392dea-1079-4bc6-9f01-6635512c7120" class="bulleted-list"><li style="list-style-type:disc">Select 연산자</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="850b601d-a9dd-4fe0-87c3-c6337977b0cb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Select </strong>: 조건에 맞는 <strong>튜플을</strong> <strong>구하는 수평적 연산</strong><p id="9bfa8465-f476-44f0-afb8-31df0ed8c144" class=""><strong>Project</strong> : <strong>리스트로 </strong>주어진 속성만 구하는 <strong>수직전 연산</strong></p><p id="a89c7434-97e5-421f-a996-1b79b4472163" class=""><strong>Join</strong> : <strong>공통 속성</strong>을 중심으로 <strong>릴레이션의 병합</strong></p><p id="1b6eace1-a600-4ce4-96c1-8efe928e3f44" class=""><strong>Division </strong>: <strong>같은 튜플</strong>들 중에서 <strong>비교 속성을 제외한 속성만 구하는 연산</strong> </p><p id="36899e75-1ac4-474d-b6a6-71577cec400f" class="">
+</p></div></figure><p id="aac783a9-28fe-4243-92f8-41239bf112d6" class="">
+</p><ol type="1" id="674fb464-e998-4916-9f7f-d104179d0b98" class="numbered-list" start="2"><li><strong>관계형 대수</strong>의 연산자가 아닌것은</li></ol><ul id="3a575efd-d13c-4ad0-a7ff-e5a40e90ba38" class="bulleted-list"><li style="list-style-type:disc"><strong>PART</strong></li></ul><ul id="324d81e8-2f5f-4e62-ab9d-8002b9c9bb95" class="bulleted-list"><li style="list-style-type:disc"><strong>JOIN , PROJECT, PRODUCT 는 순수 관계연산자이다. </strong></li></ul><p id="0e4de3e4-d1de-4cd1-91e9-1d9868597a73" class="">
+</p><ol type="1" id="29cd7687-5cae-43b6-b47c-85c479941f7e" class="numbered-list" start="4"><li>릴레이션 R의 차수 (Degree)가 3, 카디널리티(Cardinality)가 3, 릴레이션 S의 차수가 4, 카디널리티가 4일때 두 리레이션을 카티션 프로잭트한 결과 리레이션의 차수와 카디널리티는 ?</li></ol><ul id="e5b7ebee-b69d-401d-a096-67016f24e4be" class="bulleted-list"><li style="list-style-type:disc">카티션 프로덕트 , 즉 교차곱은 두 릴레이션의 차수 (Degree, 속성의수) 는 더하고 카디널리티(Cardinality, 튜플의 수)는 곱한다.</li></ul><ul id="9dcfa48c-1995-4263-9257-8fb0e4837add" class="bulleted-list"><li style="list-style-type:disc">즉, 차수 3+4 = 7 이 되고 카디널리티는 3 x 4 = 12가 된다.</li></ul><p id="1b2db5b8-2920-4451-a123-626a80538b2f" class="">
+</p><p id="7e71e2bb-bc9a-4d24-a9e4-4a1a4e79e6c0" class="">
+</p><ol type="1" id="14d9e862-de04-4f64-994c-b0ce9542e60b" class="numbered-list" start="5"><li><strong>관계대수</strong>와 <strong>관계해석</strong>에 대한 설명으로 <strong>옳지 않은것</strong></li></ol><ul id="3d63c34d-5afd-4c2a-a49c-0a1c4e884665" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">관계대수는 원하는 정보가 무엇이라는 것만 정의하는 비절차적 특징을 가지고 있다</span>. (X)<ul id="64c55e31-b8c7-467c-bed0-35f874f85a90" class="bulleted-list"><li style="list-style-type:circle"><strong>관계대수</strong>는 <strong>원하는 정보</strong>를 검색하기 위해서 <strong>어떻게 유도하는가를 기술하는 </strong><mark class="highlight-yellow_background"><strong>절차적인 언어</strong></mark>이다.</li></ul></li></ul><ul id="34d5913d-2ebe-49ce-8c3f-aa1a5a9b77d3" class="bulleted-list"><li style="list-style-type:disc">기본적으로 <strong>관계대수와 관계해석은 관계 데이터베이스를 처리</strong>하는 기능과 능력면에서 동등하다.</li></ul><ul id="12338322-9884-4a2c-b994-66860aac35b5" class="bulleted-list"><li style="list-style-type:disc"><strong>관계해석</strong>에는 <strong>튜플 관계 해석과</strong> <strong>도메인 관계 해석</strong>이 있다.</li></ul><ul id="f0909438-c45c-4c77-b239-a2867b3ff104" class="bulleted-list"><li style="list-style-type:disc">관계해석은 <strong>수학의 프레디킷 해석</strong>에 기반을 두고 있다.</li></ul><p id="82aa3faf-42f0-4722-9db1-f744b330b0ea" class="">
+</p><ol type="1" id="92c3f409-97c6-4111-81a9-0a4682ec0c1e" class="numbered-list" start="8"><li>관계해석(Relational Calculus)에 대한 설명으로 잘못된것은</li></ol><ul id="79c84378-5100-449a-9d1e-4f2bf2880944" class="bulleted-list"><li style="list-style-type:disc">튜플 관계해석과 도메인 관계해석이 있다.</li></ul><ul id="c1c002ee-c18a-4116-9ca0-1b653b9e5d71" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">원하는 정보와 그 정보를 어떻게 유도하는가를 기술하는 절차적인 특성을 가진다</span>. : 관계 대수 이다.<ul id="319a041b-36e3-48ca-a306-4bf50edb763a" class="bulleted-list"><li style="list-style-type:circle"><strong>관계해석</strong>은 <mark class="highlight-yellow_background"><strong>비절차적인 언어</strong></mark>로 <strong>원하는 결과 정보</strong>만 <strong>기술</strong>한다. VS <mark class="highlight-yellow_background"><strong>절차적인 언어</strong></mark>는 <strong>관계대수</strong>이다.</li></ul></li></ul><ul id="e848d167-9c9c-4806-8326-77b4dd7de710" class="bulleted-list"><li style="list-style-type:disc">기본적으로 관계해석과 관계대수는 관계 데이터베이스를 처리하는 기능과 능력면에서 동등하다.</li></ul><ul id="b58121dd-4004-4aca-822c-af61264d4a22" class="bulleted-list"><li style="list-style-type:disc">수학의 Predicate Calculus에 기반을 두고 있다.</li></ul><p id="65ec9abc-9557-46e3-9936-3c9d5dbcd970" class="">
+</p><p id="6e66a124-62af-4ed9-b8ca-e318703f4684" class="">9.. 관계 데이터 연산에 관한 내용으로 적당하지 않은것은</p><p id="10ba0366-3c99-4e55-aa4e-1dce5ca4a323" class="">관계대수는 원하는 정보와 그 정보를 어떻게 유도하는가를 기술하는 절차적인 방법이다.</p><p id="c7c3f106-8fe6-408d-b005-1407d7c5efff" class="">관계해석은 원하는 정보가 무엇이라는것만 정의하는 비절차적 특성을 지닌다.</p><p id="5cfa6ce3-8631-4ab9-9fee-b154d8dab8b6" class="">관계해석에는 튜플 관계해석과 도메인 관계해석이 있다.</p><p id="002f00b9-16d7-4834-93d4-6b39f0fdd955" class=""><span style="border-bottom:0.05em solid">관계해석으로 표현한 식은 관계대수로 표현할 수 없다. </span><div class="indented"><ul id="a174752b-c02f-4970-8778-717c9080ebb9" class="bulleted-list"><li style="list-style-type:disc">관계해석으로 표현한 식은 관계대수로 표현할 수 있다.</li></ul></div></p><p id="fb93d80a-8993-4760-9c2c-fcabf1e25a0d" class="">
+</p><p id="857b7e09-e904-40bc-8dc9-84287686ff6c" class="">
+</p><ol type="1" id="da73b8d9-f585-499e-a6a3-e430a4de1640" class="numbered-list" start="10"><li>관계대수의<mark class="highlight-yellow_background"> </mark><mark class="highlight-yellow_background"><strong>조인 연산</strong></mark><mark class="highlight-yellow_background">에서 결과가 </mark><mark class="highlight-yellow_background"><strong>동일한 애트리뷰트 </strong></mark>는 <strong>하나만</strong> 나타내는 것을 무엇이라고 하는가</li></ol><ul id="92cc2058-c1eb-4751-aca9-ea44adf07446" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>자연조인 </strong></mark></li></ul><p id="f3c4f6ff-ba33-4eac-b917-d6e83b00eff4" class="">
+</p><p id="b35a7325-08fb-4806-ac27-d6a42bf8e683" class="">
+</p><blockquote id="53b219b8-9849-4b2e-ba28-261bad52bd67" class="">정규화</blockquote><ol type="1" id="0b4a5ddf-7daa-49e0-9310-befaab64749e" class="numbered-list" start="1"><li><strong>정규화의 목적</strong>으로 틀린것은</li></ol><ul id="d45ac399-152a-47fb-b5bf-143c428068ed" class="bulleted-list"><li style="list-style-type:disc">어떠한 <strong>릴레이션</strong>이라도 <strong>데이터베이스 내에서 표현가능</strong>하게 만든다.</li></ul><ul id="db8a6898-c627-4845-b2c9-9bf013d15f62" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>데이터 삽입시 릴레이션을 재구성할 필요성을 줄인다.</strong></mark> </li></ul><ul id="68234803-500c-4a82-9ac3-873d4c77d927" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">중복을 배제하여 삽입, 삭제, 갱센 이상의 발생을 도모한다.</span><ul id="8e2f4020-d3f8-47be-b4e3-562b167422d2" class="bulleted-list"><li style="list-style-type:circle"><strong>정규화</strong>는 <strong>중복을 배제</strong>하여 <strong>삽입, 삭제, 갱신 이상의 발생을 방지</strong>한다. </li></ul></li></ul><ul id="010b028a-c5eb-45ca-9363-3663b76f43ee" class="bulleted-list"><li style="list-style-type:disc"><strong>효과적인 검색 알고리즘을 생성</strong>할 수 있다.</li></ul><p id="9d4436d7-023f-4a2e-b4a4-2a338a51aac7" class="">
+</p><p id="ab8c1558-09ee-4782-96af-521bb084a4ef" class="">
+</p><ol type="1" id="08962c4c-d2c3-4b53-9c72-8cdb5153b232" class="numbered-list" start="2"><li>관계 데이터베이스의 정규화에 대한 설명으로 옳지 않은 것은</li></ol><ul id="9624c2d3-fdc7-40a9-8bdf-44314d1a3f0c" class="bulleted-list"><li style="list-style-type:disc"><strong>정규화를 거치지 않으면</strong> 여러가지 상이한 종류의 정보를 하나의 릴레이션으로 표현하여 그 릴레이션을 조작할때 <strong>이상(Anomaly)현상</strong>이 발생할 수 있다.</li></ul><ul id="2d9fcb25-3bc4-46e2-9a83-294176ed2890" class="bulleted-list"><li style="list-style-type:disc">정규화의 목적은 각 릴레이션에 <span style="border-bottom:0.05em solid">분산된 종속성을 하나의 릴레이션에 통합</span>하는 것이다.<ul id="72ab0317-cf40-4fd8-ad98-b044cdef16db" class="bulleted-list"><li style="list-style-type:circle">속성들의 종속 관계를 분석하여 한개의 릴레이션을 여러개의 릴레이션으로 분해한다. </li></ul></li></ul><ul id="668d776e-4c9d-4cde-9d8b-5c4b804ab94e" class="bulleted-list"><li style="list-style-type:disc"><strong>이상(Anomoly)현상</strong>은 <strong>데이터 들 간의 존재하는 함수 종속이 하나의 원인</strong>이 될 수 있다.</li></ul><ul id="e229111f-037f-4672-ac1d-b18a4027bffb" class="bulleted-list"><li style="list-style-type:disc"><strong>정규화가 잘못</strong>되면 <strong>데이터의 불필요한 중복이 야기</strong>되어 <strong>릴레이션을 조작할때 문제가 발생</strong>할 수 있다. </li></ul><p id="14a3dffc-9d02-4a8a-9c3a-4ace1a46471e" class="">
+</p><p id="98ae8fb6-2bbd-4347-8539-a7f923161e13" class="">
+</p><ol type="1" id="1ecf1273-5c15-4633-91e6-f7d3e90270b1" class="numbered-list" start="3"><li>관계형 데이터베이스의 릴레이션을 조작할때 발생하는 이상 (Anomaly)현상에 대한 설명으로 적절하지 않은것은</li></ol><ul id="a3186f90-2ffd-4344-a9f5-74b6518f179f" class="bulleted-list"><li style="list-style-type:disc">데이터의 종속으로 인해 발생하는 이상현상에는 삭제 이상, 삽입 이상, 갱신 이상이 있다. x<ul id="fb384631-6ef1-4147-babb-c62f4d5c34a8" class="bulleted-list"><li style="list-style-type:circle">이상은 데이터의 종속으로 인해 발생하는 것이 아니고 속성 (필드)간 종속 혹은 데이터 (튜플)의 중복으로 인해 발생한다. 대이터의 종속이란 튜플간의 종석을 말하는데 튜플들 사이에는 종속이 존재하지 않는다. </li></ul></li></ul><ul id="93ff7de1-22e0-49a9-8884-676a669b4093" class="bulleted-list"><li style="list-style-type:disc">릴레이션의 한 튜플을 삭제함으로써 연쇄 삭제로 인해 정보의 손실을 발생시키는 현상이 삭제 이상이다.</li></ul><ul id="c683ff0a-e5c7-46ad-84f7-2112453ca265" class="bulleted-list"><li style="list-style-type:disc">데이터를 삽입할때 불필요한 데이터가 함께 삽입되는 현상을 삽입이상이라 한다.</li></ul><ul id="ef8bc3a4-a3cd-4cc1-b4b1-5f786295138d" class="bulleted-list"><li style="list-style-type:disc">튜플 중에서 일부 속성을 갱신함으로써 정보의 모순성이 발생하는 현상이 갱신 이상이다. </li></ul><p id="7771a38e-ae40-4c09-85ad-5206d014e1ee" class="">
+</p><p id="b9c52f91-7818-41ed-ab12-b39f6b10dd71" class="">
+</p><p id="e02324e0-d531-43c0-803d-e7c97e70a51d" class="">4, 제1정규형에서 제2정규형 수행시 의 작업으로 옳은 것은 </p><p id="45d4f7ae-98db-4d49-8251-610413ddcf09" class="">부분 함수 종속성 제거 </p><p id="c3f3358b-7c32-48db-a874-c05a1e133845" class="">
+</p><p id="b2328809-e258-4e71-b28e-279e8dea1b30" class="">
+</p><ol type="1" id="ba980d5f-e5da-4ba6-9252-7d76d6829a91" class="numbered-list" start="5"><li>도메인은 원자값이고 기본키가 아닌 모든 속성들이 기본키에 대해 완전 함수 종속저이며 이행적 함수 종속관계는 제거되었다. </li></ol><ul id="2cce4b48-3ba2-426a-9120-c049b3b46088" class="bulleted-list"><li style="list-style-type:disc">제 3정규형</li></ul><p id="86750370-e12f-4869-8e63-1f0a2392b4d8" class="">
+</p><ol type="1" id="711ee42d-d645-4983-a93e-878f4ccb8a86" class="numbered-list" start="6"><li>어떤 릴레이션 R에서 X와 Y를 각각 R의 애트리뷰트 집합의 부분 집합이라고 할 경우 애트리뷰트 X의 값 각가에 대해 시간에 관걔없이 항상 애트리뷰트 Y의 값이 오직 하나만 연관되어 있을때 Y는 X에함수 종속이라고 한다. 이 함수 종속의 표기로 옳은 것은</li></ol><ul id="772d51a4-33c5-4030-b796-84ac0f525938" class="bulleted-list"><li style="list-style-type:disc">항상 X에 따라 Y가 결정될때 Y를 X에 함숙 종속적이라고 생각한다. ! 따라서 x → Y 가 된다.</li></ul><p id="79dded9a-0c89-45b3-bf02-15798007a758" class="">
+</p><p id="a23082c6-7e0e-4476-a687-d0824b037931" class="">
+</p><ol type="1" id="67040596-bcb6-46b1-a9b9-de63baf3d53c" class="numbered-list" start="7"><li>다음중 BCBF를 만족하기 위한 조건 모두로 옳게 짝지어진것</li></ol><ul id="546f457f-97c2-49db-8698-ae8fb19eff7b" class="bulleted-list"><li style="list-style-type:disc">결정자이면서 후보자가 아닌것 제외</li></ul><ul id="59bbdcfc-39b0-4286-990d-25f8dce4c82a" class="bulleted-list"><li style="list-style-type:disc">이행적 함수 종속 제거</li></ul><ul id="0f2bd2e9-45d1-4061-ad9b-a46a1acf349f" class="bulleted-list"><li style="list-style-type:disc">부분적 함수 종속 제거</li></ul><ul id="f5f0c86e-0554-487e-a0c2-b636faa27099" class="bulleted-list"><li style="list-style-type:disc">도메인이 원자값 </li></ul><p id="77ed61be-9653-4b97-b38c-d13e6e49162c" class="">
+</p><p id="1682a54c-3923-412b-8216-7ef5c70ce54a" class="">제 1 정규형 → 제2 정규형→ 제3정규형을 거쳐 BNCF가 되미ㅡ로 제1정규형 (도메인이 원자값), 제2 정규형(부분적 함수 종속제거), 제 3정규형(이행적 함수 종속재거), BMCF(결정자이면서 후보키가 아닌것 제외) 가 되기 위핸 조건을 모두 만족해야 한다.</p><p id="11c7bd40-480f-442e-b444-e58dc4000939" class="">
+</p><p id="b6932978-98b5-4d89-a3d2-326a4225f259" class="">
+</p><ol type="1" id="6477f28b-7c03-4068-af40-1ec81b6fb23a" class="numbered-list" start="6"><li>데이터의 중복으로 인해 릴렝션 조작 시 에상하지 못한 곤란한 현상이 발생한다. 이를 무엇이라고 하는가?</li></ol><ul id="ca9138e1-606c-4f22-9181-6da7ee722541" class="bulleted-list"><li style="list-style-type:disc">이상 현상 (Anomaly)</li></ul><p id="6da90624-6db5-480f-925a-995854718214" class="">
+</p><p id="c1219ceb-03cd-4983-a022-d60eca68b8a9" class="">
+</p><p id="4a2aa602-42f9-482d-bcb8-645595b10ebe" class="">
+</p><ol type="1" id="2a05f54e-fe53-4b44-bdbb-9e17987be8d1" class="numbered-list" start="7"><li>이행적 함수 종속 관계를 의미하는 것은</li></ol><ul id="c0b759a0-d981-4437-b512-51203b1e9ca9" class="bulleted-list"><li style="list-style-type:disc">A→B 이고 B→C일때 A→C를 만족하는 관계</li></ul><p id="0f5d8946-2713-4fb7-ad0e-781753314dce" class="">
+</p><ol type="1" id="9d4196e5-86bb-4c9d-a33f-df6cf631137a" class="numbered-list" start="10"><li>제2정규형에서 제3정규형이 되기위한 조건은</li></ol><ul id="ec2bec16-cfc0-4739-b2e2-22a82d0e527b" class="bulleted-list"><li style="list-style-type:disc">이행적 함수 종속 제거</li></ul><p id="7964282b-4401-48a0-8c23-489d7b16e3ae" class="">
+</p><ol type="1" id="45679ba7-6ac5-4192-b5c9-eca02d50d511" class="numbered-list" start="11"><li>정규화를 거치지 않으면 릴레이션 조작시 데이터 중복에 따른 예기치 못한 곤란한 현상이 발생할 수 있다. 이러한 이상(Anomaly)현산의 종류에 해당하지 않는것은</li></ol><ul id="d9f81b67-f676-466c-bc17-3c2bef30c2e7" class="bulleted-list"><li style="list-style-type:disc">조회 이상</li></ul><p id="f744f200-f88a-4fb6-85cc-fb28fb85c2ed" class="">
+</p><ol type="1" id="9c14a80b-d493-421c-abca-86159f615415" class="numbered-list" start="12"><li>릴레이션 R의 모든 결정자가 후보키이면 릴레이션 $은 어떤 정규형에 속하는가?</li></ol><ul id="5f65a849-54db-433b-ab90-0045ce632d62" class="bulleted-list"><li style="list-style-type:disc">보이스코드 (BNCF)정규형</li></ul><p id="819106ce-3387-4c74-8db3-563e9707e084" class="">
+</p><p id="d411170e-ca08-4ef3-b283-ae54f28d6329" class="">
+</p><blockquote id="a28795d6-39be-4610-9c6c-22472a5509ba" class="">SQL</blockquote><p id="6269ac4d-884f-48b4-80e8-78296651cf30" class="">
+</p><ol type="1" id="97ac899e-a56d-431b-8fc1-996abd96db75" class="numbered-list" start="1"><li>SQL의 명령은 사용 용도에 따라 DDL, DML, DCL로 구분할 수 있다. 다음 명령 중 그 성격이 나머지 셋 과 다른 것은?</li></ol><ul id="6191ca5a-ca5c-4c4c-89a5-fce1832696d0" class="bulleted-list"><li style="list-style-type:disc">GRANT<ul id="7ce8f246-78ae-4e8f-ad34-c8d897dc8ac2" class="bulleted-list"><li style="list-style-type:circle">DCL :데이터 제어어 - GRANT, DML - 데이터 조작어 - SELECT, UPDATE, INSERT</li></ul></li></ul><p id="0f83b42a-cd3a-4257-b9b2-cdb442a67709" class="">
+</p><ol type="1" id="670a022b-964b-4c5c-ac13-625ffeb42237" class="numbered-list" start="2"><li>which is the folloing does not belong to the DML statement of SQL</li></ol><p id="34135a95-db21-4a75-96d4-78210564d60e" class="">*CREATE</p><p id="b0e6a76b-3a6c-4d7b-bc5d-96d20fef604d" class=""><div class="indented"><p id="26fc08e6-2aa4-48cd-b19c-9e95e6c4f583" class="">DML : UPDATE , SELECT, DELETE, INSERT</p><p id="a0985826-ad28-4951-94f9-892b9a6bb31b" class="">
+</p><p id="5d8d7bb2-a288-402c-8540-61d73723f3c7" class="">
+</p></div></p><ol type="1" id="df7c7114-a553-4a4d-80d6-3545643bce8c" class="numbered-list" start="3"><li>That is an international standard language used for defining the structore of a relation database in terms of tables, columns , and varios kinds of constraints</li></ol><ul id="bc39171c-bc1e-4479-bf54-e2b21a381834" class="bulleted-list"><li style="list-style-type:disc">SQL<ul id="de819216-8448-476f-98d0-1fe3cb09639d" class="bulleted-list"><li style="list-style-type:circle">테이블, 칼럼 그리고 다양한 제약사항들과 같은 데이터베이스 구조를 정의하는데 사용되는 국젶준언어 : SQL</li></ul></li></ul><p id="6f98d808-e40f-4edf-b17b-6b2b9a3da618" class="">
+</p><ol type="1" id="886aa2af-c799-4fd6-a540-6a6e090282ab" class="numbered-list" start="4"><li>다음 SQL 명령 중 데이터 정의어 (DDL)에 포함되지 않는 명령어는</li></ol><ul id="6e6194f7-50f7-4ca3-bbc2-f29168f634bd" class="bulleted-list"><li style="list-style-type:disc">SELECT</li></ul><ul id="9b5e27b5-29a1-4b5c-aa70-286ae6c90150" class="bulleted-list"><li style="list-style-type:disc">CREATE, ALTER, DROP은 DDL이다.</li></ul><p id="5ab70c26-8832-4f51-8cd4-92064d245c54" class="">
+</p><ol type="1" id="9abc59a2-3083-41ea-9103-ad1e389081af" class="numbered-list" start="5"><li>SQL언어의 데이터 제어어 DCL에 해당하는 것은</li></ol><ul id="3cce947d-f359-44d1-af7c-2775c69d8f32" class="bulleted-list"><li style="list-style-type:disc">GRANT<ul id="e5fe800d-a078-414e-93ec-e30340c4d981" class="bulleted-list"><li style="list-style-type:circle">COMMIT, ROLLBACK, BRANT, REVOKE 는 DCL에 속한다.</li></ul></li></ul><p id="4f9549a1-dd27-4593-8f08-7e0b96af5e44" class="">
+</p><ol type="1" id="369f5e25-2625-4243-b555-a8a4f732763e" class="numbered-list" start="6"><li>스키마, 도메인, 테이블, 뷰를 정의할때 사용되는 SQL문은?</li></ol><ul id="5135cbd6-5434-433c-b388-1ce1e704242c" class="bulleted-list"><li style="list-style-type:disc">CREATE</li></ul><p id="ff55574d-c0cb-474f-9676-bd67f63c10d2" class="">
+</p><blockquote id="df29b7d1-8573-4815-88f6-e74481cf0dfe" class="">DML</blockquote><ol type="1" id="dd4b0931-505b-448e-aaaf-f42d258669a8" class="numbered-list" start="1"><li>다음 []에 적당한 SQL문장은</li></ol><ul id="d15d18e6-cceb-45ad-ab71-7fbd56677e77" class="bulleted-list"><li style="list-style-type:disc">SELECT 번호, 이름 FROM 학생테이블 [   ] 학과 = ‘컴퓨터’;<ul id="76e9ac17-f494-41a3-9a20-361d10d38a34" class="bulleted-list"><li style="list-style-type:circle">WHERE</li></ul></li></ul><p id="549987eb-c416-4c83-8e55-fc2b80156910" class="">
+</p><p id="3d46f5dd-c613-4d5a-ab54-8916edc92069" class="">
+</p><ol type="1" id="66c7fa2d-1395-43d7-940a-280875a3d352" class="numbered-list" start="2"><li>다음 SQL문에서 WHERE절의 조건이 의미하는 것은</li></ol><ul id="7788fa99-aa38-4e5d-a9de-628bedbc1982" class="bulleted-list"><li style="list-style-type:disc">SELECT CNO, CNAME FROM COURSE WHERE CNO LIKE ‘S_ _’;<ul id="aa38ad9c-4c46-478b-8f30-bca056285c32" class="bulleted-list"><li style="list-style-type:circle">S로 시작되는 3문자의 Cno를 검색한다.</li></ul></li></ul><p id="4582907d-3f49-4e33-919b-4a79bd2ef950" class="">
+</p><ol type="1" id="6ae730a5-26db-42fc-9405-61e0ac0c4a72" class="numbered-list" start="3"><li>SQL 문장에서 GROUP BY 절에 의해 선택된 그룹의 탐색 조건을 지정할 수 있는 것은</li></ol><ul id="382f505f-b6c9-476f-b4b1-69384c765be1" class="bulleted-list"><li style="list-style-type:disc">HAVING</li></ul><ul id="def55217-9406-432b-8306-ccc25f400ed5" class="bulleted-list"><li style="list-style-type:disc">일반 튜플에 대한 조건은 WHERE, 지정된 그룹에 대한 조건은 HAVING</li></ul><p id="a02d4e33-f0e6-4943-a08e-aa12fbae6106" class="">
+</p><p id="92ce8ed2-37fe-4d37-a0f9-997ca7e47475" class="">
+</p><p id="2e110448-ae6b-418d-bac7-01034709d0d2" class="">
+</p><ol type="1" id="c862e60a-a6fa-4f92-a0f1-d4432f755828" class="numbered-list" start="4"><li>다음 릴레이션 R1과 R2에 대해 아래의 SQL문을 실행한 결과는?<ul id="850405ec-f658-40a5-8b59-428a556734fb" class="bulleted-list"><li style="list-style-type:disc">SELECT b FROM R1 WHERE C = (SELECT C FROM R2 WHERE D=’k’);<ul id="75a2986b-ce2e-464a-99b3-99dd4de24824" class="bulleted-list"><li style="list-style-type:circle">하위 질의이다. where조건에 지정된 하위 질의의 select문을 먼저 수행한다. 그리고 검색 결과를 본 질의의 조건에 있는 C속성과 비교한다. R@테이블에서 D속성의 값이 k와 같은 튜플의 속성의 값을 검색한다. 결과는 x이다. R1테이블에서 C속성의 값이 x인 튜플의 B속성의 값을 검색한다. 결과는 a, b,이다.</li></ul></li></ul></li></ol><p id="8ced0bcb-38f9-46d6-b6c6-6b110829a121" class="">
+</p><p id="edc91081-ab20-497c-8e5c-b67ba3450fbd" class="">
+</p><p id="202fee3f-be14-420f-ab23-17b864ad6add" class="">
+</p><ol type="1" id="d091d703-e2b5-4b08-b241-b54a9f926b95" class="numbered-list" start="5"><li>학생 테이블에 전산과 학생이 50명, 전기과 학생이 100명, 기계과 학생이 50명 있다고 할때 다음 SQL문 ㄱ, ㄴ, ㄷ의 실행 결과 튜플 수는 각각 얼마인가? (단 DEPT필드는 학과명을 의미한다)</li></ol><p id="399c07ca-b631-4c3c-b4d7-5011b7c218bb" class="">
+</p><p id="8da873b5-6c32-4d00-aa9f-9996813cf9b2" class="">ㄱ SELECT DEPT FROM STUDENT </p><p id="5863753d-d7fc-4f02-91b7-1db6ed6fd013" class="">ㄴ SELECT DISTINCT DEPT FROM STUDENT</p><p id="1593ff47-ec16-45fe-b3b3-d6be00b07001" class="">ㄷ SELECT COUNT(DISTINCT DEPT) FROM STUDET WHERE DEPT=’전산과’</p><p id="99d4e8ce-2f12-4b0e-a5f8-a689ea4a36b6" class="">
+</p><p id="d7699cc6-55a0-44c0-baf0-f35d18fb4404" class="">** 튜플의 수를 구하는 문제 !</p><p id="175c16ef-39bc-44ae-9e99-8fc849debcde" class="">STUDENT 테이블에서 DEPT를  검색한다. 총 200개의 튜플이 들어있고 검색 조건이 없으므로 튜플의 수는 200이다. </p><p id="88b635c8-e288-411e-8109-1e28986b20e9" class="">STUDENT 테이블에서 DEPT를 검색하는데 중복되는 결가는 처음의 한개만 검색에 포함한다. 전산과 50개 튜플의 DEPT속성의 값이 같으므로 1개, 전자과 100개 튜플의 DEPT속성의 값이 같으므로 1개, 기계과 50개 튜플의 DEPT속성이 같으므로 1개를 검색해 포함시키므로 3개의 튜플이 검색된다.</p><ul id="fdb9ab6d-a5d7-4b1e-a88c-00e1e4cfcc3a" class="bulleted-list"><li style="list-style-type:disc">STUDENT 테이블에서 DEPT 속성의값이 전산과인 튜플의 중복을 제거하여 개수를세므로 1이 검색결과로 나온다.</li></ul><p id="ee314cdd-e6d6-4000-8422-90667730e321" class="">
+</p><p id="18e9cf58-5055-4276-ae8b-e7f698eeaec3" class="">
+</p><ol type="1" id="b781843a-f074-4a72-918c-304d3bad8f70" class="numbered-list" start="6"><li>SQL문으로 RKWKD WKF QUSGHKSGKSRJTDMS</li></ol><ul id="4741a731-f16c-4cc2-b435-7536fbd5b149" class="bulleted-list"><li style="list-style-type:disc">3학년 이상의 전자계산과 학생들의이름을 검색하시오</li></ul><ul id="ebc07b30-f1f8-427b-8ad5-999c11125870" class="bulleted-list"><li style="list-style-type:disc">SELECT 이름 FROM 학생 WHERE 학년 ≥3 AND 학과 = “전자계산과”;</li></ul><p id="790ab90b-f8e2-4dc3-b834-3d876d0e532d" class="">
+</p><p id="0ff1d2ef-f13c-40fb-8957-64f66fa69709" class="">
+</p><ol type="1" id="647795fb-9f95-4244-bcf7-e151863c8059" class="numbered-list" start="8"><li>SQL문에서 SELECT문에 나타낼수 없는 절은?</li></ol><p id="73fb62bc-062b-4e64-981e-4b505cda579d" class="">DROP</p><p id="90fdf033-f3e0-453e-9a2e-9d864d49b59b" class="">
+</p><ol type="1" id="1c5274c7-c890-4656-a324-7415d78e7dae" class="numbered-list" start="9"><li>관계 데이터베이스의 테이블인 수강(학번, 과목명, 중간성적, 기말성적)에서 과목명이 ‘DB’인 모든 튜플들을 성적에 의해 정렬된 형태로 검색하고자 한다. 이때 정렬 기준은 기말 성적의 내림차순으로 정렬하고 당ㅁ SQL질의문에서 ORER BY 절의 밑줄 친 부분의 내용으로 옳은 것은 </li></ol><p id="1e390454-14b9-40f1-a024-e86fcd81106b" class="">SELECT * FROM 수강 WHERE 과목명=’DB’ ORER BY</p><p id="e17920e6-53ff-461c-8305-33f38e256db6" class="">기말 성적 DESC, 중간성적 ASC</p><p id="020babbe-c9dc-4933-ada3-80e5b78f0076" class="">
+</p><p id="dc0595ed-68a2-41e8-b672-b5727347e97f" class="">
+</p><p id="29b11e1c-51d2-47e2-b423-1756637150b5" class="">
+</p><ol type="1" id="a17a282e-e92a-4951-809f-a0213dd32e04" class="numbered-list" start="10"><li>다음 SQL문에서 DISTINCT의 의미는</li></ol><ul id="35c1f3f9-b65e-45f0-86c6-e7fb7ad83413" class="bulleted-list"><li style="list-style-type:disc">SELECT DISTINCT DEPT FROM STUDENT</li></ul><ul id="3f4e53be-b451-483b-bafd-8b4c8f693a6f" class="bulleted-list"><li style="list-style-type:disc">검색 결과에서 레코드의 중복을 제거하라</li></ul><p id="27e96373-94c4-49d6-bdb5-471f7c2b73b1" class="">
+</p><p id="39e8342d-a12c-408e-8e85-b5e017dd8380" class="">
+</p><blockquote id="34a9a11f-6e96-4ff6-8fa7-363e762c074a" class="">뷰(VIEW)</blockquote><ol type="1" id="c3f9223f-31b2-484a-b410-a447ff374c8f" class="numbered-list" start="1"><li>데이터베이스 관리자가 기본 테이블에서 임의로 유도하여 만드는 테이블로서 사용자에게 접근이 허용된 자료만을 제한적으로 보이기 위한 테이블을 무엇이라고 하는가 </li></ol><ul id="5738eddc-cc53-4cc8-9a94-1178424d81b5" class="bulleted-list"><li style="list-style-type:disc">뷰 테이블</li></ul><p id="2653afda-67e4-4ccf-b5d1-8778e7ac5dd6" class="">
+</p><p id="d9a1c857-d271-4fb6-95a6-d1deaa2a7aed" class="">
+</p><ol type="1" id="91e3a18f-f5f7-48d6-9d31-75f4b9dcea7a" class="numbered-list" start="2"><li>SQL의 뷰에 대한 장점으로 부적합한 것은</li></ol><ul id="94d560cd-2b73-41c2-834f-8ce32ffaf6e2" class="bulleted-list"><li style="list-style-type:disc">논리적 데이터 독립성을 제공한다.</li></ul><ul id="ec908586-402c-42c7-b7d1-d25f97fec61b" class="bulleted-list"><li style="list-style-type:disc">접근 제어를 통한 보안을 제공한다.</li></ul><ul id="59f61f0b-0154-4583-8ba8-5389556623e9" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">ALTER 명령을 사용할 수 있어 뷰 정의의 변경이 용이하다 </span>X</li></ul><ul id="d1866a62-5380-4791-ac42-9faabe16899f" class="bulleted-list"><li style="list-style-type:disc">사용자의 데이터 관리를 간단하게 해준다. <ul id="7151126c-16a5-4b25-a6dd-45f1bb6618a0" class="bulleted-list"><li style="list-style-type:circle">뷰는 기본테이블에서 유도된 가상 테이블이다. 간단하게 생성하고 삭제도 간단하지만 변경이 불가능하다.</li></ul></li></ul><p id="f43a38e1-e06c-443f-86ce-91c7582e017d" class="">
+</p><p id="dad8174b-edc5-4b62-a484-e0cd7c7c6ee7" class="">
+</p><ol type="1" id="ccede5a5-b8c3-42a6-879f-9e71c90354e1" class="numbered-list" start="3"><li>뷰의 이점으로 거리가 먼 것은<ul id="868df7ba-7966-4855-a1be-2ac8bf0e3c49" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">독자적인 인덱스를 가질 수 있으므로 관리가 편하다 </span>X</li></ul><ul id="18684c68-aa31-449b-96d5-ab6e87da14ca" class="bulleted-list"><li style="list-style-type:disc">여러 사용자의 상이한 응용이나 요구를 지원해준다.</li></ul><ul id="cad8f508-2cb4-4ca2-bf65-9c64cbb6d768" class="bulleted-list"><li style="list-style-type:disc">사용자의 데이터 관리를 간단하게 해준다.</li></ul><ul id="ef0c9198-53de-464c-967b-79a665e85543" class="bulleted-list"><li style="list-style-type:disc">숨겨진 데이터를 위한 자동 보안이 제공된다. <ul id="6f9bc24c-1bfc-4946-bd7e-62edc793136a" class="bulleted-list"><li style="list-style-type:circle">뷰는 독자적인 인덱스를 가질 수 없다. </li></ul></li></ul></li></ol><p id="03720c38-7c0c-4dcd-8d80-1d1c58d5c6c0" class="">
+</p><p id="8ea434b2-1815-43e9-a832-f1511b332a8e" class="">
+</p><ol type="1" id="08b014a6-2d85-44de-a037-4474f8c58702" class="numbered-list" start="4"><li>뷰에 관한 설명으로 옳지 않은 것<ul id="a7e0eed3-2517-485d-bac7-320d735cef8a" class="bulleted-list"><li style="list-style-type:disc">뷰는 가상 테이블이므로 물리적으로 구현되어 있지 않다.</li></ul><ul id="7240984b-4a82-444f-b4a2-13bb1c20db10" class="bulleted-list"><li style="list-style-type:disc">필요한 데이터만 뷰로 정의해서 처리할 수 있기 때문에 관리가 용이하다.</li></ul><ul id="1c08d2ba-c893-427e-baf5-3e6cf151ca50" class="bulleted-list"><li style="list-style-type:disc">SQL에서 뷰를 생성할때 CREATE문을 사용한다 </li></ul><ul id="263ea8d9-954a-4ffc-9029-af912e2bb509" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">하나의 뷰를 제거해도 그  뷰를 기초로 정의된 다른 뷰는 제거 되지 않는다</span>.<ul id="48a7c55d-772c-49ea-9bd0-5395ea1aaae7" class="bulleted-list"><li style="list-style-type:circle">하나의 뷰를 삭제ㅔ=하면 그 뷰를 기초로 정의된 다른 뷰도 자동으로 삭제된다. </li></ul></li></ul></li></ol><p id="8ae7390b-6611-4dec-9ade-4891f53bda61" class="">
+</p><p id="419bcc54-5043-470c-ac0b-e5075e016d45" class="">
+</p><ol type="1" id="31a7ee9f-ecb7-4f46-a922-a4302ab3ca6a" class="numbered-list" start="5"><li>하나 이상의 테이블로부터 유도되어진 가상 테이블을 뷰라 한다. SQL의 뷰에 대한 설명으로 옳지 안은 것은<ul id="b0d49933-2175-4578-ae61-cd35d7e8429a" class="bulleted-list"><li style="list-style-type:disc">뷰를 제거하고자 할때는 DROP문을 이용한다.</li></ul><ul id="caf0184d-b237-4fb7-9008-8a7d950a1135" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">뷰는 저장장치 내에 물리적으로 존재한다.</span><ul id="3c660acb-2490-4b7b-9153-1005c184b970" class="bulleted-list"><li style="list-style-type:circle">뷰는 가상테이블이기 때문에 물리적으로 구현되어 있지 않다 ! </li></ul></li></ul><ul id="d091f585-abac-4fa5-ae23-a6e0266ea902" class="bulleted-list"><li style="list-style-type:disc">뷰를 생성하고자 할때는 CREATE문을 이용한다.</li></ul><ul id="a0eb3d0d-6281-4733-af70-df6af8d775e8" class="bulleted-list"><li style="list-style-type:disc">뷰의 내용을 검색하고자 할때는 SELECT문을 이용한다. </li></ul></li></ol><p id="cd7daab2-2e09-4690-866e-5c82faffdac7" class="">
+</p><ol type="1" id="2d026211-3b81-4b7c-abb0-33675e4675b7" class="numbered-list" start="6"><li>데이터베이스의 뷰에 관한 설명으로 옳지 않은 것<ol type="a" id="83e837f0-2c26-4b49-928c-8f6cda414c75" class="numbered-list" start="1"><li>하나 이상의 테이블에서 유도되는 가상테이블이다.</li></ol><ol type="a" id="6a6a7386-5fd9-4ef1-a1d7-f226fec54024" class="numbered-list" start="2"><li>뷰는 별도의 디스크 공간을 차지하여 생성되는 실제적 테이블이다.<ul id="8cece7ad-d5d8-48ca-9119-fdb70010228b" class="bulleted-list"><li style="list-style-type:disc">뷰는 실제로 생성되는 물리적인 테이블이 아니라 가상 테이블이다.</li></ul></li></ol><ol type="a" id="c71a36a5-826a-43b7-ad78-09e61c1cc81e" class="numbered-list" start="3"><li>뷰를 이용한 또 다른 뷰의 생성이 가능하다.</li></ol><ol type="a" id="e33157d3-5584-420e-abc2-b28e0079cbb2" class="numbered-list" start="4"><li>삽입, 갱신, 삭제 연산에는 제약이 따른다.</li></ol><p id="5c64d8d2-d285-4ddd-b0e5-322a252dcaee" class="">
+</p></li></ol><ol type="1" id="859cbe11-fa81-47ea-a072-fc8460094860" class="numbered-list" start="7"><li>뷰에 관한 설명 중 잘못된것은<ol type="a" id="b3c7c099-4c54-4814-8e2d-eeb002ca87d5" class="numbered-list" start="1"><li>뷰는 SQL에서 CREATE VIEW명령으로 정의된다.</li></ol><ol type="a" id="a76567d3-c65e-46c4-8fcb-868d9d040916" class="numbered-list" start="2"><li>뷰는 하나이상의 기본 테이블로부터 유도되어 만들어지는 가상테이블이다.</li></ol><ol type="a" id="c53b3a1a-2bad-4ee2-ba14-f1b86c6a89ff" class="numbered-list" start="3"><li><span style="border-bottom:0.05em solid">뷰는 INSERT , DELETE, UPDATE 등을 이용한 삽입, 삭제, 갱신 연산이 항상 허용된다. </span><ul id="7271909a-a0b6-465f-b9b7-aec7df4d8c1c" class="bulleted-list"><li style="list-style-type:disc">뷰에서 삽입, 삭제, 갱신 연산이 가능하게 하려면 기본 테이블의 기본키를 포함한 속성 집합으로 뷰를 구성해야만 한다.</li></ul></li></ol></li></ol><ul id="4220f878-0f4d-47da-97f9-b44868e482cc" class="bulleted-list"><li style="list-style-type:disc">뷰의 정의는 ALTER문을 이용항 변경할 수 없다. </li></ul><p id="df732998-fe08-41e7-be54-b5cbd93c5f65" class="">
+</p><p id="dc7becaa-917b-49be-9c5b-054d9751d351" class="">
+</p><p id="62272545-3d38-48b8-ba56-3a5aab392f73" class="">
+</p><ol type="1" id="f7fcb61e-ada8-4690-826e-cdf2b4825cf4" class="numbered-list" start="8"><li>SQL에서 VIEW를 삭제할때 사용하는 명령은 DROP</li></ol><p id="9ec35d3b-b8ba-4015-85f9-198eb0051102" class="">
+</p><ol type="1" id="ab3ac75f-b13b-48a0-8e89-29c855a4afea" class="numbered-list" start="9"><li>뷰 VIEW의 특징으로 옳지 않은것</li></ol><ul id="467215b5-5b80-40f0-be58-5c0e565597bb" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">뷰는 기본 테이블 검색 연산과 비교하여 제약이 따른다.</span><ul id="8f00e1af-a713-492d-9351-0eafd8cdea82" class="bulleted-list"><li style="list-style-type:circle">삽입, 삭제, 갱신 연산에는 제한이 있지만 검색은 기본 테이블 석색 연산과 동일하다. </li></ul></li></ul><ul id="5a9aee35-db7e-49ba-8931-e90370d44b9a" class="bulleted-list"><li style="list-style-type:disc">DBA는 보안 측면에서 뷰를 활* 데이용할 수 있다.</li></ul><ul id="b6df5de1-19cc-4f6c-9114-edc8cbbb5a24" class="bulleted-list"><li style="list-style-type:disc">뷰 위에 또 다른 뷰를 정의할 수 있다.</li></ul><ul id="5b2ad69e-0747-4994-8426-6cf3aa7b157f" class="bulleted-list"><li style="list-style-type:disc">물리적으로 존재하지 않는가상테이블이다.</li></ul><p id="1ecafee1-654f-4f69-aa63-771ecf7a5ca3" class="">
+</p><blockquote id="99731dfc-62dc-4eb3-8865-0695be566714" class="">시스템 카탈로그</blockquote><p id="6b950ae7-8463-4f59-9b3b-62d6f1fdce2d" class="">
+</p><ol type="1" id="c29696f2-e255-470e-8181-bda1cea1af54" class="numbered-list" start="1"><li>시스템 자신이 필요로 하는 여러가지 ㄱ개체에 관한 정보를 포함하고 있는 시스템 데이터베이스로서 포함하고 있는 객체로는 테이블, 데이터베이스 , 뷰, 접근 권한 등이 있는 것은</li></ol><ul id="b2ecf7d0-8d59-4256-8118-e24ef8a74a39" class="bulleted-list"><li style="list-style-type:disc">카탈로그</li></ul><p id="360c524d-a857-400e-8d92-dd2e8f34b866" class="">
+</p><ol type="1" id="43e61c7a-cff0-4479-bc09-b2c68930d95f" class="numbered-list" start="2"><li>데이터베이스에 포함되는 모든 데이터 객체들에 대한 정의나 명세에 관한 정보를 유지관리하는 시스템을 무엇이라고 하는가</li></ol><ul id="821b9092-ca2c-4ae8-997b-6a4fb569c9c6" class="bulleted-list"><li style="list-style-type:disc">데이터 사전 <ul id="38746618-57ab-4ea9-80e6-6884ffe4169e" class="bulleted-list"><li style="list-style-type:circle">데이터 사전이 시스템 카탈로그를 의미한다.</li></ul></li></ul><p id="a0d3f735-8a5a-43d5-8956-3d71080bbd4d" class="">
+</p><ol type="1" id="043b33b9-a114-4f31-80cb-1cc6d468626d" class="numbered-list" start="3"><li>시스템 카탈로그에 대한 설명으로 틀린것은<ul id="40646115-4c9e-4b09-bb73-8e0af5fbb352" class="bulleted-list"><li style="list-style-type:disc">데이터베이스 시스템에 따라 상이한 구조를 가진다.</li></ul><ul id="cd42feb0-256e-4ce0-bc1a-b8c36d687ba6" class="bulleted-list"><li style="list-style-type:disc">사용자도 SQL을이용하여 검색할 수 있다.</li></ul><ul id="54417b82-8041-430a-bae3-ccdeb782aa69" class="bulleted-list"><li style="list-style-type:disc">데이터베이스에 대한 통계 정보가 저장 될 수 있다.</li></ul><ul id="d3e02226-922b-4957-811c-f494093fbbba" class="bulleted-list"><li style="list-style-type:disc">사용자 데이터베이스이다. </li></ul></li></ol><p id="54e76fbc-cfab-416f-8c63-a3c5754ee5f4" class="">
+</p><ol type="1" id="6f98a73a-b604-42f4-ad8c-3758a6bf44d7" class="numbered-list" start="4"><li>시스템 카탈로그에 대한 설명으로 옳지 않은 것<ul id="6a2e7fda-424f-44f8-b1db-53e115d6ec9d" class="bulleted-list"><li style="list-style-type:disc">데이터베이ㅡ의 무결성 유지를 위하여 사용자가 직접 시스템 카탈로그를 갱신해야 한다.</li></ul><ul id="41699c10-7618-4566-b3b6-6fdb65002685" class="bulleted-list"><li style="list-style-type:disc">일반 질의어를 이용해 그내용을 검색할 수 있다.</li></ul><ul id="5fb5f264-f677-411e-9a82-7c73735ceab7" class="bulleted-list"><li style="list-style-type:disc">DBMS가 스스로 생성하고 유지하는 데이터베이스 내 특별한 테이블의 집합체이다.</li></ul><ul id="6e325f4a-afdb-47c7-831f-9157372daf34" class="bulleted-list"><li style="list-style-type:disc">데이터베이스 스키마에 대한 정보를 제공한다.</li></ul></li></ol><p id="d30225cc-3a51-4c14-b52c-6a388b254232" class="">
+</p><ol type="1" id="547e8d54-ae21-4a88-a209-ed6c485c0975" class="numbered-list" start="5"><li>시스템 카탈로그에 대한 설명으로 옳지 않은 것</li></ol><ul id="b253b10b-b446-4996-af26-30615cd1a8aa" class="bulleted-list"><li style="list-style-type:disc">시스템 자체에 관련 있는 다양한 객체에 관한 정보를 포함하는 시스템 데이터베이스이다.</li></ul><ul id="ae12d6a8-d00d-4ddb-a7c7-191db0a44d79" class="bulleted-list"><li style="list-style-type:disc">데이터 사전이라고도 한다.</li></ul><ul id="65ee5703-db2a-4a48-a0fa-c96915441178" class="bulleted-list"><li style="list-style-type:disc">기본 테이블, 뷰, 인덱스, 패키지, 접근 권한등의 정보를 저장한다.</li></ul><ul id="e45b08b0-ea7b-4d5c-864d-9e43b2c71b9b" class="bulleted-list"><li style="list-style-type:disc">시스템을 위한 정보를 포함하는 시스템 데이터베이스이므로 일반 사용자는 SQL을 이용하여 내용을 검색하여 볼 수 없다. <ul id="72d5e4aa-33c5-47d0-9a42-70ad6b94ac51" class="bulleted-list"><li style="list-style-type:circle">시스템 카탈로그 자체도 시스템 테이블로 구성되어 있어 일반 사용자도 SQL을 이용하여 내용을 검색해볼수 있다. 단 수정을 불가능하다. </li></ul></li></ul><p id="bf55faad-0104-4d5b-aaa6-1fd2a5dd2302" class="">
+</p><p id="45848837-20e7-4c9d-af38-648acd1695f4" class="">
+</p><p id="55c7373e-6fc0-49f2-9ad0-fd2f3c30f329" class="">
+</p><p id="2e438105-6c1b-4ba5-89ea-7f22316858ab" class="">
+</p><p id="b399d420-e474-4a96-94ce-3a14f34d04b6" class="">
+</p><p id="58cf1c29-74d2-47e8-bbb1-428408eab1fa" class="">
+</p><p id="8e8c0691-1d32-4866-adf7-c3457efd148b" class="">
+</p><p id="de03febc-40b4-4fe0-b93f-217da8351327" class="">
+</p><p id="b0f0fc1c-bb9f-4a70-8164-b7ab879a1414" class="">
+</p><p id="f5b1aac3-edce-4551-a6ce-4c423cbad906" class="">
+</p><p id="d68b0981-1f73-4044-813c-ed83b734a540" class="">
+</p><p id="d152c05e-dd45-450a-9ac8-286ead1d4df0" class="">
+</p><p id="4026ad0d-eba8-46ed-880e-cc1c04f26694" class="">
+</p><p id="e56c8453-337b-4712-b011-60e2bd7346e0" class="">
+</p><p id="87a7e701-35d2-420e-a97c-98483ff430b3" class="">
+</p><p id="51fb44c6-b614-4e64-9baa-8a867f61b3e0" class="">
+</p><p id="2381c265-7bba-4553-9bed-386b459f8616" class="">
+</p><p id="13e6eed9-ced6-4c2f-b749-49f291261d3d" class="">
+</p><p id="9ca7e361-18b9-40dd-bcc7-d8cb145513a9" class="">
+</p><p id="408dc564-19ed-4844-a692-c0b6cca43e37" class="">
+</p><p id="a725a731-ca7a-4d5d-b996-b97dda436991" class="">
+</p><p id="76d8707f-1f72-44a1-8891-501a95871d5a" class="">
+</p><p id="e52c5ad1-21cb-40c4-92b1-975fa8c3f273" class="">
+</p><p id="b80e4b69-2396-4105-a240-5727bd661d18" class="">
+</p><p id="4abbcafd-3fd4-4bce-8945-cb78cd6724cd" class="">
+</p><p id="d484d468-4f53-4542-b995-dc1c55ab5a94" class="">
+</p><p id="2b5bfda7-ef45-41a9-9434-0478ef42c4c6" class="">
+</p><p id="9f17a803-b96b-4ebd-955f-214c0ad3a97a" class="">
+</p><p id="221649e6-f106-45be-8bc7-cc735146341f" class="">
+</p><p id="9e1c75be-8217-47a2-918b-1ddcfe1928ce" class="">
+</p><p id="5c8b4f7b-8f18-46b3-ae1b-6b6a60a11331" class="">
+</p><p id="ad490cd2-56fb-4287-8a80-3474e56fb8ce" class="">
+</p><p id="b226f615-116a-4173-bb60-15121702511a" class="">
+</p><p id="162a7259-e1ef-46b3-a775-3895ef05a7a9" class="">
+</p><p id="db1358a7-8587-4677-bc2c-e65672adb8bc" class="">
+</p><p id="29430eaf-bf91-4770-937f-3cd9df7298bd" class="">
+</p><p id="84abd4f5-9d0c-4132-a634-f045de7694b5" class="">
+</p><p id="4dcf00ea-54be-4263-acfd-fcd7e17f6e1f" class="">
+</p><p id="681006a5-0948-46da-b524-269cd442a8aa" class="">
+</p><p id="a9c01820-3200-4b04-87cc-e8dc2ac04c52" class="">
+</p><p id="005d46f6-9924-4bb8-807a-6c8b88986ab7" class="">
+</p><p id="43d24159-1848-4907-928c-82f5e87cf117" class="">
+</p><p id="c4ef2be4-2926-4d71-9574-e209c562dbba" class="">
+</p><p id="5f432417-9807-4bf8-a426-8512caa6e9a4" class="">
+</p><p id="5425bdb9-beda-4975-9655-f2a61cceffa2" class="">
+</p><p id="5160c76d-1bb0-4b23-aec0-47ee4f1485c7" class="">
+</p><p id="3d750eca-9d87-46e6-8bd9-dabf1e426847" class="">
+</p><p id="5b9c63a9-c60d-4e75-99a0-f3c220b0cad9" class="">
+</p><p id="f4b549dc-6fa4-409c-9a33-5417b1a87b5b" class="">
+</p><p id="db9accf2-b5e5-40c2-86de-e2def2902a33" class="">
+</p><p id="1480441f-abb4-4758-a0e1-bc7b4083ad55" class="">
+</p><p id="fb18a97d-74c0-482b-b072-d62756750a22" class="">
+</p><p id="d1087248-e59f-426c-8b9f-9eb000798c2b" class="">
+</p><p id="574cab8a-7d2c-4a70-97ef-26013f5fe1a5" class="">
+</p><p id="e361919b-0980-4ab1-b607-d99972d10cfb" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

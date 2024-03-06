@@ -1,0 +1,725 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>프로세스 관리</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ff1df6d5-1445-42b1-893c-1af77cbe6e45" class="page sans"><header><h1 class="page-title">프로세스 관리</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr></tbody></table></header><div class="page-body"><p id="4c99919a-ab54-4b6f-af62-cf8cdd9df54c" class="">
+</p><ol type="1" id="3fbc0769-8230-4633-a10d-0ce2b3cc64c9" class="numbered-list" start="1"><li><strong>프로세스</strong>의 정의로 적당히지 않은것은</li></ol><ul id="54f5cb2e-9a0a-4213-93c4-1cef76dd92ae" class="bulleted-list"><li style="list-style-type:disc">하드에어에 의해 사용되는 입 출력 장치 (x)</li></ul><ul id="026f45e7-3fb9-499f-b2f9-327b304bc0c9" class="bulleted-list"><li style="list-style-type:disc"><strong>실행중인 프로그램</strong></li></ul><ul id="5dfce04e-2590-4b05-bfc9-820176fc3c93" class="bulleted-list"><li style="list-style-type:disc">운영체제내에 <strong>프로세스 제어 블록의 존재</strong>로서 명시되는것</li></ul><ul id="4b99eee8-9b34-426a-8711-ab77bca939cc" class="bulleted-list"><li style="list-style-type:disc"><strong>프로세서가 할당</strong>되는 개체<ul id="e758dfbf-065f-430b-901b-8301ad3bc852" class="bulleted-list"><li style="list-style-type:circle"><strong>PCB를 가진 </strong>프로그램,<strong> 실기억장치</strong>에 저장된 프로그램, <strong>프로시저</strong>가 활동중인 것, <strong>비동기행위</strong>를 일으키는 주체, 지정된 결과를 얻기 위한 <strong>일련의 계통적 동작</strong>, 목적 또는 결과에 따라 발생되는 사건들의 과정</li></ul></li></ul><p id="e0017e9d-de1b-44a6-a906-7ec29f543c90" class="">
+</p><ol type="1" id="3e41bb63-6a6d-48c1-b0d0-4ca691a30cc4" class="numbered-list" start="2"><li>PCB에 관한 설명으로 옳지 않은것</li></ol><ul id="aaa740d8-26f3-4edb-a35f-5216c31e8a16" class="bulleted-list"><li style="list-style-type:disc">운영체제가 프로세스 관리를 위해 필요한 정보를 PCB에 수로간다.</li></ul><ul id="456302f6-ec20-4a23-971e-14364dae054f" class="bulleted-list"><li style="list-style-type:disc">프로세스가 생성될때마다 해당 PCB가 생성되며 프로세스가 소멸되어도 PCB는 소멸되지 않는다 (x)<ul id="4bd4b78d-f7a8-4007-894c-977c97252e7b" class="bulleted-list"><li style="list-style-type:circle"><strong>프로세스가 소멸</strong>되면<strong> PCB도 소멸</strong>된다.</li></ul></li></ul><ul id="8cbb3191-f5fc-432d-93b8-2be846587fd2" class="bulleted-list"><li style="list-style-type:disc">PCB에는 <strong>프로세스 식별번호</strong>, 프로세스 <strong>상태 정보</strong>, <strong>CPU 레지스터 정보</strong> 등이 수록되어 있다.</li></ul><ul id="29ed5c4f-351b-471a-9e8b-e369546990eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Process Control Block</strong>을 의미한다.</li></ul><p id="a0e0d8a6-cca1-4da8-a349-80fc42794903" class="">
+</p><ol type="1" id="ca4bd828-59f6-46bc-99b3-ce6e4c0e52b7" class="numbered-list" start="3"><li><strong>제어의 흐름</strong>을 의미하며 프로세스에서 <strong>실행의 개념만 분리</strong>한 것으로 프로세스의 구성을 제어의 흐름 부분과 실행 환경 부분으로 나눌때 <strong>프로세스의 실행부분을 담당함</strong>으로써 <strong>실행의 기본 단위가 되는것</strong>을 무엇이라 하는가 <strong>Thread</strong><ul id="6cfeadf1-16dc-4637-8c7f-8a5bd0e6246f" class="bulleted-list"><li style="list-style-type:disc">워킹 셋 : 프로세스가 일정시간 동안 자주 참조하는 페이지들의 집합, PCB (Process Control Block, 프로세스 제어 블록): 운영체제가 프로세스에 대한 중요한 저옵를 저장해 놓은것, 세그멘테이션(segmentation)기법 : 프로그램을 가변적이 크기로 나눈 단위를 세그먼트라 하며 이 세그먼트를 블록으로 사용하는 기법</li></ul></li></ol><p id="fb5adaf2-0cc5-4164-ac40-b22016c0a14f" class="">
+</p><p id="eac6de1e-ea3b-4e3e-883a-a3b82658001f" class="">4<strong> 다중 스레드 프로그램</strong>을 사용하는 주요 이점이 아닌것은</p><ul id="ba9f34b9-d294-47ef-9e72-cddf9832cd16" class="bulleted-list"><li style="list-style-type:disc">다중 프로세싱 <strong>하드웨어의 성능향상</strong></li></ul><ul id="b55e3d1e-44ed-4d84-a8f4-0b8c5330f0d9" class="bulleted-list"><li style="list-style-type:disc">응용 프로그램의 <strong>처리율 향상</strong></li></ul><ul id="cbddded5-462a-4cba-b745-1bf34aab4680" class="bulleted-list"><li style="list-style-type:disc">프로세스 들 간<strong>의 통신 향상</strong></li></ul><ul id="f18341de-373b-4bf9-b4a6-83053a37b4fa" class="bulleted-list"><li style="list-style-type:disc">응용 프로그램의 응답시간 증가 (x)<strong> 응용 프로그램의 응답시간 단축</strong></li></ul><p id="ccb9409d-b828-46e6-9aa6-0a9d38710495" class="">
+</p><p id="4934d75a-470f-40a5-bebd-63756f71770e" class="">5 <strong>임계구역 (Critical section)</strong>에 대한 설명으로 옳지 않은것</p><ul id="75349ebc-4a9c-4768-b2f2-e2d356b21159" class="bulleted-list"><li style="list-style-type:disc">임계구역에서 <strong>프로세스 수행</strong>은<strong> 가능한 빠리 끝내야 한다</strong>.</li></ul><ul id="b2435382-e77c-4838-ba83-9b90572a1f42" class="bulleted-list"><li style="list-style-type:disc">임계구역에서는 프로세스가<strong> 무한 루프에 빠지지 않도록 해야 한다.</strong></li></ul><ul id="22603300-7f20-47ff-b92d-4e21644cb648" class="bulleted-list"><li style="list-style-type:disc">임계구역에서는 프로세스들이<strong> 하나씩 순차적으로 처리</strong>되어야 한다.</li></ul><ul id="54a1e730-389d-4cb4-ba34-d0f97ec65a27" class="bulleted-list"><li style="list-style-type:disc">프로세스의 처리 시간보다 페이지 교체에 소요되는 시간이 더 많아지는 현상을 의미한다 (x) :<strong> 스레싱 (Thrashing)</strong></li></ul><p id="6cde5bdf-e106-4f4f-b06b-19fdd6299128" class="">
+</p><p id="4e48865d-c4d0-4e1c-8bac-45890f3583d9" class="">6 프로세스 스케줄러의 스케줄링 정책에 해당하지 않는것 Semaphore</p><ul id="dfabb028-6754-4dbd-a1a0-430a32bebd28" class="bulleted-list"><li style="list-style-type:disc">FIFO</li></ul><ul id="9572a53d-e093-4e4a-a022-e812f1caf8a4" class="bulleted-list"><li style="list-style-type:disc">Round Robin</li></ul><ul id="82e6bcfb-25c5-4657-9080-7908f981aa6c" class="bulleted-list"><li style="list-style-type:disc">SJF<ul id="271c2f86-50e9-4b4b-80d3-fae176aa84d9" class="bulleted-list"><li style="list-style-type:circle"><strong>비선점 </strong>스케줄링 종류 : FCFS(FIFO), SJF, 우선순위, HRN, 기한부 등</li></ul><ul id="1a472f0a-3ae3-4bb5-9fdb-0f17c6c2caca" class="bulleted-list"><li style="list-style-type:circle"><strong>선점 </strong>스케줄링 종류 : Round Robin, SRT, 선점 우선순위,다단계 큐(MQ), 다단계 피드백 큐(MFQ)등</li></ul></li></ul><p id="874701b1-e17d-4d40-a6dd-5ac9602773ff" class="">
+</p><ol type="1" id="959bb282-035f-4c45-bc7a-586c657406f7" class="numbered-list" start="7"><li>다음과 같은 CPU 버스트 시간을 가진 프로세스들의 집합이 있다. FCFS스케줄링 알고리즘을 이용했을때 <strong>평균 대기 시간이 가장 적게 걸리는 것</strong>은 어느 순서로 작업을 시행했을 때인가?</li></ol><p id="fe2bf7ab-74b9-4015-8031-c7fad6b9d1ed" class="">{ P1 : 24ms P2 : 5ms P3 : 3ms} p3 → p2 → p1<div class="indented"><ul id="4bd949ea-d135-4b55-a736-99380ff96272" class="bulleted-list"><li style="list-style-type:disc">임의의 작업 순서를 지정하여 최소 평균 대기 시간을 구하려면 실행 시간이 가장 적은것 부터 차례로 수행하면 된다. 만약 최대 평균 대기 시간을 구하려면 실행 시간이 가장 긴것부터 차례로 수행하면 된다.</li></ul></div></p><p id="f3920092-afb3-4bb5-90fa-8c276350baf7" class="">
+</p><p id="fdc43d9b-0b95-4675-91e0-0cb1b0ba5b7e" class="">
+</p><p id="977fc14d-d02f-4274-b3fa-abe8da9e0422" class="">8 <strong>기한부 스케줄링</strong>에 관한 설명으로 거리가 먼 것은 </p><ul id="4307ae3f-f998-41ac-97b6-aff8a441fa13" class="bulleted-list"><li style="list-style-type:disc">작업이 주어진 특별한 시간이나 만료 시간 안에 완료되도록 하는 기법이다.</li></ul><ul id="eb275a5e-6ba4-4639-bfaf-3ab10b05b2be" class="bulleted-list"><li style="list-style-type:disc">동시에 다수의 기한부 작업이 수행되면 스케줄링은 보다 용이해진다. (X)</li></ul><ul id="83cf6168-c6b3-4341-b24a-1a1205899c9a" class="bulleted-list"><li style="list-style-type:disc">기한부 스케줄링에 필요한 집약적 자원관리는<strong> 많은 오버헤드를 일으킬 수 있다.</strong></li></ul><ul id="67982670-f7ce-4d93-9f59-921d409524d2" class="bulleted-list"><li style="list-style-type:disc">사용자는 그 작업에 필요한 자원에 관한 정확한 정보를 시스템에 제시하여야 한다.</li></ul><p id="20102aff-7b25-4bee-9eff-971b00c80061" class="">
+</p><ol type="1" id="ab998fc9-1316-41b8-bfee-0006d24a68c3" class="numbered-list" start="9"><li><strong>Round-Robin 스케줄링 방식</strong>에 대한 설명으로 옳지 않은것</li></ol><ul id="86ec9f6a-403f-4ccd-82cf-657e7eeefedd" class="bulleted-list"><li style="list-style-type:disc">할당된 시간 내에 작업이 끝나지 않으면<strong> 대기 큐의 맨 뒤로 그 작업을 배치</strong>한다.</li></ul><ul id="c0d81723-d3b6-4760-bdf8-62849250d8ed" class="bulleted-list"><li style="list-style-type:disc">시간 할당량이 충분히 크면 <strong>FIFO 방식과 비슷</strong>하다.</li></ul><ul id="7b15a51c-539c-4eaf-a7de-c56880f6aaf9" class="bulleted-list"><li style="list-style-type:disc">적절한 응답시간이 보장되므로 일괄처리 시스템에 유용하다. (x)</li></ul><ul id="d8e18bd9-ef71-4c7b-bbf3-6f2c563c6d3a" class="bulleted-list"><li style="list-style-type:disc"><strong>시간 할당량이 작아질수록 문맥교환 과부하는 상대적으로 높아진다.</strong></li></ul><p id="e25177b1-3b17-4d89-abe0-7ff70721b6cf" class="">
+</p><p id="880f29bf-3b8b-42c0-858b-b08f4b77a846" class="">10 다음중 <strong>바람직한 스케줄링 정책</strong>이라고 할 수 있는 것은</p><ul id="4ff2f2dc-fd7f-4bb1-b75f-893f909e36d6" class="bulleted-list"><li style="list-style-type:disc"><strong>무한의 실행 연기</strong>를 피하기 위해 <strong>Aging 기법</strong>을 사용한다<ul id="8cfc87fe-efef-4886-aa19-142b21541b40" class="bulleted-list"><li style="list-style-type:circle">스케줄링은 <strong>응답시간, 반환시간, 대기시간을 줄이고 CPU이용률을 늘려서 </strong>많은 프로세스가 CPU나 자원을 효율적으로 사용하는 것을 목적으로 한다.</li></ul></li></ul><p id="402e649a-b574-499f-b895-a3c741709b5a" class="">11 스케줄링 방식에서 평균대기 시간이 가장 짧은 것은  ? SJF</p><p id="3be96447-f6a8-4ef3-89b3-5a41476924da" class="">
+</p><p id="9be48382-1ad7-4cde-9d95-1eccaed11bd4" class="">
+</p><p id="b5fcb785-fa3b-49ff-9ecd-63d7ba12b68e" class="">12 대기시간 45 서비스 시간 5일때 HRN스케줄링 기법을 사용했을때 경우 우선순위 계산 결과는 10 </p><ul id="56dc237d-0f3c-4ca4-b6ff-748d07fcc8bc" class="bulleted-list"><li style="list-style-type:disc"><strong>HRN 스케줄링 기법의 우선순위 계산식</strong>은 <strong>( 대기시간 + 서비스 시간) / 서비스 시간</strong>, (45 + 5 ) / 5=10</li></ul><p id="e8546907-8da6-42b4-b82d-46903dfb2338" class="">
+</p><p id="87597bea-4619-486f-b788-16c106e932dc" class="">13 다중프로그래밍 운영체제에서 한 순간에 여러개의 프로세스에 의하여 공유되는 데이터 및 자원에 대하여<strong> 한순간에는 반드시 하나의 프로세스에 의해서만 자원 또는 데이터가 사용되도록 하고 </strong>이러한 자원이<strong> 프로세스에 의하여 반납된후 비로소 다른 프로세스에서 자원을 이용</strong>하거나<strong> 데이터를 접근할 수 있도록 지정된 영역을 의미</strong>하는 것은 ?<strong> Critical SEction</strong></p><p id="d2332d50-debf-44d4-bff2-727845998a34" class="">
+</p><p id="b3793c91-a899-4521-97c4-adaa0a1dff25" class="">
+</p><p id="2617af76-0651-4faf-b32f-1a8d4fe87562" class="">14 <strong>프로세스</strong>에 대한 설명으로 틀린것 </p><ul id="23e11610-f43c-4447-bd39-b32357fb848a" class="bulleted-list"><li style="list-style-type:disc">지정된 결과를 얻기 위한<strong> 일련의 계통적 동작</strong>을 말한다</li></ul><ul id="f4ade4f5-ea96-465e-b91d-0b31a312ecd9" class="bulleted-list"><li style="list-style-type:disc">목적 또는 결과에 따라 발생되는<strong> 사건들의 과정</strong>을 말한다</li></ul><ul id="6f0c499b-1709-487b-9214-afd32c5cc93e" class="bulleted-list"><li style="list-style-type:disc">프로세스는 프로그램 자체만으로 이루어져 있다. (X)</li></ul><ul id="5b77a466-975b-4fbb-baca-02cdf54070c5" class="bulleted-list"><li style="list-style-type:disc">CPU에 의해 <strong>수행되는 사용자</strong> 및 <strong>시스템 프로그램을 말한다.</strong></li></ul><p id="4d61d245-5be1-4d78-9fea-1b63001f917f" class="">
+</p><ol type="1" id="eb45591c-eb02-49a1-aad4-6a73dbe3106a" class="numbered-list" start="15"><li><strong>처리 스케줄러</strong>가 하는 일은 ?</li></ol><ul id="f439c654-6f33-48f9-90df-27ede888e50c" class="bulleted-list"><li style="list-style-type:disc">하나의 프로세스를<strong> 준비  (Ready)상태에서 실행 상태</strong>로 만든다.</li></ul><p id="d06c7ba4-bcfa-4588-b99c-98ec2e5f4522" class="">
+</p><p id="449a6db7-b2af-4a26-bb07-2e2f2718e95d" class="">16 <strong>병행 프로세스</strong>의 <strong>상호배제 구현기법</strong>으로 거리가 먼것은</p><ul id="658866f4-555b-4861-92da-374fda7c7ad6" class="bulleted-list"><li style="list-style-type:disc"><strong>데커 </strong>알고리즘 - 소프트웨어적</li></ul><ul id="d881dbe1-4727-498f-93d9-73d28c03d8b5" class="bulleted-list"><li style="list-style-type:disc">Teast and Set 명령어 기법 - 하드웨어적 + Swap 명령어 기법</li></ul><ul id="00884728-3f34-4fd6-9317-26278163c133" class="bulleted-list"><li style="list-style-type:disc"><strong>피터슨 </strong>알고리즘 - 소프트웨어적<ul id="d667d9f3-3ec0-40e8-bf42-40476f3580db" class="bulleted-list"><li style="list-style-type:circle">Lamport의 빵집 알고리즘</li></ul></li></ul><ul id="2263f028-41b5-4e91-9df2-dc05a6337c12" class="bulleted-list"><li style="list-style-type:disc">은행원 알고리즘 (x)<ul id="d47457e6-a8cf-4ff0-a0e2-83fffb7f2b04" class="bulleted-list"><li style="list-style-type:circle">은행원 알고리즘은 교착상태가 발생한 가능성을 배제하지 않고 교착상태가 발생하면 적절히 피해나가는 교착상태 회피 기법이다.</li></ul></li></ul><p id="d0243452-e33a-4360-95e6-e1acf540b1a5" class="">
+</p><p id="1c2ba84f-abde-4c2b-96dd-273a2d25ba08" class="">
+</p><p id="a99efbb7-be50-4d6a-8b4e-af66cb96a98a" class="">17 <strong>임계영역 </strong>문제를 해결하기 위한 조건이 아닌 것은</p><ul id="8c5ca8f0-4bd1-4e20-bfbd-a5270be0121c" class="bulleted-list"><li style="list-style-type:disc"><strong>상호 배제</strong></li></ul><ul id="f67ff870-1ef0-40e2-9a01-e4e7c66834ec" class="bulleted-list"><li style="list-style-type:disc"><strong>진행</strong></li></ul><ul id="0bb73600-5c57-4878-8d78-efe01ad4dd6a" class="bulleted-list"><li style="list-style-type:disc">비선점 (x)</li></ul><ul id="90317d98-2a24-444c-8333-bfcd1013e5f0" class="bulleted-list"><li style="list-style-type:disc"><strong>한계 대기 (Bounded Waiting)</strong></li></ul><p id="9b6227a3-dee9-44e8-8021-eb5a12eabf39" class="">
+</p><p id="acb8f391-188e-40af-9f57-1d00c964aec9" class="">18 시스템에서 프로세스들은 병행하여 처리할 수 있다. <strong>병행처리</strong>를 허용하는 이유로 거릭 먼 것은</p><ul id="caf47242-86ab-4403-bcc7-2e95a36965f2" class="bulleted-list"><li style="list-style-type:disc">컴퓨터 하드웨어 자원이<strong> 한정되어 있으므로 </strong>다수의 사용자 환경에서 <strong>자원을 공유해야 하기 때문</strong>에</li></ul><ul id="44ba8c3d-7772-41a9-bab6-338335ebf6c4" class="bulleted-list"><li style="list-style-type:disc">여러 사용자가 같은 정보를 참조할 수 있으므로 <strong>이들 자원에 동시 접근할수 있도록 하기 위하여</strong></li></ul><ul id="b2c052b7-59f9-431f-963f-bc70230c0f63" class="bulleted-list"><li style="list-style-type:disc">시스템 기능을 하나의 프로세스로 통합하여 시스템을 구성할수있도록 하기 위하여(X)</li></ul><ul id="8d88b4b3-f0a3-4415-9c71-5223592b45af" class="bulleted-list"><li style="list-style-type:disc">개별 사용자들도<strong> 동시에 처리해야 하는 많은 테스크를 가질 수 있기 때문</strong>에</li></ul><p id="e99e4bb8-21c8-43d7-b717-5610c83df28e" class="">
+</p><p id="af3d9bfe-0a50-4b95-9141-8d95b0aad321" class="">19 <strong>카운팅 세마포어</strong>에 대한 설명 중 옳지 않은것</p><ul id="937de43e-97db-4dc6-be07-03a55af7ae11" class="bulleted-list"><li style="list-style-type:disc">1 이상의 정수로 초기화 되는 세마포어(x) - 0이상의 정수로 초기화 되는 세마포어</li></ul><ul id="e4bc7294-3e31-4a7e-8673-408363b69a0e" class="bulleted-list"><li style="list-style-type:disc"><strong>동일한 자원들이 있는 풀</strong>에서 <strong>자원을 할당할때 사용</strong></li></ul><ul id="b745c4bd-1293-4b31-8384-96e01b96d024" class="bulleted-list"><li style="list-style-type:disc">풀에 있는 자원 수와 같은 값으로 초기화</li></ul><ul id="a51ba368-9087-45aa-acc9-a5f1a1acef93" class="bulleted-list"><li style="list-style-type:disc"><strong>세마포어가 0까지 줄어들었을때 대기</strong></li></ul><p id="0aa3e808-4270-4dfe-98d8-ea9be6cfcd15" class="">
+</p><p id="4874c1ff-5c55-44f2-9e66-06e031a14f71" class="">
+</p><p id="b06093d2-3c28-4821-aa71-1f60d33c85b5" class="">20 교착상태의 예방을 위하여 각 자원 유형에 일련의 순서 번호를 부여하는 것은 어떤 교착상태 발생 조건을 제거하기 위해서인가 ?<strong> 환형 대기 조건</strong></p><p id="6e82d25f-e70f-4867-aa6e-a433809b3b1a" class="">
+</p><p id="dde61d0b-e0df-4d72-b208-4da015c05823" class="">21 Round-Robin 스케줄링에 대한 설명으로 틀린것</p><ul id="e24de23c-b505-4481-8491-1b4c052a3e91" class="bulleted-list"><li style="list-style-type:disc">프로세스들이 배당 시간 내에 작업을 완료하지 못하면 폐기된다 (x)<ul id="913fe36f-21c1-4ab8-a2c4-5d418bfc9765" class="bulleted-list"><li style="list-style-type:circle">프로세스에게<strong> CPU를 넘겨주고</strong> 현재의 프로세스는 <strong>준비상태 큐의 가장 뒤로 배치</strong>된다. </li></ul></li></ul><ul id="91aaa235-0780-4daa-b042-78f2c497c4c8" class="bulleted-list"><li style="list-style-type:disc">프로세스들이 중앙처리장치에서 <strong>시간량에 제한을 받는다</strong></li></ul><ul id="bf860e9a-cd89-4c3b-8874-c899249d07b8" class="bulleted-list"><li style="list-style-type:disc"><strong>시분할 시스템에 효과적</strong>이다</li></ul><ul id="5f93db47-785e-4ef7-a6b6-49668fd36ed9" class="bulleted-list"><li style="list-style-type:disc"><strong>선점형 기법</strong>(Preemptive)이다.</li></ul><p id="394ec1b3-34ba-45c7-b649-45ea489e9689" class="">
+</p><ol type="1" id="ff1444c5-14d4-42e2-a157-9f35754c1179" class="numbered-list" start="22"><li>에이징 (aging)기법에 대한 설명으로 가장 오은것</li></ol><ul id="9c8ca1f2-ca99-4536-91b0-21d13b77bf71" class="bulleted-list"><li style="list-style-type:disc">프로세스가 자원을 기다리고 있는 시간에 비례하여 우선 순위를 부여함으로써 가까운 시간 안에 자원이 할당될수 있도록 한다.</li></ul><p id="90477253-08e6-4d83-9c4b-e5e293097a2f" class="">
+</p><p id="264e2b59-11a5-460f-9006-d7b183cbd903" class="">23 데드라인 스케줄링에 대한 설명 중 옳지 않은것</p><ul id="6f984290-5ef4-4465-bd89-0c36f04ba64b" class="bulleted-list"><li style="list-style-type:disc">프로세스들이 특정 시간 안에 마치도록 스케줄링</li></ul><ul id="a9ac4cf8-5a36-4930-8b88-4a5fcfac25eb" class="bulleted-list"><li style="list-style-type:disc">데드라인을 놓치면 프로세스 가치가 낮아짐</li></ul><ul id="a62b2ff2-9087-40d0-8cad-4b6aec79004f" class="bulleted-list"><li style="list-style-type:disc">정확한 자원 요구량을 미리 제시하는것이 필요</li></ul><ul id="fa6cd497-485d-40a4-be2c-c16e609b6466" class="bulleted-list"><li style="list-style-type:disc">오버헤드 측면에서 안정적임 X</li></ul><p id="e622c557-bce8-4b17-a787-b8d336dd91a1" class="">
+</p><p id="93042ed6-4f0e-4906-b012-d8f1d2c3b2e6" class="">24 RR(RoundRoubin) 방식에 관한 설명으로 옳지 않은것</p><ul id="14674c1a-07ab-4cdc-8130-240d7a455642" class="bulleted-list"><li style="list-style-type:disc">시분할 시스템을 위해 고안된 방식 </li></ul><ul id="43e26bac-b2e7-4a96-be62-e55a7c0c0202" class="bulleted-list"><li style="list-style-type:disc">시<strong>간 할당량이 클 경우 FCFS기법과 같아지고 시간 할당량</strong>이 <strong>작을 경우</strong> <strong>문맥 교환 </strong>및 <strong>오버헤드가 자주 발생</strong>될 수 있다.</li></ul><ul id="8571d9b0-9db2-4726-8cc3-772b5b25a8eb" class="bulleted-list"><li style="list-style-type:disc">시스템이 사용자에게 <strong>적합한 응답시간을 제공</strong>해주는<strong> 대화식 시스템에 유용</strong>하다</li></ul><ul id="ff035b09-584a-48cc-8cb1-64dee27ad41f" class="bulleted-list"><li style="list-style-type:disc">프로세스에게 이미 할당된 프로세서를 강제로 빼앗을수없고 그 프로세스의 사용이 종료된 후에 스케줄링 해야 하는 방법을 택하고 있다 (x) - 라운드로빈 방식은<strong> 프로세스에게 이미 할당된 프로ㅔ서를 강제로 빼앗을 수 있는 선점형 기법</strong>이다.</li></ul><p id="a4bd1b35-5e41-41de-8fa9-61ff717fa17a" class="">25.입출력 서비스는 <strong>우선순위 없이 도착 순위로 스케줄된다.</strong> <strong>선입선출 </strong>방식은 <strong>? Round Robin</strong></p><ul id="fcf23f70-b4dd-4f0d-99d1-0a9bb6864d12" class="bulleted-list"><li style="list-style-type:disc"><strong>SRT </strong>:<strong> SJF 알고리즘</strong>을 <strong>선점 형태</strong>로 변경한 것으로 <strong>현재 실행중인 프로세스</strong>의 <strong>남은 시간</strong>과<strong> 준비 상태 큐</strong>에 새로 도착한 프로세스의 <strong>실행 시간을 비교</strong>하여 <strong>가장 짧은 실행 시간을 요구</strong>하는 <strong>프로세스에게 CPU를 할당하는 기법</strong></li></ul><ul id="e48f022a-a7ef-4b86-b29d-bb23088e3c7c" class="bulleted-list"><li style="list-style-type:disc"><strong>SJF </strong>: 준비상태<strong> 큐</strong>에서 기다리고 있는 프로세스들 중에서 실행 시간이 <strong>가장 짧은 프로세스에 먼저 CPU를 할당</strong>하는 기법</li></ul><ul id="c2c781a0-65d0-4c80-a2ed-7659ba85a923" class="bulleted-list"><li style="list-style-type:disc"><strong>HRN </strong>: 실행시간이<strong> 긴 프로세스에는 불과한 SJF 기법을 보완</strong>하기 위한 것, <strong>서비스(실행)시간</strong>과 <strong>대기시간을 이용</strong>하는 기법</li></ul><p id="90fcb8f1-4308-46cf-bdd2-f020b746a532" class="">
+</p><p id="eb9ed5f8-5825-4e8c-aeaa-50a71dad5a04" class="">26 스케쥴링 방식 중 평균 대기 시간이 가장 적은 방법은 SJF</p><p id="f5af2d93-3a20-4ff8-9142-ca741a7a3114" class="">
+</p><p id="5d57c5bc-df22-449d-874e-dc495c1e385e" class="">
+</p><p id="74a3a455-ea5f-4ccb-8bd8-47cbc39cbc58" class="">27 <strong>교착상태는</strong> 하나 또는 둘 이상의 프로세스가 더 이상 꼐속 할수 없는 어떤 특정 사건을 기다리고 있는 상태를 말한다. 여기서 특정사건의 의미로 가장 적당한 것은 </p><p id="d887ed78-090f-43be-9796-930b842e5617" class=""><strong>자원의 할당과 해제</strong></p><p id="b88708d8-b259-425b-a8fd-0a0d50dfbe75" class="">
+</p><p id="7dcb4827-26e0-4386-89d9-235995dfea75" class="">
+</p><p id="fb6f05f0-f3b6-4fa0-bf50-91d01f1f9531" class="">28 프로세서 스케줄링 방법 중 시분할 시스템을 위해 고안되었으며 10~100msec정도의 규정 시간량 또는 타임슬라이스라는 작은 단위시간이 정의되어 이 시간량만큼 CPU를 제공하는 방법은 ? 라운드 로빈</p><p id="20517b62-8965-40ed-a454-a4404496e13b" class="">
+</p><ol type="1" id="30061f1f-c4d4-4fe3-9d2f-80792d005a41" class="numbered-list" start="29"><li>용어설명이 옳지 않은것</li></ol><ul id="9de850db-9838-4e63-8713-b92fca20ff8f" class="bulleted-list"><li style="list-style-type:disc">시간 할당량 (Time Slice) 한 프로세스가 작업을 모두 마칠 수 있도록 부여한 시간 (X)</li></ul><ul id="a7a21e22-816f-46b3-9ed4-2e84b54f29f0" class="bulleted-list"><li style="list-style-type:disc">디스패치 : 준비상태에 있는 여러 프로세스 중 하나가 프로세서를 할당받아 실행 상태로 전이되는 과정</li></ul><ul id="a374e004-5bdf-48f3-8ccb-192c93194296" class="bulleted-list"><li style="list-style-type:disc">문맥교환 Context Switching : 한 프로세스에서 다른 프로세스로 CPU가 할당되는 과정</li></ul><ul id="dff3fa06-a611-44fb-a030-642c46321716" class="bulleted-list"><li style="list-style-type:disc">교착상태 : 프로세스들이 발생하지 않을 사건을 무한정 기다리고 있는 상태</li></ul><p id="222d4b39-2e25-4ad7-9f35-14d697ac30ec" class="">
+</p><p id="8006c390-a9b2-446d-92a6-114befa59971" class="">30 <mark class="highlight-yellow_background"><strong>시스템에서는 어떤 자원을 기다린 시간에 비례하여 프로세스에게 우선순위를 부여하는 에이징 기법을 적용</strong></mark>하고 있다. 어떤 현상을 방지하기 위해서인가 ? <strong>무한연기</strong> (Indefinite Postponement)</p><p id="555550f7-958e-4055-9dc3-37a47e362f6e" class="">
+</p><p id="580baf36-a573-4d3d-8ef5-0d14ec0830cc" class="">31 <strong>세마포어</strong>에 대해 옳지 않은것</p><ul id="35448dbf-9763-464e-a2ce-904eda4d5e03" class="bulleted-list"><li style="list-style-type:disc">Dijkstra는 교착 상태에 대한 문제를 세마포어라는 개념을 이용하여 해결하였다 (x)<ul id="4790c86d-5334-476c-a86f-470b09ee7c53" class="bulleted-list"><li style="list-style-type:circle">세마포어 : 두개 이상의 프로세스를 한 시점에서는 동시에 처리할 수 없으므로 각 프로세스에 대한 처리 순서를 결정하는 동기화 기법중 하나</li></ul><ul id="858b5f38-a2a6-4cac-8857-1ba313ba0ecc" class="bulleted-list"><li style="list-style-type:circle">교착상태 : 둘 이상의 프로세스들이 자원을 점유한 상태에서 서로 다른 프로세스가 점유하고 있는 자원을 요구하며 무한정 기다리는 현상으로 예방기법, 회피기법, 별긴기법, 회복기법을 사용하여 교착상태를 해결할 수 있다.</li></ul></li></ul><ul id="c68de106-d51e-480e-b6d0-36297ec65c68" class="bulleted-list"><li style="list-style-type:disc"><strong>세마포어에 </strong>대한 오퍼레이션들은 <strong>소프트웨어나 하드웨어로 구현 가능</strong>하다.</li></ul><ul id="aa3b53e6-0f8b-4203-97dc-9ca3c628d8f4" class="bulleted-list"><li style="list-style-type:disc">P와 V라는 두개의 연산을 사용하며 이 연산을 통해 접근 가능한 세마포어 변수 S를 사용한다</li></ul><ul id="0f2bceb1-073b-4468-ae59-59cb2cae12a2" class="bulleted-list"><li style="list-style-type:disc"><strong>프로세스 사이의 동기를 유지하고 상호 배제의 원리를 보장할 수 있다.</strong></li></ul><ol type="1" id="d9aa1383-92bc-467c-9c84-6bbb3c15b815" class="numbered-list" start="32"><li>동시 수행 프로세스 중 한 프로세스가 <strong>어떤 공유 데이터를 액세스</strong> 하고 있다면 이 프로세스는 어디에 있다고 하는가 <strong>Critical SEction</strong></li></ol><p id="72e2c35a-33d7-413b-8a09-5e5a9751538d" class="">
+</p><p id="c0be32bb-c271-45f2-8bbb-74f7f6ee1590" class="">
+</p><p id="77b84a43-d24e-484f-847c-662e8d2bc43f" class="">
+</p><p id="d892eef0-7d68-41b1-ab8e-e10e49ae074c" class="">33 <strong>상호 배제</strong>를 올바로 구현하기 위한 요구조건에 대한 설명으로 틀린것</p><ul id="f25ec4a5-0039-43d4-be81-28704c7cf7cb" class="bulleted-list"><li style="list-style-type:disc">두개 이상의 프로세스들이 공유데이터에 접근하여 동시에 수행할수 있어야 한다(x)</li></ul><ul id="650001ce-479a-4a29-808e-4f5ebeb60d56" class="bulleted-list"><li style="list-style-type:disc">임계구역 바깥에 있는 프로세스가 다른 프로세스의 임계구역 진입을 막아서는 안된다.</li></ul><ul id="e31ff054-3eb7-420d-8705-8fb30573399a" class="bulleted-list"><li style="list-style-type:disc">어떤 프로세스도 임계 구역으로 들어가는 것이 무한정 연기 되어서는 안된다.</li></ul><ul id="34186539-0e2a-45a8-90f9-eab6ec50bb7d" class="bulleted-list"><li style="list-style-type:disc">임계구역은 특정 프로세스가 독점할 수 없다.</li></ul><p id="bf55efcf-8c43-4661-9ae4-7a5949d2e121" class="">
+</p><p id="50562a37-cc99-4757-8fdb-5541d42e2011" class="">34 모니터에 관한 설명으로 옳지 않은것</p><ul id="eaa6b02f-07b9-4249-a2bd-a9bccd72de87" class="bulleted-list"><li style="list-style-type:disc">한 순간에 여러 프로세스가 모니터에 동시에 진입하여 자원을 공유할수 있다 X</li></ul><ul id="7bf05187-31be-4e08-b787-d432faf41164" class="bulleted-list"><li style="list-style-type:disc">공유데이터와 이 데이터를 처리하는 프로시저로 구성된다.</li></ul><ul id="a755cba4-9567-49d4-b89c-044c4ba3546c" class="bulleted-list"><li style="list-style-type:disc">모니터 외부의 프로세서는 모니터 내부의 데이터를 직접 액세스 할 수 없다 </li></ul><ul id="57297624-1ed5-43ed-a210-21aa9fd50f1a" class="bulleted-list"><li style="list-style-type:disc">모니터에서는 wait와 signal연산이 사용된다.</li></ul><p id="caa11ca5-7049-48b5-b19e-d2da08351967" class="">
+</p><p id="03a17b87-d044-4095-bfad-2119f458d00a" class="">35  교착상태의 네가지 필요 조건에 해당하지 않는 것은</p><ul id="95c2ea8c-5efe-49d4-a7c7-21b36fc5e90f" class="bulleted-list"><li style="list-style-type:disc">자원은 사용이 끝날때까지 이들이 갖고 있는 프로세스로부터 제거할수 있다 x</li></ul><ul id="097ece2b-0e09-4f98-8837-c27816a09de5" class="bulleted-list"><li style="list-style-type:disc">프로세스가 다른 자원을 기다리면서 이들에게 이미 할당된 자원을 갖고 있다</li></ul><ul id="b34b3fd6-36c3-4efa-abaf-3e25a42e71fc" class="bulleted-list"><li style="list-style-type:disc">프로세스들이 그들이 필요로 하는 자원에 대해 배타적인 통제권을 요구한다</li></ul><ul id="6668a4f6-0e32-457e-bbcc-8a5038aaea7a" class="bulleted-list"><li style="list-style-type:disc">프로세스의 환형 사슬이 존재해서 이를 구성하는 각 프로세스는 사슬 내의 다음내에 있는 프로세스가 요구하는 하나 또는 그 이상의 자원을 갖고 있다.</li></ul><p id="bd990217-8de5-4524-bcde-bda0da43f6da" class="">
+</p><p id="932a61ad-6ae7-454e-b72b-2eb2ab690d8f" class="">36 교착상태를 방지하는 방법으로 가장 거리가 먼것</p><ul id="8ef5b922-4fc1-471e-9ff3-001e585d45e5" class="bulleted-list"><li style="list-style-type:disc">점유와 대기 조건의 부정</li></ul><ul id="928a0d63-6e39-47e6-a95e-fd3d4fcc4948" class="bulleted-list"><li style="list-style-type:disc">불완전 상태 조건의 부정 x</li></ul><ul id="66fc58e9-803b-4a8a-b82e-13a91cb624fa" class="bulleted-list"><li style="list-style-type:disc">환형 대기 조건의 부정</li></ul><ul id="5a12ad78-6fd2-4469-8594-b24be384041a" class="bulleted-list"><li style="list-style-type:disc">비선점 조건의 부정</li></ul><p id="da40bb63-8ec6-4ab6-b1a1-16075d221438" class="">
+</p><p id="eff83524-0adc-4399-8ecb-fa7c2d8e57de" class="">37 시스템 호출의 종류 중 프로세스 제어를 위해 사용되는 명령어로 틀린것은 SEND</p><p id="b785edac-3c23-49e7-b370-821bd3cf70ea" class="">END / LOAD / EXECUTE </p><p id="f8626de7-58ac-40f8-95df-775e2d0f3d1b" class="">
+</p><p id="a51e68ac-2082-4bdd-bf9c-2010d7dca420" class="">38 교착상태 해결 방법 중 다음 사항과 관계되는 것은 Prevention</p><p id="2cf871c2-3e84-451a-af3c-a55769a37d48" class="">Mutual Exclusion 부정</p><p id="b4614471-c2c7-4695-8409-0013f6bb78b1" class="">Hold and Wait 부정</p><p id="9417a4a9-958b-4d0c-9403-1fc2d0419d3f" class="">Non-preemption 부정</p><p id="0cf915a7-7a7b-40b2-a057-06bbf90b4da9" class="">Circular Wait 부정 </p><p id="1ecde7f7-9450-4423-8c40-bbc504c79f13" class="">
+</p><p id="36968722-0610-4f5c-9dd5-d3c4a2f25ca4" class="">
+</p><p id="5bc33c1c-6a65-4f61-9159-a5a548300226" class="">39 프로세스관리 중에서 스케줄링의 기준에 해당되지 않는것은 메모리 중심 프로세스</p><p id="69b78af9-5f06-4f55-9230-d35b12152fb0" class="">
+</p><p id="a305bb96-a8f2-4af1-bc8d-fe8369805a48" class="">40 교착상태를 회피하는데 사용하는 은행원 알고리즘에 관한 설명으로 옳지 않은것은</p><ul id="ba65de70-e14b-4adb-bb7f-88b1fe856a94" class="bulleted-list"><li style="list-style-type:disc">불완전 상태와 안전 상태로 구분한다</li></ul><ul id="eee37c8c-58e1-4c18-86ab-c4d13df623fa" class="bulleted-list"><li style="list-style-type:disc">안전상태에서는 교착 상태가 발생하지 않는다</li></ul><ul id="db2f0d3a-81c6-4813-96b7-b8d3447488e6" class="bulleted-list"><li style="list-style-type:disc">불완전 상태와 교착상태는 동일한 의미다 x</li></ul><p id="6d0efae7-43f2-4e99-ab84-56ff5dd89be5" class="">
+</p><p id="bddbd4c4-784d-4891-9254-87fcd732b20a" class="">
+</p><p id="eaa510f2-385f-4ca9-8a1e-13fd22754e3b" class="">41 </p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

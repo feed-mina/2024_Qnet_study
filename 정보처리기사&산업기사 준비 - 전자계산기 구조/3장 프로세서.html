@@ -1,0 +1,931 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3장 프로세서</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d670070c-89b6-4370-be84-9645e58bf0e9" class="page sans"><header><h1 class="page-title">3장 프로세서</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 24일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="50a6bf85-9468-40ab-99de-12c259806cf8" class=""><strong>중앙처리장치</strong></blockquote><p id="d72809ec-0819-480d-b45c-c8262822d86f" class="">
+</p><p id="5a1a6d7f-81d8-4738-bbb0-ef3ca3e8cdee" class="">중앙처리장치 (CPU : Central Processing Unit( 은 사람의 두뇌와 같이 컴퓨터 시스템에 부착된 모든 장치의 동작을 제어하고 명령을 실행하는 장치이다. <strong>중앙처리장치</strong>는 <strong>제어장치</strong>, <strong>연산장치</strong>, <strong>레지스터 </strong>그리고 이들을 <strong>연결하여 데이터를 전달하는 버스</strong>로 구성되어 있다. </p><p id="baee9b4c-0236-4fe2-b356-3e9858f7e6b3" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="acd5df06-ba11-435b-87b7-2a1d38d6cb73" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">					 ┌--&gt;  레지스터 (Register)
+제어장치---|
+           └--&gt; 산술논리 연산장치 (Arithmetic Logic Unit)</code></pre><p id="339c8462-f119-48ca-a2a3-f16cb34d39a5" class="">
+</p><p id="e64e6970-3f59-462d-ab79-714103069e8c" class=""><strong>제어장치</strong>는 컴퓨터에 있는 모든 장치들의 동작을 지시하고 제어하는 장치이다. 제어장치는 <strong>명령 레지스터</strong>에서 읽어 들인 <strong>명령어를 해독하여 </strong>해당하는 장치에게 <strong>제어 신호를 보내 정확하게 수행</strong>하도록 지시한다.</p><p id="f3984d73-7744-465a-9898-5a4bd5769c55" class="">
+</p><ul id="946043aa-34a8-431d-946b-c7690e5ce2ae" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">제어장치로 들어오는 </span><span style="border-bottom:0.05em solid"><strong>입력신호</strong></span></li></ul><p id="428fb867-2189-4268-97b2-183b532a25e7" class=""><strong>클록</strong>(Clock) 펄스, <strong>명령어 레지스터</strong>, <strong>플래그</strong>(CPU 상태), <strong>제어 버스</strong>를 통해 외부에서 입력되는 <strong>제어 신호</strong> </p><ul id="0912d9e3-1a4d-46e0-aee2-7e796082a1e8" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">제어장치로 내보내는 </span><span style="border-bottom:0.05em solid"><strong>출력신호</strong></span></li></ul><p id="8d789433-df60-46d8-a461-c32433e4c6c8" class=""><strong>CPU로</strong> 전달되는 <strong>제어신호</strong>, <strong>제어 버스를</strong> 통해 외부로 출력되는 <strong>제어신호</strong></p><p id="4663048c-2f55-4c00-a906-ac54f1f6b4f7" class="">
+</p><p id="ed6b3f7b-91bb-4f0a-bc47-6ebcd789d059" class=""><strong>명령 레지스터 </strong>: 현재 <strong>실행중인 명령어의 내용</strong>을 기억하고 있다.</p><p id="abda338f-f424-4ba1-aaf4-f929cc556146" class=""><strong>명령 해독기(Decoder)</strong> : <strong>명령 레지스터</strong>에 있는 <strong>명령어를 해독하는 회로</strong>이다. </p><p id="34b27e5f-140b-470b-aa56-9b432d63c93c" class=""><strong>제어신호 발생기, 부호기</strong>(Encoder) : <strong>해독된 명령에 따라 </strong>각 장치로 보낼 <strong>제어신호를 생성하는 회로</strong>이다.</p><p id="73dd1b91-6b29-481d-a188-2e4d1bb8254d" class=""><strong>제어 주소 레지스터 (CAR)</strong> : <strong>마이크로 명령어의 주소를 저장하는 레지스터</strong>로, <strong>Mapping의 결과값</strong>, <strong>주소 필드</strong>, <strong>서브루틴 레지스터</strong>의 내용들이 적재되어있다. </p><p id="f5f6d0f6-998a-4244-af6f-25efd7039b3a" class=""><strong>제어 버퍼 레지스터(CBR)</strong>:제어 기억장치로부터 읽혀진 <strong>마이크로 명령어 비트들을 일시적으로 저장하는 레지스터</strong></p><p id="c50314cc-e4a9-4984-aff2-1d0ecc2d4ef2" class=""><strong>제어 기억 장치</strong>: 마이크로 명령어들로 이루어진 <strong>마이크로프로그램을 저장하는 내부 기억장치</strong>이다.</p><p id="4f0cd874-8dc4-4ee8-af93-4994e033f971" class=""><strong>순서 제어 모듈 </strong>: 마이크로명령어의 <strong>실행 순서를 결정하는 회로들의 집합</strong>이다.</p><p id="1b6d0554-88c9-4435-a70c-3aec5b8c1917" class=""><strong>순차 카운터(Sequence counter)</strong>: <strong>디코더에 의해 선택된 번호</strong>에 해당하는 <strong>타이밍 신호를 생성</strong>한다.</p><p id="e0738fa4-2761-47e6-91d3-89e8f247295e" class="">
+</p><p id="0323a35d-d6d0-4b63-858b-006dd17847f9" class="">타이밍 신호</p><ul id="ab0108e3-ea54-4b8c-9d1a-fe2f81d4782e" class="bulleted-list"><li style="list-style-type:disc">마이크로 오퍼레이션이 순서대로 실행될 수 있도록 보내는 신호, 즉 다음의 ADD연산은 세 번의 타이밍 신호가 발생하고 3개의 마이크로 오퍼레이션이 순서대로 실행된다. </li></ul><p id="873ecb55-65ff-4aeb-bb4b-0ec7f37469cc" class="">
+</p><p id="ab8ae655-06e1-451e-afe4-ff3610b67576" class=""><strong>연산장치</strong> 는 (ALU, Arithmetic &amp; Logic Unit) <strong>제어장치의 명령에 따라 </strong>실제로 연산을 수행하는 장치이다. 연산장치가 수행하는 연산에는 <strong>산술 연산</strong>, <strong>논리 연산</strong>, <strong>관계 연산</strong>, <strong>이동 </strong>등이 있다. 연산자치는 <strong>가산기</strong>(2진수의 덧셈을 수행하는 회로), <strong>누산기(AC),</strong> <strong>보수기</strong>(Complementor, 뺄셈의 수행을 위해 입력된 값을 보수로 변환하는 회로), <strong>데이터 레지스터</strong>, <strong>오버플로 검출기</strong>, <strong>시프트 레지스터</strong>(Shift Register)등으로 구성되어 있다. </p><p id="1ce80485-b542-4408-aa0f-a173a8736a0e" class="">
+</p><p id="79571a0c-a272-4ad5-9876-5474f839def3" class=""><strong>레지스터</strong>(Register)는 CPU 내부에서 <strong>처리할 명령어</strong>나 <strong>연산의 중간 결과 값</strong> 등을 <strong>일시적으로 기억하는 임시 기억장소</strong>이다. 레지스터는 <strong>플립플롭</strong>이나 <strong>래치</strong>들을 <strong>병렬로 </strong>연결하여 구성한다. 레지스터는 메모리 중에서 <strong>속도가 가장 빠르다</strong>. <strong>레지스터의 크기</strong>는 <strong>워드를 구성하는 비트 개수만큼의 플립플롭</strong>으로 구성되며 <strong>여러 개의 플립플롭</strong>은 <strong>공통 클록의 입력</strong>에 의해 <strong>동시에 여러 비트의 자료가 저장</strong>된다.</p><ul id="e51a151c-51fc-427f-a5bf-f81da6181005" class="bulleted-list"><li style="list-style-type:disc">레지스터의 크기 : 워드의 크기가 16비트라면 레지스터는 16개의 플립플롭이나 래치로 구성된다</li></ul><p id="980d578a-5437-4498-aa8d-0a9a1348eb6f" class="">레지스터를 구성하는 <strong>플립플롭</strong>은 저장하는 값을 임의로 설정하기 위해 <strong>별도의 입력 단자를 추가할 수 있으며 저장값을 0으로 하는것</strong>을 <strong>설정해제(CLR)</strong>이라 한다.</p><p id="14999e46-2e52-47b5-b7bb-bc6cbb1904ef" class="">
+</p><p id="894b96ad-09f8-4e20-9761-b57602923e14" class="">레지스터 간의 자료 전송</p><p id="813532b2-048a-41c2-839b-6d3b29fe9f68" class=""><strong>직렬 전송 </strong>: 직렬 시프트 마이크로 오퍼레이션을 뜻하며 <strong>병렬 전송에 비해 전송 속도가 느리다.</strong> </p><p id="0bf16032-53b8-499f-b593-995cec013f85" class=""><strong>병렬 전송 </strong>: <strong>하나의 클록 펄스 </strong>동안에 레지스터 내의 <strong>모든 비트</strong>, 즉 <strong>워드가 동시에 전송</strong>되는 전송방식이다.</p><p id="2c00304c-9cc9-487b-b00a-104e0a94b5cc" class=""><strong>버스전송 </strong>: 모든 레지스터들이 <strong>공통으로 이용하는 경로</strong>로 병렬 전송에 비해 <strong>결선의 수를 줄일 수 있다는 장점</strong>이 있다.</p><p id="6e523133-5549-40d5-aae7-e108bc65c8d6" class="">
+</p><p id="cdf2e158-c961-4359-9c9a-6c2cb4afd5f6" class=""><strong>프로그램 카운터, 프로그램 계수기 </strong>(PC : Program Counter) - 다음 번에 <strong>실행할 명령어의 번지</strong>를 기억하는 <strong>래지스터</strong>, <strong>분기 명령</strong>이 실행되는 경우 그 <strong>목적지 주소로 갱신</strong>됨</p><p id="7a9cfb37-04ee-437a-9620-4feadd0646a4" class=""><strong>명령 레지스터 </strong>: 현재 <strong>실행중인 명령의 내용</strong>을 기억하는 <strong>레지스터 (IR : Instruction Register)</strong></p><p id="b5610deb-0214-4165-9e56-b55b61dd0727" class=""><strong>누산기 </strong>: <strong>연산된 결과를</strong> <strong>일시적으로 저장하는 </strong>레지스터로 <strong>연산의 중심임 </strong>(<strong>AC : Accumulator</strong>)</p><p id="6e66d7c1-279a-4586-b064-de4b62c4ba51" class=""><strong>상태 레지스터 </strong>: 시스템 내부의 순간순간의 상태가 기록된 정보를 <strong>PSW</strong>라고 함, <strong>오버플로, 언더플로, 자리올림, 계산 상태</strong>(0,-,+) , <strong>인터럽트 </strong>등이 <strong>PSW(Program Status Word register) 를 저장하고 있는 레지스터 </strong>, <strong>프로그램 제어</strong>와 밀접한 관계를 가짐 (<strong>플래그 레지스터</strong>)</p><p id="3e73e296-198d-4a3a-b5fd-59e0e246ebca" class=""><strong>메모리 주소 레지스터 </strong>: <strong>(MAR, Memory Address Register) 기억 장치를 출입</strong>하는 <strong>데이터의 번지를 기억</strong>하는 레지스터</p><p id="544e7e6f-ff6e-4c5e-88b7-b08650e2eb45" class=""><strong>메모리 버퍼 레지스터 </strong>: <strong>(MBR , Memory Buffer Register) </strong>기억장치를 출입하는 <strong>데이터가 잠시 기억되는 레지스터</strong>로 <strong>CPU가 데이터를 처리하기 위해서는 반드시 거쳐야함</strong></p><p id="f219a086-82f3-4fbe-ab12-9d124d300b7a" class=""><strong>베이스 레지스터 </strong>: 명령이 <strong>시작되는 시작 번지를 기억</strong>하고 있는 레지스터</p><p id="fcadbb11-6134-426b-b046-09fd24b570ba" class=""><strong>인덱스 레지스터 </strong>: <strong>주소의 변경, 서브루틴 연결 및 프로그램에서의 반복 연산의 횟수를 세는 레지스터</strong>, 프로그래머가 내용을 변경할 수 있음</p><p id="a68a8d45-bbe2-4c99-a606-6b5e0a17215b" class=""><strong>데이터 레지스터 </strong>: <strong>연산에 사용될 데이터를 기억</strong>하는 레지스터</p><p id="250b7be2-fb18-4810-90fe-5ed345817017" class=""><strong>시프트 레지스터 </strong>: 저장된 값을 왼쪽 또는 오른쪽으로 <strong>1Bit씩 자리를 이동시키는 레지스터</strong>, <strong>2배 길이 레지스터</strong>라고 함</p><p id="ec0fa9e5-0eb9-41db-b9e9-1223f8cf0137" class=""><strong>메이저 스테이터스 레지스터 </strong>: <strong>CPU의 메이저 상태를 저장</strong>하고 있는 레지스터</p><p id="9c7f168f-dae2-4ae8-a887-e12dbff7b547" class="">
+</p><p id="0dd62d2a-f52f-4bcd-ae72-2fe38c8395bc" class="">오버플로 : 연산의 결과값이 기억 워드의 기억 용량을 초과하여 넘쳐나는 상태, 언더플로 : 연산의 결과값이 컴퓨터가 표현할 수 있는 값보다 작아 표현이 불가능한 상태, 메이저 상태 : CPU의 현재 상태를 말하는 것으로 인출, 간접, 실행, 인터럽트 상태가 있다. </p><p id="ce45c374-ad7b-4417-9dc0-0c2a2139a8a6" class="">
+</p><p id="09ad9d53-3cdf-44f2-a854-f5cafc011bb6" class=""><strong>버스는 각 장치에 데이터를 실어나르는 공동의 선로</strong>이다. 버스의 종류는 <strong>제어, 주소, 데이터 그리고 데이터 버스</strong>가 있다. </p><p id="d95dc449-009f-47e0-bbb9-d007e3a195a2" class=""><strong>제어 버스</strong>는 <strong>양방향 버스</strong>라는것을 기억하기 ! </p><p id="05c224f8-8ab1-4217-9930-8805ba75f858" class="">
+</p><p id="5dffee2c-5c37-45f3-accf-214d92210738" class="">
+</p><p id="73b88c44-0500-4d67-936b-f6301bff509a" class="">버스는 <strong>CPU</strong>, <strong>메모리</strong>, <strong>I/O장치 </strong>등과 <strong>상호 필요한 정보를 교환하기 위해 </strong>연결하는 <strong>공동의 전송선</strong>이다. </p><p id="188fa7e9-751f-4577-ac60-84ef2d7f2017" class="">컴퓨터 내부 회로에서 버스 선을 사용하는 목적은 <strong>결선의 수를 줄이기 위해서이다</strong>.</p><p id="1c2b33bc-e999-4bb8-b099-3f517c02ca85" class=""><strong>메모리</strong>나 <strong>입 * 출력 장치</strong>가 제대로 동작하려면 <strong>버스를 통해 </strong>전달되는 <strong>제어 신호</strong>, <strong>어드레스 신호 </strong>및 <strong>데이터 신호</strong>의 <strong>상호 시간적 관계</strong>가 잘 유지되어야 한다.</p><p id="9f61002e-bfa4-436e-b875-41667954bcb0" class="">전송하는 정보에 따른 분류 </p><p id="865893e2-1e03-4306-823f-c3caea3048de" class=""><strong>번지 버스 (Adress Bus) </strong>: <strong>CPU가</strong> <strong>메모리나 입*출력 기기의 번지를 지정할때 </strong>사용하는 <strong>단방향 전송선</strong></p><p id="9131c565-6d95-47a5-975d-2a36d74fec58" class=""><strong>자료 버스 (Data Bus)</strong> : CPU와 메모리 또는 입 * 출력 기기 사이에서 <strong>데이터를 전송하는 양방향 전송선</strong></p><p id="e88d6936-108c-4637-be48-59dc61faaf76" class=""><strong>제어 버스(Control Bus)</strong> : <strong>CPU의 현재 상태나 상태 변경</strong>을 <strong>메모리 또는 입 * 출력 장치</strong>에 알리는 <strong>제어 신호를 전송</strong>하는데 사용하는 <strong>양방향 전송선</strong></p><p id="bfcb442c-8e3b-4002-8e0e-3888171d2a5a" class="">
+</p><p id="cf930d73-ca5c-4472-824d-4332f14be1d9" class="">내부 버스 : CPU 및 메모리 내에 구성된 BUS</p><p id="1313fe34-ad69-47d8-a128-912d1d8599d7" class="">외부 버스 : 주변 입 * 출력 장치에 구성된 BUS</p><p id="8111dd98-1cff-472d-9105-7689704cba74" class="">
+</p><ol type="1" id="33553d64-db28-419f-8f9c-b92b4370f7b1" class="numbered-list" start="1"><li>주기억장치에 기억된 명령을 꺼내서 해독하고 시스템 전체에 지시 신호를 내는 것은 ? Control Unit</li></ol><ul id="3aea440e-ae62-4951-abf5-c124d0d7d758" class="bulleted-list"><li style="list-style-type:disc">제어 장치(Control Unit)은 컴퓨터에있는 모든 장치들의 동작을 지시하고 제어 / 연산장치(ALU , Arithmetic &amp; Logic Unit)은 제어장치의 명령에 따라 실제로 연산을 수행하는 장치 </li></ul><p id="06f655c4-6722-4425-8ea8-93413799ff39" class="">
+</p><ol type="1" id="a2700569-48c5-4147-b50c-e21a06a8de20" class="numbered-list" start="2"><li><strong>CPU의 Hardware요소들을 기능별로 분류</strong>할 때 포함되지 않는것은?  입*출력 기능</li></ol><p id="eafd88df-0dbf-44e1-8af5-60bbfc8e3b12" class=""><strong>제어장치의 제어기능</strong>, <strong>연산 장치의 연산 기능</strong>, <strong>레지스터의 기억 기능</strong>, <strong>버스의 전달기능</strong> </p><p id="14970729-db3d-4e35-9ae2-2acd6ceef6ec" class=""> </p><ol type="1" id="13bfa1d3-6c13-43e5-b5dd-36f3770a0bde" class="numbered-list" start="3"><li><strong>메모리가 </strong>제대로 동작하려면 <strong>어드레스 신호</strong>, <strong>데이터 신호 </strong>및 (<strong> 제어  ) 신호</strong>가 상호간 시간적관계가 잘 유지되어야한다.</li></ol><p id="ae4734d7-5e58-443a-9732-9f5142d65228" class="">
+</p><ol type="1" id="db9f21d5-57de-4f06-a6d0-50ec65de0f52" class="numbered-list" start="4"><li>컴퓨터 시스템에서 시스템 내부의 순간순간의 상태를 기록하고 있는 정보를 무엇이라고 하는가? PSW (Program Status Word)</li></ol><ol type="1" id="5af0c259-a8ca-46b4-8ba0-c9e1b16c1183" class="numbered-list" start="5"><li><strong>누산기(Accumulator)</strong>란? <strong>연산 장치</strong>에 있는 <strong>레지스터의 하나로</strong> <strong>연산 결과를 기억</strong>하는 장치이다.</li></ol><p id="25619f21-e93d-4fe3-8caa-9f8bdeb24d71" class="">
+</p><ul id="55b06b43-a1e1-4e55-a41f-b5d14a5b54dc" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">PSWR , IR, AC 꼭 알아두기</mark></li></ul><p id="835f4867-736b-46af-80b0-3b0d76c7bf23" class="">
+</p><ol type="1" id="d5ebc0a8-b336-4d52-9958-76c3f533b9ed" class="numbered-list" start="6"><li>다음 설명하는것은 ? <strong>프로그램 카운터</strong></li></ol><ul id="efa591c1-3382-498d-9eae-1f0663fc0a65" class="bulleted-list"><li style="list-style-type:disc"><strong>분기 명령어가 실행</strong>되는 경우에는 그 <strong>목적지 주소로 갱신</strong>된다. </li></ul><ul id="1476cf93-a842-41fd-9551-7f9c8f730cfd" class="bulleted-list"><li style="list-style-type:disc">다음에 <strong>인출할 명령어의 주소를 </strong>가지고 있는 <strong>레지스터</strong>이다. <ul id="b948179a-1052-4c87-9a8f-17a659e72462" class="bulleted-list"><li style="list-style-type:circle">PC 는 Program Counter, LC (Location Counter), 프로그램 계수기 등으로 불린다.</li></ul></li></ul><p id="848e41e0-e224-47e4-83bf-698b07171543" class="">
+</p><p id="70d6a188-9bde-44fb-a32f-809de667ed27" class="">
+</p><ol type="1" id="3ac218fe-24f4-4720-8def-34f0a1ca787a" class="numbered-list" start="7"><li>다음 중 데이터 레지스터에 속하지 않는것은 ? Program Counter</li></ol><ul id="72bdf9b3-81d3-4f75-9f63-e22bb30a6644" class="bulleted-list"><li style="list-style-type:disc"><strong>Stack, Accumulator, General Purpose Register </strong>: 데이터를 담을 수 있는 <strong>데이터 레지스터</strong></li></ul><ul id="b8ed2bbf-c717-4cf7-8af6-4f3620f111e1" class="bulleted-list"><li style="list-style-type:disc"><strong>프로그램 카운터</strong>는 다음에 실행할 명령의주소를 기억하고 있는 <strong>제어 레지스터</strong>이다.</li></ul><p id="c7131a35-2b87-4819-859e-70aff21aeb3e" class="">
+</p><ol type="1" id="ea18336a-c96b-4a66-89c3-f6a1a10eba91" class="numbered-list" start="8"><li>인덱스 레지스터의 사용 목적이 아닌것은? 입 * 출력</li></ol><p id="b6b36bb2-5bc6-458e-9ab9-46871ff2a4e1" class=""><strong>인덱스 레지스터 </strong>: <strong>서브루틴 연결</strong>, <strong>어드레스 수정</strong>, <strong>반복 계산 수행 </strong>, <strong>사용자가 내용을 변경</strong>할 수 있다.</p><p id="71ecd1fe-77c0-47b5-a42c-a458a4118378" class="">
+</p><ol type="1" id="72762d29-dc4f-4327-a6ed-bbf0506f013f" class="numbered-list" start="9"><li><strong>I/O Bus</strong>에 연결 될 수 있는 다음 4개의선 중에서 <strong>양방향성 (Bidrectional)</strong>인것은 </li></ol><ul id="3da1fa93-6276-4ff9-87d8-81c84d8c78a7" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Line </strong>: <strong>데이터 버스는 </strong>레지스터로 입력되는 <strong>데이터와 </strong>레지스터에서 <strong>메모리로 출력되는 데이터가 양방향으로 사용</strong>한다.</li></ul><p id="ae05ac3b-062f-4e0e-ac3a-8acbfe9c9e1e" class="">
+</p><ol type="1" id="8649da07-8438-4370-910c-65e250def7e7" class="numbered-list" start="10"><li>프로그램 실행 도중 분기(Branch)가 발생하면 CPU 내의 어떤 장치의 내용을 먼저 변화시켜야 하는가? PC(Program Counter)</li></ol><ul id="9f5a45a4-1895-47f3-b5dd-e79a1acd37cc" class="bulleted-list"><li style="list-style-type:disc">프로그램 실행 도중 분기가 발생하면 CPU내에서 다음에 실행할 명ㄹㅇ의 주소를 가지고 있는 PC(Program Counter)를 먼저 변화시켜야 한다.</li></ul><p id="90194e77-66c4-4b13-aa72-920bd7fc088f" class="">
+</p><ol type="1" id="cbec4adf-ccea-44ba-be20-22e4ed8e14a4" class="numbered-list" start="11"><li>CPU의 제어장치 구성으로 옳은것은?</li></ol><p id="6f00815e-d8cd-4d79-a234-9a5f03aaf8cc" class="">명령 레지스터, 명령 해독기, 신호 발생기 </p><ul id="c8318044-e0f1-4d4a-8712-93d288dc1a01" class="bulleted-list"><li style="list-style-type:disc"><strong>제어장치의 기본 기능</strong>은 <strong>명령 레지스터</strong>에 있는 <strong>명령어를 해독</strong>한 후 해독한 명령어에 따라 각 장치로 보낼 <strong>제어신호</strong>를 생성하는것이다.</li></ul><p id="dab1c202-2cf2-4296-a1c1-51125ad7e9e3" class="">
+</p><ol type="1" id="bd64a167-f8ac-48b4-80c8-89fb75c12462" class="numbered-list" start="12"><li><strong>메모리 주소 레지스터(MAR)</strong>에 대한 설명으로 올바른것은 ?</li></ol><ul id="3b349103-0f72-4f4c-a2c4-fca96072d3b3" class="bulleted-list"><li style="list-style-type:disc"><strong>읽기 동작</strong>이나 <strong>쓰기 동작</strong>을 수행할 <strong>기억 장소의 주소</strong>를 저장하는 <strong>주소 저장용 레지스터</strong>이다.</li></ul><p id="ecea1233-90a4-4c06-a0cf-99a95829fc9e" class="">
+</p><p id="50c500b5-651e-4de0-b469-2bf5e833b7ad" class="">
+</p><ol type="1" id="8f301d61-b111-48ec-a28e-486a6ba2e3d8" class="numbered-list" start="13"><li><strong>자료를 기억</strong>하거나 <strong>읽는 자료</strong>를 <strong>레지스터로</strong>, <strong>CPU</strong>가 <strong>데이터를 처리</strong>하는데 반드시 거쳐야 하는 레지스터는?</li></ol><ul id="73eeea70-8e1c-4f4c-a4d8-515554893ac5" class="bulleted-list"><li style="list-style-type:disc">MBR (Memory Buffer Register)</li></ul><p id="94380d7e-feee-46a7-a095-735216b09359" class="">
+</p><ol type="1" id="c0fe85e0-d886-4ba7-8a72-018a3a2d4be4" class="numbered-list" start="14"><li><strong>응용 프로그래머</strong>가 <strong>프로그램을 작성할때 직접 레지스터의 내용</strong>을 <strong>다룰 수있는 레지스터</strong>는?</li></ol><ul id="8986427d-cbc4-4ec8-9836-6c9eabd12d98" class="bulleted-list"><li style="list-style-type:disc"><strong>Index Register </strong>: <strong>주소의 변경</strong>이나 <strong>반복 연산의 횟수</strong>를 세는데 사용하기도 한다. </li></ul><p id="2b238fdb-a5e4-411f-9068-9d5ac680f80c" class="">
+</p><ol type="1" id="5a7b7360-6077-4260-872f-5295d5a9b566" class="numbered-list" start="15"><li>레지스터와 레지스터 사이의 데이터 전송 방법을 설명한 것중 틀린것은?</li></ol><ul id="2bb7a069-f0b7-4f18-9cc3-ff0d7d21e52a" class="bulleted-list"><li style="list-style-type:disc">레지스터 간의 전송은 직렬 전송, 병렬 전송, 버스 전송으로 크게 구분 할 수 있다.</li></ul><ul id="b1c544be-54d8-440a-9a04-34dbea8a7b3c" class="bulleted-list"><li style="list-style-type:disc">보통 직렬 전송은 직렬 시프트 마이크로 오퍼레이션을 뜻하며 병렬 전송에 비해 전송 속도가 빠르다. (X)<ul id="0ede98ff-57db-47cc-9b9c-cc9bfb184151" class="bulleted-list"><li style="list-style-type:circle">하나씩 전송하는 직렬과 여러개를 한꺼번에 보내는 병렬중 병렬 전송이 속도가 더 빠르다</li></ul></li></ul><ul id="d474308a-de20-4e74-ac6f-0550ae4d03cd" class="bulleted-list"><li style="list-style-type:disc"><strong>병렬 전송</strong>은 <strong>하나의 클록 펄스 동안</strong>에 레지스터 내의 모든 비트, 즉 <strong>워드가 동시에 전송</strong>되는 전송방식이다.</li></ul><ul id="e9a62f37-0963-4fc3-ae2f-6c7c1af94e9a" class="bulleted-list"><li style="list-style-type:disc"><strong>버스 전송</strong>은 병렬 전송에 비해 <strong>결선의 수를 줄일 수 있따</strong>는 장점을 가지고 있다.</li></ul><p id="7559438a-361a-4473-a7f1-f3955a93aa2a" class="">
+</p><ol type="1" id="9b0ded75-7011-4e87-b269-fc6a198f6623" class="numbered-list" start="16"><li>일반적인 Micro Processor에서 ALU가 위치한 곳, ALU의 의미가 옳게 나열된 것은?</li></ol><ul id="f632bc00-56d1-4a0b-b05e-676077a3c052" class="bulleted-list"><li style="list-style-type:disc">CPU, 산술논리연산장치<ul id="5ba25ea8-4a6c-4091-9dd4-30e58063864c" class="bulleted-list"><li style="list-style-type:circle">연산장치는 가산기, 누산기 (AC , Accumulator), 보수기, 데이터 레지스터, 오버플로 검출기, 시프트 레지스터 등으로 구성되어 있다.</li></ul><p id="9496413c-26db-4c31-a7c1-f3a792db46eb" class="">
+</p></li></ul><ol type="1" id="397edaf9-4820-4b9b-8c4b-b214680d93e1" class="numbered-list" start="17"><li><strong>메모리로부터 읽혀진 명령어</strong>의 <strong>오퍼레이션 코드</strong>(OP-Code)는 CPU의 어느 레지스터에 들어가는가? <strong>인스트럭션 레지스터</strong> </li></ol><p id="94dd15cb-5a80-44cc-9727-39b21de04ab4" class="">
+</p><blockquote id="773f6173-f067-4054-b009-abd8f0230c93" class=""><strong>명령어 (Instruction)</strong></blockquote><ul id="40bba704-ec35-4a91-9ce6-af70ba0a1d3b" class="bulleted-list"><li style="list-style-type:disc">연산자부와 자료부의 기능, 연산자부를 이용한 명령어의 개수 계산, 자료부를 이용한 기억장소의 용량, 계산법</li></ul><p id="461c9f0f-7cc2-4af8-a5e1-d9332a2a7f0d" class="">
+</p><p id="f4808833-aa05-4ae5-a320-82260138065e" class="">컴퓨터에서 실행되는 명령어는 크게 연산자가 표시되는 연산자(Operation Code)부와 연산의 수행에 필요한 자료의 정보가 표시되는 자료(Operand)부로 구성된다.</p><p id="76222d48-ecdd-4427-9656-48eef5d648de" class=""><div class="indented"><p id="8b015d8d-1ad5-4115-9443-1d72d2afc917" class="">연산자(Operation Code)부      |     모드(Mode)부    |     자료(Operand)부</p><p id="17526e55-879e-4d06-9649-17c545b229c7" class="">
+</p></div></p><p id="f02664c1-7b4f-49e0-bcd9-bd45886bf9de" class="">
+</p><p id="39473a66-311d-4988-8d8a-0aba53ac1fb6" class=""><strong>연산자부(Operation Code)</strong>는 수행해야 할 동작에 맞는 연산자를 표시하며 흔히 <strong>OP-Code</strong>부라고 한다. <strong>연산자 부의 크기(비트수)는</strong> 표현할 수 있는 <strong>명령의 종류</strong>를 나타내는 것으로, <strong>nBit</strong>일때 최대 <strong>2ⁿ </strong>개의 명렁어를 사용할 수 있다.</p><p id="baf74eb2-843b-4ed0-ba23-a1f18bb2d4a1" class=""><strong>모드(Mode)부는 </strong>주소부의 <strong>유효주소가 결정되는 방법</strong>을 지정한다. <strong>모든 비트</strong>가 <strong>0</strong>이면 <strong>직접</strong>, <strong>1</strong>이면 <strong>간접주소</strong>이다.</p><p id="3c1e165f-4590-47ce-a978-e363f29a8b84" class=""><strong>자료(Operand)부</strong>는 실제 데이터에 대한 정보를 표시하는 부분으로 <strong>주소 필드(Address filed)</strong>라고도 한다. <strong>기억 장소의 주소</strong>, <strong>레지스터 번호</strong>, <strong>사용할 데이터 </strong>등을 표시한다. 자료부의 크기는] <strong>메모리의 용량</strong>과 관계가 있다.</p><p id="04baefd1-b681-40c6-b01e-83eb81fd68c7" class="">자료부가 16Bit라면 2^16 = 65536 = 64K의 메모리를 주소로 지정하여 사용할 수 있다.</p><p id="07d5783b-02e6-45db-9723-c2e10cf4262b" class="">
+</p><p id="a2ac08fe-c06f-4d86-ab35-34cb5a53eb79" class=""><strong>명령어의 구성</strong></p><p id="852a301e-5c17-457b-a7bb-931df2c99864" class=""><strong>연산자부</strong>에는 <strong>더하라</strong>는 <strong>연산자가 들어있</strong>으며 <strong>자료부</strong>에는 <strong>더할 자료의 실제값</strong>이나 <strong>실제값이 저장된 기억 장소의 주소</strong>가 들어있다.  <strong>연산자부 </strong>에는 실행할 명령이 들어있어 <strong>명령부</strong>라고 한다. <strong>자료부 </strong>에는 주로 연산에 사용할 <strong>자료의 주소를 표시</strong>하므로 주소부라고 부르기도 한다.</p><p id="6baef4a9-120e-42d9-bb3b-28594c52199c" class="">
+</p><p id="255eef00-9ca3-43b6-9431-d1405801ce30" class=""><strong>명령어 설계시 고려사항 </strong>: 연산자의 종류,명령어 형식, 주소지정방식, 데이터 구조</p><p id="d840ecf2-0cb7-4f48-8dbe-12cd8dd4d621" class=""><strong>연산자의 종류 </strong>: 해당 컴퓨터 시스템에서 처리할 기능에 맞게 연산자의 종류를 결정한다. </p><p id="ca1db1d6-ede4-4876-adf9-26e18ac39cc2" class=""><strong>명령어 형식 </strong>: 명령어의 길이, <span style="border-bottom:0.05em solid">오퍼랜드 필드의 개수와 길이</span> 등을 결정한다.</p><p id="01c6f421-828f-47dc-8060-cf2cc6fabb1c" class=""><strong>주소지정방식 </strong>: 명령어가 시용할 자료의 위치를 표시하기 위한 방법을 결정한다.</p><p id="710a8eef-c37b-4a6f-87da-5288228946a7" class=""><strong>데이터 구조</strong> : 해당 컴퓨터 시스템의 워드 크기 등 데이터 구조에 맞게 명령어를 설계한다.</p><p id="2d9247c7-e62e-4290-bb44-f5f5c915c116" class=""><strong>인스트럭션 세트의 효율성을 높이기 위하여 고려할 사항 </strong>: <span style="border-bottom:0.05em solid">기억 공간</span>, <span style="border-bottom:0.05em solid">사용 빈도</span>, <span style="border-bottom:0.05em solid">주소지정 방식</span>, <span style="border-bottom:0.05em solid">주기억장치 밴드폭 </span>이용</p><p id="e8696314-461a-4450-b17d-a3251cbbf970" class="">
+</p><p id="7c3000fc-8b46-4bb8-b157-24ea95d6bcb2" class="">연산자의 기능 : <strong>연산자의 기능</strong>에는 <strong>함수연산</strong>, <strong>자료 전달</strong>, <strong>제어 * 입출력 기능</strong>이 있다.<div class="indented"><p id="a495003b-e497-4a7b-9bfc-7c63eac9df43" class=""><strong>함수연산</strong>은 수칙적인 <strong>산술연산(ADD, SUB, MUL, DIV, 산술 Shift)</strong>과 비수칙적인 <strong>논리연산(NOT,AND,OR,XOR,논리적 Shift, Rotate, Complement, Clear)등</strong>이 있다.</p><ul id="7d05b2ed-a47c-4754-af29-bfab099e130d" class="bulleted-list"><li style="list-style-type:disc">피연산자의 수에 따른 연산자의 분류 : NOT A처럼 피연산자가 한개만 필요한 연산자를 단항 연산자라하고 A+B처럼 피연산자가 두개 필요한 연산자를 이항 연산자라고 한다.</li></ul><ul id="d28cbb10-8824-4834-9d1b-c43f2ade9e24" class="bulleted-list"><li style="list-style-type:disc"><strong>단항 연산자(Linary Operator)</strong> : NOT, Complement, Shift, Rotate, Move / <strong>이항연산자(Binary Opeator)</strong> : 사칙연산, AND, OR, XOR, XNOR 등  </li></ul><ul id="a4159078-dd29-4009-8fef-fa9ac22b2df3" class="bulleted-list"><li style="list-style-type:disc"><strong>연산자의 우선순위 </strong>: 계산식에 연산자가 혼합되어 나오면 우선순위는 <strong>산술(^(거듭제곱), X(곱셈), / (나눗셈), +, -) &gt; 관계 (=, ≠, &gt;,&lt;,≤,≥) &gt; 논리 (NOT &gt; AND &gt; OR) </strong>순이다. </li></ul></div></p><p id="631556ce-6ddb-4549-b67b-18727cad4c16" class="">
+</p><ul id="341d0e1f-4ba3-48ad-9b82-f2577a93d12b" class="bulleted-list"><li style="list-style-type:disc"><strong>자료 전달 기능 </strong>: 자료전달기능은 <strong>CPU와 기억장치 사이에서 정보를 교환</strong>하는 기능이다. </li></ul><p id="f6cc1bde-1a31-421b-b11d-1f901eb712b7" class=""><strong>Load </strong>: <strong>기억장치</strong>에 있는 <strong>기억되어있는 정보를 CPU로 꺼내오는 명령</strong>,</p><p id="a1fc3163-0634-4333-918c-4f63434d1407" class=""><strong>Store </strong>: <strong>CPU</strong>에 있는 정보를 <strong>기억장치에 기억시키는 명령</strong></p><p id="bda52c0f-395a-464f-9769-ade19260d545" class=""><strong>Move </strong>: <strong>레지스터 간</strong>에 <strong>자료를 전달</strong>하는 명령</p><p id="e5ee5c1d-a58d-4e83-8aa7-a458bfd006cc" class=""><strong>Push </strong>:<strong> 스택</strong>에 <strong>자료를 저장</strong>하는 <strong>명령</strong></p><p id="21441b4a-94e3-4df3-966f-a337a7a09410" class=""><strong>Pop</strong> : <strong>스택</strong>에서 <strong>자료를 꺼내오는</strong> <strong>명령</strong></p><p id="1b230c35-dfe7-4c6e-a157-9d74fab4cb8e" class="">
+</p><ul id="bbec215b-8ee0-4fe9-a888-0e02c817bcd4" class="bulleted-list"><li style="list-style-type:disc"><strong>제어기능 </strong>: 제어기능은 <strong>명령의 실행 순서</strong>를 <strong>변경</strong>시킬때 사용하는 명령이다.</li></ul><p id="e1d43c67-de94-4efc-b233-3eb1fa201070" class=""><strong>무조건 분기 명령 </strong>:<span style="border-bottom:0.05em solid"> GOTO</span>, <span style="border-bottom:0.05em solid">Jump</span>(JMP)</p><p id="df67155e-948b-45d1-afa8-019dc0178d38" class=""><strong>조건 분기 명령 </strong>: <span style="border-bottom:0.05em solid">IF조건</span>,<span style="border-bottom:0.05em solid"> SPA </span>(Skip IT AC is Positive, AC의 값이 0보다 크면 스킵한다.), <span style="border-bottom:0.05em solid">SNA</span>(Skip it AC is Negative, AC의 값이 0보다 작으면 스킵한다.), <span style="border-bottom:0.05em solid">SZA</span>(Skip it AC is Zero, AC의 값이 0이면 스킵한다.) 등</p><p id="8f385832-8043-4542-b7b1-0c01128287e0" class=""><strong>Call </strong>: 부 프로그램 호출</p><p id="2400a38e-d36d-482c-973e-464c8e777560" class=""><strong>Return </strong>: 부 프로그램에서 주 프로그램으로 복귀</p><p id="070c5121-22db-4a0c-91cd-76255cc2732e" class="">
+</p><ul id="52a96720-6184-461a-8bb7-6060f80ef5ee" class="bulleted-list"><li style="list-style-type:disc"><strong>입출력 기능 </strong>: 입출력기능은 <strong>CPU</strong>와 <strong>I/O장치</strong>, 또는 <strong>메모리와 I/O 장치 </strong>사이에서 자료를 전달하는 기능이다.</li></ul><p id="da2ef7f5-6c7d-4a8e-a99b-d2e0cfd9be09" class=""><strong>INPUT </strong>:<strong> 입*출력 장치의 자료</strong>를 <strong>주기억장치</strong>로 입력하는 명령</p><p id="e51a2648-1f50-4235-ba80-3a80ee1cbbfc" class=""><strong>OUTPUT </strong>:<strong> 주기억장치의 자료</strong>를 <strong>입*출력 장치</strong>로 출력하는 명령</p><p id="875d9e39-1e8f-4c81-939b-872391f3256a" class="">
+</p><ol type="1" id="8b7ea840-4619-4130-9412-ff36ff824315" class="numbered-list" start="1"><li><strong>명령 코드의 비트</strong>는 필드라고 불리는 몇개의 그룹으로 나누어진다. 그중 <strong>모드필드</strong>에 대한 설명으로 옳은것은?</li></ol><ul id="9f72b566-7079-4b44-9674-7c15617a0fcf" class="bulleted-list"><li style="list-style-type:disc">오퍼랜드나 유효변지가 결정되는 방법을 나타낸다. , 모드 비트가 0이면 직접, 1이면 간접 주소이다.</li></ul><p id="07b87e07-14ac-4bbd-95ea-35c12a3f7392" class="">
+</p><ol type="1" id="d7acbad3-c9f7-482f-91f9-0da8cc1c881f" class="numbered-list" start="2"><li>명령어의 연산자 코드가 8비트, 오퍼랜드가 10비트 일때 이 명령어로 몇 가지 연산을 수행하게 할 수 있는가? 256</li></ol><ul id="1f6bc743-899a-44b6-b053-715d69befd5c" class="bulleted-list"><li style="list-style-type:disc">명령어 중 연산자 코드의 비트수는 수행 가능한 명령어의 수를 나타낸다. 8Bit </li></ul><p id="4d2b31cc-5073-43d6-be57-4fe3c4356804" class="">
+</p><ol type="1" id="3720bdd4-59c8-4869-9780-872292eb8fc3" class="numbered-list" start="3"><li><strong>32가지의 서로 다른 동작을 수행</strong>하고 <strong>직접 주소 지정방식과 간접 주소 지정방식을 선택적으로 사용</strong>할 수 있으며 <strong>4개의 레지스터</strong>를 가진 컴퓨터의 <strong>기억장치의 크기가 4KB</strong>라 할때 명령어의 크기는 몇 bit인가? 20</li></ol><p id="a58e9fa8-56c1-4905-a723-f16dcef5edbb" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8ab2e893-03b1-4421-a953-cfed83345357" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">오퍼코드        |   모드코드   |   레지스터지정  | 기억장소 주소
+32개 명령       | 직접, 간접   | 4개            | 4K
+OP-code : 32개의 명령어이므로 5비트  (2^5=32) 
+모드비트 : 직접/간접만 구분하면 되므로 1비트 ( 2^1 = 2) 
+레지스터의 지정 : 4개이므로 2비트 (2^2 = 4)
+기억장소 주소 : 4K이므로 12비트 (4K = 4 X 1024  = 4096 = 2^12)
+따라서 명령어 크기는 5 + 1 + 2 + 12 = 20</code></pre><p id="6c28d553-18e1-440a-a0f8-c18607e34b14" class="">
+</p><ol type="1" id="aeb1c964-f347-4e2d-8b6e-5dcce591ddf7" class="numbered-list" start="4"><li>어떤 <strong>제어 기억장치의 단어 길이</strong>가 <strong>32비트</strong>, <strong>마이크로 명령어 형식</strong>의 <strong>연산 필드</strong>는 <strong>12비트</strong>, <strong>조건을 결정하는 플래그의 수</strong>는 <strong>4개</strong>일때 <strong>제어 기억장치의 최대 용량</strong>은 약 얼마인가? (단, 분기필드는 필요하지 않는다고 가정한다.) 1M</li></ol><ul id="675a55c6-6782-440a-992d-3520e240ad4c" class="bulleted-list"><li style="list-style-type:disc"><strong>기억장치</strong>의 <strong>최대 메모리 용량</strong>은 <strong>어드레스 필드</strong>를 이용하여 접근할 수 있는 <strong>워드의 개수 X 워드의 크기 </strong>이므로 주어진 단서를 이용하여 <strong>어드레스 필드의 크기</strong>를 구한다. </li></ul><ul id="85fb843f-ec04-46ae-a4a9-952187962666" class="bulleted-list"><li style="list-style-type:disc"><strong>플래그의 수</strong>가 <strong>4개</strong>라고 했으니 <strong>2비트</strong>가 필요하고 , <strong>연산필드</strong>가 <strong>12비트</strong>라고 했으므로 <strong>어드래스 필드의 크기</strong>는 <strong>32 - (12+2) = 18비트</strong>이다. </li></ul><ul id="f39b5a54-5e0f-4c5a-844b-d5ffc40610f6" class="bulleted-list"><li style="list-style-type:disc"><strong>18비트의 어드레스 필드</strong>를 이용하면 <strong>2^18</strong>개의 <strong>워드를 지정</strong>할 수 있는데 <strong>한 개 워드의 크기</strong>가 <strong>32비트</strong>, <strong>즉 4바이트</strong> 이므로 최대 메모리 용량은 2^18 X 4 = 1,048,576 = 1024K = 1M이다. (2^18 X 2^2) = (2 ^ 20) = (1024 (=2^10) X 2^10)  </li></ul><ul id="d5c99a58-bed0-46b1-bb26-94a5f8568782" class="bulleted-list"><li style="list-style-type:disc">K = 2^10, M  = 2^20</li></ul><ul id="620c8842-b9a8-4e37-b816-b8d5839e0d4c" class="bulleted-list"><li style="list-style-type:disc"></li></ul><p id="2c52dc50-9606-4f90-aef2-0e1f51796633" class="">
+</p><ol type="1" id="ade54295-dc7d-4d7d-86ed-aca613be5011" class="numbered-list" start="5"><li>다음과 같은 명령 형식을 사용하는 컴퓨터에서 가능한 <strong>MRI (Memory Reference Instruction)</strong>의 개수는?16개</li></ol><p id="b7182cb1-d164-404d-a7f6-382604aced33" class="">0     1             5                11</p><p id="99db2fd2-bc29-4ceb-a690-ed4328b2b564" class="">|     | OP-Code| Address   |</p><p id="eac30dc8-997d-4ab7-863d-d0e0345b3c2c" class="">
+</p><ul id="98a028d1-80d8-444e-8962-49127853b0c8" class="bulleted-list"><li style="list-style-type:disc"><strong>MRI (메모리 참조 명령)의 개수</strong>를 의미한다. 즉 명령어의 개수 <strong>(OP-code)의 크기</strong>를 이용해서 구한다. 2^4 = 16 </li></ul><p id="7ab60637-0e62-47bc-b318-d1a127ba8263" class="">
+</p><ol type="1" id="d74a234a-2b5c-4a52-a412-fbf79b4d9332" class="numbered-list" start="6"><li>컴퓨터의 연산자 (OP-code)기능이 아닌것은? 기억기능</li></ol><ul id="1156bab2-c791-45cb-8c11-f6699f3a6cd6" class="bulleted-list"><li style="list-style-type:disc">연산자(OP-code)의 기능은 4가지로 함수 연산, 연산 제어, 전달, 입*출력 기능이 있다.</li></ul><p id="a5a2fc0b-240f-4593-af84-ccf5c6198838" class="">
+</p><ol type="1" id="59819b22-6469-4ebb-b7f4-b93d2b2ca7b1" class="numbered-list" start="7"><li>폰 노이만형 컴퓨터의 연산자 기능으로서 적합하지 않은것은? 병렬처리 기능</li></ol><ul id="27f2b0ce-498a-495e-b920-de7ed2723fba" class="bulleted-list"><li style="list-style-type:disc"><strong>폰노이만 컴퓨터</strong>란 명령어를 <strong>순차적으로 처리</strong>하는 컴퓨터를 말한다. 즉, <strong>OP-code 의 기능</strong>을 물어보는것과 같다. 폰 노이만 컴퓨터 구조의 <strong>순서처리</strong>에 대립되는 개념 으로 <strong>I/O채널 </strong>또는 <strong>Processor</strong>와 같은 <strong>다수 개의 Processor(처리기) </strong>에서 <strong>동시에 여러작업 (Process)를 처리</strong>하는 <strong>병렬 처리 컴퓨터</strong>가 있다.</li></ul><p id="dba099af-e943-472c-b6cb-546ef95eaf1a" class="">
+</p><ol type="1" id="fa459572-fcf5-406e-a0b5-5d762e7583dd" class="numbered-list" start="8"><li>연산자 기능에 대한 명령어를 나타낸 것중 옳지 않은것은 : <strong>전달기능 </strong>- CPA, CLC (x) <strong>MOVE, LOAD, STORE</strong>가 있다.</li></ol><ul id="6b1165bd-30f2-4bd3-b062-b6cac931e68a" class="bulleted-list"><li style="list-style-type:disc"><strong>함수 연산 기능 - ROL , ROR</strong></li></ul><ul id="da924b40-32c8-4b9e-9320-2c2f91c88230" class="bulleted-list"><li style="list-style-type:disc"><strong>제어기능 -</strong> <strong>JMP (= Jump, 무조건 분기명령), SMA(조건 분기명령)</strong></li></ul><ul id="cf6bb237-572d-4974-af9a-5d7cbfd6da68" class="bulleted-list"><li style="list-style-type:disc">입*출력 기능 - INP, OUT</li></ul><p id="18840894-c21c-4aa2-b857-65cfb743ad2d" class="">
+</p><ol type="1" id="3949e88b-376b-48e1-8ca6-761eeb47b343" class="numbered-list" start="9"><li><strong>연산의 종류</strong>를 <strong>Unary연산</strong>과 <strong>Binary연산</strong>으로 구별할때 <strong>Binary연산</strong>을 하는 연산자가 아닌것은?</li></ol><ul id="32687c71-8764-4e41-ae6c-8e82771be6ba" class="bulleted-list"><li style="list-style-type:disc">Complement <ul id="6f2ecee1-224b-420f-8153-c6e01b2ec7fc" class="bulleted-list"><li style="list-style-type:circle">단일 연산자 (Uniary 연산자) : NOT, Complement, Shift, Rotate , MOVE 등 / 이항 연산자(Binary Operator) : 사칙연산, AND, OR, XOR, XNOR 등</li></ul></li></ul><p id="6ce631f0-684d-40ea-912c-56dafd0b4160" class="">
+</p><ol type="1" id="d7e68038-4976-4a9f-8790-36ad15e7056f" class="numbered-list" start="10"><li><strong>마이크로 동작 중 종류가 다른것은 ? 산술연산</strong></li></ol><ul id="94c44cbe-27e5-4306-ad5e-7b3ab48f04a2" class="bulleted-list"><li style="list-style-type:disc">단항연산(논리 시프트, 순환 시프트, 보수) 과 이항연산(산술연산)을 구분하는점이 핵심!</li></ul><p id="2a9786f0-ef1a-4bc3-9b6b-ec33285e0950" class="">
+</p><ol type="1" id="96531d0e-08e9-4b6c-94ad-3d0208002f24" class="numbered-list" start="11"><li><strong>메모리의 내용</strong>을 <strong>레지스터에 전달</strong>하는 기능은? LOAD</li></ol><ul id="c291bd5d-6f1b-40c2-b5d0-b504d3af5ef4" class="bulleted-list"><li style="list-style-type:disc"><strong>LOAD</strong>는 <strong>메모리의 내용</strong>을 <strong>레지스터에 전달</strong>하는 기능, <strong>Store</strong>은 <strong>레지스터</strong>에서 <strong>메모리에 전달</strong>하는 기능을 의미한다.</li></ul><p id="3a065cce-ca5b-4421-9ec0-4fd777c8a690" class="">
+</p><ol type="1" id="fd6c067b-fcc5-414b-bbca-d751a31e114c" class="numbered-list" start="12"><li><strong>레지스터의 내용</strong>을 <strong>메모리에 전달</strong>하는 기능을 무엇이라 하는가? <strong>Store</strong></li></ol><ol type="1" id="b588a2a3-1240-453e-81c0-36c8c019968c" class="numbered-list" start="13"><li>명령어를 구성하는 명령어 내 비트들의 할당에 영향을 주는 요소가 아닌 것은? <strong>버스 개수</strong></li></ol><ul id="a4455523-f829-436a-a52a-2428f1332996" class="bulleted-list"><li style="list-style-type:disc">명령어를 구성하는 명령어 내 비트들의 할당에 영향을 주는 요소 : <strong>주소지정 방식의 개수 </strong>(모드), <strong>주소 영역</strong>, <strong>연산코드</strong>(명령어를 수행해야 하는 연산자부)</li></ul><ul id="61529000-0601-4179-ab7d-1b976720faa1" class="bulleted-list"><li style="list-style-type:disc">명령어는 수행해야 할 <strong>연산자를 표시하는 연산자부</strong>, <strong>주소지정방식이 직접인지 간접인지를 표시하는 모드 비트</strong>, <strong>실제 데이터에 대한 정보를 표시하는 주소부분</strong>으로 구성되어있으므로 버스 개수와 명령어 내의 비트와는 관계가 없다.</li></ul><p id="f2a92153-015c-4aa4-a238-ba2017548490" class="">
+</p><ol type="1" id="929a2cb9-fa4c-48b5-92ad-f0bedb4a0167" class="numbered-list" start="14"><li><strong>서브루틴과 연관</strong>되어 사용되는 명령은 ? <strong>Call 과 Return</strong> (<strong>서브루틴</strong>은 <strong>부 프로그램</strong>을 의미한다.)</li></ol><ul id="b09bad75-8795-4573-82f5-afecd9b730a8" class="bulleted-list"><li style="list-style-type:disc">제어 기능은 무조건 분기명령, 조건 분기 명령, Call 과 Return이 있다. Call은 부 프로그램 호출이고 Return은 부 프로그램에서 주 프로그램으로 복귀한다.</li></ul><p id="48f05a0b-b6d4-4067-b30a-79965c5de545" class="">
+</p><ol type="1" id="aa0f2b4b-2a4b-4608-aedd-7294292ca624" class="numbered-list" start="15"><li>컴퓨터의 연산에 대한 설명 중 옳지 않은것은? </li></ol><ul id="549f1cde-d5a8-4a41-806a-709a8777ace0" class="bulleted-list"><li style="list-style-type:disc">피 연산자의 수에 따라 한 개의 단항 연산자와 두개인 이항 연산자로 분류했다. 연산자(기)로 한번에 연산 가능한 데이터의 개수 는 두개다. </li></ul><ul id="981431b8-7b55-4255-81a6-09d0f50a96b3" class="bulleted-list"><li style="list-style-type:disc"><strong>중앙처리 장치</strong>에서 <strong>연산에 사용될 데이터</strong>를 <strong>기억시켜 두는 장소</strong>를 <strong>레지스터</strong>라한다.</li></ul><ul id="a1c4765b-63ba-4c51-9b68-a8af7572524b" class="bulleted-list"><li style="list-style-type:disc"><strong>이동(Move)</strong>와 <strong>회전(Rotate)</strong>는 <strong>비수칙적 연산</strong>에 속한다.</li></ul><p id="a24308b2-8917-497c-a80e-7d5ec192233b" class="">
+</p><ol type="1" id="3e8e0488-3bf7-4587-86cc-c6e3f9360dcc" class="numbered-list" start="16"><li>비수칙적 연산에 속하지 않은것은? 사칙연산 // 논리적 연산, 로테이트, 시프트는 비수칙적 연산에 속한다.</li></ol><p id="cab29128-49ed-42f1-92eb-bc8df6e8cbbb" class="">
+</p><ol type="1" id="5becb3cf-02fc-4b93-b78a-90e5c4c3081e" class="numbered-list" start="17"><li>번지필드가 필요 없는 명령은 ? skip </li></ol><ul id="0d14c085-ae95-4658-b993-5c2135f8a4db" class="bulleted-list"><li style="list-style-type:disc"><strong>skip 명령</strong>은 <strong>다음 실행할 명령을 실행하지 않고 건너띄는 것</strong>으로 <strong>번지필드가 필요없다</strong>.</li></ul><ul id="ceeb4453-2355-4f49-ae5f-67b70d390a96" class="bulleted-list"><li style="list-style-type:disc"><strong>번지필드가 필요한 명령</strong>은 <strong>branch, jump, call </strong>이 있다.</li></ul><p id="8a346866-81ae-43e7-a1bb-df3a8e832eac" class="">
+</p><ol type="1" id="411e9d40-8ea6-4e17-b4da-c808e6b9ccda" class="numbered-list" start="18"><li>다음 3가지의 연산자가 혼합되어 나오는 식에서 시행(연산)순서는?</li></ol><p id="ef2d587c-30e3-476f-9e9f-e4d6bfc9c7b8" class=""><mark class="highlight-yellow_background"><strong>산술 연산자 &gt; 관계 연산자 &gt; 논리연산자</strong></mark></p><p id="52f6be5b-82b2-4c52-b462-4a9109d37996" class="">
+</p><p id="17d62f53-1c74-4f20-9f9f-d538aa53e7d0" class="">
+</p><blockquote id="4816cb1b-aae8-4abe-a20a-35d5d4537b85" class=""><strong>연산</strong></blockquote><p id="3caa4d5d-2463-4b61-962d-cf8a809b48a1" class=""><mark class="highlight-yellow_background"><strong>AND는 삭제 연산, OR 은 삽입 또는 1로 세트, XOR은 비교 또는 반전, NOT은 보수, 논리 SHIFT는 데이터의 직렬 전송, ROTATE는 문자의 위치를 변환하는 연산이다.</strong></mark></p><ul id="0fa808ec-96d8-4a9a-bc76-0565611715f4" class="bulleted-list"><li style="list-style-type:disc">AND(Masking Operation) : 특정 비트를 삭제시키는 연산</li></ul><p id="1f6e673f-8689-4ba1-b327-f83289f4e2da" class=""> 삭제할 부분의 비트를 0과 AND시켜서 삭제한다. 대응시키는 0 비트를 Mask Bit라 한다. </p><ul id="3f9efa86-1223-4d0d-9e61-b4349462e037" class="bulleted-list"><li style="list-style-type:disc">OR (Selective-Set) : 특정 문자를 삽입하거나 특정 비트에 1을 세트시키는 연산</li></ul><p id="44962732-40e0-49a3-94b7-38708b6f2513" class="">삽입하거나 세트시킬 비트에 삽입할 문자 코드 또는 1을 OR연산시킨다. </p><ul id="c5552635-2b14-41d8-af3c-d6eb6230931c" class="bulleted-list"><li style="list-style-type:disc">XOR(Compare, 비교) : 두개의 데이터를 비교하거나 특정 비트를 반전시킬때 사용 </li></ul><p id="90e6baac-22ee-4cc6-adda-a886174140fb" class="">두개의 데이터를 XOR연산하여 결과에 1Bit라도 1이 있으면 서로 다른 데이터이다. <strong>반전시킬때는 반전시킬 비트와 1을 XOR시킨다 </strong><div class="indented"><ul id="476f49df-be26-4fb7-92e4-97b90336d9b4" class="bulleted-list"><li style="list-style-type:disc">1 1 → 0 , 0 1 → 1 , 1 0 → 1, 0 0 → 0 </li></ul></div></p><p id="6e86920e-b609-46ed-9219-37cd7f069d17" class="">  1 0 0 0 <strong>1 0 0 1</strong></p><p id="966e049a-b611-45dd-b241-a1aa01194d70" class="">  0 0 0 0 <strong>1 1 1 1</strong></p><p id="91d12c5c-352a-41ba-bd8e-10c4bf44fd35" class="">→1 0 0 0 <strong>0 1 1 0</strong></p><ul id="d788308d-4694-4a15-9579-8152e1af7d60" class="bulleted-list"><li style="list-style-type:disc">NOT(Complement, 보수): Not연산은 각 비트의 값을 반전시키는 연산으로, 보수를 구할때 사용한다.</li></ul><p id="f08cdad5-7cc2-4132-ac76-30e2f5fc71c7" class="">    1 0 0 0 1 0 0 1</p><p id="41c4c9f3-705e-4cc0-bf7f-409127246b8e" class="">→ 0 1 1 1 0 1 1 0</p><ul id="b98c2a9a-f73f-447f-ad47-76c868dc4868" class="bulleted-list"><li style="list-style-type:disc">논리 Shift : 왼쪽 또는 오른쪽으로<span style="border-bottom:0.05em solid"> </span><span style="border-bottom:0.05em solid"><strong>1Bit씩 자리를 이동</strong></span>시키는 연산, <strong>데이터의 직렬 전송</strong>에 사용한다. </li></ul><p id="ada26916-b677-4396-b0e5-e771b1e1ea5f" class=""><span style="border-bottom:0.05em solid"><strong>삽입되는 자리는 무조건 0이다.</strong></span></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="54d0226b-8afe-4897-b4b7-1bd1116039f6" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">shift Left Logical
+  1 1 0 0 0 0 1 0
+x 1 0 0 0 0 1 0 0 (0이 삽입된다., x는 밀려나서 없어진다.)
+
+shift Right Logical
+1 1 0 0 0 1 0 1
+0 1 1 0 0 0 1 0 x (0이 삽입된다., x는 밀려나서 없어진다.)</code></pre><ul id="44f91d6b-34b4-4e29-9946-80aafcbaf465" class="bulleted-list"><li style="list-style-type:disc">Rotate : Shift에서 밀려나가는 비트의 값을 반대편 값으로 입력하는 연산이다.</li></ul><p id="016d3807-fa0e-46b8-85cb-0dfc489ad7b8" class=""><strong>Rotate는 문자 위치를 변환할때 사용</strong>한다. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bfd7e3f1-4810-4deb-b91e-09ac8f367240" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Rotate Left
+1 1 0 0 0 0 1 0
+1 0 0 0 0 1 0 1 (위에 있는 1이 아래로 내려와서 반대편 값으로 입력된다.)
+
+Rotate Right
+1 1 0 0 0 1 0 1
+1 1 1 0 0 0 1 0 
+
+</code></pre><ul id="1f574e1a-13c3-4373-a1cb-6be2f7a567bb" class="bulleted-list"><li style="list-style-type:disc">산술 Shift : 부호(Sign)을 고려하여 자리를 이동시키는 연산, 2ⁿ 으로 곱하거나 나눌때 사용한다.</li></ul><p id="3460b2a2-ca39-4b1e-acdd-a54a76f98b31" class=""><strong>왼쪽</strong>으로 <strong>시프트</strong>하면 <strong>곱셈</strong>, <strong>오른쪽</strong>으로 <strong>시프트</strong>하면 <strong>나눗셈</strong>이 되는 산술이다.</p><p id="90007572-3254-480a-90c0-adefb3d50397" class="">홀수를 오른쪽으로 한번 Shift하면 0.5의 오차가 발생한다. 산술 Shift는<strong> 정수 표현방식</strong>에만 가능한 방법으로 <strong>정수의 수치 표현 방법에 따라서 표현이 조금씩 다르다.</strong></p><table id="43391c94-4108-4861-98a3-0ebddfc44552" class="simple-table"><tbody><tr id="0fd78e41-fe78-4f03-a8e7-da3bea338dc8"><td id=":z}s" class="">shift</td><td id="Ca?L" class="">수치 표현법</td></tr><tr id="efe07fb7-278a-46e3-84da-388aaf7edd4b"><td id=":z}s" class=""></td><td id="Ca?L" class="">부호화 절대치</td></tr><tr id="92ade65e-30a8-4a49-8e85-369013748264"><td id=":z}s" class=""></td><td id="Ca?L" class=""></td></tr></tbody></table><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="41eff35d-8c8a-4dea-abd1-bf150b984d76" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">shift Left : n Bit Shift 하면 원래 자료에 2ⁿ을 곱한 값과 같다.
+43 : 2진법 0 0 1 0 1 0 1 1
+            1 + 2 ^ 1 + 2 ^3+2^5
+ 32 + 8 + 2 + 1 = 43 
+부호화 절대치 -43
+padding Bit : 0 
+           1 0 1 0 1 0 1 1 부호화
+         _ 0 1 0 1 0 1 1 _ left shift 
+           1 1 0 1 0 1 1 0 paddig bit     
+   1 1 0 1 0 1 1 0 은 -43 X 2^1 : -86이 된다. 
+
+1의 보수법 -43
+   1 1 0 1 0 1 0 0  * 1의 보수법
+ _ 1 0 1 0 1 0 0 _  *   left shift 
+	 1 0 1 0 1 0 0 1  *   padding bit로 1 이 삽입  
+   1 0 1 0 1 0 0 1 은 -43 X 2 ^ 1 : -86이 된다.
+
+2의 보수법 -43
+   1 1 0 1 0 1 0 0 + 1 (1의 보수에 1을 더한다.)
+   1 1 0 1 0 1 0 1      2의 보수 법
+ _ 1 0 1 0 1 0 1 _ paddig bit 0이 삽입
+   1 0 1 0 1 0 1 0
+   
+paddig Bit : Shift 에서 자리를 이동한 후 생기는 왼쪽이나 오른쪽 끝의 빈자리에 채워지는 비트를 말한다.
+왼쪽으로 Shift 할때 부호화 절대치와 2의 보수법은 무조건 0이 입력되지만 1의 보수법은 부호비트 (음수 1, 양수 0)와 같은 비트가 입력된다.
+오른쪽으로 Shift 할때 부호화 절대치는 0이 입력되지만 1과 2의 보수법은 부호 비트(음수 1, 양수 0)과 같은 비트가 입력된다.
+</code></pre><p id="53b77e9c-2d81-4c8a-b331-1613bf922e33" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="895f03d5-65bc-4789-a3b2-29f5d563d263" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">부호화 절대치법 : 양수 표현에 대하여 부호비트의 값만 0을 1로 바꾼다. 음수 표현시 부호화 절대치법은 양수의 표현에 대해 부호 비트만 바꾸면 되므로 음수로의 변환이 가장 쉽다.
+
+부호화 1의 보수법 : 양수 표현에 대하여 1의 보수를 취한다. 
+
+- 둘 다 두가지 형태의 0 (+0, -0)이 존재
+
+-25의 부호화 절대치법
+양수 25를 8Bit 2진수로 표현한 후 부호비트만 1로 바꾸어준다. (부호비트는 맨 앞의 비트)
+  00011001
+-&gt;10011001 
+
+* 보수법 : r의 보수 
+보수를 구할 숫자의 자릿수만큼 0을 채우고 가장 왼쪾에 1을 추가하여 기준을 만든다.
+ex) 33의 10의 보수는
+33 + X = 100 , x = 100 - 33 , x = 67
+10101의 2의 보수는?
+10101 + x = 100000 -&gt; x = 100000 - 10101 = 01011
+
+1의 보수는 주어진 각 자리값을 0일때는 1로 1일때는 0으로 변환한다.
+2의 보수는 1의 보수를 구한 뒤 결과값에 1을 더한다. 
+
+-25의 부호화 1의 보수법
+양수 25를 8비트 2진수로 표현한 후 1의 보수를 구한다.
+  0 0 0 0 1 1 0 0 1
+-&gt;1 1 1 1 0 0 1 1 0
+
+-25의 부호화 2의 보수법
+양수 25를 8Bit 2진수로 표현한후 2의 보수를 구한다.
+   0 0 0 0 1 1 0 0 1
+-&gt; 1 1 1 1 0 0 1 1 1
+
++ 25 표현방법은 부호화 절대치법, 부호화 1의 보수법, 부호화 2의 보수법 모두 같다.
+양수 25를 2진수로 변경한 후 0을 추가하여 8Bit로 자리를 맞춘다.
+11001 -&gt; 000011001   </code></pre><ol type="1" id="704f8003-68dd-4b3c-b9f9-2fddcdedb639" class="numbered-list" start="1"><li>논리 마이크로 연산에 있어서 레지스터 A와 B의 값이 단서오 같이 주어졌을때 Selective-Set연산을 수행하면 어떻게 되는가? A는 프로세서 레지스터이고 B는 논리 오퍼랜드, A = 1010 , B = 0011</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9d6a5c7d-f79a-4417-9a61-53042ce87620" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">selective - Set 연산은 OR을 의미한다.
+1 0 1 0
+0 0 1 1
+________
+1 0 1 1 OR일때 1 0 | 1 &amp;&amp; 0 1 | 1 </code></pre><p id="41996cd3-4772-4ae7-b163-1f8ef23aac43" class="">
+</p><ol type="1" id="848e2dee-d57d-4231-84ef-190c5a5f0678" class="numbered-list" start="2"><li>다음 설명 중 옳은것은</li></ol><p id="acba7791-9ab5-4b89-bbdf-c0ebf9754947" class="">1) 1 0 1 0 1 1 0 0 의 오른쪽 4비트만 0으로 하려면<strong> </strong><mark class="highlight-yellow_background"><strong>마스크 내용</strong></mark>을 0 0 0 0 1 1 1 1 로 OR연산을 한다. (x)</p><ul id="38d993dd-9abb-4c0f-aaf1-d2237fb99c74" class="bulleted-list"><li style="list-style-type:disc">특정 비트를 0으로 삭제시키는 연산은 OR연산이 아니라<mark class="highlight-yellow_background"><strong> AND 연산</strong></mark>이다. </li></ul><p id="fce59f7f-85a4-45fb-bea7-e6b665bf6fe9" class="">2) 0(Zero)은 부동 소수점으로 표현할 수 없다. (x)</p><ul id="119dbac7-7932-4fe5-921d-ebb8a84ce603" class="bulleted-list"><li style="list-style-type:disc">0(Zero)도 부동 소수점 방식으로 표현할 수 있다.</li></ul><p id="f1cfcdc9-2e51-4d82-a5ba-ea5ab1bb207c" class="">3) <strong>논리적 시프트</strong>(왼쪽이나 오른쪽 모두)는 <strong>시프트된 공간</strong>에 <strong>항상 0(Zero)이 들어온다.</strong></p><p id="fa2a0d49-4af4-427c-8564-1ba21532001e" class="">4) 산술 시프트(왼쪽이나 오른쪽 모두)는 시프트된 공간에 항상 0(zero)이 들어온다. (x)</p><ul id="4668d6a0-6cce-4e6c-8d9d-47b9a2f5f634" class="bulleted-list"><li style="list-style-type:disc">산술 시프트는 수치 표현법이나 표현되는 수치에 따라 각기 다른 값 (패딩비트가 들어온다.)</li></ul><p id="de4ae788-95c8-428f-a091-8c0c280c08e8" class="">
+</p><ol type="1" id="792b89b9-b9b3-471d-86b3-f759c8ad01f5" class="numbered-list" start="3"><li>비교(Compare)동작과 같은 동작을 하는 논리 연산은? 배타적 (Exclusive) OR</li></ol><ul id="182a53cb-deb5-44a8-b816-67e3364645a6" class="bulleted-list"><li style="list-style-type:disc">배타적 OR(XOR)은 비교하는 두개의 비트가 같으면 0을 출력하기 때문에 연산 후 모든 비트의 값이 0이면 두 레지스터의 값이 일치하였음을 알 수 있다 !</li></ul><ul id="3beebdf5-d0ff-40df-ab42-cd251473fd38" class="bulleted-list"><li style="list-style-type:disc"><strong>1 1 → 0 , 0 1 → 1 , 1 0 → 1, 0 0 → 0 </strong></li></ul><ol type="1" id="51f1ee45-56d6-498e-b692-db5bff2a763a" class="numbered-list" start="4"><li><strong>이항(Binary)연산</strong>의 하나로 <strong>자료의 특정 비트</strong>를 <strong>반전시키고자 </strong>하는 경우에 사용하는 연산은? <strong>XOR</strong></li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="54e981bb-78d6-437c-a334-786e4cff9447" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">반전시킬 비트를 1과 XOR연산을 하면 해당 비트가 반전된다.
+
+1010 에서 두번째, 세번째 비트를 반전시키려면 0110과 XOR연산을 한다.
+
+    1 0 1 0
+XOR 0 1 1 0
+    1 1 0 0
+
+0과 연산되는 비트는 변함이 없고 1과 연산되는 비트만 반전된다.</code></pre><ol type="1" id="68b0725e-00ea-4234-b86a-d7073546dd4f" class="numbered-list" start="5"><li>컴퓨터의 연산장치에서 2개의 자료 11011101 , 01101101을 Exclusive-OR을 연산하였을때 결과는?</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="10a019fc-deec-44d7-a378-66c456ccf453" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">1 1 0 1 1 1 0 1
+0 1 1 0 1 1 0 1
+1 0 1 1 0 0 0 0</code></pre><ol type="1" id="664c99ca-577f-4ab0-b07f-3cabee8ced40" class="numbered-list" start="6"><li>A의 sodyddl 1010, B의 내용이 1100이다. Masking OPeration 후 A의 내용은 ?</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7abcec39-7229-42d5-8892-49c6af694f36" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">1 0 1 0
+1 1 0 0
+1 0 0 0
+OR에서 0 1 | 0 &amp;&amp; 1 0 | 0 , 마스킹 은 OR이다.</code></pre><p id="283e059c-d78d-46e6-9a33-54df95edac72" class="">
+</p><ol type="1" id="f0bfc177-1ac2-48ee-8bf1-a2d9310acff9" class="numbered-list" start="7"><li>Shift Register에 있는 Binary Number가 여섯(6)번 Shift-Left 되었을때의 값은</li></ol><ul id="2483ca13-1959-4d5f-b348-50cc6eefd292" class="bulleted-list"><li style="list-style-type:disc">왼쪽으로 한번 시프트 할때마다 2로 곱한것과 같다. 따라서 여섯번 시프트 했으므로 원래 자료에 2^6을 한것과 같다.  따라서 Number X 64</li></ul><ol type="1" id="5fc381fd-d2f9-42c7-aab5-2237a9161f2b" class="numbered-list" start="8"><li>8비트 부호와 2의 보수로 나타낸 수 -77을 오른쪽으로 두 비트 산술 시프트 수행한 결과는 ?</li></ol><p id="55c4bc2d-b878-4997-ae8a-eac3274508f3" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="107e0d79-62b5-41f9-af31-b043047405d2" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">두 비트 오른쪽으로 시프트하면 2로 두번 나눈것과 같다. 그런데 홀수인 음수를 2의 보수법으로 표현했다고 하니 4로 나눈 것보다 오차만큼 작아진다. -77/4 -&gt; -19.25 -&gt; -20
+* 먼저 77을 2 진수로 표현하면 0100 0011이다. (-77)
+* 0100 1101의 2의 보수를 취하면 1011 0011이 된다. (-77)
+* 2Bit를 오른쪽으로 시프트 하면 2의 보수와 1의 보수법에서는 음수는 패딩비트로 1이 들어오므로 
+1110 1100 이다.
+
+1110 1100의 크기를 알아보기 위해 2의 보수를 취하여 10진수로 변경하면
+0001 0100 즉 -20이 된다</code></pre><p id="992c19f6-56cc-4417-b4ab-cc12527c44f6" class="">
+</p><ol type="1" id="528c9a8d-55fe-4768-b328-67156b1d9254" class="numbered-list" start="9"><li>문자의 위치 변환에 이용하는데 가장 효율적인 동작은 ? Rotate 로테이트 동작</li></ol><ol type="1" id="6bb03ef7-c825-4e27-9025-c1dc0691a51e" class="numbered-list" start="10"><li><strong>비수치 데이터</strong>에서 <strong>마스크를 이용</strong>하여 불필요한 부분을 <strong>제거하기 위한 연산</strong>은 ? AND</li></ol><ul id="0454c7c0-f4e5-484d-a992-58a1c5be99f1" class="bulleted-list"><li style="list-style-type:disc"><strong>AND는 삭제, OR은 삽입 또는 1로 세트, XOR은 비교, NOT은 반전!</strong></li></ul><ol type="1" id="a4dbcf0c-68a6-4e81-b100-eac92b3f5247" class="numbered-list" start="11"><li>두개의 데이터를 혼합하거나 일부에 삽입하는데 사용되는 연산은 ? OR연산이다.</li></ol><ol type="1" id="701ceacc-c18e-4f2a-a167-d9a603ad596f" class="numbered-list" start="12"><li>8비트로 표현되는 부호화 절대치의 방식에서 -50을 1비트 우측으로 시프트했을때 옳은것은?</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="97e99c68-ef8b-4907-ade1-c38f3c9e09c0" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">50
+
+32 + 16 +2
+2^1 + 2 ^ 4 + 2 ^ 5
+
+  1 0 1 1 0 0 1 0
+  _ 1 0 1 1 0 0 1 _         오른쪽 1 비트 시프트
+  1 0 0 1 1 0 0 1
+ 부호 패딩비트
+맨왼쪽 비트는 부호비트이므로 그대로 두고 나머지 비트만 1비트씩 우측으로 이동한다.
+부호화 절대치 표혀법에서는 패딩 비트로 0이 채워진다. 
+</code></pre><p id="0717c573-236f-4e86-bc83-adfc4caa27a8" class="">
+</p><ol type="1" id="1046ce97-7d57-401e-bb10-93201ee73741" class="numbered-list" start="13"><li>다음 중 소수점 이하를 잃어버리는 절단 현상인것은 ?</li></ol><ul id="9c9f0216-b67d-4cda-b102-dd35048bc9d3" class="bulleted-list"><li style="list-style-type:disc">산술 시프트 연산일 경우 홀수, 즉 맨 오른쪽 끝이 1인 경우 우측으로 시프트하면 0.5가 잘린다.</li></ul><ol type="1" id="af9f99c7-4c8f-48db-9fcc-ba720901dcc8" class="numbered-list" start="14"><li>다음 중 특정비트를 1로 설정하기 위해서 사용되는 논리게이트는 ? OR</li></ol><ol type="1" id="e5f5dad2-a10d-4a3d-a41a-a50fb78ce290" class="numbered-list" start="15"><li><strong>shift 명령을 수행 한 후 빈 공간에 채워지는 내용이 달라질 수 잇는것은? 오른쪽으로 산술 shift한 결과 </strong></li></ol><ul id="83cbec5f-45f4-4740-aa97-cbfc463bb2e0" class="bulleted-list"><li style="list-style-type:disc">패딩비트는 모두 0으로 채워지는데 음수 3가지 경우가 다르다. 1의 보수법에서 shfit left, 1의 보수법과 2의 보수법에서 shift right </li></ul><p id="9595c83f-3c8d-4839-be78-44e06aa48d02" class="">
+</p><ol type="1" id="b5999ebe-b273-4185-9ec1-6d3c786c55ff" class="numbered-list" start="16"><li>연산 명령 자체로 특수한 곱셈과 나눗셈을 수행하거나 혹은 곱셈과 나눗셈에서 보조적으로 이용되는 것은? 산술적 Shift</li></ol><ul id="71f5bc41-ef2c-4cc6-a4d0-5c4a31271047" class="bulleted-list"><li style="list-style-type:disc">한 비트를 오른쪽으로 산술 시프트하면 2로나눈것과 같고 왼쪽으로 시프트하면 2로 곱한것과 같으므로 산술적 Shift는 곱셈과 나눗셈을 위한 용도로 사용한다.</li></ul><p id="ab4c62e5-4a53-4754-a15d-9806747dd3c2" class="">
+</p><ol type="1" id="f5217b39-4aa1-403c-b9e5-9f67e19fbf6a" class="numbered-list" start="17"><li>AND 연산을 이용하여 어느 비트를 지울것인가를 결정하는 자료는 ? 마스크 비트</li></ol><p id="dc881264-a1ee-4fa6-89d2-acf7e7f4e0a9" class="">
+</p><p id="001591bb-5323-4d53-ae01-943b5ee40d4e" class="">
+</p><blockquote id="fb8e58be-6cb8-464e-a0d6-d4fabebe7eba" class=""><strong>명령어 형식</strong></blockquote><p id="cea3daef-2357-40fc-81a3-1b42d983541f" class="">명령어는 크게 OP-Code 부 (명령부)와 Operand부(자료부)로 구성된다. Operand 부의 개수에 따라 다음의 네가지 명령어 형식이 있다. </p><p id="95773a74-4674-45af-9c22-7d9a77fb781b" class="">3주소 명령어(3Adress Instruction), 2주소 명령어(2 Adress Instruction), 1주소 명령어(1 Adress Instruction), 0주소 명령어(0 Addres Instruction)</p><p id="82e2c64c-eaa6-47f1-ba9c-a1386fc0d24f" class="">
+</p><ul id="4c09e4ff-a156-462f-8f2d-b2cadaf5f24b" class="bulleted-list"><li style="list-style-type:disc">3주소 명령어는 Operand부가 세개로 구성되는 명령어 형식으로 여러개의 범용 레지스터 (GPR)를 가진 컴퓨터에서 사용한다. 연산의 결과는 주로 Operand 1에 기록된다.</li></ul><table id="2ff62401-52d7-48f2-a5d4-ca595580908c" class="simple-table"><tbody><tr id="ea6f5bba-e5e3-4c60-8ef1-1c6465c03568"><td id="@W?G" class="">OP-Code</td><td id="dgTz" class="">Operand1</td><td id="&gt;&lt;wV" class="">Operand2</td><td id="NHS~" class="">Operand3</td></tr><tr id="8d039301-f5ef-4607-98a9-66924e74520c"><td id="@W?G" class=""></td><td id="dgTz" class="">자료 1의 주소</td><td id="&gt;&lt;wV" class="">자료 2의 주소</td><td id="NHS~" class="">자료 3의 주소</td></tr></tbody></table><ul id="df7b918c-f605-4285-883a-d892b6e1b0ba" class="bulleted-list"><li style="list-style-type:disc">3주소 명령어의 장점으로는 연산 시 원래의 자료를 파괴하지 않는다. 다른 형식의 명령어를 이용하는 것보다 프로그램 전체의 길이를 짧게 할 수 있다. 전체 프로그램 실행 시 명령 인출을 위하여 주기억장치를 접근하는 횟수가 줄어든다. 단점으로는 명령어 한개의 길이가 너무 길어진다. 추가적으로 3주소 명령어는 한개의 명령어로 여러 명령을 수행하므로 전체 명령어를 읽어오는 시간은 단축되지만 세개의 오퍼랜드를 사용하지 않는 경우라도  최소한 네번 기억장소에 접근해야 하므로 전체적인 수행 시간면에서는 수행시간이 길어진다는 단점이 있다. </li></ul><p id="ab587e37-98f1-4862-8c48-7357acd6a701" class="">
+</p><ul id="e87b6087-c9ab-440b-8d40-e0720d8beb40" class="bulleted-list"><li style="list-style-type:disc">2 주소 명령어 는 Operand부가 두개로 구성되는 가장 일반적으로 사용되는 명령어 형식이다. 여러개의 범용 레지스터를 가진 컴퓨터에서 사용한다.</li></ul><table id="da5fc82e-8034-4dbf-907f-61d450845e4c" class="simple-table"><tbody><tr id="7e06359f-7d46-4dd6-8864-7150a200cf41"><td id="@W?G" class="">OP-Code</td><td id="dgTz" class="">Operand1</td><td id="&gt;&lt;wV" class="">Operand2</td></tr><tr id="8cca084d-7b02-4816-876e-e5bdb5c422fb"><td id="@W?G" class=""></td><td id="dgTz" class="">자료 1의 주소, 결과의 주소</td><td id="&gt;&lt;wV" class="">자료 2의 주소</td></tr></tbody></table><ul id="766dc79d-5c95-4feb-a54a-1fd935c0224d" class="bulleted-list"><li style="list-style-type:disc">2주소 명령어의 장점은 실행속도가 빠르고 기억 장소를 많이 차지하지 않는다. 3주소 명령에 비해 명령어의 길이가 짧다. 계산 결과가 기억장치에 기억되고 중앙처리장치에도 남아있어서 계산결과를 시험할 필요가 있을때 시간이 절약된다. 2주소 명령어의 단점은 연산결과는 주로 Operand1에 저장되므로 Operand1에 있던 원래의 자료가 파괴된다. 전체 프로그램의 길이가. 길어진다.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="db9cc588-324d-49c1-86b4-473b9c83eb4c" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all"> Y = ( A + B ) * ( C + D)
+MOV R1 A; R1 &lt;- M[A] -메모리 A값을 R1에 저장한다.
+ADD R1 B; R1 &lt;- R1 + M[B] 메모리의 B값을 R1에 더한다. (A + B)
+MOV R2 C; R2 &lt;- R2 M[C] 메모리 C의 값을 R2에 저장한다.
+ADD R2 D; R2 &lt;- R2 + D 메모리 D 값을 R2에 더한다 ( C + D)
+MUL R1 R2; R1 &lt;- R1 * R2 &lt;- R1 과 R2를 곱하여 R1에 저장한다. (A+B) * (C+D)
+MOV Y R1; M[Y] &lt;- R1 &lt;- R1의 값을 메모리 Y에 저장한다.
+
+A,B 기억장소에 각각 10, 20이 기억되어 있다고 가정할때 A = A + B를 처리하면 다음과 같다.
+
+								A            B
+Memory | *** | 10  |  *** |  20 |*** |
+						 | 30  |      |     |    |
+A와 B 기억 장소의 데이터 값 10, 20을 더한 결과 30을 A, 기억장소에 다시 기억시킴으로써 A기억장소와 원래 자료인 10이 파괴된다.</code></pre><ul id="67a80c81-dca1-4ff1-b81c-0789dc8a018c" class="bulleted-list"><li style="list-style-type:disc">1주소 명령어 : 1주소 명령어는 Operand부가 한 개로 구성되어있다. 1주소 명령어 형식의 컴퓨터는 누산기 (AC ,Accumulator)를 이용하여 명령어를 처리하므로 누산기에 저장된다.</li></ul><table id="538bdce1-bb55-43c6-873c-6cc50f41996c" class="simple-table"><tbody><tr id="d92f3797-c4ba-4838-8e63-9d78ee5b7e61"><td id="@W?G" class="">OP-Code</td><td id="dgTz" class="">Operand1</td></tr><tr id="329b14d7-ed7b-47d1-9aff-21f348337adb"><td id="@W?G" class=""></td><td id="dgTz" class="">자료 1의 주소</td></tr></tbody></table><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="82d6e88b-7fd3-4b9d-add6-096728ca2748" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">D = ( A + B ) * C
+LDA A ; AC &lt;- M[A]    &lt;- 메모리의 A값을 누산기에 저장한다.
+ADD B ; AC &lt;- AC + M[B] &lt;- 메모리의 B값을 누산기에 더한다. A + B
+MUL C ; AC &lt;- AC * M[C] &lt;- 메모리의 C를 누산기의 값과 곱하여 누산기에 저장한다. (A+B)*C
+STA D ; M[D] &lt;- AC      &lt;- 누산기의 값을 메모리의 D에 저장한다.</code></pre><ul id="39f7bdd4-c660-4163-87c3-bbbb20327fd8" class="bulleted-list"><li style="list-style-type:disc"><strong>0주소 명령어</strong> 는 자료의 주소를 지정하는 Operand (TOP)없이<strong> OP-Code</strong> 부만으로 구성되어있다.<strong> 스택</strong>을 사용하여 모든 연산을 수행하기 때문에 수행 후에는<strong> 원래의 자료가 모두 지워진다</strong>. 모든 연산은<strong> Stack 메모리의 Stack Pointer(TOP)</strong>가 가리키는 <strong>Operand를 이용하여 수행한다</strong>. 0주소 명령어의 모든 연산은 스택에 있는 자료를 이용하여 수행하기 때문에 <strong>스택 머신 </strong>이라고도 한다. 스택에 기억된 데이터만 이용하여 연산하므로 <strong>인스트럭션 수행시간이 짧다</strong>. 피연산자를 나타내지 않기 때문에 <strong>인스트럭션의 길이가 짧아서 기억공간의 이용이 효율적</strong>이다. </li></ul><table id="552ff89c-accb-4276-a427-463114511bf9" class="simple-table"><tbody><tr id="77a8367d-140a-4082-82a7-75579303dd6b"><td id="@W?G" class="">OP-Code</td></tr></tbody></table><ul id="8e23dfb5-f8c6-4401-b2ca-a182071612f4" class="bulleted-list"><li style="list-style-type:disc">스택 : 스택은 자료의 삽입 * 삭제작업이 한쪽 방향에서만 가능할 수 있도록 할당된 메모리의 일부로서 <strong>가장 나중에 삽입된 자료를 가장 먼저 삭제</strong>하는 방식으로 자료를 처리한다.</li></ul><ul id="058b1453-bdbf-49cd-b18d-8053eb35562e" class="bulleted-list"><li style="list-style-type:disc">스택의 응용분야 : 0주소 명령어 형식의 자료 저장소, 부 프로그램 호출시 복귀주소, 인터럽트가 발생시의 복귀주소, 재귀 프로그램의 순서 제어, 컴파일러를 이용한 언어 번역시 , 후위 표기법으로 표현된 산술식을 연산할때, </li></ul><ul id="15227d07-5159-4280-a70f-5094d9f543c1" class="bulleted-list"><li style="list-style-type:disc"><strong>0주소 명령어</strong> 는 <strong>스택을 사용한 컴퓨터</strong>에서 수식을 계산하기 위해서는<strong> 우선 수식을 Postfix(역 Polish)형태로 변경</strong>(Post fix 는<strong> 연산자가 피연산자의 뒤로 가는 형태</strong>이다 예를 들면<strong> 4 + 5 → 45 +</strong>) 해야 한다. 0주소 명령어는 <span style="border-bottom:0.05em solid">주소의 사용 없이 스택에 연산자와 피연산자를 넣었다 꺼내어</span> <strong>연산 후 결과를 다시 스팩</strong>에 넣으면서 연산하기 때문에<strong> 원래의 자료가 남지 않는다.</strong></li></ul><p id="e72efa2f-2388-4531-87d9-8193a62b4866" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f11f48b1-60c8-4489-ad69-96ff263a48f1" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">D = ( A + B ) * C
+PUSH A &lt;- 메모리의 A값을 스택의 최상위에 저장한다.
+PUSH B &lt;- 메모리 B값을 스택의 최상위에 저장한다.
+ADD &lt;- 스택의 최상위에서 차례대로 2개의 피연산자 B와 A를 꺼내 덧셈을 수행한 다음 스택의 최상위에서 저장한다.
+PUSH C &lt;- 메모리의 C값을 스택의 최상위에 저장한다.
+MUL &lt;- 스택의 최상위에서 차례대로 2개의 피연산자 C와 (A+B)를 꺼내 곱셈을 수행한 다음 스택의 최상위에 저장한다.
+POP D &lt;- 스택의 최상위에서 (A+B) * C 를 꺼내 메모리 D에 저장한다.</code></pre><p id="6d101afc-0552-4906-995a-0cd15d958451" class="">
+</p><ol type="1" id="201632f6-5080-4a4d-95d5-5b79d4fac655" class="numbered-list" start="1"><li><strong>함수 연산기능 인스트럭션 수행</strong>에 필요한 <strong>피연산자를 기억시킬 레지스터의 종류</strong>에 따라 컴퓨터 구조를 분류할때 이에 속하지 않는것은 ? 리스트 컴퓨터 구조</li></ol><ul id="e59effef-c672-4ccf-9ef9-8f8c8dd9297d" class="bulleted-list"><li style="list-style-type:disc"><strong>스택 컴퓨터 구조</strong>, <strong>AC 컴퓨터 구조</strong>, <strong>범용 레지스터(GPR) 컴퓨터 구조</strong>는 <strong>함수 연산기능 인스트럭션 수행</strong>에 필요한 <strong>피연산자를 기억시킬 레지스터의 종류</strong>에 따라 컴퓨터 구조를 분류로 사용된다. </li></ul><p id="4a97a0ea-e32b-4812-bb51-ac6b0bb9c09b" class="">
+</p><ol type="1" id="c2f44512-26f7-4fd1-92a7-2010d09495ec" class="numbered-list" start="2"><li><strong>여러개의 범용 레지스터</strong>를 가진 컴퓨터에 사용되며 사용 후에 <strong>입력 자료가 변하지 않고 보존되는</strong> 인스트럭션의 형식은? <strong>3주소 인스트럭션의 형식 </strong></li></ol><ul id="a774a5ba-257a-4205-bfb5-7457b7fd004c" class="bulleted-list"><li style="list-style-type:disc">3주소 형식의 특징은 <strong>한 개 명령어</strong>의 길이가 <strong>길다</strong>, <strong>원시 데이터가 보존</strong>된다 가 있다.</li></ul><ol type="1" id="6bce0981-39f5-498d-ad27-6c416a7d76b2" class="numbered-list" start="3"><li>주소 부분이 하나밖에 없는 <strong>1-주소 명령 형식</strong>에서 결과 <strong>자료를 넣어두는데 사용하는 레지스터</strong>는? <strong>어큐뮬레이터 (Accumulator) </strong>= <strong>ACC </strong>= <strong>누산기</strong></li></ol><ul id="e5c5c678-b5a0-4479-8e7b-db3d1f39012b" class="bulleted-list"><li style="list-style-type:disc">명령어형식의 저장장소 : <strong>0 - 스택 , 1-누산기, 2-GPR(범용레지스터), 3-GPR(범용 레지스터)</strong></li></ul><ol type="1" id="2a9819d2-ba6e-484c-8223-2bea3148301e" class="numbered-list" start="4"><li>명령어 형식 중 컴퓨터에서 <strong>가장 널리 사용되는 형식</strong>으로 <strong>입력 자료가 연산된 후</strong>에는 <strong>보존되지 않지만 실행속도가 빠르고</strong> <strong>기억장소를 많이 차지하지 않는 형식</strong>으로 <strong>오퍼랜드 1의 내용과 오퍼랜드 2의 내용을 더해 오퍼랜드 1에 기억시키는 형식</strong>은? <strong>2-address 명령형식</strong></li></ol><ol type="1" id="6047f141-a3ac-4b3d-ab4d-13e49ce41cb3" class="numbered-list" start="5"><li>0-주소 인스트럭션 형식의 특징이 아닌것은?</li></ol><ul id="4047e0b8-27e3-4eea-978c-88033553c9bc" class="bulleted-list"><li style="list-style-type:disc">Unary 연산 경우에는 2개의 자료가 필요하고 TOP이 저장하는 곳의 자료를 처리하고 결과는 TOP다음 위치에 저장한다. (X) → <strong>Unary연산 경우</strong> <strong>1개의 자료</strong>가 <strong>필요</strong>하고 <strong>TOP이 저장하는 곳의 자료를 처리</strong>하고 <strong>결과를 TOP 위치에 저장한다</strong>.</li></ul><ul id="59152632-bb95-409d-b6c1-183e9eae44e9" class="bulleted-list"><li style="list-style-type:disc"><strong>Binary연산</strong>인 경우 <strong>2개 자료가 필요</strong>하고 <strong>스택 상단부 2자리에 저장</strong>한다.</li></ul><ul id="f59f4b36-0f4f-4695-9ac9-4a37f5d91787" class="bulleted-list"><li style="list-style-type:disc">연산을 위해 스택을 갖고 있으며 연산 수행 후에 결과를 스택에 보존한다.</li></ul><ul id="c7c41311-de8d-46f5-9598-2ea59c91beb9" class="bulleted-list"><li style="list-style-type:disc"><strong>자료를 얻기 위하여 스택에 접근</strong>할때는 <strong>TOP이 지정하는곳</strong>에 접근한다.</li></ul><ol type="1" id="60434b5d-c295-4a47-a6f1-6acf4b4d1b2e" class="numbered-list" start="6"><li><strong>스택</strong>머신은?<strong> zero </strong>Address Machine</li></ol><ol type="1" id="0a6c8a8d-1f3f-4c41-951f-1b172a7b6ebb" class="numbered-list" start="7"><li>0-주소 인스트럭션에 필요한 것은 ? 스택</li></ol><ol type="1" id="0e240f8b-be07-4903-af54-eb009c668b48" class="numbered-list" start="8"><li>다음은 어느 유형의 주소명령방식인가? One - Address</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="eaf4744a-6ea9-4a1c-8c5d-b3512d2a98e5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">LOAD A
+ADD B ( 오퍼랜드 1개를 의미)
+STORE C</code></pre><p id="10f8d041-9c0f-4c06-9837-2660783d00d0" class="">명령어 뒤에 오퍼랜드가 1개 있다. 2주소는 ADD A, B 처럼 오퍼랜드가 2개 사용되며 3주소는 ADD C,A,B처럼 오퍼랜드가 3개 사용된다. <strong>오퍼랜드의 수에 따라서 명령어 형식이 달라진다</strong>.</p><ol type="1" id="de30d5f9-7305-48e3-bdf5-e0fbf1d7f171" class="numbered-list" start="9"><li>X = (A+B)* C산술식을 1-주소 명령으로 옳게 표현한것은? </li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fae9aedf-2497-4502-ba23-89cf8d30d2c0" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">LOAD A
+ADD B
+MUL C
+STORE X</code></pre><ol type="1" id="2472fd32-aad3-4015-8dc9-92f3d92892a5" class="numbered-list" start="10"><li>일반적인 컴퓨터의 CPU구조 가운데 수식을 계산할때 <strong>수식을 미리 처리</strong>되는 <strong>역 polish(postfix)형식</strong>으로 바꾸어야 하는 CPU구조는? <strong>스택구조CPU</strong></li></ol><ol type="1" id="98730d4c-f34c-48f2-9be6-b5f8f2ce8250" class="numbered-list" start="11"><li>명령어의 형식 가운데 연산에 사용된 모든 피연산자 값을 상실하는 명령어 형식은? 0-주소 형식 명령어 </li></ol><ul id="ccee1c25-854b-4031-87e6-cd0971f132f8" class="bulleted-list"><li style="list-style-type:disc">모든 피연산자 값을 상실한다는 것은 피연산자가 저장되는 오프랜드부가 없다는 것을 의미한다.</li></ul><p id="58617ce4-b96a-4c8c-b797-e4eb4c29be70" class="">
+</p><blockquote id="7ead7971-a13a-41b5-a7af-3910face7228" class=""><strong>주소지정방식</strong></blockquote><p id="9994231f-a88b-42ac-a459-d2a46c19f447" class="">프로그램 실행이란 명령어와 자료가 기억된 기억장치에 접근하는 일이 반복되어 이루어지는 것이므로 효율적인 주소지정방식은 매우 중요하다 </p><p id="ff9f9e56-cda5-4d61-9a0b-8730a5ec5666" class=""><strong>주소 설계시 고려사항 :</strong> 표현의 효율성, 사용의 편리성, <strong>주소공간</strong>(프로그램에서 사용하는 주소, <span style="border-bottom:0.05em solid">보조기억 장치 내의 기억공간</span>)과 <strong>기억공간</strong>(<span style="border-bottom:0.05em solid">주기억장치내의 실제 기억공간</span>)의 독립성 </p><ul id="fff40a11-e5be-4b2d-a4f8-0960789eb062" class="bulleted-list"><li style="list-style-type:disc"><strong>주소</strong>를 <strong>실제 기억공간</strong>과 <strong>연관</strong>시키는 방법에 따라 <strong>절대주소</strong>(임의의 <strong>기억 장소에 대한 실제주소 </strong>= 유효주소 로 0,1,2,3 …의 순서로 처음부터 <strong>차례대로 지정</strong>)와 <strong>상대주소</strong>(<strong>기억 주소를 기준</strong>으로 <strong>상대적으로 얼마만큼 떨어져 있는지 </strong>변위로 표현하는 주소)로 구분할 수 있다. <strong>상대주소</strong>는 <strong>절대주소로 변환</strong>해야만 <strong>실제 데이터에 접근</strong> 할 수 있다.</li></ul><p id="bc8da114-ad91-4ee4-a9d8-f8f88f028be9" class="">
+</p><p id="c156d801-d9bb-4ca7-a1b1-ded0be50886e" class=""><strong>주소 지정 방식의 종류 </strong>: 암시적 주소지정 방식 , 즉차적 주소지정방식,계산에 의한 주소지정방식</p><ul id="bf3c723a-84af-4773-9c63-bd4c74c2593c" class="bulleted-list"><li style="list-style-type:disc"><strong>암시적 주소지정방식 </strong>(Implied Mode)은 주소를 지정하지 않고 암시 </li></ul><p id="49b671e9-94d4-4bd3-a009-f15cc4272341" class="">명령 실행에 필요한 데이터의 위치를 지정하지 않고 <strong>누산기 </strong>(<strong>SHL </strong>: 누산기의 내용을 <strong>좌측으로 1Bit 이동</strong>,)나 <strong>스택의 데이터를 묵시적으로 지정</strong>하여 사용, <strong>오퍼랜드가 없는 명령</strong>이나 <strong>PUSH R1</strong>(R1의 내용을 스택의 최상위에 저장)처럼 <strong>오퍼랜드가 1개인 명령어 형식</strong>에 사용 </p><p id="61207588-8ac1-4575-a6f1-408d9707ccba" class="">
+</p><ul id="8b03adfc-79c2-44ea-b303-5c05e4fc29bc" class="bulleted-list"><li style="list-style-type:disc"><strong>즉차적 주소지정방식</strong>(Immediate)은 주소 대신 즉시 사용할 수 있는 값이 들어간다.</li></ul><p id="d0c6437c-7eca-44bd-a253-c62748b7ef80" class=""><strong>즉차적 주소지정방식</strong>은 <strong>명령어 자체에 오퍼랜드</strong>(실제 데이터)를 가지고 있는 방식이다. (명령 | 실제 데이터) , <span style="border-bottom:0.05em solid">별도의 기억장소를 액세스 하지 않고 </span><strong>CPU에서 곧바로 자료를 이용</strong>할 수 있어서 <strong>실행속도가 빠르다</strong>. <strong>명령어의 길이에 영향을 받으므로 </strong>표현할 수 있는 <strong>데이터 값의 범위가 제한적</strong>이다. </p><p id="89161c5b-a3ad-490b-8fd4-2d37834cfccc" class="">
+</p><ul id="cb091e59-54de-4886-ba41-373468e2434d" class="bulleted-list"><li style="list-style-type:disc"><strong>직접주소 </strong>(Direct)는 자료가 들어가 있는 곳을 직접 지정한다.</li></ul><p id="6bbff3a7-8811-4585-8d6a-73aa8d42b942" class=""><strong>직접주소방식</strong>은 <strong>명령의 주소부(Operand)가 사용할 자료의 번지</strong>를 표현하고 있는 방식이다. 명령의 Operand부에 표현된 <strong>주소를 이용하여 실제 데이터가 기억된 기억장소에 직접 사상</strong>시킬 수 있다. <strong>주소 부분</strong>에는 <strong>실제 사용할 데이터의 유효주소 </strong>( 컴퓨터가 실제로 사용할 데이터, 직접 주소지정방식은 <strong>주소부에 유효주소를 표현</strong>) 를 적기 때문에 <strong>주소 길이에 제약을 받는다</strong>. <strong>기억 용량</strong>이 <strong>2ⁿ개의 Word인 메모리 시스템</strong>에서 주소를 표현하려면 <strong>nBit</strong>의 <strong>Operand부가 필요</strong>하다. 직접 주소지정방식에는 <strong>명령의 Operand부</strong>에 <strong>데이터를 가지고 있는 레지스터의 번호를 지정</strong>하면 <strong>레지스터 모드</strong>라고 한다. </p><p id="6116e781-7b13-4b5e-9058-acc92a844551" class="">
+</p><ul id="de77de53-ccfb-478c-b460-85b324290e9f" class="bulleted-list"><li style="list-style-type:disc"><strong>간접 주소 </strong>(Indirect)는 주소가 지정하는 곳에 <strong>직접 가면 자료가 없고 </strong>대신 <strong>자료가 들어가있는 곳</strong>의 <strong>주소가 들어있다</strong>.</li></ul><p id="702f5a65-7c92-43af-8d5d-0e29457a1670" class="">명령어 내의 <strong>Operand 부에 </strong>실제 데이터의 주소가 아니고 실제 데이터의 주소가 저장된 곳의 주소를 표현하므로 <strong>최소한 주기억장치를 두번 이상 접근</strong>하여 <strong>데이터가 있는 기억장소에 도달</strong>한다.<strong> 명령어에 나타낼 주소</strong>가 명령어 내에서 <strong>데이터를 지정하기 위해 비트(Operand부의 비트)</strong>수로 <strong>나타낼 수 없을때 </strong>사용하는 방식이다. <strong>명령의 길이가 짧고 제한되어 있어도 긴 주소에 접근 가능한 </strong>방식이다. <strong>명령의 Operand부</strong>에 <strong>데이터의 주소를 가지고 있는 레지스터의 번호를 지정</strong>하면 <strong>레지스터 간접모드</strong>라고 한다.</p><p id="367f55c3-dac4-43eb-bc73-214a70b20cf2" class="">
+</p><ul id="2dce9cb2-21c2-49c8-8e86-6bd0bee7b8f3" class="bulleted-list"><li style="list-style-type:disc"><strong>계산에 의한 주소 </strong>는 <strong>베이스 레지스터</strong>를 이용하는 것은 <strong>베이스 주소(</strong>유효주소 : 명령어의 주소 부분 + 베이스 레지스터, 프로그램을 재배치할때 이용<strong>)</strong>, <strong>인덱스 레지스터(</strong>명령어의 주소 부분 + Index Register<strong>)</strong>를 이용하면 <strong>인덱스 주소</strong>, <strong>프로그램 카운터(PC)</strong>를 이용하면 <strong>상대주소(</strong>유효주소 : 명령어의 주소 부분 + PC, 명령어 자신의 기억 장소를 기준으로 데이터의 위치를 지정)가 된다. </li></ul><p id="2a4262a8-0487-4e52-b864-cd378239101a" class=""><span style="border-bottom:0.05em solid">전체 기억장치의 주소를 사용해야 하는 </span><strong>일반적인 주소지정방식</strong>에 비해 <strong>적은 수의 비트</strong>를 사용하고 <strong>레지스터 지정필드 없이 묵시적으로 레지스터를 지정</strong>하여 사용하기 때문에 <strong>데이터의 주소를 </strong>분류할때 <strong>약식주소 </strong>라고도 한다. Operand 부와 CPU의 특정 레지스터의 값이 더해져 유효주소를 계산하는 방식이다. </p><p id="52a42d33-6017-4def-8fea-f4ee2c21909d" class="">
+</p><p id="72419941-2178-4088-b6f1-8c93cae0f707" class="">베이스 레지스터 : 프로그램 상에서 명령어의 주소를 표현할때는 절대 주소로 나타내지 않고 Load될때 할당되는 영역의 시작 주소를 기준으로 재조정하여 실제 기억장소의 주소를 사용할 수 있도록 변위값으로 표현한다. 명령의 시작주소를 가지고 있는 레지스터가 베이스 레지스터이며 베이스 레지스터의 값과 명령어에 포함된 변위 값을 더해 접근하고자 하는 기억장소의 유효장소를 얻는것을 재배치라 한다.</p><p id="954eace5-b95b-45ad-8b47-881c78e40d6a" class="">
+</p><ol type="1" id="1cd74b81-5df9-4f2a-912e-a6068ff99b71" class="numbered-list" start="1"><li>전자계산기 기억장치의 주소 설계시 고려사항이 아닌것은? 주소표시를 정확하게 해야한다.</li></ol><ul id="120a9512-91e0-480a-83b4-1bc305242628" class="bulleted-list"><li style="list-style-type:disc"><strong>주소 설계시 고려사항</strong>은 <strong>표현의 효율성</strong>, <strong>사용의 편리성</strong>, <strong>주소공간과 기억공간의 독립성</strong>이 있다.</li></ul><p id="dc12f5dc-9bd1-41a1-8c6c-86998a10d04a" class="">
+</p><ol type="1" id="f57d37a9-5654-4c3d-80a2-5b0fa722c394" class="numbered-list" start="2"><li>명령어의 주소부분(Operand)를 데이터로 사용할 경우 장점으로 볼 수 있는 것은?</li></ol><p id="09a38f7a-bb1c-449f-bc2a-bb6bcb21ba31" class="">메모리 참조의 횟수를 줄일 수 있다. (주소 부분을 데이터로 사용하는 즉치적 주소지정방식은 명령어의 주소부분에 사용할 데이터가 있으니 메모리를 참조할 필요가 없다.)</p><p id="fe8b8656-2a2c-4cea-b547-c9238fafb5fe" class="">
+</p><ol type="1" id="1b13db9e-e9ad-43c4-8b55-6b01660dcd6e" class="numbered-list" start="3"><li>간접 주소지정방식에서 명령어 ADD(47)이 수행되면 다음 중 어느 것이 연산장치로 보내지는가? (기억장소 47번지에는 2002가 저장되어 있다) 2002번지의 내용</li></ol><ul id="4837f1fe-1c7d-4ae4-ab69-3c7cdf23f74b" class="bulleted-list"><li style="list-style-type:disc">오퍼랜드 값 47이 간접 주소이므로 47번지에 있는 값 2002는 오퍼랜드로 사용할 값이 아니라 오퍼랜드로 사용할 값이 들어있는 곳을 가리키는 번지이다. 47번지에 기억된 2002가 가리키는 곳의 값이 연산장치로 보내진다.</li></ul><p id="1d055dec-2609-49d7-beba-7ca4e21e0e67" class="">
+</p><ol type="1" id="417cc012-a44f-445a-8da6-1658bdd10a10" class="numbered-list" start="4"><li>간접주소(Indirect Adress)에 대한 설명이 옳지 않은것 ? 자료가 기억된 장소에 직접 사상시킬수 있는 주소형태이다. (= 직접 주소지정방식)</li></ol><ul id="2ff9048b-2974-4327-9054-fac05fc4fd82" class="bulleted-list"><li style="list-style-type:disc">그 자료를 얻기 위항 적어도 두 번 이상 기억장치에 접근한다. </li></ul><ul id="07530947-c3b9-42c0-aa9c-5c8073276d10" class="bulleted-list"><li style="list-style-type:disc">인스트럭션의 길이가 짧고 제한되어 있어도 이것을 이용하여 긴 주소를 찾아갈 수 있다.</li></ul><ul id="1ef254b1-3e6b-4224-92b2-11555ea0999a" class="bulleted-list"><li style="list-style-type:disc">오퍼랜드가 메모리상의 데이터 주소를 기억하고 그 주소에 기억되어 있는 데이터에 접근하는 방식이다.</li></ul><p id="8439a83c-7de1-494e-81fc-d9efcd4226f8" class="">
+</p><ol type="1" id="c944ee12-8fac-4b00-b184-0d7232cdcab9" class="numbered-list" start="5"><li>기억장치로부터 명령을 읽어 동작(Operation)코드를 해독하고 처리를 위한 데이터를 구하기 위해 주소지정방식을 결정하는데 이 경우 가장 빠른 주소지정방식은? Immediate Addressing Mode (직접 주소 지정 방식)</li></ol><ul id="5de661ce-8186-4d9f-b8d1-58236662e963" class="bulleted-list"><li style="list-style-type:disc">즉시 주소 지정방식의 가장 큰 장점은 별도의 기억 장치를 접근하지 않고 CPU에서 곧바로 자료를 이용하므로 실행속도가 빠르다는 점이다.</li></ul><p id="9bdab3ea-a91d-4ebf-b59d-82802e3cc1a9" class="">
+</p><ol type="1" id="b64c1772-25d2-47bb-83c8-2c0e87f75182" class="numbered-list" start="6"><li>명령어의 주소부분과 프로그램 카운터의 값을 더해서 유효주소를 결정하는 주소모드는? <strong>Relative Address모드 (상대 주소 모드)</strong></li></ol><p id="e8f95a8b-85f3-4b3d-b0a8-537f40b3649e" class="">
+</p><ol type="1" id="41307162-e293-4fdd-8fa6-b11b4f1f750a" class="numbered-list" start="7"><li>기억장치의 내용이 다음과 같을때 어셈블리어로 LDA 34명령이 직접 주소방식으로 수행될때 AC에 들어가는 값은 A라고 하고 간접 주소지정방식으로 수행될때 AC에 들어가는 값을 B라 하면 A,B값은? A = 39 , B = 127</li></ol><ul id="c72e0c29-a5e9-4964-a82c-b1ef6bfdffbb" class="bulleted-list"><li style="list-style-type:disc">LDA는 Load to Acc명령어로 기억장치에 있는 내용 ACC (누산기)로 옮기는 명령이다. </li></ul><ol type="1" id="ea847f66-584e-4e48-878c-cf6712521358" class="numbered-list" start="8"><li>다음에서 주소지정방식이 아닌것은? Temporary Addressing</li></ol><ol type="1" id="a61dbea8-2cfe-4f4c-a855-509b31e35440" class="numbered-list" start="9"><li>주소지정방식 중 <strong>오퍼랜드를 Fetch하는데</strong> <strong>가장 많이 메모리를 접근</strong>하는 방식은? <strong>간접 주소 방식</strong></li></ol><ol type="1" id="4963893f-33b1-4996-8171-40cafb097538" class="numbered-list" start="10"><li><strong>명령어의 주소 부분</strong>에 <strong>실제 사용</strong>할 <strong>데이터의 유효주소를 저장</strong>하고 <strong>주소길이에 제약을 받는 주소지정방식</strong>은? <strong>직접주소방식</strong></li></ol><ol type="1" id="da56ed75-4faa-4e3b-89b9-136789d09d32" class="numbered-list" start="11"><li><strong>오퍼랜드가 레지스터를 지정</strong>하고 그 <strong>레지스터 값</strong>이 실제 데이터가 <strong>기억되어 있는 주소를 지정하는 방식</strong>은? <strong>레지스터 간접 주소 지정방식</strong></li></ol><ul id="4a1ee932-62d7-412a-9fd9-915f95384179" class="bulleted-list"><li style="list-style-type:disc"><strong>오퍼랜드가 레지스터를 저장</strong>했으니 <strong>레지스터 모드</strong>이고 그 <strong>레지스터의 값</strong>을 <span style="border-bottom:0.05em solid"><strong>데이터로 사용하는 것이 아니고 </strong></span>그 레지스터가 <span style="border-bottom:0.05em solid"><strong>가리키는 곳의 데이터를 저장해 사용</strong></span>하니 <strong>간접 주소</strong>가 된다.</li></ul><ol type="1" id="71bf7540-4cfe-441d-8549-f159706d6cd1" class="numbered-list" start="12"><li><strong>명령어의 주소부</strong>를 <strong>유효주소</strong>로 이용하는 방법은 ? <strong>직접 주소</strong></li></ol><ul id="418432de-9db4-45b7-b89f-de5e35ef6e8a" class="bulleted-list"><li style="list-style-type:disc">명령어의 주소부에 유효주소, 즉 <strong>컴퓨터가 </strong><span style="border-bottom:0.05em solid"><strong>실제로 사용할 데이터</strong></span>가 <strong>저장한 주소</strong>를 <strong>직접 지정</strong></li></ul><ol type="1" id="9eea8ece-969c-4c39-855a-43cbf2422b63" class="numbered-list" start="13"><li>Operand의 내용을 저장하는 장소에 <strong>Operand의 주소</strong>를 저장하는 방식으로서 <strong>두번의 참조를 필요</strong>로 하는 방식은 ? <strong>간접 주소 방식</strong> </li></ol><p id="ff3ce215-1407-4ad5-ab5d-4a0ef1c03cbd" class="">
+</p><p id="e5621853-787b-487d-b1cf-c9c1c414457d" class="">
+</p><p id="2bd0e27b-59c9-4231-b957-ab9cd20ddf48" class="">
+</p><p id="bbe90dff-175d-4916-8638-bed477118069" class="">
+</p><p id="15828899-25fe-4c93-be3f-39fb8b24904f" class="">
+</p><p id="9587369f-61c7-488e-a8be-324494f3c0de" class="">
+</p><p id="7b630146-4384-4a03-b1cf-04de1e0e0623" class="">
+</p><p id="63bfba5b-3e66-420b-915a-59443263c4c8" class="">
+</p><p id="2a31c524-bafe-4bf7-b541-6714c56fc0e5" class="">
+</p><p id="b3938ed5-f77d-4619-ab25-a69e155e124b" class="">
+</p><p id="da05ebab-96ff-4fb9-b315-c5f2b97a1ef9" class="">
+</p><p id="d2921e44-9d9a-487a-902e-afe45564b6f4" class="">
+</p><p id="1804fab2-453f-48fa-b7b0-1ddd8a1ca481" class="">
+</p><p id="e441120c-3b59-4a29-9285-60f79e5283d7" class="">
+</p><p id="7a80efe0-f2d2-418f-aad5-eeff614984b6" class="">
+</p><p id="93c626aa-28d2-483d-a49c-371748c7470b" class="">
+</p><p id="81c05116-d8cb-4bbb-b38d-ab4921a0cc7e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

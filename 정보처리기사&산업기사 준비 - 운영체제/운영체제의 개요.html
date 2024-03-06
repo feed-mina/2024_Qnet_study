@@ -1,0 +1,716 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>운영체제의 개요</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e0283af2-fc63-46a7-b55e-0fbb45b3aaed" class="page sans"><header><h1 class="page-title">운영체제의 개요</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr></tbody></table></header><div class="page-body"><ol type="1" id="5dd417f3-b293-4685-a530-6dc46cfbb3cb" class="numbered-list" start="1"><li>운영체제에 관한 설명으로 옳지 않은것</li></ol><ul id="4e36bd40-9748-4f43-8041-471f5c5640ef" class="bulleted-list"><li style="list-style-type:disc">운영체제는 고급 언어로 작성된 프로그램을 컴파일하여 기계어로 만들어준다. (x)</li></ul><p id="3d4ad03d-615c-4202-9a9d-2198d971bdae" class="">고급 언어로 작성된 프로그램을 컴파일하여 기계어로 만들어주는것은 언어 번역프로그램(컴파일러, 인터프리터 등)이다.</p><ul id="0b567d1d-660e-44b4-8d68-8946a7cf2239" class="bulleted-list"><li style="list-style-type:disc">운영체제는 사용자와 컴퓨터 시스템 간의 인터페이스 기능을 제공한다.</li></ul><ul id="c0e99dd6-af93-4e14-b18d-005b5405e525" class="bulleted-list"><li style="list-style-type:disc">운영체제는 CPU, 기억장치 , 파일, 입출력 장치 등의 자원을 관리한다.</li></ul><ul id="ae7ca4cc-cd9b-4ce8-a590-af7398a77eeb" class="bulleted-list"><li style="list-style-type:disc">운영체제는 사용자가 쉽게 하드웨어에 접근할 수 있도록 한다.</li></ul><p id="a2fa6c9a-8c2d-4154-9adc-c23dedca0bf0" class="">
+</p><p id="5cc888e0-acaa-4e3b-93ad-9327146d4138" class="">
+</p><ol type="1" id="87a1a3a3-2d2b-4515-bdc5-aeeafe07dc7a" class="numbered-list" start="2"><li>데이터를 수집하고 그것을 계산 처리용으로 변환하여 계산을 실행한 후 그 결과를 사용자에게 알려주는데 요하는 시간을 나타낸 것은 ? Turnaround Time</li></ol><p id="affe3915-bbb3-42e0-93ec-3ee652e65ee6" class="">
+</p><ol type="1" id="c8ce17a1-16a1-45a8-92f6-22445f336ba6" class="numbered-list" start="3"><li>운영체제의 기능에 대해 설명으로 거리가 먼 것은?</li></ol><ul id="ca86b627-3644-45b7-9c5d-3424fbf9d3be" class="bulleted-list"><li style="list-style-type:disc">컴퓨터를 초기화 시켜 작업을 수행할수 있는 상태로 유지시키는 역할을 한다.</li></ul><ul id="eb7a9be9-7ccc-4312-87c6-0a71cf983481" class="bulleted-list"><li style="list-style-type:disc">컴퓨터 자원을 여러 이용자가 나누어 사용할 수 있도록 자원을 관리한다.</li></ul><ul id="ef5f2407-b40b-4c45-b51b-55c85ce32f2e" class="bulleted-list"><li style="list-style-type:disc">하드웨어와 사용자 사이에 내부 및 인터페이스르 제공한다.</li></ul><ul id="5131a8e7-94c8-4746-b6e8-df350fd3a93e" class="bulleted-list"><li style="list-style-type:disc">소프트웨어나 하드웨어에 오류가 발생하면 운영체제는 회복을 위해 어떤 일도 할 수 없다.(x)</li></ul><p id="c60d5da2-9718-4b90-846c-3464f1234a18" class="">운영체제는 시스템 사용 도중 발생하는 내부, 외부적인 오류로부터 시스템을 보호하는 기능을 제공한다.</p><p id="32d79a41-bd69-425b-9a38-1238cd28c54c" class="">
+</p><ol type="1" id="81a800bf-04e3-49b4-b274-fd299a82fa49" class="numbered-list" start="4"><li>운영체제의 기능으로 가장 거리가 먼 것은</li></ol><ul id="c1dd1f5a-cc0d-418f-833e-f2c954485f81" class="bulleted-list"><li style="list-style-type:disc">통신 네트워크 관리 기능</li></ul><ul id="6f3f83b2-d5b8-427f-b501-0508c2758482" class="bulleted-list"><li style="list-style-type:disc">시스템에서의 에러처리 기능</li></ul><ul id="d4014512-8a79-4715-9027-eed164c7b87a" class="bulleted-list"><li style="list-style-type:disc">시스템의 바이러스 자동퇴치 기능 (x) - 백신 프로그램</li></ul><ul id="4834acb8-1867-4acc-bce3-01a4e7c20f02" class="bulleted-list"><li style="list-style-type:disc">병렬 수행을 위한 평의성 제공 기능</li></ul><p id="93c74637-034b-4cbb-b619-910647e7f6a9" class="">
+</p><ol type="1" id="0f2f4aad-7e73-4d41-b269-c1fe04f534c4" class="numbered-list" start="5"><li>운영체제의 목적으로 거리가 먼것은</li></ol><ul id="8d142597-9083-44cd-b443-1c4748599042" class="bulleted-list"><li style="list-style-type:disc">사용자 인터페이스 제공</li></ul><ul id="ca55cd70-bb31-4b70-90da-a1558872b618" class="bulleted-list"><li style="list-style-type:disc">자원스케줄링</li></ul><ul id="d83319e3-fcef-4082-b0b2-1b801f40d3b6" class="bulleted-list"><li style="list-style-type:disc">데이터의 공유</li></ul><ul id="be1ccd51-1fab-4992-bd23-1a5134a66c08" class="bulleted-list"><li style="list-style-type:disc">원시프로그램을 목적프로그램으로 변환 (x) - 언어 번역 프로그램</li></ul><p id="173ac673-dae2-48cf-b669-3553cf6cdeff" class="">
+</p><ol type="1" id="b811ea59-dbfa-4904-b10d-f62483a3b469" class="numbered-list" start="6"><li>운영체제를 수행 기능에 따라 분류하면 제어프로그램과 처리 프로그램으로 구분할 수 있다. 다음 중 제어프로그램의 기능이 아닌것은 </li></ol><ul id="83659848-07a1-4dc5-8c93-3d8e730ea67f" class="bulleted-list"><li style="list-style-type:disc">인터럽트 처리</li></ul><ul id="54cd953c-dcec-41c2-97da-2d9573bd0930" class="bulleted-list"><li style="list-style-type:disc">링킹 (x)</li></ul><p id="9fb624d4-e713-4cb8-8919-1166725c2296" class="">링킹은 목적 프로그램과 또 다른목적프로그램, 라이브러리 함수 등을 결합하여 실행 가능한 모듈을 만드는 것으로 처리 프로그램의 링커가 이를 담당한다.</p><ul id="9618567f-fbbf-4db8-bf4b-0ec8c4564801" class="bulleted-list"><li style="list-style-type:disc">프로그램 실행의 스케줄링</li></ul><ul id="c51ab2bd-c5e3-4b74-a842-d1b220baec93" class="bulleted-list"><li style="list-style-type:disc">I/O 오퍼레이션 스케줄링</li></ul><p id="75d04b49-c439-49a3-b308-31b9fa0a93e3" class="">
+</p><ol type="1" id="c800b86e-d2e6-4659-9497-5e1b2d8ff980" class="numbered-list" start="7"><li>O/S 성능평가의 이용가능도를 가장 잘 설명한것은</li></ol><ul id="438a414f-2b66-4d08-a4eb-cc223516f37c" class="bulleted-list"><li style="list-style-type:disc">시스템의 전체 운영 시간 중에서 실제 가동하여 사용중인 시간의 비율</li></ul><ul id="4760be5d-52ee-4018-b3f3-f4f60bd1e7cf" class="bulleted-list"><li style="list-style-type:disc">동일한 시간 내에서 얼마나 많은 작업량을 처리할 수 있는가의 요인 - 처리능력 (Throughput)</li></ul><ul id="93eb17cc-6268-4466-9e3e-853d0f899294" class="bulleted-list"><li style="list-style-type:disc">요청한 작업에 대한 결과를 사용자에게 반호나 할때까지 소요되는 시간 - 반환시간 (TumAround Time)</li></ul><ul id="787d38ad-e279-4c84-a143-150665261268" class="bulleted-list"><li style="list-style-type:disc">작업의 결과를 얼마나 정확하고 믿을수 있는가의 요인 =—신뢰도 (Realiablity)</li></ul><p id="0fcd5978-3fe3-43ab-b2e7-47606e5399c6" class="">
+</p><ol type="1" id="b74e0ce7-f8b9-4eac-9fd3-0b3c92baed7c" class="numbered-list" start="8"><li>운영체제의 기능에 해당하는것은 </li></ol><ul id="d4f9695f-4529-4f96-94da-a7fb760303f4" class="bulleted-list"><li style="list-style-type:disc">사용자에게 시스템 자원을 쉽고 효율적으로 사용할 수 있도록 한다.</li></ul><p id="a598ef38-b45b-4d97-928a-b7916e56bd97" class="">
+</p><ol type="1" id="3149d0c7-54c3-43f5-a876-778c4aa258ac" class="numbered-list" start="9"><li>시스템 자원이 아닌 것은</li></ol><ul id="0080c411-00ce-4f1e-a052-ec6e93ffc00a" class="bulleted-list"><li style="list-style-type:disc">기억 장치</li></ul><ul id="8bb67016-6f4e-4926-976c-e12af43da2ad" class="bulleted-list"><li style="list-style-type:disc">I/O 채널</li></ul><ul id="879f0148-8d94-4aad-a8d0-e6487d881482" class="bulleted-list"><li style="list-style-type:disc">라이브러리</li></ul><ul id="d74e0248-812b-4cee-9314-20a1d8f5ebb3" class="bulleted-list"><li style="list-style-type:disc">언어 매뉴얼 (x)</li></ul><p id="8e7b09c4-9dfa-48bb-ab43-cc45b1ecb016" class="">
+</p><ol type="1" id="ca160ed6-ba62-4a8f-be0a-05acb60fb1b9" class="numbered-list" start="10"><li>시스템 소프트웨어에서 제공하는 기능이 아닌것은</li></ol><ul id="9e6a3db1-ed38-4c62-894d-38794efcb66d" class="bulleted-list"><li style="list-style-type:disc">보조기억장치의 관리</li></ul><ul id="e0becef3-d518-47be-8a15-284d00f019e0" class="bulleted-list"><li style="list-style-type:disc">오류 처리</li></ul><ul id="ce39ee9f-f9dd-41ab-9e6e-785a8930df91" class="bulleted-list"><li style="list-style-type:disc">작업계획</li></ul><ul id="d61c70a7-7f42-48c5-9749-9cf8c32bb85d" class="bulleted-list"><li style="list-style-type:disc">언어의 선택 (x)</li></ul><p id="af282352-36b2-4ab2-a2ef-412fd0b55ecc" class="">
+</p><ol type="1" id="7e146c79-1389-4064-b6de-49d21cf4aebb" class="numbered-list" start="11"><li>다음 소프트웨어 중 펌웨어로 구현하기에 가장 적합한것은 어느것인가 </li></ol><p id="e6f5858e-3420-4313-a5b6-16d7f90b6fa6" class="">운영체제의 핵심 부분 - 팜웨어는 ROM에 저장시켜서 사용하는 마이크로 프로그램들을 말하며 변경되지 않은 내용을 저장하여 계속적으로 사용한다. 이러한 특성을 지닌 것은 운영체제의 핵심 부분이다. </p><p id="e953237e-3446-464d-b1d6-8ffc7667602e" class="">마이크로 프로그램은 ROM이나 PROM에 영구히 기록되는 프로그램을 의미한다.</p><p id="28c00d5c-9076-4cf9-9094-c510ffb46f53" class="">
+</p><p id="f4cd5189-e85a-4b6d-83e4-2875424a588d" class="">12  <strong>부트적재기</strong>의 설명으로 옳은것 </p><ul id="1de7138a-8180-4d7c-84c8-73f108da1367" class="bulleted-list"><li style="list-style-type:disc"><strong>메모리가 비어 있는 상태</strong>에서 <strong>처음</strong>에 <strong>실행되는 프로그램</strong>이다. </li></ul><p id="632c1c70-7cbc-473d-83d8-f505a25221c5" class=""><strong>부트로더</strong> : <strong>운영체제를 적재</strong>할 수 있도록 하는것으로 <strong>ROM</strong>에 저장되어 있으며 <span style="border-bottom:0.05em solid">메모리가 비어있는 상태에서 </span><strong>처음에 실행되는 프로그램</strong>을 말한다. </p><p id="e298161b-f6d1-4ef1-a14f-ed0b118a47bb" class=""><strong>Reset 스위치</strong>를 누르면 <strong>다시 실행</strong>된다. </p><p id="aad913ad-d8f7-499a-9f66-f3144883cd4d" class=""><strong>부트스트랩 로더</strong>라고도 하며 이를 통해 <strong>부팅(부트스트랩)이 수행</strong>된다.</p><p id="d5b063c6-7cab-4379-9fe5-fbced5aee5e6" class="">
+</p><p id="4f3a9ee1-bc17-4c22-8f8d-99ab73677350" class="">13 </p><p id="4d51a050-fb90-4d83-b006-4776c375f50f" class=""><strong>하나의 CPU</strong>와 <strong>주기억장치를 이용</strong>하여 <strong>여러개의 프로그램을 동시에 처리</strong>하는 방식인 <strong>다중 프로그래밍</strong>에 대한 설명 </p><p id="b10e6650-8b50-48ec-94ba-b56b8f71573d" class="">다중 프로그래밍은 <strong>한 프로그램</strong>이 <strong>입 * 출력하는 동안</strong> <strong>다른 프로그램</strong>이 <strong>CPU를 사용</strong>할 수 있으므로 <strong>시스템의 효율</strong>과 CPU의 <strong>처리량을 증가</strong>시킬 수 있다.</p><p id="80518efd-49f1-4cfd-b747-8f7a37145fa1" class=""><strong>여러개의 프로그램</strong>이 <strong>주기억장치에 동시에 적재되어 실행되는 방법</strong> </p><p id="6663e1e4-e264-402e-911e-3d9a20f43119" class="">
+</p><p id="155f4b30-b96d-41ad-9580-0dda56f548de" class="">14 </p><ul id="14dd7745-c64e-44e2-9ed1-e492e868b144" class="bulleted-list"><li style="list-style-type:disc"><strong>운영체제의 발전 과정</strong> : <strong>일괄 처리 시스템 </strong>&gt; <strong>다중 프로그래밍 시스템</strong>, 다중 처리 시스템, <strong>시분화 시스템</strong>, <strong>실시간 처리 시스템</strong> &gt; <strong>다중 모드</strong> &gt; <strong>분산  처리 시스템</strong></li></ul><p id="b19ac1b2-3176-41ec-a5ff-d5e77f08e0f4" class="">
+</p><p id="da013d47-b1e4-4e19-b575-0a61f6c7170b" class="">15  전자계산기 ㅣㅇ용하기 위하여 사용하는 언어를 크게 세가지의 계층으로 구분할 수 있다. 이와 관계 없는것 :레지스터</p><p id="48a6595e-11c1-4cea-961e-e04d7dc6b943" class="">프로그래밍 언어는 <strong>저급언어</strong>와 <strong>고급언어 (컴파일러 언어)</strong>로 분류하고 다시 저급언어는 <strong>기계어</strong>와 <strong>어샘블리어</strong>로 분류한다.</p><p id="0d36c143-8796-47e8-a6f9-4b6983fd4246" class=""><strong>레지스터</strong>(Register) : CPU 내부에서 처리할 <strong>명령어나 연산의 중간 결과값</strong> 등을 <strong>일시적으로 기억하는 임시 기억 장소</strong></p><p id="9695c818-d9f7-4554-bc25-256e030f9ef7" class="">
+</p><p id="b7d8fdbe-9023-489e-96f8-aaa6b7912977" class="">16</p><p id="804699d6-0ff6-4db5-b0f1-1215cd7b852f" class=""><strong>다중 프로그래밍</strong>은 여러개의 작업을 <strong>효율적으로 병행</strong>하기 위해서 사용하는 것으로 <strong>하나의 주기억 장치를 공유</strong>, <strong>분할</strong>하여 사용하게 되므로 <strong>메모리의 관리</strong>와 <strong>스케줄링</strong>, <strong>보호</strong>는 반드시 이루어져야 하는 기능이다.</p><p id="370cb0b3-db7f-4f37-9c64-f45830323f3c" class=""><span style="border-bottom:0.05em solid">off-line 처리</span>의 경우는 <strong>모아서 한번에 처리</strong>하게 되므로 <strong>병행 처리</strong>를 하여 <strong>반응 속도를 빠르게 하는것</strong>과는 <span style="border-bottom:0.05em solid">관련이 적다</span>.</p><p id="4a67f5cd-405a-4aba-a3ad-0b7abce7d3b9" class="">
+</p><p id="27987975-d533-4ad7-a165-ad48e509e1c7" class="">
+</p><p id="b0d9c090-1e5d-46c2-804e-c4b028a01e84" class="">17</p><p id="95af5bdb-3706-4721-8671-a536c4605726" class=""><strong>실시간 처리 시스템 (Real Time Processing System)</strong></p><ul id="68a89781-6707-48c3-90ef-79af270d6960" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터 발생 즉시 </strong>또는 <strong>데이터 처리 요구</strong>가 있는 <strong>즉시 처리</strong>하여 <strong>결과를 산출</strong>하는 방식이다.</li></ul><ul id="27939a7e-ac28-4107-a244-1b92435a4242" class="bulleted-list"><li style="list-style-type:disc"><strong>우주선 운행</strong>이나 <strong>레이더 추저기</strong>, <strong>핵물리 실험 </strong>및 <strong>데이터 수집</strong>, <strong>전화교환장치의 제어</strong>, <strong>은행의 On-line 업무</strong> 등 <span style="border-bottom:0.05em solid">시간에 제한을 두고 수행되어야 하는 작업</span>에 사용된다.</li></ul><p id="5ce77788-0ab0-415f-ad7c-fa3a43031a37" class="">
+</p><p id="01347b8b-6921-4fcb-b9be-cfbb0cd496bf" class="">18<strong>운영체제</strong>에서 <strong>자기 자신을 Loading 하는 과정</strong>을 무엇이라 하는가 <strong>Bootstrapping</strong></p><ul id="4985d3d8-f070-46c0-b7bf-ce71df39d23d" class="bulleted-list"><li style="list-style-type:disc"><strong>Loading </strong>: <strong>보조기억장치</strong>에서 <strong>주기억장치</strong>로 프로그램을 가져오는것</li></ul><ul id="8e4cc0e5-be73-4480-886d-d2712ecfa2ad" class="bulleted-list"><li style="list-style-type:disc">Searching : 원하는 정보를 찾는것</li></ul><ul id="5f912db0-efd9-4ab0-9bf1-44dc0fae9b19" class="bulleted-list"><li style="list-style-type:disc"><strong>Overapping </strong>: <strong>주기억장치보다 큰 프로그램</strong>을 <strong>기억장치로 적재</strong>할때 사용하는 방식 중 한가지</li></ul><p id="808e4173-d8b9-46c8-86c3-4398c6ab68de" class="">
+</p><p id="0271c0bb-9a28-4406-b0b9-f29b79684fda" class="">19 <strong>개방 서브루틴</strong>과 <strong>폐쇄 서브루틴</strong>의 차이점</p><p id="963eb6d3-91f2-4cc8-be33-07ced954b425" class="">매크로와 부 프로그램의 비교</p><p id="ab59f667-249c-461d-9b79-59c502edf105" class=""><strong>매크로 </strong>: <strong>개방서브루틴</strong>(Opened Sub-routine), <strong>주 프로그램의 매크로 호출 </strong>명령이 있는 <strong>위치마다 </strong>매크로 내용을 <strong>삽입</strong>하여 <strong>확장된 프로그램을 만들어 놓</strong>고 <strong>연속적으로 실행</strong>함</p><p id="60616dcb-5217-4a67-b7ee-deeedbf33f7d" class=""><strong>부 프로그램 </strong>: <strong>패쇄 서브 루틴</strong>, 부 프로그램이 호출될때마다 <strong>제어가 부 프로그램으로 넘어갔다가 다시 주 프로그램으로 복귀됨</strong></p><p id="9bde1589-33fb-4c27-b253-19f56b7e6d6a" class="">
+</p><p id="4b8a517e-3749-4caf-b406-8931264314b8" class="">21 </p><ul id="2e74ab0c-2530-4d9f-8c82-484ee9277c13" class="bulleted-list"><li style="list-style-type:disc"><strong>매크로</strong>를 <strong>개방 서브루틴</strong>, <strong>서브포르그램</strong>을 <strong>폐쇄 서브루틴 </strong>이라고 한다.</li></ul><ul id="e5e340e5-dec9-4d84-926e-abaed7e3ff53" class="bulleted-list"><li style="list-style-type:disc"><strong>Function</strong>은 함수를 의미하며 <strong>어떤 일을 수행하도록 지시하는 프로시저</strong>를 의미한다.</li></ul><p id="e2749dbf-1720-4213-981c-d2bacefcb12e" class="">
+</p><p id="35dacde5-6ef2-4690-99b3-5d5ebb1bf157" class="">23 </p><p id="ad226fd0-4df2-4d7a-9b8e-b733ee428f4f" class=""><strong>매크로 1Pass</strong>에서 사용되는것 : <strong>매크로 원본,</strong> 위치계수기(PC), ST, MOT , POT, 리터럴 테이블(LT) 등</p><p id="5b9ed52f-556e-4c44-97f7-9e451184f666" class=""><strong>매크로 2Pass</strong>에서 사용되는것 : <strong>매크로 원시 프로그램 사본</strong>, PC, ST, LT, 기계명렁어 테이블(MOT), POT, <strong>베이스 레지스터 테이블 </strong>, <strong>Print Line</strong>,<strong>목적 프로그램</strong>(Object PRogram)</p><p id="97d6fcce-d7e3-4e06-8b49-c06b1def4271" class="">
+</p><p id="a93a301a-2d59-4020-95b0-921b5d6f99c0" class="">24 </p><p id="c8be43a5-eb87-4dba-9f03-ef36d5cd58cf" class=""><strong>매크로 프로세서</strong>의 기능 : <strong>매크로 정의 인식</strong>, 매크로 정의 <strong>저장</strong>, 매크로 <strong>호출 인식</strong>, 매크로 <strong>확장</strong>과 <strong>인수 치환</strong> </p><p id="4114abfe-870e-428d-86da-842f3f99ba7f" class="">
+</p><p id="3873f8fe-c7bb-42c0-b8ac-9082dc30d037" class="">25 매크로 프로세서가 하는 일로 볼 수 없는것 </p><ul id="0e517f2e-c278-473f-aeec-46c3ba8dccb5" class="bulleted-list"><li style="list-style-type:disc">매크로 정의를 인식한다.</li></ul><ul id="40f61a99-dda7-4ff4-bbbb-454cc1b2f2db" class="bulleted-list"><li style="list-style-type:disc">매크로 정의를 저장한다.</li></ul><ul id="d57b98cc-1f7f-4108-8a14-9b8904d5b707" class="bulleted-list"><li style="list-style-type:disc">매크로 호출을 인식한다.</li></ul><ul id="e67efc0d-809b-4fec-83f8-ac8f1c9bf3be" class="bulleted-list"><li style="list-style-type:disc">원시 프로그램에 매크로 호출 부분이 있을 경우 매크로를 삽입하여 확장된 원시 프로그램을 생성한다.</li></ul><ul id="453b7819-c21c-4994-9c6c-dfb8703d9797" class="bulleted-list"><li style="list-style-type:disc">사용자가 매크로를 호출하여 해당 매크로의 대체 텍스트에 제공된 인수를 삽입하여 출력하며 이를 매크로 확장이라 한다.</li></ul><ul id="4543c315-eee2-4284-9d10-d3f28dd539e6" class="bulleted-list"><li style="list-style-type:disc">사용자는 매크로 정의내에 또 다른 매크로를 정의할 수 있다.</li></ul><ul id="e40ddd5b-9a94-4894-b27f-c4e8bd2a018e" class="bulleted-list"><li style="list-style-type:disc"><strong>매크로 프로세서</strong>는 <strong>컴파일러</strong>와도 <strong>같이 사용될 수 있다</strong></li></ul><ul id="3eea53c2-1f56-4407-a6f2-d2810c68a9b0" class="bulleted-list"><li style="list-style-type:disc">매크로 프로세서는 항상 어샘블러와 함께 사용된다. (X)</li></ul><p id="008342d2-e198-4ed1-8c35-6c69143c6b86" class="">
+</p><p id="e965fb20-f2dc-4c15-aa49-da64f017b798" class="">26  프로그램 성능 분석을 위한 프로그램은 <strong>Bench Mark Program </strong></p><p id="7d47a112-9c6d-43c1-8b6e-11cba915b3b5" class=""><strong>Control Program </strong>: 운영체제의 <strong>제어프로그램</strong>, 즉 <strong>감시 프로그램</strong>, <strong>작업제어 프로그램</strong>, <strong>데이터 관리 프로그램</strong>을 의미</p><p id="fab52d93-89e2-4088-8b50-f9ee81f30aa9" class=""><strong>Assembler </strong>: 어샘블리어로 작성된 <strong>원시프로그램을 목적프로그램으로 번역</strong>하는 프로그램</p><p id="ca0e9136-d805-4e30-8a3e-2a61bd9a1678" class=""><strong>Scheduler </strong>: 스케줄링을 <strong>프로세스가 생성</strong>되어 실행될때 필요한 시스템의 <strong>여러 자원을 해당 프로세스에게 할당하는 작업을 의미</strong>하며 스케줄러는 이런 스케줄링 작업을 수행하는것을 의미함</p><p id="315eb9b1-9cba-4dab-aff8-c9971b338b27" class=""><strong>Bench Mark Program </strong>: 컴퓨터 속도 등의 <strong>성능을 평가하기 위한 프로그램</strong>을 이용해 사용자가 준비한 기본 문제들을 처리하여 <strong>문제 해결의 결과로서 성능을 판정</strong>하는 방법 </p><p id="18261a82-f8cf-428a-ba3b-c280f9cdd29e" class="">
+</p><ol type="1" id="ba01a2b9-381b-4ad9-ae3a-6be47105818e" class="numbered-list" start="27"><li>다음 중 <strong>인간이 사용하는 언어</strong>를 <strong>이용</strong>해서 작성된 내용을 <strong>기계가 이해할 수 있는 내용</strong>으로 <strong>번역해주는 시스템 프로그램</strong>은 ? <strong>Compiler 컴파일러</strong></li></ol><ol type="1" id="8ab6b90c-6ffc-4e1b-9612-f70614643ce5" class="numbered-list" start="28"><li><strong>운영체제</strong>는 <strong>사용자가 컴</strong>퓨터를 <strong>편리</strong>하고 <strong>효과적으로 사용</strong>하도록 환경을 제공하는것이므로 일반적으로 사용되는 시스템에서 <strong>범용적으로사용</strong>할수 있도록 <strong>설계</strong> 되어야 한다.</li></ol><p id="a5c3a0eb-780d-49f4-ae9f-f50b582fc1d0" class="">
+</p><p id="778d478a-3fd7-4634-b233-613769e791e7" class="">29 어샘블러 번역 과정 중 기계 내부에서 기계어 명령인지 , 의사 명령인지 어떻게 아는가?</p><p id="6d529749-3c9b-40db-a560-3075a0faa129" class=""><strong>어샘블러</strong>가 <strong>어샘블하는 방법</strong>은 <strong>원시 프로그램의 첫 줄에 있는 명령</strong>부터 <strong>차례로</strong> <span style="border-bottom:0.05em solid"><strong>의사 명령어 테이블을 검색</strong></span>하여 해당 내용이 있으면 <strong>의사 명령에 대한 실행,</strong> <strong>루틴의 시작 주소</strong>를 가지고 나와 그 <strong>루틴을 실행</strong>시켜서 어셈블에 필요한 정보를 <strong>어셈블러에게 제공</strong>하고 <strong>없으면 집행명령으로</strong> 인식하여 <strong>기꼐 명령어 테이블을 검색</strong>한다.</p><p id="755cec77-1952-4a09-84e0-d54b94409349" class="">
+</p><p id="2da59071-0ca1-4325-95f9-e16ae71fccbf" class=""><strong>의사 명령 테이블 </strong>(<strong>POT</strong> : Psuedo Operation Table) <strong>의사명령</strong>과 그 명령을 처리하는 <strong>실행 루틴이 있는 주소</strong>를 가지고 있는 <strong>테이블</strong></p><p id="048cb602-bf66-46ab-af17-b4fa1f6d7b73" class=""><strong>기계명령어 테이블 </strong>(<strong>MOT</strong> :Machine Operation Table) <strong>어샘블리어</strong>의 실행 명령에 대응하는 <strong>기계어에 대한 정보</strong>를 가지고 있는 테이블</p><p id="c92257cb-7d21-45a9-9490-257493297fdb" class="">
+</p><p id="68c2bb90-9844-4dd1-ac0e-67850148ef75" class="">30 어샘블러 제 1단계(pass-1)에서 수행하는 일</p><p id="a7c06b63-2d39-4c2a-8356-3d84fb1e34fb" class=""><strong>기계명령어의 길이 정의</strong></p><p id="15302d13-c144-4963-917e-f32087ecb36a" class=""><strong>위치 계수기 (PC)관리</strong></p><p id="ed956097-d569-4145-8dc2-295540f6d41e" class=""><strong>기호들의 값을 ST에 기억</strong></p><p id="6d5b8dd2-7c42-43f6-a2e1-fed31ccc2bcd" class="">몇 가지 연산자(의사 명령어 ) 처리</p><p id="b97b7ae5-d67f-42e9-890b-05698cac940a" class="">리터러들을 LT에 기억</p><p id="b54ac71a-14dc-42ae-b543-19a637f8972a" class="">
+</p><p id="c24f9364-f06b-43da-a263-a9c17b938dd4" class="">31 어샘블리어가 고급언어보다 좋은점</p><p id="b1416098-8a2e-4152-abd8-96a017321d24" class="">어샘블리어는 프로그래밍 오류 검증이 힘들고 <strong>기계와 종속적인 프로그램</strong>을 만들게 되지만 <strong>메모리의 이용률이 좋은 프로그램을 작성</strong>할 수 있다.</p><p id="23b2f47d-506d-4a59-9990-63a514e57fb9" class="">
+</p><p id="7b90f055-1794-46e5-aeee-7ec3661ae0ab" class="">32 어셈블리어에 대한 설명 중 적절하지 못한것</p><ul id="d50c17cb-5e7b-4794-8c02-4660a3a2e410" class="bulleted-list"><li style="list-style-type:disc">어셈블러에 의하여 기계어로 번역되어야 한다.</li></ul><ul id="2f7ae6d1-8032-4006-8a02-98bbaeb4cb7d" class="bulleted-list"><li style="list-style-type:disc">어셈블리어는 모두 동일하다 (x)</li></ul><p id="b844dc64-9265-4160-b7e7-fee97b99a70c" class=""><strong>어샘블리어</strong>는 <strong>기계어를 기호화 </strong>해놓은것으로 <strong>작성한 CPU마다 어샘블리어가 다를 수 있다</strong>.</p><p id="005ee877-ce84-4279-b0f0-8b19681dd0ab" class="">기호로 표기되어 프로그램을 작성하기가 기계아보다 편리하다.</p><p id="2d5228dc-5e92-4d99-bbeb-3c9f5951b5db" class="">고급 언어로 작성된 프로그램보다 처리 시간이 일반적으로 짧다</p><p id="01723c35-89c3-4079-8a3a-4a86e5d6f8b8" class="">33 Relocation Loader의 네가지 기능을 수행하는 올바른 순서</p><p id="8a079c48-d92e-4b11-b3fd-ec320de1e14f" class="">재배치 로더의 수행순서 : 주기억 장치 할당 &gt; 연결 &gt; 재배치 &gt; 적재(Loading)</p><p id="79931e27-95af-4f54-bd07-57fcc56e7d05" class="">Allocation &gt; Linking &gt; Relocation &gt; Loading</p><p id="ef5ee6cb-5975-46d5-b2a1-67fd4a1f25a2" class="">34 로더에 대한 설명으로 적절하지 못한것</p><ul id="1705bdff-0d06-48dc-acb7-3fc22d4b1942" class="bulleted-list"><li style="list-style-type:disc">프로그램을 주기억 장치에 적재한다.</li></ul><ul id="56608b98-e0a8-4f22-95c4-632f3c7d729f" class="bulleted-list"><li style="list-style-type:disc">기호로서 호출되는 부프로그램을 연결처리한다.</li></ul><ul id="ac01a4b1-3bd7-4fab-8d5e-902e3787c4b9" class="bulleted-list"><li style="list-style-type:disc">주소를 조정하여 프로그램의 재배치를 실행한다.</li></ul><ul id="0317002a-a090-428d-9958-783d266b7eb8" class="bulleted-list"><li style="list-style-type:disc">불필요하게 중복된 명령을 최적화환다. (x) - 명령을 최적화 하려면 명령어 최적화 기등을 이용한다</li></ul><p id="e9985aca-0aff-40ab-8e10-185a450d9d50" class=""><strong>로더는</strong> 기억장치 할당, 연결, 재배치 , 적재의 기능을 하지만 <strong>최적화 기능을 수행하는 것은 아니다</strong>.</p><p id="0086bdf6-42bb-494d-8fbf-e07d9362e51c" class="">.</p><p id="c25b140e-0fb7-45eb-8461-47e8fd3b4560" class="">
+</p><p id="092382f4-a886-4996-9e8d-369ac526b5ce" class="">35 연결 편집기(Linkage Editor) 에 대한 설명으로 옳은것</p><p id="68c85778-563b-4856-89ab-5cfacfcc37dd" class="">연결 편집기(Linkage Editor)는 언어 번역 프로그램에 의해 <strong>독립적으로 번역된 객체 모듈</strong>, 라이브러리, 또 다른 로드 <strong>모듈들을 연결</strong>하여 <strong>실행 가능한 로드 모듈을 만드는 시스템 소프트웨어</strong>이다.</p><ul id="b69a6844-c938-4b18-8b1d-7033e72601c7" class="bulleted-list"><li style="list-style-type:disc">독립적으로 번역된 객체 모듈들을 연결하여 한개의 로드 모듈을 생성하는 기능을 갖고 있다.</li></ul><p id="84b57685-5010-436e-8534-7ea3e779011e" class="">
+</p><p id="a964679d-f1e4-4365-af09-48ae013b22d5" class="">36 <strong>C언어</strong>로 작성된 <strong>원시프로그램</strong>이 <strong>목적 프로그램</strong>이 되고 그것에 수행되기까지 사용되는 <strong>시스탬 프로그램의 순서</strong></p><p id="d8ac1013-5017-48ce-b61d-1a1345796bff" class="">원시프로그램이 수행되기까지의 순서</p><p id="3c3c6b77-03b6-4589-b382-d8861f607af7" class="">원시프로그램은 <strong>번역 프로그램(컴파일러)</strong>을 통해 번역 된후 <strong>링킹을 통해 </strong>각목적 프로그램이나 <strong>로드 모듈을 연결</strong>한 다음 <strong>적재기에 의해 주기억 장치에 적재</strong>된다.</p><p id="6a799e16-4747-4a68-a512-829d3bb2ea85" class="">Compiler &gt; Linkage Editor &gt; Loader</p><p id="f3abaada-3f70-4fb7-8de8-626089998b92" class="">37</p><p id="000780a9-42d2-4e25-a805-549e9a2b6892" class=""><strong>시분할 처리 방식</strong>이란 CPU의 <strong>적체 사용시간</strong>을 <strong>작은 시간 단위</strong>로 <strong>쪼개어 </strong>각 단말기에 할당하여 그 시간량 동안만 처리하게 하는 방식으로 <strong>매우 빠르게 사용자가 교대</strong>되어 돌아오기 때문에 사용자는 마치 자기 혼자만 사용하는 것처럼 느낀다</p><p id="06cb52cb-9072-49a6-bf74-253e37510129" class="">시분할 처리 시스템의 단말장치로는 빠른 입 * 출력이 가능한 <strong>영상표시장치(모니터)</strong>가 적합하다.</p><ol type="1" id="52304035-1ffb-47ed-bb2d-1e451e4d4a94" class="numbered-list" start="38"><li><strong>입출력 장치 구동기</strong>(Device DriveR)에 관하 ㄴ설명으로 옳지 않은것</li></ol><ul id="98f66fbd-3066-4b5f-8669-5e7e50a77296" class="bulleted-list"><li style="list-style-type:disc">새로운 입 출력 장비가 개발될때마다 운영체제 내의 장치 구동기를 수정하여 작성해야 한다. (x)</li></ul><ul id="9b677cec-4629-4cfe-b1a2-02f8501d0ce8" class="bulleted-list"><li style="list-style-type:disc">입출력 장비 업체가 개발하여 공급할 수 있다.</li></ul><ul id="88546a60-574e-4fe9-a5ad-e1d34b7ae4cd" class="bulleted-list"><li style="list-style-type:disc">입출력 장비를 <strong>제어하는 </strong>일종의 <strong>제어 프로그램</strong>이다.</li></ul><ul id="1448150b-bc35-43b4-8efd-7c117e98fdaf" class="bulleted-list"><li style="list-style-type:disc">입출력을 실행하는 일종이 <strong>서브루틴</strong>이다.</li></ul><p id="0791bfd4-e0fc-4042-a12d-f05b29c25058" class="">39 </p><p id="a9f8b2d6-86a5-4dfd-870b-a9d4f2e162c2" class="">운영체제 <strong>제어프로그램</strong>과 <strong>처리프로그램</strong>으로 구성되어 있다.</p><p id="d3041fa2-d8e1-4866-a946-eadb8eb210ad" class="">자원할당측면에서 운영체제의 주된 기능은 <strong>프로세서</strong>, <strong>기억장치</strong>, <strong>입*출력 장치</strong>, <strong>파일 및 정보 </strong>등의 자원 관리 등이 있다</p><p id="174d7123-ba8e-4046-986d-2be278a9f53e" class="">운영체제는 <strong>시스템 전체의 움직임을 감시</strong>, <strong>감독 </strong>관리 및 지원하는 <strong>제어 프로그램</strong>과 주어진 문제를 <strong>응용프로그램 </strong>감독하에 <strong>실제 데이터 처리</strong>를 하는 <strong>처리 프로그램</strong>으로 구성된다.</p><p id="b6017810-581c-4e44-aaba-fa189995dd8e" class="">
+</p><p id="8eaf6b3e-9e29-48ed-9ab0-1808d6a90a10" class="">40 시분할 시스템에 대한 설명으로 틀린것</p><ul id="fe301bb3-22b4-4049-a1cc-695e35833792" class="bulleted-list"><li style="list-style-type:disc">다중 프로그래밍의 논리적 확장이다.</li></ul><ul id="969ccb3a-1b9e-4e85-b877-71db0bc0bccb" class="bulleted-list"><li style="list-style-type:disc">사용자와 시스템 간에 직접적인 통신을 제공한다</li></ul><ul id="7ac13148-6132-44aa-afc6-6ea950a0fb9e" class="bulleted-list"><li style="list-style-type:disc">동시에 많은 사용자가 컴퓨터를 공유 할 수 이싿.</li></ul><p id="9d4fa212-bd91-469e-9911-a31b48f06a80" class="">시스템의 효율을 위하여 <strong>작업량을 일정 수준 모아두었다가 한꺼번에 처리하는 것</strong>은 <strong>일괄 처리 시스템 </strong>(<span style="border-bottom:0.05em solid"><strong>Batch Processing System</strong></span>)이다. </p><p id="e07a2b51-217f-47d0-b84c-6c312df051dc" class="">
+</p><p id="32049ecb-e95e-4ffe-9e50-31f6fcae14d9" class="">
+</p><p id="78cd248d-1c80-496f-aa48-1a07ad009ae7" class="">
+</p><p id="1ac1c3c2-93ea-41b6-a42d-4b17c1b2e2de" class="">
+</p><p id="9afb1b8d-ecb0-4be3-bb04-f6788ee04179" class="">
+</p><p id="de25a4e2-3f86-45b3-9a4c-5151a5e821c0" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

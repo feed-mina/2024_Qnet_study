@@ -1,0 +1,732 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2장 데이터 모델링 및 설계</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1c353713-2383-4569-8e44-613f6c49b05d" class="page sans"><header><h1 class="page-title">2장 데이터 모델링 및 설계</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 10일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="5b14d13e-af42-4afe-845e-391efd888ac3" class=""><strong>데이터모델의 개념</strong></blockquote><ol type="1" id="e0252c31-595c-42d0-a558-3171264ecf33" class="numbered-list" start="1"><li><strong>데이터 모델의 개념</strong>으로 적절한 것</li></ol><ul id="8939a6a1-129e-466d-abbe-9253685a6289" class="bulleted-list"><li style="list-style-type:disc"><strong><span style="border-bottom:0.05em solid">현실 세계의 데이터 구조</span></strong><span style="border-bottom:0.05em solid">를 </span><strong><span style="border-bottom:0.05em solid">컴퓨터 세계와 데이터 구조로 기술하는 개념적인 도구</span></strong><span style="border-bottom:0.05em solid">이다.</span><ul id="7939e201-c016-41c3-ba30-c9deaab08f18" class="bulleted-list"><li style="list-style-type:circle">데이터 모델은 현실 세계의 정보들을 <strong>컴퓨터에 표현하기 위해 단순화, 추상화</strong>하여 <strong>채계적으로 표현한 개념적 모형</strong>이다.</li></ul></li></ul><ul id="7d7dccba-798e-4910-a6fd-81a58027b673" class="bulleted-list"><li style="list-style-type:disc">컴퓨터 세계의 데이터 구조를 현실 세계의 데이터 구조로 기술하는 개념적인 도구</li></ul><ul id="2ac5ac46-961a-482a-b122-0d2fce70cc45" class="bulleted-list"><li style="list-style-type:disc">현실 세계의 특정한 한 부분의 표현</li></ul><ul id="e7c6f51f-201e-4524-b90a-7eb0b9bbca16" class="bulleted-list"><li style="list-style-type:disc">가상 세계의 데이터 구조를 현실 세계의 데이터 구조로 기술하는 개념적인 도구</li></ul><p id="8260db70-0c59-4447-8fa6-d26e537aa0fd" class="">
+</p><ol type="1" id="5c97eb94-97d7-4077-87e9-c9906e971677" class="numbered-list" start="2"><li><strong>데이터 모델의 구성요소</strong>가 아닌것</li></ol><ul id="2d8939ad-2b83-4227-8d52-1b87014204b8" class="bulleted-list"><li style="list-style-type:disc"><strong>논리적으로 표현된 데이터 구조</strong></li></ul><ul id="693c9161-4fe2-4608-bc66-667619fc9a3f" class="bulleted-list"><li style="list-style-type:disc">구성 요소의 <strong>연산</strong></li></ul><ul id="4199fc91-dcd4-4bf7-b0ce-f216a97a220e" class="bulleted-list"><li style="list-style-type:disc">구성 요소의 <strong>제약조건</strong></li></ul><ul id="fb49c15f-8af0-4bb7-9ec5-360f2eab448a" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">물리적 저장 구조</span><ul id="4f110159-2584-43d5-be89-cfd1ce028e39" class="bulleted-list"><li style="list-style-type:circle"><strong>데이터 모델의 표현 </strong>해야 할 요소 : <strong>논리적 구조</strong>(Structure), <strong>연산</strong>(Operation), <strong>제약조건</strong>(Constraint)</li></ul></li></ul><p id="55d7e35f-f167-4edf-a1ae-d3ddd8a5f66b" class="">
+</p><ol type="1" id="7befc1be-1c22-4367-ad1f-120a43c3b601" class="numbered-list" start="3"><li>데이터베이스의 구성 요소 중 개체(Entity)에 대한 설명으로 적합하지 않은것</li></ol><ul id="737ed82c-3328-4fc2-bfff-d14468c46017" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">속성들이 가질 수 있는 모든 값들의 집합이다.</span><ul id="a2465333-bd9f-45c2-8d25-33c099eccbb0" class="bulleted-list"><li style="list-style-type:circle">└ <strong>도메인 </strong>이라고 한다. (속성들이 가질 수 있는<strong> 모든 값들의 집합</strong>)</li></ul></li></ul><ul id="3ad7154c-3719-4ea9-adba-ddcedbe0b9f5" class="bulleted-list"><li style="list-style-type:disc">데이터베이스에 표현하려고 하는 <strong>현실 세계의 대상체</strong>이다.</li></ul><ul id="daf967d6-26c6-4d09-9bbc-ab24993f750c" class="bulleted-list"><li style="list-style-type:disc"><strong>유형, 무형의 정보로서 </strong>서로 <strong>연관된 몇 개의 속성으로 구성</strong>된다.</li></ul><ul id="753bcc0d-b453-4f39-b96b-dc8c694fbd0d" class="bulleted-list"><li style="list-style-type:disc"><strong>파일의 레코드에 대응</strong>하는 것으로 <strong>어떤 정보를 제공하는 역할을 수행</strong>한다. </li></ul><p id="4054a7dd-2a76-4529-8f1d-db4c98f46859" class="">
+</p><p id="3904385d-d63f-4e0e-a393-46ea9f5e325f" class="">
+</p><ol type="1" id="50dd241f-2548-4e3e-addb-7e08322e2273" class="numbered-list" start="4"><li>What is the <strong>entity type </strong>definition correctly? 엔티티 타입을 맞게 정의 한것</li></ol><ul id="b67d6b47-461f-4877-a947-8bd448dd1608" class="bulleted-list"><li style="list-style-type:disc">a set of entities that have the same attributes 같은 속성을 갖는 개체들의 집합</li></ul><ul id="9870ac42-0054-4ee4-af17-5e3cb15fae11" class="bulleted-list"><li style="list-style-type:disc"><strong>a set of attributes </strong>that have the <strong>same entities</strong> 같은 개체를 갖는 속성들의 집합</li></ul><p id="7e43d6e1-cab4-4461-9fc4-f0262541a2f2" class="">
+</p><p id="4da1b492-b20c-43f0-8a43-f101b78faa4c" class="">
+</p><ol type="1" id="8773b349-f348-41cf-89fd-1e074e4ebd4f" class="numbered-list" start="5"><li>데이터의 <strong>가장 작은 논리적 단위로서</strong> <strong>파일 구조상의 데이터 항목 </strong>또는 <strong>데이터 필드</strong>에 해당하는것은</li></ol><ul id="97ff4162-e5f9-4518-b385-24215af2478a" class="bulleted-list"><li style="list-style-type:disc">attribute</li></ul><p id="4acc5d0e-e9ec-4205-b8ec-88ec7240689e" class="">개체와 속성의 구분을 명확하게 하기. <strong>개체는 한 개 이상의 속성</strong>으로 이루어진다. 그리고 <strong>속성</strong>은 데이터베이스 구성의 가장 작은 논리적인 단위이다.</p><p id="4501e1f9-d3e0-4510-9b71-7c964e21fc45" class="">
+</p><p id="3b4aa08a-9699-40fa-ab91-fb2c24518282" class="">
+</p><ol type="1" id="912817d9-fadd-49d9-b7c5-837d080ce983" class="numbered-list" start="6"><li>다음 설명이 의미하는 A와 B의 관계는 </li></ol><p id="da20c8a6-19ba-4c1a-b2af-9b499139a4a8" class="">An entity in an entity set A is associated with any number of entities in an entity set B. and an entity in B is associated with any number of entities in A</p><ul id="c3dbe924-67ac-4a9f-9a1d-dcd7832ec7d3" class="bulleted-list"><li style="list-style-type:disc">many to many</li></ul><p id="f8a148da-58a9-489b-bb6f-909cbefcaffe" class="">개체 집합 A속에 있는 <strong>하나의 개체</strong>는 개체 집합 B의 <strong>여러 개의 개체들과 연관</strong>되었으며 <strong>B의 한 개체가 A의 여러 개</strong>의 개체들과 연관되어 있는 관계</p><p id="3aea3a4d-c479-4f3b-b971-1fd788962116" class="">
+</p><ol type="1" id="8d67496c-f018-4e9c-b1a9-5c6fc049bfda" class="numbered-list" start="7"><li>다음 문장의 빈 칸에 적합한 용어는?</li></ol><ul id="261140ad-9186-41c4-9647-a88564f36c01" class="bulleted-list"><li style="list-style-type:disc">The basic object that the ER model represents in an _________ , which is a “thing” in the real world with an independent existence</li></ul><p id="f6950347-f2bd-42a7-b355-e1927634a5ff" class="">→ entity</p><p id="e2945509-25fa-4fe8-a196-a8e56f4ff8c4" class=""><strong>ER모델</strong>에서 표시하는 <strong>기본적인 객체</strong>로서 <strong>현실 세계</strong>에서 <strong>독립적으로 </strong>존재하는 실체  = <strong>엔티티</strong></p><p id="a50ec201-145a-48f4-a977-ea74feb23dd6" class="">
+</p><p id="b1faa7f3-be26-4d26-a5af-914ca56b034b" class="">
+</p><blockquote id="2eee5bb2-d5a1-44e0-b046-89b27b5ab3a9" class=""><strong>개체 - 관계 모델</strong></blockquote><p id="7167d08e-d874-48d8-b4ea-0ae813fd0ab4" class="">
+</p><ol type="1" id="c27cbb56-d71f-4d9f-a2e3-c1989fefeed8" class="numbered-list" start="1"><li>개체-관계 (E-R)모델에 대한 설명으로 잘못 된것은</li></ol><ul id="9aa6ddb2-c6b5-48b5-ba4e-df8e63928f59" class="bulleted-list"><li style="list-style-type:disc">E-R다이어그램ㅇ로 표현하며 P.Chen이 제안했다.</li></ul><ul id="2a22263e-889b-48f1-9a05-f9ee31177507" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">일 대일 (1:1)관계 유형만을 표현 할 수 있다.</span></li></ul><ul id="50270cdb-321f-47b3-a462-32cc983d8b60" class="bulleted-list"><li style="list-style-type:disc">개체 타입과 이들 간의 관계 타입을 이용해 현실 세계를 개념적으로 표현한 방법이다.</li></ul><ul id="5f964d6b-f91d-4731-940b-4670bf545897" class="bulleted-list"><li style="list-style-type:disc">E-R다이어그램은 E-R모델을 그래프방식으로 표현한 것이다.</li></ul><p id="7c1ed583-3a02-43ba-b373-c369ded1bfb2" class="">
+</p><p id="806fa796-f4b8-4181-8c76-51b6156ae078" class="">
+</p><p id="ca230af7-91ab-45ad-8e56-b9c002726164" class="">
+</p><ol type="1" id="7f3a146a-4dac-4513-bea2-ec295bd712cf" class="numbered-list" start="2"><li>개체-관계 모델 (E-R)에 대한 설명으로 옳지 않은것은?</li></ol><ul id="3550f775-d6e8-4971-a475-d5f2f86d2052" class="bulleted-list"><li style="list-style-type:disc">개체와 개체 간의 관계를 도식화한다.</li></ul><ul id="2104526d-ba62-4c04-a83f-d557d192a709" class="bulleted-list"><li style="list-style-type:disc">개체 집합을 사작형으로 표시한다.</li></ul><ul id="3e9e1ac0-f1cb-4e60-8b37-b8af85319866" class="bulleted-list"><li style="list-style-type:disc">관계를 다이아몬드로 표시한다.</li></ul><ul id="30c65cc9-b3f7-4bb2-9f88-8142df12905d" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">오너-맴버 (Owner-MembeR) 관계라고도 한다</span>.</li></ul><p id="0b48281a-0105-4dd9-ac17-8b8de1ee5954" class="">
+</p><p id="41179709-d1b0-4e7f-a9b2-3a5cd852b885" class="">
+</p><ol type="1" id="983ef483-e8c5-4cb8-9fc8-626ad409dc5b" class="numbered-list" start="3"><li>개체-관계(E-R)모델의 설명으로 옳지 않은 것은</li></ol><ul id="c43f8644-cf05-4762-aa3b-8ecc480b0b51" class="bulleted-list"><li style="list-style-type:disc">데이터를 인티티, 관계,속성으로 묘사한다.</li></ul><ul id="c2ad0d57-05cc-4ce1-9d28-9ae33cf457ff" class="bulleted-list"><li style="list-style-type:disc">E-R모델에서 엔티티는 실세계에서 개념적 또는 물리적으로 존재하는 실제 사용을 의미한다.</li></ul><ul id="0805a161-f489-4c3e-86f0-9e31725c866c" class="bulleted-list"><li style="list-style-type:disc">E-R 모델에서 속성은 엔티티를 묘사하는데 사용될 수 있는 특성을 의미한다.</li></ul><ul id="a59435e3-a64d-4c1c-a764-5c93d12cef0e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">E-R 모델에서 관계는 속성들에 대한 관계 표현이다.</span><ul id="f03f8661-78d6-4cc8-88f3-61510904522b" class="bulleted-list"><li style="list-style-type:circle">E-R모델에서 관계는 속성들에 관한 관계표현 아니고 개체 간의 관계 표현이다. </li></ul></li></ul><p id="e306624b-2033-4036-9c3b-afe49aef15e0" class="">
+</p><ol type="1" id="d0e76b49-7ba0-4537-8b0d-b3af4b879e41" class="numbered-list" start="4"><li>E-R 다이어그램의 구성 요소에 대한 표현이 틀리게 짝지어진것</li></ol><ul id="f9354a3d-d689-4105-b78e-7dd106421b9a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">개체 집합 -  직사각형</mark></li></ul><ul id="5f83b48c-84af-452c-8f04-ff48892923c2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">관계 집합 - 마름모꼴</mark></li></ul><ul id="4fcdd114-9497-4ac4-a3e2-acfebe3522bc" class="bulleted-list"><li style="list-style-type:disc">속성 - 원</li></ul><ul id="3edd9f46-8397-4cd2-a89a-47d8bd39db85" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">링크 - 화살표 </span><strong><span style="border-bottom:0.05em solid">(x)</span></strong><p id="be576a78-3c39-41f4-900a-90213265207a" class="">
+</p></li></ul><ol type="1" id="84a963f1-18af-4327-bee6-a9b7392ad663" class="numbered-list" start="5"><li>개체-관계 모델(E-R모델)에 대한 설명으로 옳지 않은 것은?</li></ol><ul id="bf5422c6-1e07-4dd3-a22c-0dae2ed90510" class="bulleted-list"><li style="list-style-type:disc">개체 타입과 관계 타입을 이용해서 현실 세계를 개념적으로 표현하는 방법이다.</li></ul><ul id="a7d14e45-975f-4107-bfec-c5e896b6073b" class="bulleted-list"><li style="list-style-type:disc">E-R다이어그램은 E-R모델을 그래프 방식으로 표현한 것이다.</li></ul><ul id="73456d3d-c4e7-40c2-97f9-0abf657cb34a" class="bulleted-list"><li style="list-style-type:disc">E-R 다이어그램의 다이아몬드 형태는 관계타입을 표현하며 연관된 개체 타입들을 링크로 연결한다. </li></ul><ul id="184ae650-6c5a-4f63-9cf3-7786b5c26617" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">현실 세계의 자료가 데이터베이스로 표현될 수 있는 물리적 구조를 기술하는 것이다.</span><ul id="5e63a559-aeb7-4a3c-b04f-d0bed24e6fc4" class="bulleted-list"><li style="list-style-type:circle"><strong>현실 세계</strong>의 자료가 <strong>데이터베이스로 표현될 수 있는 물리적 구조</strong>를 기술하는 것은 <strong>논리적 데이터 모델</strong>이다. </li></ul><ul id="5d3e307b-c510-4c45-b8c3-9de6322baee6" class="bulleted-list"><li style="list-style-type:circle"><strong>E-R모델</strong>은 <strong>개념적 데이터 모델</strong>이다.</li></ul></li></ul><p id="62d69bca-3114-4ac4-a385-32ce3b4dc8b9" class="">
+</p><p id="f30a18cf-f1b8-46c5-9442-4cdc66d35ce6" class="">
+</p><ol type="1" id="66154c7f-4f6d-415f-a585-3b4e4e82205e" class="numbered-list" start="6"><li><strong>P.Chen</strong>이 제안한것으로 <strong>현실 세계</strong>에<strong> 존재하는 객체들과 그들간의 관계</strong>를 사람이 이해하기 쉽게 표현한 모델은?</li></ol><ul id="ccdf47e4-357c-451d-88e1-ef5e6a7b371a" class="bulleted-list"><li style="list-style-type:disc"><strong><span style="border-bottom:0.05em solid">개체-관계 (E-R) 모델</span></strong></li></ul><ul id="b2d0c0be-0df7-4222-b731-50ecddc4dd34" class="bulleted-list"><li style="list-style-type:disc">관계 데이터 모델</li></ul><ul id="8afc5c31-2492-4374-abd5-86d55038dc2d" class="bulleted-list"><li style="list-style-type:disc">네트워크 데이터 모델</li></ul><ul id="cdb8168f-0e63-4bf1-93b3-5b9e8e5ed89e" class="bulleted-list"><li style="list-style-type:disc">계층 데이터 모델</li></ul><p id="dfdce1c0-7247-4d08-9fef-a252eb77f1d4" class="">
+</p><p id="14ed6265-c59c-4972-ba20-35d5fd918d5e" class="">
+</p><blockquote id="fb09b383-ed27-4bd5-8378-e867beed908e" class=""><strong>망(네트워크) 데이터 모델</strong></blockquote><p id="d940835d-7b64-462b-803c-48932aba9d78" class="">
+</p><ol type="1" id="41753914-83dd-436f-8507-30a22b350819" class="numbered-list" start="1"><li>데이터 모델에 관한 설명 중 옳지 않은 것은?</li></ol><ul id="2e9cc767-5c18-488f-b048-9b6c21d3a44f" class="bulleted-list"><li style="list-style-type:disc"><strong>관계 데이터 모델</strong>은 <strong>개체와 관계 모두가 테이블로 표현</strong>된다.</li></ul><ul id="a77650a4-e740-4aa3-a060-b372e6f7f9c7" class="bulleted-list"><li style="list-style-type:disc"><strong>계층 데이터베이스</strong>는 <strong>부자 관계(Parent-Child Relationship)</strong>를 나타내는 <strong>트리 형태의 자료 구조</strong>로 표현된다.</li></ul><ul id="92c372c8-8527-4690-a993-7b519d26e168" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">네트워크 데이터베이스는 오너-멤버 관계(Owner-Member Relationship)를 나타내는 트리 구조로 표현된다.</span><ul id="8b879e21-64a0-42a1-a589-e01c68315298" class="bulleted-list"><li style="list-style-type:circle"><strong>네트워크 데이터베이스</strong>는 <strong>오너-멤버 관계</strong>를 나타내지만 트리 구조가 아닌 <strong>그래프 구조</strong>이다.</li></ul></li></ul><ul id="df45df30-55e9-457a-97c0-3e8ed58a23df" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터 모델</strong>은 <strong>데이터, 데이터 관계, 데이터의 의미 </strong>및 <strong>일관성 제약 조건 </strong>등을 기술하기 위한 <strong>개념적 도구</strong>들의 모임이다. </li></ul><p id="995d4e19-788d-462f-8f9a-d6a1498a9413" class="">
+</p><ol type="1" id="17fe5dfa-cd91-4a04-b2d7-11e52aa2f2dc" class="numbered-list" start="2"><li>데이터베이스의 <strong>논리적 구조 표현</strong>을 <strong>그래프 형태</strong>로 표현하며 <strong>일대 다 (1:N) 관계</strong>에 연관된 <strong>레코드 타입</strong>들을 각각 <strong>오너(Owner), 멤버(Member)</strong>라 하고, 이들의 관계를 <strong>오너-멤버 관계</strong>라고도 일컫는 데이터 모델은?</li></ol><ul id="93250db7-c4d4-4069-8f32-46df7c6d7ad6" class="bulleted-list"><li style="list-style-type:disc">관계형 데이터 모델</li></ul><ul id="a51d846c-b5e0-4dea-a4cc-a96de77e3da6" class="bulleted-list"><li style="list-style-type:disc"><strong><span style="border-bottom:0.05em solid">네트워크 데이터 모델</span></strong></li></ul><ul id="7e3e04b7-89b0-4007-9fb7-94ef6a418709" class="bulleted-list"><li style="list-style-type:disc">계층적 데이터 모델</li></ul><ul id="ee97df2e-d39f-4f17-b7bc-59ca09645c0c" class="bulleted-list"><li style="list-style-type:disc">객체지향적 데이터 모델</li></ul><p id="7b511f82-bc33-41cc-882b-48a93e073343" class="">
+</p><ol type="1" id="ddc5a192-c558-400b-aebb-e73f8cb53479" class="numbered-list" start="3"><li><strong>상위 하나의 레코드</strong>에 대하여 <strong>하위의 레코드가 복수 대응</strong>하고 <strong>하위 하나의 레코드</strong>에 대해서 <strong>상위 레코드도 복수 대응</strong>하는 데이터베이스 구조는?</li></ol><ul id="91ca9464-5b79-41c6-948d-e56948f5b413" class="bulleted-list"><li style="list-style-type:disc"><strong>망 구조</strong><ul id="689823f1-5759-4a51-9319-e5fdda7531c5" class="bulleted-list"><li style="list-style-type:circle"><strong>상하의 개념</strong>이 있으면서 <strong>서로 복수 대응 하는 구조</strong>는 <strong>망 (네트워크) 형 구조 </strong>하나 뿐이다.</li></ul></li></ul><p id="fafd28d9-042f-42e4-8353-4173a742a33b" class="">
+</p><p id="c534540b-aa9f-4442-b5c4-846b613ea562" class="">
+</p><ol type="1" id="7e9c1d8e-6a19-4b21-a86a-bc0045c4876e" class="numbered-list" start="4"><li>논리적 데이터 모델 중 <strong>오너-멤버(Owner-Member) 관계</strong>를 가지며 <strong>CODASYL DBTG</strong>모델이라고 하는 것은? </li></ol><ul id="4f04af8f-3d34-461b-a5a9-97dcc1a0290e" class="bulleted-list"><li style="list-style-type:disc"><strong>네트워크 데이터 모델 </strong></li></ul><p id="ae1c4f7c-bbfc-4634-af22-cf9c2e07d115" class="">
+</p><p id="9d9aa957-848e-41ac-bfba-833c04e8c908" class="">
+</p><blockquote id="cc5720dd-a374-443e-b7e5-5973e03cc919" class=""><strong>데이터베이스 설계</strong></blockquote><p id="718d2f53-9540-4d84-adf5-65e4fb6efbe7" class="">
+</p><ol type="1" id="6ef8446d-9f86-4fb9-bdb8-df8db9402709" class="numbered-list" start="1"><li><mark class="highlight-yellow_background"><strong>데이터베이스 설계 순서</strong></mark>로 옳은 것은?</li></ol><ul id="d970b6c5-c382-4758-afcb-42d12d7c1c5a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>요구 조건 분석 </strong></mark><mark class="highlight-yellow_background">→ </mark><mark class="highlight-yellow_background"><strong>개념적 설계 </strong></mark><mark class="highlight-yellow_background">→ </mark><mark class="highlight-yellow_background"><strong>논리적 설계 </strong></mark><mark class="highlight-yellow_background">→ </mark><mark class="highlight-yellow_background"><strong>물리적 설계 </strong></mark><mark class="highlight-yellow_background">→ </mark><mark class="highlight-yellow_background"><strong>구현</strong></mark></li></ul><p id="18f7db32-bda6-4a9b-9f90-e5d7ff080309" class="">
+</p><ol type="1" id="6ce62ac7-3335-4f65-b557-2d5debeb3ba4" class="numbered-list" start="2"><li>데이터베이스 설계에 있어 <strong>개념 스키마 모델링</strong>과 <strong>트랜잭션 모델링</strong>을 <strong>병행적으로 수행</strong>하는 단계는?<ul id="140afa43-d68b-43b5-ba7a-f63ce45bd551" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>개념적 설계</strong></mark><ul id="0f384648-c97a-4da7-9e1c-0108258050eb" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background"><strong>개념적 설계</strong></mark>는 <strong>개념 스키마</strong>, <strong>E-R모델</strong>, <mark class="highlight-yellow_background"><strong>논리적 설계</strong></mark>는 <strong>특정 DBMS 모델 </strong>!</li></ul></li></ul></li></ol><p id="bce6d2f7-19ce-4744-b696-bce167de8a00" class="">
+</p><ol type="1" id="e72b37cf-1cbd-458e-9fc6-7cd117965960" class="numbered-list" start="3"><li>데이터베이스 설계 시 <strong>요구 분석 단계</strong>에서 나온 <strong>결과</strong>(명세)를 <strong>E-R다이어그램</strong>과 같은 <strong>DBMS에 독립적이고 고차원적인 표현 기법</strong>으로 기술하는 것을 무엇이라고 하는가?</li></ol><ul id="b6d144c2-90d1-451e-9ac7-47ef07a1537c" class="bulleted-list"><li style="list-style-type:disc">계층 데이터베이스 모델링(x)</li></ul><ul id="04ea0f86-eba7-40fe-afb2-35f1d53c0f75" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>개념 스키마 모델링 </strong></mark><ul id="ce448e89-b865-4155-908d-0f9974e635de" class="bulleted-list"><li style="list-style-type:circle"><strong>개념 스키마</strong>는 <span style="border-bottom:0.05em solid"><strong>현실 세계에 대한 인식을 추상적 개념으로 표현</strong></span>하는 과정으로 <strong>특정 DBMS와는 무관</strong>하다. 그리고 <mark class="highlight-yellow_background"><strong>E-R모델링 </strong></mark>하면 개념 설계와 연관이 있다 ! </li></ul></li></ul><p id="b873aa37-2fda-4a01-bf2c-bb59e1f5531f" class="">
+</p><p id="3b127ae1-50a5-415f-8ebf-224595d6c78b" class="">
+</p><ol type="1" id="3dd0ee0a-45d3-4c2e-9ebf-7fcbb7fc3db1" class="numbered-list" start="4"><li>데이터 베이스 설계 단계와 그 단계에서 수행되는 결과의 연결이 잘못 된것은?</li></ol><ul id="5fd84558-f0c4-43ef-959c-fce2c3a6b6e2" class="bulleted-list"><li style="list-style-type:disc"><strong>개념적 </strong>설계 단계 - <strong>트랜잭션 모델링</strong></li></ul><ul id="182843df-0893-4b84-b7e2-d6d5d2fd1120" class="bulleted-list"><li style="list-style-type:disc"><strong>물리적 </strong>설계 단계 - <strong>목표 DBMS</strong>에 맞는 <strong>물리적 구조 </strong>설계</li></ul><ul id="f65d5cb8-6011-48b1-9c86-9523515f8b57" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">논리적 설계 단계 - 목표 DBMS에 독립적인 논리 스키마 설계</span><ul id="7b677ff4-296e-4110-ab3a-b5a6f20033fd" class="bulleted-list"><li style="list-style-type:circle"><strong>논리적 </strong>설계 단계 - <strong>목표 DBMS</strong>에 맞는, 즉 <strong>독립적이지 않고 </strong><mark class="highlight-yellow_background"><strong>종속적인 논리 스키마를 설계</strong></mark>하는 단계이다.</li></ul></li></ul><ul id="1ab9fb35-fc55-4098-b771-4d0372cedf33" class="bulleted-list"><li style="list-style-type:disc"><strong>구현 단계 </strong>- <mark class="highlight-yellow_background"><strong>목표 DBMS DDL로 스키마 작성</strong></mark><mark class="highlight-yellow_background"> </mark></li></ul><p id="deb0e182-26e6-4b99-a229-288c2f6ed695" class="">
+</p><p id="a341e4de-5f47-415a-af84-de5c0cc9dd39" class="">
+</p><p id="3499a2ba-de57-4796-9f8b-e95107c56a44" class="">
+</p><p id="9eb1d444-42c3-4579-9e89-6181f97f6e35" class="">// 여기서부터 답 확인하기</p><ol type="1" id="809d013e-b782-4d80-867e-138c7e41c858" class="numbered-list" start="5"><li><strong>데이터베이스 설계 </strong>시 <strong>물리적 설계 단계</strong>에서 수행하는 사항이 아닌 것은?</li></ol><ul id="2ff1b5fd-3e14-42e9-9e11-3af60b32b03b" class="bulleted-list"><li style="list-style-type:disc"><strong>저장 레코드 양식 설계</strong></li></ul><ul id="008295ac-ee2b-413c-85f5-48755dc2c52f" class="bulleted-list"><li style="list-style-type:disc"><strong>레코드 집중</strong>의 분석 및 설계</li></ul><ul id="60399045-99a5-4473-a514-dde5ff37c833" class="bulleted-list"><li style="list-style-type:disc"><strong>접근 경로 설계</strong></li></ul><ul id="3aa7d174-b1d8-46ad-ac61-b8afa5f83200" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">목표 DBMS에 맞는 스키마 설계</span><ul id="3aae50d0-2849-496d-be5b-1bcdc57aedd0" class="bulleted-list"><li style="list-style-type:circle"><strong>저장 레코드 양식 </strong>설계, <strong>레코드 집중의 분석</strong> 및 설계, <strong>접근 경로 설계 </strong>: <mark class="highlight-yellow_background"><strong>물리적 </strong></mark>설계 단계  </li></ul><ul id="ea8ca76c-4c0e-4fa8-be24-b754bb1a098f" class="bulleted-list"><li style="list-style-type:circle"><strong>목표 DBMS에 맞는 스키마 설계 </strong>: <mark class="highlight-yellow_background"><strong>논리적 </strong></mark>설계 단계</li></ul></li></ul><p id="4ded097a-a5e9-4e13-9a77-36d12bfb8341" class="">
+</p><ol type="1" id="59f86f23-c4e2-48ef-9f87-363e7a3da096" class="numbered-list" start="6"><li>데이터베이스 <strong>물리적 설계</strong>의 옵션시 고려해야 할 사항으로 거리가 먼 것은?</li></ol><ul id="b578c032-6d84-4563-9678-938ec4083656" class="bulleted-list"><li style="list-style-type:disc"><strong>응답시간</strong></li></ul><ul id="1725599a-47dc-4d66-8fab-71bbfbb0f974" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">응용 프로그램의 양</span><ul id="64e96609-42d3-4865-b4f4-5ca01a908496" class="bulleted-list"><li style="list-style-type:circle">특정 DBMS가 제공하는 물리적 설계 옵션 선택시 고려해야 할 사항 </li></ul></li></ul><ul id="eec911eb-33d8-4d0d-adf4-af8b254dcd14" class="bulleted-list"><li style="list-style-type:disc"><strong>저장공간의 효율성</strong></li></ul><ul id="dd987fe7-7120-4eb9-8aaa-0671116b980a" class="bulleted-list"><li style="list-style-type:disc"><strong>트랜잭션의 처리도 </strong></li></ul><p id="b4633414-0bde-4bce-bffb-1282aef2dafe" class="">
+</p><p id="6ed51aa4-6111-4809-a481-292bbf62459c" class="">
+</p><ol type="1" id="caa2d823-31e0-44ad-9241-cf3b945e0f00" class="numbered-list" start="7"><li>데이터베이스 설계 과정 중 <strong>개념적 설계 단계</strong>에 대한 설명으로 틀린 것은?</li></ol><ul id="75b967c0-dd1d-437f-9fb9-c05d09faff89" class="bulleted-list"><li style="list-style-type:disc"><strong>산출물</strong>로 <strong>ER-D</strong>가 만들어진다.</li></ul><ul id="0d27d337-c4d9-490f-8f38-027b88e011ed" class="bulleted-list"><li style="list-style-type:disc"><strong>DBMS에 독립적인 개념 스키마를 설계</strong>한다.</li></ul><ul id="7c4af076-28f1-4a02-b353-0a47623feba3" class="bulleted-list"><li style="list-style-type:disc"><strong><span style="border-bottom:0.05em solid">트랜잭션 인터페이스</span></strong><span style="border-bottom:0.05em solid">를 설계한다. : </span><strong><span style="border-bottom:0.05em solid">논리적 설계</span></strong><span style="border-bottom:0.05em solid"> </span></li></ul><ul id="4a231a57-1db0-47a2-91c9-73cced62ed57" class="bulleted-list"><li style="list-style-type:disc"><strong>논리적 설계 단계의 앞 단계</strong>에서 수행된다.</li></ul><p id="8b4d54fe-d93e-446a-b44c-1e76ed034d7c" class="">
+</p><p id="5aeac39a-6ed7-472c-b45d-25e48755d442" class="">
+</p><ol type="1" id="fca331d9-a567-4687-a6ec-4b2d373142ad" class="numbered-list" start="8"><li>데이터베이스 설계 단계 중 <strong>물리적 설계</strong>에 대한 설명으로 옳지 않은것은</li></ol><ul id="c3f7e1fd-6ba7-4ab6-9af9-b9cc216561f2" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">개념적 설계 단계에서 만들어진 정보구조로부터 특정 목표 DBMS가 처리할 수 있는 스키마를 생성한다. → </span><strong><mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid">논리적 설계</span></mark></strong><ul id="8ecfc25f-ff38-467d-9d68-d0de22f27ac4" class="bulleted-list"><li style="list-style-type:circle"><strong>개념적 </strong>설계 <strong>다음에 논리적 </strong>설계, 특정 목표 DBMS가 처리할 수 있는 스키마를 생성하는 <strong>논리적 설계</strong></li></ul></li></ul><ul id="aee273c5-d304-424f-9a2c-7e87a0cfc970" class="bulleted-list"><li style="list-style-type:disc">다양한 데이터베이스 응용에 대해서 처리 성능을 얻기 위해 <strong>데이터베이스 파일의 저장 구조</strong> 및 <strong>액세스 경로</strong>를 <strong>결정한다</strong>.</li></ul><ul id="8d012d1e-a2b7-4133-8e36-2c0ce52808b8" class="bulleted-list"><li style="list-style-type:disc"><strong>물리적 저장장치</strong>에 저장할 수 있는 <strong>물리적 구조의 데이터로 변환</strong>하는 과정이다. </li></ul><ul id="7bed2d00-8120-44d3-8d00-b16fcb2692a4" class="bulleted-list"><li style="list-style-type:disc"><strong>물리적 설계</strong>에서 <strong>옵션 선택시 응답시간</strong>,<strong> 저장 공간의 효율화</strong>,<strong> 트랜잭션 처리율 </strong>등을 고려하여야 한다.</li></ul><p id="abac7163-02e2-4d5e-8fd1-b985cfe60790" class="">
+</p><ol type="1" id="da437fb6-9737-4e1c-b7d0-e91934a49211" class="numbered-list" start="9"><li>데이터베이스 설계의 <mark class="highlight-yellow_background"><strong>논리적 설계 </strong></mark>단계에서 수행하는 작업이 아닌것은</li></ol><ul id="61ef69b4-5774-4cee-bd1d-7958920504fa" class="bulleted-list"><li style="list-style-type:disc"><strong>논리적 데이터 모델로 변환</strong></li></ul><ul id="f33f4faf-3f18-4720-a71b-e78e6b151f62" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>트랜잭션 인터페이스 설계</strong></mark></li></ul><ul id="b6ff65c3-e533-4732-ba34-53f9ca6f55b3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>스키마의 평가</strong></mark><mark class="highlight-yellow_background"> </mark>및 <strong>정체</strong></li></ul><ul id="a1a19024-901c-4e5d-bda2-a2921a65872e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">트랜잭션 모델링 </span>: <mark class="highlight-yellow_background">개념적 설계 단계</mark></li></ul><p id="7075aaba-803b-4819-a992-d62788b67286" class="">
+</p><p id="0e3bb37e-7678-419c-8b3f-5c0df0f79dc8" class="">
+</p><ol type="1" id="04a833e9-ff6a-4bca-a3a2-6c5cb5745b4b" class="numbered-list" start="10"><li><strong>데이터베이스 설계 단계 중 목표 DBMS의 DDL로 스키마를 작성</strong>하여 <strong>데이터베이스에 등록</strong>하고 <strong>응용 프로그램을 위한 트랜잭션을 작성</strong>하는 단계는 ? </li></ol><ul id="bb81b03f-3a01-486d-b3ce-a05105563e10" class="bulleted-list"><li style="list-style-type:disc"><strong>구현</strong><ul id="16fbaac5-5872-47e8-aadf-826ca57ed98d" class="bulleted-list"><li style="list-style-type:circle">목표 DBMS의 DDL로 스키마를 작성하여 데이터베이스에 등록한다 : <strong>실제로 데이터베이스 파일을 생성</strong>한다 . </li></ul></li></ul><p id="1f8349ed-7546-48ec-9aaf-d5ee0a96973f" class="">
+</p><ol type="1" id="bb683fde-67a8-465d-8924-d0f6c61f5c1a" class="numbered-list" start="11"><li>데이터베이스 설계 단계 중 <mark class="highlight-yellow_background"><strong>논리적 설계 단계</strong></mark>에 해당하는것</li></ol><ul id="4baf1d12-0b90-4994-8e15-c42710d80b75" class="bulleted-list"><li style="list-style-type:disc"><strong>개념적 설계 단계</strong>에서 만들어진 <strong>정보 구조로부터 특정 목표 DBMS가 처리할 수 있는 스키마를 생성</strong>한다.<ul id="ac521c77-0a44-4d8e-8e5f-ee0648b8a3c4" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red"><span style="border-bottom:0.05em solid">개념적 설계 다음이 논리적 설계 !</span></mark></strong></li></ul></li></ul><p id="3934bc4c-0b62-4a22-b49c-8f8fb4187097" class="">
+</p><p id="54e176c3-01c9-410b-a052-05f73b5856a1" class="">
+</p><p id="a1937942-6c55-4160-98bd-dc95ee0c40cd" class="">
+</p><p id="54147131-0795-4812-abbf-32ced964bd8e" class="">
+</p><p id="dc832c47-a553-49eb-aac5-e222b660a0b1" class="">
+</p><p id="409946a7-2683-49c0-8f63-211803911b0e" class="">
+</p><p id="9377cbb7-8169-4e1c-a3e2-1314d438d6fb" class="">
+</p><p id="ed807466-f3bb-4bbf-af1f-178f2767bccb" class="">
+</p><p id="5ee8dead-911d-43f7-ad4b-4d078bc59e69" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

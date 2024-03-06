@@ -1,0 +1,1146 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>정보처리기사 : 2022년04월24일 기출문제</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="21177f08-db19-48f2-8a65-0b26962ca9b7" class="page sans"><header><h1 class="page-title">정보처리기사 : 2022년04월24일 기출문제</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td><span class="selected-value select-value-color-red">완료</span></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span></th><td>~목</td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 26일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="64ef88dd-bb87-4e75-9608-2f1ef228646b" class=""><strong>정보처리기사 : 2022년04월24일 기출문제</strong></blockquote><ol type="1" id="3dbfbe6d-33a8-47b1-89a1-3120cff731da" class="numbered-list" start="1"><li>UML 다이어그램 중 <strong>순차 다이어그램</strong>에 대한 설명으로 틀린것?</li></ol><ul id="04545e9b-bf78-4fe5-9b37-314e0bb48388" class="bulleted-list"><li style="list-style-type:disc">객체 간의 <strong>동적 상호작용</strong>을 <strong>시간개념</strong>을 중심으로 <strong>모델링</strong> 하는것이다.</li></ul><ul id="7d2719f8-e533-461d-bd02-fecde6025a6f" class="bulleted-list"><li style="list-style-type:disc">주로 <span style="border-bottom:0.05em solid">시스템의 정적 측면</span>을 모델링 하기 위해 사용한다. (x) <ul id="1e49b34c-97c2-40f8-879a-1505ff0a77ac" class="bulleted-list"><li style="list-style-type:circle"><strong>순차 다이어그램</strong>은 <strong>행위 다이어그램</strong>, 따라서 <strong>동적</strong>이다. 순차적표현</li></ul></li></ul><ul id="c093928b-d556-426f-b6ea-2c1ad12fa9f5" class="bulleted-list"><li style="list-style-type:disc">일반적으로 <strong>다이어그램의 수직방향</strong>이 <strong>시간의 흐름</strong>을 나타낸다.</li></ul><ul id="8d88028e-3eba-4112-96da-cad708c05ea9" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>회귀 메시지(self-message)</strong></span><span style="border-bottom:0.05em solid">, </span><span style="border-bottom:0.05em solid"><strong>제어 블록(statement block)</strong></span><span style="border-bottom:0.05em solid">등으로 구성된다.</span></li></ul><p id="a01cce03-7a62-4cdc-b917-0294cc1502d1" class="">
+</p><p id="010379f6-e237-4c9e-a7e8-c432fbed1251" class="">
+</p><ol type="1" id="f9b910ee-b97d-4b3c-badb-5e8fb1f7522a" class="numbered-list" start="2"><li>메시지 지향 미들웨어(Message-Oriented Middleware , MOM)에 대한 설명으로 틀린것은?</li></ol><ul id="5ef03c15-9dc3-4c5c-a65e-6da9002f7ca9" class="bulleted-list"><li style="list-style-type:disc">느리고 안정적인 응답보다는 즉각적인인 응답이 필요한 온라인 업무에 적합하다.(x)<ul id="97cb24c1-c694-4d96-9c84-b8d80cc2c2b9" class="bulleted-list"><li style="list-style-type:circle"><strong>MOM </strong>(Message Oriented Middware)은  <strong>다소 느리고 안전적인 응답</strong>을 필요로하는 경우에 많이 사용된다.</li></ul><ul id="9a3759ed-bf7b-4e61-96a9-3b3871ec85ab" class="bulleted-list"><li style="list-style-type:circle">온라인 업무 보다 <strong>이기종 분산 데이터 시스템</strong>의 동기를 위해 사용</li></ul></li></ul><ul id="b4d4a049-db7a-4390-9d46-9a9c478e9acb" class="bulleted-list"><li style="list-style-type:disc"><strong>독립적인 애플리케이션</strong>을 <strong>하나의 통합된 시스템</strong>으로 묶기 위한 역할을 한다.</li></ul><ul id="fac09531-dd07-4dae-b6fd-6785da67992c" class="bulleted-list"><li style="list-style-type:disc"><strong>송신측</strong>과 <strong>수신측</strong>의 연결 시 <strong>메시지 큐를 활용</strong>하는 방법이 있다.</li></ul><ul id="37b33208-57f7-4542-b660-8aa7d8bbea77" class="bulleted-list"><li style="list-style-type:disc">상이한 <strong>애플리케이션 간 통신</strong>을 <strong>비동기 방식</strong>으로 지원한다.<ul id="111add9b-06e6-40f2-8b08-a74303c412b1" class="bulleted-list"><li style="list-style-type:circle">메시지 기반의 비동기형 메시지를 전달하는 방식의 미들웨어이다.</li></ul></li></ul><p id="fbebc43f-d08d-499a-92fe-3ae5a6fbe037" class="">
+</p><ol type="1" id="0d0f9712-eddb-4b46-a2a8-d910d66c3ca8" class="numbered-list" start="3"><li><strong>익스트림 프로그래밍</strong>에 대한 설명으로 틀린것은?</li></ol><ul id="d71595a6-064f-47bf-b547-fc87a6272280" class="bulleted-list"><li style="list-style-type:disc">대표적인 구조적 방법론 중 하나이다. (x) <ul id="3a8849d3-cd69-46c0-8a7c-7b5bbc947b65" class="bulleted-list"><li style="list-style-type:circle">구조적 방법론이 아니다. <span style="border-bottom:0.05em solid"><strong>애자일 방법론</strong></span>이다.</li></ul></li></ul><ul id="6e3431c1-1ac0-4a54-ab0f-46d2abd8d20d" class="bulleted-list"><li style="list-style-type:disc"><strong>소규모 개발 조직</strong>이 <strong>불확실</strong>하고 <strong>변경이 많은 요구</strong>를 <strong>접하였을때 적절한 </strong>방법이다.</li></ul><ul id="d74c7b07-3cac-4571-ac0e-787088ee4295" class="bulleted-list"><li style="list-style-type:disc">익스트림 프로그램을 구동시키는 원리는 <span style="border-bottom:0.05em solid"><strong>상식적인 원리</strong></span><strong>와 경험</strong>을 최대한 끌어올리는것이다.</li></ul><ul id="44da676f-6ee3-45f0-b0e2-1d9c811dfcf1" class="bulleted-list"><li style="list-style-type:disc"><strong>구체적인 실천 방법</strong>을 정의하고 있으며 개발 문서보다는 <strong>소스코드</strong>에 <strong>중점을 둔다</strong>. </li></ul><p id="25199a6e-fe31-4219-b301-e03490e37a0f" class="">
+</p><ol type="1" id="c59b579d-55c8-4d7b-95b4-9a441afd91b1" class="numbered-list" start="4"><li><strong>유스케이스 (Use Case)</strong>의 <strong>구성 요소 </strong>간의 관계에 포함되지 않은것은</li></ol><ul id="4e6af4ad-7332-4072-8ab5-23f17efbfd34" class="bulleted-list"><li style="list-style-type:disc">연관<ul id="95976970-d133-41d5-8168-87d61a257c81" class="bulleted-list"><li style="list-style-type:circle"><strong>연관관계 </strong>(Association) : <strong>유스케이스</strong>와 <strong>액터</strong> 간의 <strong>상호작용</strong>이 있음을 표현한다.</li></ul></li></ul><ul id="2fcfba09-c9f0-4def-9a24-9de83c334962" class="bulleted-list"><li style="list-style-type:disc">확장 <ul id="cc10e845-3e9d-4734-ab93-517a9e2ef166" class="bulleted-list"><li style="list-style-type:circle"><strong>확장 관계</strong>(Extend) : <strong>확장 가능 유스케이스</strong>와 <strong>확장 대상 유스케이스 </strong>사이에 <strong>형성되는 관계</strong>이다.</li></ul></li></ul><ul id="3c9e1908-4fa9-48a6-aa92-638446c5e945" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>구체화 </strong></span>(x)</li></ul><ul id="c118a077-742d-4419-839d-a4842772d1d2" class="bulleted-list"><li style="list-style-type:disc">일반화 <ul id="89eaa08a-118c-4c2e-ac70-17bb07248135" class="bulleted-list"><li style="list-style-type:circle"><strong>일반화 관계</strong>(Generalization) : <strong>유사한 유스케이스 </strong>또는 <strong>액터</strong>를 모아 <strong>추상화한 유스케이스 </strong>또는 <strong>액터</strong>와 연결 시켜 그룹을 만들어 이해도를 높이기 위한 관계이다.</li></ul><ul id="7c925629-aab3-4c5b-9a94-5338e18c77dd" class="bulleted-list"><li style="list-style-type:circle"><strong>포함 관계</strong>(Include) : <strong>하나의 유스케이스</strong>가 <strong>다른 유스케이스의 실행을 전제로 할때 </strong>형성되는 관계이다.</li></ul></li></ul><p id="4cf019f9-d130-456b-a3ff-5755c65d6682" class="">
+</p><ol type="1" id="71620e88-bcd2-4904-a446-757b934d1986" class="numbered-list" start="5"><li>요구사항 분석에서 비기능적(Nonfunctional) 요구에 대한 설명으로 옳은 것은?</li></ol><ul id="097e9029-9c48-4bb4-9752-cb0c9ffd1826" class="bulleted-list"><li style="list-style-type:disc"><strong>시스템의 처리량(Throughput)</strong>, <strong>반응 시간 </strong>등의 <strong>성능 요구</strong>나 <strong>품질 요구</strong>는 비기능적 요구에 해당하지 않는다. → 비기능적</li></ul><ul id="fd5944a1-a02d-478c-8e27-698aee07a918" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">‘차량 대여 시스템이 제공하는 </span><span style="border-bottom:0.05em solid"><strong>모든 화면이 3초 이내에 사용자에게 보여야 한다</strong></span><span style="border-bottom:0.05em solid">’는 </span><span style="border-bottom:0.05em solid"><strong>비기능적 요구</strong></span><span style="border-bottom:0.05em solid">이다. (ㅇ)</span><ul id="fbf0e682-99b6-40cb-b244-1e958d535e16" class="bulleted-list"><li style="list-style-type:circle">차량 대여 시스템이 제공하는 모든 하면이 3초 이내에 사용자에게 보여야 한다는 <span style="border-bottom:0.05em solid"><strong>성능</strong></span>에 해당하므로 <strong>비기능적 요구사항</strong>에 해당한다.</li></ul></li></ul><ul id="01fd32ce-b83b-40aa-82a7-145d73d88eaf" class="bulleted-list"><li style="list-style-type:disc">시스템 구축과 관련된 <strong>안전</strong>, <strong>보안</strong>에 대한 요구사항들은 비기능적 요구에 해당하지 않는다.→ 비기능적</li></ul><ul id="823edb0e-3600-4366-9c68-1e457ac8636e" class="bulleted-list"><li style="list-style-type:disc">‘<span style="border-bottom:0.05em solid">금융 시스템은 조회, 인출, 입금, 송금의 기능이 있어야 한다</span>’는 비기능적 요구이다.  → <strong>기능적 ( 시스템이 실제로 어떻게 동작하는지에 대한 관점을 둔 요구사항</strong>)<ul id="34237427-f394-43f6-aa42-836e211d5235" class="bulleted-list"><li style="list-style-type:circle">비기능적 요구사항 은 시스템 구축에 대한 성능, 보안, 품질, 안정 등에 대한 성능, 보안, 품질, 안정성등으로 실제 수행에 보조적인 요구사항을 뜻한다.</li></ul></li></ul><ol type="1" id="b02a4c36-1289-46d7-a7fd-bb90ae1a7ad3" class="numbered-list" start="6"><li><strong>정보공학 방법론</strong>에서 <strong>데이터베이스 설계의 표현</strong>으로 사용하는 모델링 언어는?</li></ol><ul id="7f4acf78-8762-438c-8e32-e3560251980f" class="bulleted-list"><li style="list-style-type:disc"><strong>entity-relationship diagram</strong></li></ul><ul id="d6d65e86-8a5d-4735-b104-c481c7729b50" class="bulleted-list"><li style="list-style-type:disc"><strong>Package Diagram</strong>, <strong>State Transition Diagram</strong>, <strong>Deployment Diagram</strong>은 <strong>uml 다이어그램</strong>을 가르킨다.</li></ul><p id="ec53c49f-d3ad-4515-ac5f-ad0b2b1d0942" class="">
+</p><ol type="1" id="86137a22-5bd4-4706-84b0-c3965ff004b9" class="numbered-list" start="7"><li><strong>미들웨어</strong>에 대한 설명으로 틀린것은?</li></ol><ul id="41b2fd74-6fcd-4505-be22-40c1584365c7" class="bulleted-list"><li style="list-style-type:disc">여러 운영체제에서 응용프로그램들 사이에 위치한 소프트웨어이다.<ul id="9b164cf8-7114-4a14-b771-7a29d25a39ca" class="bulleted-list"><li style="list-style-type:circle"><strong>이기종 하드웨어</strong>, <strong>소프트웨어</strong>, <strong>네트워크</strong>, <strong>프로토콜</strong>, <strong>PC환경</strong>, <strong>운영체제 환경</strong>등에서 <span style="border-bottom:0.05em solid"><strong>시스템 간의 표준화된 연결</strong></span>을 도와주는 <strong><span style="border-bottom:0.05em solid">소프트웨어이</span></strong>다.</li></ul></li></ul><ul id="1fac9d0f-53bc-42b4-87ab-837f4d8d3813" class="bulleted-list"><li style="list-style-type:disc">미들웨어의 서비스 이용을 위해 사용자가 정보교환 방법등의 내부 동작을 쉽게 확인할 수 있어야한다. (x)<ul id="28c33d79-6664-4bc4-9529-fb4d2c0231a7" class="bulleted-list"><li style="list-style-type:circle">사용자가 미들웨어의 정보 교환 방법 등의 내부 동작을 쉽게 확인할 수 있다면 보안의 위협이 될 수 있으므로 확인 할 수 없도록 해야 한다.</li></ul><ul id="d21b1705-0cae-4162-a5db-a3c19d1c563e" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid">미들웨어는 사용자에게 초점이 맞추어져 소프트웨어 시스템에서 여러 구성 요소 간에 정보를 전달하고 상호작용하는 소프트웨어로 사용자는 내부 동작을 일일이 확인할 필요가 없다.</span></li></ul><ul id="0a2bf105-f709-496d-b171-ac4a5d3c8534" class="bulleted-list"><li style="list-style-type:circle"><strong>미들웨어 솔루션</strong>은 <strong>미들웨어의 서비스 이용</strong>을 위해 <strong>사용자가 정보 교환 방법</strong>등의 <strong>내부 동작</strong>을 <strong>확인할 필요가 없다</strong>.</li></ul></li></ul><ul id="ae4cdbdf-91d1-44d3-b4df-f9a3769d97c9" class="bulleted-list"><li style="list-style-type:disc">소프트웨어 컴포넌트를 연결하기 위한 준비된 인프라 구조를 제공한다.<ul id="f95842ec-f8e7-4070-a4ee-57ab533eb82f" class="bulleted-list"><li style="list-style-type:circle"><strong>클라이언트</strong>와 <strong>서버 </strong>간의 <strong>통신을 담당</strong>하는 <strong>시스템 소프트웨어</strong>이다.</li></ul></li></ul><ul id="7a11446e-13a4-4074-af80-e366de9abd46" class="bulleted-list"><li style="list-style-type:disc"><strong>여러 컴포넌트</strong>를 <strong>1대 1</strong>, <strong>1대 다</strong>, <strong>다 대 다</strong> 등 <strong>여러 가지 형태</strong>로 <strong>연결이 가능하다</strong>. <ul id="57478f41-c83b-4172-8abb-f8a06ec613d6" class="bulleted-list"><li style="list-style-type:circle"><strong>표준화된 인터페이스</strong>를 통하여 <strong>시스템 간의 데이터 교환</strong>에 있어 <strong>일관성을 제공</strong>한다.</li></ul></li></ul><p id="b6f21017-cb5a-4ff0-a5a9-679fd53313b5" class="">
+</p><ol type="1" id="53a46749-3b33-4ef8-aea0-d2316309aa80" class="numbered-list" start="8"><li>UI의 설계 지침으로 틀린 것은?<ul id="9bf83808-ff80-4283-9c8f-2eb9379d2bb4" class="bulleted-list"><li style="list-style-type:disc">이해하기 편하고 쉽게 사용할수 있는 환경을 제공해야 한다.<ul id="d101a292-da65-4030-9695-1b74cc7f20da" class="bulleted-list"><li style="list-style-type:circle"><strong>사용자 중심 </strong>: 사용자가 이해하기 쉽고 편하게 사용할 수 있는 환경을 제공해 실 사용자에 대한 이해가 바탕이 되어야함</li></ul></li></ul><ul id="f219c96b-b770-4545-8bb1-7d9316abbf65" class="bulleted-list"><li style="list-style-type:disc">주요 기능을 메인 화면에 노출하여 조작이 쉽도록 하여야 한다.<ul id="7ba259ac-4408-4aa0-9e3e-c4dea2bba60a" class="bulleted-list"><li style="list-style-type:circle"><strong>단순성 </strong>: 조작방법은 가장 간단하게 작동되도록 하여 인지적 부담 최소화</li></ul><ul id="3089a930-aaa5-4753-bc14-b2637d07a8aa" class="bulleted-list"><li style="list-style-type:circle"><strong>결과 예측 가능 </strong>: 작동시킬 기능만 보고도 결과 예측이 가능해야 함</li></ul><ul id="0d6a119b-d2c1-4634-8e53-1fc210e375ec" class="bulleted-list"><li style="list-style-type:circle"><strong>가시성</strong> : 주요 기능을 메인 화면에 노출하여 쉬운 조작이 가능해야함</li></ul></li></ul><ul id="351f94f5-c4e8-415e-879d-9df6469830f2" class="bulleted-list"><li style="list-style-type:disc">치명적인 오류에 대한 부정적인 사항은 사용자가 인지할수 없도록 한다. (x)<ul id="c43c636b-2b07-4274-bb7e-fc66e872c44a" class="bulleted-list"><li style="list-style-type:circle">사용자가 UI를 통해 프로그램을 사용 할 때 발견할 수 있는 치명적 오류에 대한 부정적인 사항들을 인지 할 수 있어야 프로그램의 개선이 가능하고 또 오류를 피할 수 있다. </li></ul></li></ul><ul id="57920b90-bc4e-4108-a3c8-11e4da997f70" class="bulleted-list"><li style="list-style-type:disc">사용자의 직무, 연령, 성별 등 다양한 계층을 수용하여야 한다. <ul id="2b2364bb-2ab2-4512-bb3c-e7d35ea21923" class="bulleted-list"><li style="list-style-type:circle"><strong>접근성 </strong>: 사용자의 직무, 연령, 성별 등이 고려된 다양한 계츠을 수용해야함</li></ul><ul id="4f49e315-3c4b-47f0-aa83-52f40dbf9a39" class="bulleted-list"><li style="list-style-type:circle"><strong>명확성 </strong>: 사용자가 개념적으로 쉽게 인지해야함</li></ul></li></ul></li></ol><p id="e1d815a8-30b6-4894-9226-c0b3d0a1bbe3" class="">
+</p><ol type="1" id="c3467155-5120-487b-a39d-53c5c84e4068" class="numbered-list" start="9"><li>객체지향 개념에서 다향성(Polymorphism)과 관련한 설명으로 틀린것?</li></ol><ul id="40873f1e-32ae-4afb-a403-eb354b1a3b26" class="bulleted-list"><li style="list-style-type:disc"><strong>다형성</strong>은 <strong>현재 코드를 변경하지 않고</strong> <strong>새로은 클래스를 쉽게 추가</strong>할 수 있게 한다.</li></ul><ul id="c3815f18-be8f-4345-909c-2de1146171a3" class="bulleted-list"><li style="list-style-type:disc"><strong>다형성</strong>이란 <strong>여러 가지 형태</strong>를 가지고 있다는 의미로 <strong>여러 형태를 받아들일 수 있는 특징</strong>을 말한다.</li></ul><ul id="6f7767cb-d9f2-4750-8364-f236dc73461e" class="bulleted-list"><li style="list-style-type:disc"><strong>메소드 오버라이딩</strong>(Overriding)은 <strong>상위 클래스</strong>에서 정의한 <strong>일반 메소드의 구현</strong>을 <strong>하위 클래스</strong>에서 <strong>무시하고 재정의 할 수 있다</strong>. (o)<ul id="a041606e-cdeb-4a25-bb52-a62f2e78a38e" class="bulleted-list"><li style="list-style-type:circle"><strong>상속관계</strong>에서만 발생, <strong>슈퍼클래스</strong>의 <strong>메서드</strong>를 <strong>서브클래스</strong>에서도 <strong>동일한 메서드를 재정의</strong> 하는것</li></ul></li></ul><ul id="d1709a4c-635a-4020-8597-b0c6f6d2c799" class="bulleted-list"><li style="list-style-type:disc">메소드 오버로딩(Overloading)의 경우 매개 변수 타입은 동일하지만 메소드명을 다르게함으로써 구현, 구분 할 수 있다. (x)<ul id="c3bf3f7e-ea28-4021-ba6e-0f7c1bcdc325" class="bulleted-list"><li style="list-style-type:circle"><strong>같은 이름</strong>의 <strong>메소드</strong>를 <strong>중복</strong>하여 정의하는것</li></ul><ul id="31b1e2da-c36e-4f51-90db-56ec2996b071" class="bulleted-list"><li style="list-style-type:circle"><strong>한 클래스 </strong>내에서 <strong>메서드의 이름</strong>은 <strong>동일</strong>하지만 <strong>매개변수</strong>의 <strong>수</strong>나 <strong>타입</strong>을 <strong>다르게 </strong>하여 <strong>재정의 </strong>하는것</li></ul></li></ul><p id="5027918c-0119-4ba9-9ce2-80b36274fcc0" class="">
+</p><ol type="1" id="92420359-b8ed-4f6a-a39e-6d03c24392d3" class="numbered-list" start="10"><li>소프트웨어 개발 영역을 결정하는 요소 중 다음 사항과 관계잇는것은?</li></ol><ul id="ed2a48a7-3993-4e84-9da2-120e0279afa8" class="bulleted-list"><li style="list-style-type:disc">소프트웨어에 의해 간접적으로 제어되는 장치와 소프트웨어를 실행하는 하드웨어</li></ul><ul id="82cf76e0-d244-4372-a51a-f39977f23a72" class="bulleted-list"><li style="list-style-type:disc">기존의 소프트웨어와 새로운 소프트웨어를 연결하는 소프트웨어</li></ul><ul id="6755f59c-4636-4227-b18b-fbb73d7479ef" class="bulleted-list"><li style="list-style-type:disc">순차적 연산에 의해 소프트웨어를 실행하는 절차 </li></ul><p id="58c46d75-a34d-4f03-be85-9fc1db7ea1a9" class="">정답 : <strong>인터페이스</strong>(<strong>서로 다른 두 시스템</strong>이나 <strong>소프트웨어 </strong>등을 <strong>서로 이어주는 부분 </strong>또는 <strong>접속장치</strong>를 의미)</p><p id="ccbfd909-c900-456b-acca-fff657b562e3" class="">
+</p><ol type="1" id="c2fff8d0-1ce3-4fd3-a3a5-3f50af219745" class="numbered-list" start="11"><li>객체에 대한 설명으로 틀린것은?</li></ol><ul id="44463834-05e5-46f3-b870-aebd13d6e7ec" class="bulleted-list"><li style="list-style-type:disc">객체는 상태, 동작, 고유 식별자를 가진 모든것이라 할 수 있다.</li></ul><ul id="3692c5d2-9304-4345-8c36-794639676d2a" class="bulleted-list"><li style="list-style-type:disc">객체는 공통 속성을 공유하는 클래스들의 집합이다. (x)<ul id="71804b92-054e-45ec-a65a-6d924bfbdb8a" class="bulleted-list"><li style="list-style-type:circle"><strong>클래스</strong>는 <strong>공통 속성</strong>을 공유하는 <strong>객체들의 집합</strong>이다.</li></ul><ul id="1013a094-47f5-490a-bac7-1ad74296792b" class="bulleted-list"><li style="list-style-type:circle">프로그램을 해보면 객체를 생성할때는 클래스를 정의한 후에 클래스 이름으로 객체를 생성한다. 클래스는 빵을 굽는 틀, 객체는 그 틀에서 구워지는 각각의 빵을 뜻한다.</li></ul></li></ul><ul id="e1f0ed84-af05-4549-b501-40c30b4fb34b" class="bulleted-list"><li style="list-style-type:disc">객체는 필요한 자료 구조와 이에 수행되는 함수들을 가진 하나의 독립된 존재이다.</li></ul><ul id="968bdbc3-532c-4b2f-86f0-773a7dfe0658" class="bulleted-list"><li style="list-style-type:disc">객체의 상태는 속성값에 의해 정의된다.</li></ul><p id="33a6f625-0d8c-41f2-976a-58f3645366f7" class="">
+</p><p id="b1abb00e-f3c8-471e-b673-3f5429c3d209" class="">
+</p><ol type="1" id="accb493b-482f-4754-9dee-66b3f6840f65" class="numbered-list" start="12"><li><strong>속성과 관련된 연산</strong>을 <strong>클래스 안에</strong> 묶어서 <strong>하나로 취급</strong>하는 것을 의미하는 객체지향 개념은? <strong>Encapsulation 캡슐화</strong></li></ol><ul id="4aa4c03b-944b-49e5-a987-0fa63713507c" class="bulleted-list"><li style="list-style-type:disc">캡슐화: 서로 관련성이 많은 데이터들과 연산들을 묶는다., 인캡슐 → 캡슐 안에 넣다 → <strong>클래스 안에 속성</strong>과 <strong>연산</strong>들을 <strong>묶어서 </strong>넣는다.</li></ul><ul id="c2e8c1c9-e799-4111-8be5-ff7a1c5522ce" class="bulleted-list"><li style="list-style-type:disc"><strong>연관관계 </strong>= Association = <strong>2개 이상</strong>의 사물이 <strong>서로 관련</strong>되어 있다.</li></ul><ul id="58aacd62-528f-491b-b486-1c07d217fb7e" class="bulleted-list"><li style="list-style-type:disc"><strong>상속 </strong>= <strong>Inheritance </strong>= <strong>이미 정의된 상위클래스</strong>(부모 클래스)의 <strong>모든 속성과 연산</strong>을 <strong>하위 클래스</strong>(자식클래스)가 <strong>물려받는것</strong></li></ul><ul id="7e269411-4d80-4db0-b947-e594281adbd8" class="bulleted-list"><li style="list-style-type:disc"><strong>클래스 </strong>: 하나 이상의 <strong>유사한 객체들</strong>을 묶는다.</li></ul><p id="ade039c9-431d-421e-bd66-6f23fcccaa0b" class="">
+</p><ol type="1" id="edf0ffb6-43c6-4701-b9d4-cb37ac22b89e" class="numbered-list" start="13"><li>애자일(Agile)프로세스 모델에 대한 설명으로 틀린것은?</li></ol><ul id="dc27c677-a649-46d0-89b2-063949321de4" class="bulleted-list"><li style="list-style-type:disc">변화에 대한 대응보다는 자세한 꼐획을 중심으로 소프트웨어를 개발한다. (x) <ul id="98ceebce-fab0-400f-97de-aa8709d22837" class="bulleted-list"><li style="list-style-type:circle">개발에 대한 개념적 방법론으로 개발 프로젝트 기간을 짧은 주기로 나눠 반복적인 개발을 하는 것이 특징</li></ul><ul id="11687e86-fb4a-4f02-bb1b-2c05885b07f8" class="bulleted-list"><li style="list-style-type:circle">고객 관점의 효율적이고 민첩한 변화 대응을 중시</li></ul></li></ul><ul id="714f7621-5162-49cf-9658-8f7d2b65934e" class="bulleted-list"><li style="list-style-type:disc">프로세스와 도구 중심이 아닌 개개인과의 상호소통을 통해 의견을 수렴한다.</li></ul><ul id="b2a58d93-a5fa-4f8f-bdc6-c011c47f81a9" class="bulleted-list"><li style="list-style-type:disc">협상과 계약보다는 고객과의 협력을 중시한다.</li></ul><ul id="55684ffb-4f27-4252-a2ad-7aa7ac05dd39" class="bulleted-list"><li style="list-style-type:disc">문서 중심이 아닌 실행 가능한 소프트웨어를 중시한다.<ul id="e4d0da6a-cc21-4b6e-8480-fde230efffbb" class="bulleted-list"><li style="list-style-type:circle">애자일 선언문 : 프로세스, 도구 보다는 (사람과 상호작용)을 광범위한 문서보다는 (실제 작동하는 제품)을 계약 협상보다는 (고객 협력)을 계획을 따르기보다는 (변화대응)을</li></ul></li></ul><p id="4053a351-40ee-4a77-8a2f-ee95ba7545db" class="">
+</p><ol type="1" id="73347619-1dc0-4bfd-8de6-91cf2887415c" class="numbered-list" start="14"><li><strong>명백한 역할</strong>을 가지고 <strong>독립적</strong>으로 <strong>존재할 수 있는 시스템의 부분</strong>으로 넓은 의미에서는 <strong>재사용되는 모든 단위</strong>라고 볼 수 있으며 <strong>인터페이스를 통해서만 접근 할 수 있는것</strong>은?</li></ol><ul id="ce4ca499-3aec-494f-885a-526ad7ed5dac" class="bulleted-list"><li style="list-style-type:disc">Component 컴포넌트 ( 프로그래밍에 있어 재 사용이 가능한 각각의 독립된 모듈, 특정 기능 수행을 위해 독립적으로 분리)</li></ul><p id="0d1180bf-3a86-42db-b688-6b3d49eb5e77" class="">
+</p><ol type="1" id="1966703a-5dbe-4251-b3fd-049161228bd4" class="numbered-list" start="15"><li><strong>GOF(Gang of Four) 디자인 패턴</strong>을 <strong>생성</strong>,<strong> 구조</strong>, <strong>행동</strong> 패턴의 세 그룹으로 분류할때 <strong>구조 패턴</strong>이 아닌것은? <strong>Builder패턴 </strong></li></ol><p id="cf2efe3a-2740-4317-b107-a8e718d6bec0" class=""><strong>구조패턴 </strong>= <strong>어댑터(Adapter)</strong>, <strong>브릿지</strong>(Bridege), <strong>컴포지트(composite)</strong>, <strong>데코레이터(decorator)</strong>, <strong>퍼싸트(facade)</strong>, <strong>플라이웨이트(flyweight)</strong>, <strong>프록시 </strong>(Proxy) - 구조를 통해 <strong>확장성</strong>을 추구하는 패턴</p><ul id="920fbb26-c15f-4f1c-b59a-83a182dd6dab" class="bulleted-list"><li style="list-style-type:disc"><strong>생성패턴 </strong>: <strong>객체를 생성</strong>하는 것에 대한 패턴 = <strong>추상 팩토리 패턴</strong>(abstract factory), <strong>빌더 패턴</strong>(builder), <strong>팩토리 메소드 패턴</strong>(factory method), <strong>프로토타입 패턴</strong>(prototype), <strong>싱글톤 패턴</strong>(singleton)</li></ul><ul id="e1fdcd27-d2c9-439f-acf8-10fc9bf0a797" class="bulleted-list"><li style="list-style-type:disc"><strong>행위 패턴 </strong>: <strong>행위의 변경</strong>, <strong>수정</strong> 등을 위한 패턴 , <strong>역할 사슬 패턴</strong>(<strong>책임 연쇄</strong>, chain of reposibility), <strong>커맨드 패턴</strong>(command), <strong>인터프리터 패턴</strong>(interpreter), <strong>이터레이터 패턴</strong>(반복자, iterator), <strong>미디에이터 패턴</strong>(중재자, mediator), <strong>메멘토 패턴</strong>(memento), <strong>옵저버 패턴</strong>(observer), <strong>상태 패턴</strong>(state), <strong>전략패턴</strong>(strategy), <strong>템플릿 메소드 패턴</strong>(template method), <strong>비지터 패턴</strong>(방문자, visitor)</li></ul><p id="202607fa-05f8-4f22-98f5-0d5a839e324e" class="">
+</p><ol type="1" id="650b7de0-6169-4918-a21d-8bc931e79196" class="numbered-list" start="16"><li>UI와 관련된 기본 개념 중 하나로 시스템의 상태와 사용자의 지시에 대한 효과를 보여주어 사용자가 명령에 대한 진행상황과 표시된 내용을 해석할 수 있또록 도와주는 것은? feedback (피드백) - 처리된 결과를 측정하고 목표에 도달되었는가를 검사하며 불출분한 경우 다시 입력하는 요소</li></ol><ol type="1" id="9f862023-9f33-4291-98fa-609ddaa2eb7c" class="numbered-list" start="17"><li>UI의 종류로 멀티 터치(Multi-touch), 동작 인식(Gesture Recognition) 등 사용자의 자연스러운 움직임을 인식하여 서로 주고 받는 정보를 제공하는 사용자 인터페이스를 의미하는것은 ? NUI (Natural User Interface)</li></ol><ul id="b57c5f4f-3c86-46e0-8dcb-2a774ed9723c" class="bulleted-list"><li style="list-style-type:disc">사용자 인터페이스 (UI, User Interface)의 구분 :</li></ul><p id="89faa7be-0a86-4bef-9f07-9e89940c459c" class=""><strong>CLI (Command Line Interface </strong>, <span style="border-bottom:0.05em solid">텍스트 형태 </span>인터페이스),<strong>GUI</strong>(Graphical User Interface, <strong>마우스를</strong> 선택하여 작업하는 <strong>그래픽 환경 인터페이스</strong>), <strong>NUI</strong>(<strong>Natural User Interface</strong>,<strong>사용자의 말이나 행동</strong>으로 <strong>기기 조작하는 인터페이스</strong>), <strong>VUI</strong>(Voice USer Interface, <strong>사람의 음성으로 기기 조작</strong>하는 인터페이스), <strong>OUI</strong>(<strong>Organic </strong>User Interface, <strong>모든 사물</strong>과 <strong>사용자 </strong>간의 <strong>상호작용을 </strong>위한 인터페이스)</p><p id="ad9c25f6-203a-4470-9031-b9670eb1d6a5" class="">
+</p><ol type="1" id="a15ba6a6-3926-4835-97a6-ec092bc8a5e3" class="numbered-list" start="18"><li>소프트웨어 모델링과 관련한 설명으로 틀린것은?</li></ol><ul id="3dd8ca48-834e-4860-b678-fa746dde7e8d" class="bulleted-list"><li style="list-style-type:disc">모델링 작업의 결과물은 다른 모델링 작업에 영향을 줄 수 없다. (x)<ul id="c58bd101-3154-480d-af1d-99e34132bb66" class="bulleted-list"><li style="list-style-type:circle">모델링 작업의 결과물은 다른 모델링 작업에 <strong>영향을 줄 수 있음</strong></li></ul><p id="82206802-7c31-45a8-80c8-75a2903ee660" class="">ex) <strong>유스케이스 명세</strong>로부터 <strong>필요한 요소</strong>들을 가져와 <strong>도메인 모델</strong>로 정리할 수 있다</p></li></ul><ul id="83475e63-837f-419a-b5c8-1294f04bc47d" class="bulleted-list"><li style="list-style-type:disc"><strong>구조적 방법론</strong>에서는 <strong>DFD</strong>(<strong>Data Flow Diagram</strong>), <strong>DD</strong>(<strong>Data Dictionary</strong>)등을 사용하여 요구 사항의 결과를 표현한다.</li></ul><ul id="922105f3-f65e-4f96-8415-17b8eb1748d2" class="bulleted-list"><li style="list-style-type:disc"><strong>객체 지향 방법론</strong>에서는 <strong>UML 표기법</strong>을 사용한다.</li></ul><ul id="22a9a7bc-6475-4a8e-91b3-f6056bf0d00f" class="bulleted-list"><li style="list-style-type:disc">소프트웨어 모델을 사용할 경우 개발될 소프트웨어에 대한 이해도 및 이해당사자 간의 의사소통 항상에 도움이 된다.</li></ul><p id="97d1c472-a32d-49d0-b94a-3b1afd2c1ec7" class="">
+</p><ol type="1" id="04cd7aec-e1fd-4486-9072-dc8d8742ba16" class="numbered-list" start="19"><li><strong>유스케이스 다이어그램 </strong>(use case Diagram)에 관련된 내용으로 틀린것은?</li></ol><ul id="9ebb5e6b-ddbd-44e2-9c76-f5890dd82955" class="bulleted-list"><li style="list-style-type:disc">시스템과 상호작용하는 외부시스템은 액터로 파악해서는 안된다. (x)<ul id="7308d716-6d84-483a-b1a4-5f8c41e6d5e3" class="bulleted-list"><li style="list-style-type:circle"><strong>액터</strong> : <strong>시스템</strong>과 <strong>상호작용</strong>하는 <strong>모든것 </strong>(<strong>사람</strong>, <strong>기계</strong>, <strong>외부시스템</strong>, <strong>모든 외부요소</strong>)</li></ul></li></ul><ul id="3f7eebbf-c957-4161-8c6c-a98f0f86d658" class="bulleted-list"><li style="list-style-type:disc"><strong>유스케이스</strong>는 <strong>사용자 측면</strong>에서의 <strong>요구사항</strong>으로 사용자가 원하는 목표를 달성하기 위해 수행할 내용을 기술한다.</li></ul><ul id="911f5e3b-fc84-4ebf-bd4c-b336a18f875f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>시스템 액터</strong></mark>는 <strong>다른 프로젝트</strong>에서 <strong><span style="border-bottom:0.05em solid">이미 개발되어 사용되고 있으며</span></strong> 본 시스템과 <mark class="highlight-yellow_background"><strong>데이터를 주고 받는 서로 연동되는 시스템</strong></mark>을 말한다. ?</li></ul><ul id="38fa72f5-fe46-4285-a21b-40744dbbc899" class="bulleted-list"><li style="list-style-type:disc">액터가 <strong>인식 할 수 없는 시스템 내부의 기능</strong>을<strong> 하나의 유스케이스로 파악해서는 안된다. </strong></li></ul><p id="eb4923dd-b4d4-4ec0-b935-959c5744441e" class="">
+</p><p id="2846e909-1932-4d9d-9742-5d980bafbde1" class="">
+</p><ol type="1" id="cde603a5-2208-441c-9551-66716e26a49f" class="numbered-list" start="20"><li>소프트웨어 아키텍처 모델 중 MVC(Model-View-Controller)와 관련한 설명으로 틀린것은?</li></ol><ul id="1e6e9ce6-cca0-4a7b-92f0-d44ab39e5cd7" class="bulleted-list"><li style="list-style-type:disc"><strong>MVC 모델</strong>은 <strong>사용자 인터페이스를 담당</strong>하는 <strong>계층의 응집도</strong>를 <strong>높일 수 있</strong>꼬 <mark class="highlight-yellow_background"><strong>여러 개의 다른 UI</strong></mark>를 만들어 <mark class="highlight-yellow_background"><strong><span style="border-bottom:0.05em solid">그 사이에 결합도를 낮출 수 있다</span></strong></mark>. <ul id="6b053cf8-2533-4d41-a2d0-5d3d75ce19e6" class="bulleted-list"><li style="list-style-type:circle">한개의 모델에 대해 여러 개의 뷰를 만들 수 있다.</li></ul></li></ul><ul id="d8992b2c-2414-4386-96f7-96db62868b50" class="bulleted-list"><li style="list-style-type:disc"><strong>모델</strong>(Model)은 뷰(View)와 제어(Controller)사이에서<strong> 전달자 역할</strong>을 하며 뷰마다 모델 서브시스템이 각각 하나씩 연결된다. (x)<ul id="0438c3b0-1091-4c90-ad24-da0c4d2df0e7" class="bulleted-list"><li style="list-style-type:circle"><strong>전달자 역할</strong>은 모델이 아닌<strong> 제어(Controller)이다. </strong></li></ul><ul id="343bd7e2-b24e-4920-a73f-a21e79594b12" class="bulleted-list"><li style="list-style-type:circle"><strong>모델</strong>은 <strong>서브시스템</strong>의 <strong>핵심기능</strong>과 <strong>데이터</strong>를 <strong>보관</strong>하며 <strong>MVC패턴</strong>에서는 <strong>여러 개의 뷰를 만들 수</strong> 있으므로 <strong>한개의 모델에 대해 여러개의 뷰를 필요로 하는 </strong><mark class="highlight-yellow_background"><strong>대화형 어플리케이션</strong></mark>에 적합하다. </li></ul></li></ul><ul id="185aa2f3-c28c-4b48-a575-570fa94ae272" class="bulleted-list"><li style="list-style-type:disc"><strong>뷰</strong>(View)는 <strong>모델(</strong>Model)에 있는 <strong>데이터</strong>를 <strong>사용자 인터페이스</strong>에 보이는 역할을 담당한다.</li></ul><ul id="bf7174cf-73c6-4015-b644-c5f94bff8f7f" class="bulleted-list"><li style="list-style-type:disc"><strong>제어</strong>(Controller)는 <strong>모델</strong>(Model)에 <strong>명령을 보냄</strong>으로써 <span style="border-bottom:0.05em solid"><strong>모델의 상태를 변경</strong></span>할 수 있다. </li></ul><p id="e023e7dd-6762-4725-a6a6-ee1bd76d8d10" class="">
+</p><ol type="1" id="43785093-805f-4f48-9582-e254e9fe896c" class="numbered-list" start="21"><li><strong>통합 테스트</strong>와 관련한 설명으로 <strong>틀린것</strong>은?</li></ol><ul id="f26c486c-4e0f-4578-b685-368b05f84e6c" class="bulleted-list"><li style="list-style-type:disc">시스템을 구성하는 <strong>모듈의 인터페이스</strong>와 <strong>결합</strong>을 <strong>테스트</strong>하는것이다.</li></ul><ul id="80b9e9dd-6f5c-42b6-9fde-a81fa08d3d13" class="bulleted-list"><li style="list-style-type:disc">하향식 통합 테스트의 경우 <strong>넓이 우선 방식</strong>으로 테스트를 할 모듈을 선택할 수 있다. <ul id="78ea9d7c-50bb-48f4-bb6d-1fbf816971dd" class="bulleted-list"><li style="list-style-type:circle"><strong>하향식 </strong>통합 테스트<strong>(Top Down </strong>Intergration Test) : <strong>상위 모듈</strong>에서 <strong>하위 모듈</strong> 방향으로 통합, <strong>깊이 우선 통합법</strong>, <strong>넓이 우선 통합법 </strong>사용, <strong>초기부터 사용자에게 시스템 구조를 보여줌</strong></li></ul></li></ul><ul id="2522c9b9-b525-49f6-8292-8e0bc9c2fad7" class="bulleted-list"><li style="list-style-type:disc">상향식 통합 테스트의 경우 시스템 구조도 최상위에 있는 모듈을 먼저 구현하고 테스트한다. (x)<ul id="1fb76ed8-26e1-40d8-9ae5-e85287c80e09" class="bulleted-list"><li style="list-style-type:circle"><strong>상향식 </strong>통합 테스트 (<strong>Bottom Up</strong> Intergration Test) : <strong>프로그램</strong>의 <strong>하위모듈</strong>에서 <strong>상위 모듈</strong> 방향으로 통합, <strong>하나의 주요 제어 모듈</strong>과 <strong>관련된 종속 모듈</strong>의 그룹인 <strong>클러스터(Clustor) 필요</strong> </li></ul></li></ul><ul id="104b623f-e01a-40a8-960b-6bcc495f6aa7" class="bulleted-list"><li style="list-style-type:disc">모듈 간의 인터페이스와 시스템의 동작이 정상적으로 잘 되고 있는지를 <strong>빨리 파악하고자 할때 </strong>상향식 보다는 <strong>하향식 통합 테스트를 사용</strong>하는 것이 좋다.  ㅇ </li></ul><p id="1e6bc1fb-42ba-4e58-ac6d-26177bbf59af" class="">
+</p><p id="72773421-3110-484f-902f-30bc2dda1895" class="">
+</p><ol type="1" id="898229c3-1dfc-4161-aebf-6b636657086f" class="numbered-list" start="22"><li> 이진 검색 방법으로 14를 찾을 경우 비교되는 횟수는 ? 3</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2b51091f-256e-4814-b00f-253a9fd82cd5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">1 2 3 4 5 6 7 7 9 10 11 12 13 14 15</code></pre><p id="5debfe4b-85e0-481d-8fea-f99ec1acd2bc" class="">이진 탐색 동작 방식 : 1) 배열의 중간 값을 찾음 2) 중간값과 검색 값을 비교 2-1) 중간 값이 검색 값과 같으면 끝 2-2) 중간값보다 검색값이 크다면 오른쪽 구색을 탐색 2-3) 중간값보다 검색값이 작다면 왼쪽 구색을 탐색 3) 값을 찾거나 간격이 비었을때 까지 반복</p><p id="ad358eb2-3d12-4e8d-839b-adb6f8b4c367" class="">
+</p><p id="cd82b027-91fe-4d09-8b91-d7537feb64f6" class="">이진검색 (Binary Search) : low, middle, high 값을 사용, 찾고자 하는 데이터를 중앙에 위치한 중간값과 비교하는 방법, 데이터 목록은 반드시 사전에 오름차순으로 정렬되어있어야한다<strong>.(전제조건)</strong></p><p id="2c15f3fc-3572-4e0b-879a-8c5e89519f97" class="">
+</p><ol type="1" id="9c21f3ef-dd09-45d8-8dc3-dc4cf3bc62f8" class="numbered-list" start="23"><li>소프트웨어 공학에서 <strong>워크스루 </strong>(<strong>Walrkthrough</strong>)에 대한 설명으로 틀린것?</li></ol><ul id="925575a2-e9d6-455e-84e6-615d1450deed" class="bulleted-list"><li style="list-style-type:disc"><strong>사용사례를 확장</strong>하여 <strong>명세</strong>하거나 <strong>설계 다이어그램</strong>, <strong>원시코드</strong>, <strong>테스트 케이스 </strong>등에 적용 할 수 있다.</li></ul><ul id="a3d621bc-18db-451f-863a-20c31f483d6b" class="bulleted-list"><li style="list-style-type:disc"><strong>복잡한 알고리즘 </strong>또는 <strong>반복</strong>, <strong>실시간 동작</strong>, <strong>병행 처리</strong>와 같은 <strong>기능이나 동작을 이해</strong>하려고 할때 유용하다.</li></ul><ul id="b42f2d5d-94d5-44ac-9e7c-3ef2aee094dc" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>인스펙션</strong></span>과 동일한 의미를 가진다.(X)<ul id="e90eb6cb-8640-441b-baec-668ac6ceed77" class="bulleted-list"><li style="list-style-type:circle">인스펙션 : 요구사항을 명세서 작성자를 제외한 다른 검토 전문가들이 요구사항 명세서를 확인하면서 결함을 발견</li></ul></li></ul><ul id="56971c37-9651-47a9-90b5-48f0c2026de1" class="bulleted-list"><li style="list-style-type:disc"><strong>단순한 테스트 케이스</strong>를 이용하여 <strong>프로덕트를 수작업으로 수행</strong>해보는것이다. ( O)<ul id="99ee18a9-be10-4bef-a5b7-1fbb899f323e" class="bulleted-list"><li style="list-style-type:circle">워크스루 : 요구사항 명세서 작성자를 포함하여 사전 검토한 후에 짧은 검토회의를 통해 결함을 발견</li></ul></li></ul><p id="e5c043f9-a7ed-4524-871d-5a93086ecd54" class="">
+</p><ol type="1" id="f6284e51-b458-469e-a155-3692f000a3ef" class="numbered-list" start="24"><li>소프트웨어의 개발 과정에서 소프트웨어의 변경사항을 관리하기 위해 개발된 일련의 활동을 뜻하는것은? 형상관리</li></ol><ul id="1d9e2481-b2f5-40d3-954c-6631f3c8bd05" class="bulleted-list"><li style="list-style-type:disc">복호화 - 디코딩, 즉 부호화된 데이터를 부호화되기 전 형태로 바꾸어 사람이 읽을 수 있는 형태로 되돌려 놓는것</li></ul><ul id="c1e8c0b2-9fff-4e49-82fc-785b8ef38c08" class="bulleted-list"><li style="list-style-type:disc"><strong>크랙</strong> - 소프트웨어를 수정하여 소프트웨어를 크랙하는 사람이 원하지 않는 기능들, 보통은 <strong>수정방식 </strong>( 복사 보호, 소프트웨어 조작 보호<strong>)을 비활성화 하거나 제거하는일</strong> </li></ul><p id="32c3f0ea-8e8a-432b-95aa-c21694fd002d" class="">
+</p><ol type="1" id="1610d0ec-c17e-4b22-8b80-186d09b90b4a" class="numbered-list" start="25"><li>테스트케이스와 관련한 설명으로 틀린것</li></ol><ul id="f2b6d3a8-7dd0-4f9b-9bc4-0af8070ff7ef" class="bulleted-list"><li style="list-style-type:disc">테스트의 목표 및 테스트 방법을 결정 하기 전에 테스트 케이스를 작성해야 한다. (x)<ul id="5b17d1cf-2aa1-435a-8e68-b450f8733893" class="bulleted-list"><li style="list-style-type:circle">구현된 소프트웨어가 사용자의 요구사항을 정확하게 준수했는지를 확인하기위해 설계뙨 입력값, 실행조건, 기대결과 등으로 구성된 테스트 항목에 대한 명세서를 의미한다.</li></ul><ul id="5054d73f-f4ae-44a1-aa3d-da7400358250" class="bulleted-list"><li style="list-style-type:circle">따라서 테스트의 목표 및 테스트 방법을 결정하고 테스트 케이스를 작성해야 한다.</li></ul></li></ul><ul id="c4fca0c1-d50b-476c-b1e5-8f445d679d25" class="bulleted-list"><li style="list-style-type:disc">프로그램에 결함이 있더라도 입력에 대한 정상적인 결과를 낼 수 있기 때문에 <strong>결함을 검사 할 수 있는 테스트 케이스를 찾는것이 중요</strong>하다</li></ul><ul id="db84920d-da74-4fad-9326-87bd3914a33c" class="bulleted-list"><li style="list-style-type:disc">개발된 서비스가 <strong>정의된 요구사항을 준수 하는지 </strong>확인하기 위한 <strong>입력값과 실행조건</strong>, <strong>예상결과의 집합</strong>으로 볼 수 있다.</li></ul><ul id="d8905788-3d9d-40ab-8314-c06129980627" class="bulleted-list"><li style="list-style-type:disc"><strong>테스트 케이스 실행</strong>이 통과되었는지 실패하였는지 판단하기 위한 <strong>기준을 </strong><strong><span style="border-bottom:0.05em solid">테스트 오라클</span></strong>이라고 한다. </li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="85677b89-d541-489d-bb80-a7324b14ae15" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">26. 객체지향 개념을 활용한 소프트웨어 구현과 관련한 설명 중 틀린것은 ?
+* 객체(Object)란 필요한 자료 구조와 수행되는 함수들을 가진 하나의 독립된 존재이다.
+* JAVA에서 정보은닉(Information Hiding)을 표기할때 private의 의미는 공개이다. (x)
+	* JAVA에서 정보은닉(InformationHiding)을 표기할때 private의 의미는 외부에서 클래스 내부 정보에 접근하지 못하도록 하는 &#x27; 접근금지 &#x27; 이다.
+* 상속 (Inheritance)은 개별 클래스를 상속 관계로 묶음으로써 클래스 간의 체계화된 전체 구조를 파악하기 쉽다는 장점이 있다.
+* 같은 클래스에 속하는 개개의 객체이자 하나의 클래스에서 생성된 객체를 인스턴스 ( Instance ) 라고 한다.
+
+27. DRM ( Digital Rights Management ) 과 관련한 설명으로 틀린것은
+* 디지털 콘텐츠와 디바이스의 사용을 제한하기 위해 하드웨어 제조업자, 저작권자, 출판업자 등이 사용할 수 있는 접근 제어 기술을 의미한다.
+* 디지털 미디어의 생명주기 동안 발생하는 사용 권한 권리, 과금, 유통 단계를 관리하는 기술로도 볼 수 있다.
+*클리어링 하우스 ( Clearing House ) 는 사용자에게 콘텐츠 라이센스를 발급하고 권한을 부여해주는 시스템을 의미한다.
+* 원본을 안전하게 유통하기 위한 전자적 보안은 고려하지 않기 때문에 불법 유통과 복제의 방지는 불가능하다. (x)
+	* 디지털 콘텐트의 지적재산권 보호, 관리기능 및 안전한 유통과 배포를 보장하는 솔루션이다.
+	* 디지털 콘텐츠의 지적재산권을 보호하는 권한통제기술 , 사용권한제어 기술, 패키징 기술, 라이선스 관리를 포함한 유통체제이다.
+	* 디지털 콘텐츠와 디바이스의 사용을 제한하기위해 하드웨어 제조업자, 저작권자, 출판업자 등이 사용할 수 있는 접근제어기술 을 의미한다.
+	
+	
+28. 위험모니터링 의 의미로 옳은것
+* 위험을 이해하는 것
+* 첫번째 조치로 위험을 피할 수 있도록 하는것
+* 위험 발생 후 즉시 조치하는 것
+* 위험 요소 징후들에 대하여 계속적으로 인지하는것 (ㅇ)
+	* 위험모니터링 ( monitoring) 의 의미는 위험 요소 징후들에 대하여 계속적으로 인지하는것이다 
+	
+	
+29. 동시에 소스를 수정하는것을 방지하며 다른 방향으로 진행된 개발 결과를 합치거나 변경 내용을 추적할 수 있는 소프트웨어 버전 관리 도구는 ? RCS ( Revision Control System )
+
+* RCS (Revision Control System)은 다수의 사용자가 동시에 소스 파일의 수정을 할 수 없도록 파일 잠금 방식으로 버전을 관리하는 도구이다. 다른 방향으로 진행된 개발 결과를 합치거나 변경 내용을 추적할 수 있다.
+
+CVS 와 차이점은 소스파일의 수정을 한 사람만으로 제한한다.
+
+* RPC ( Remote Procedure Call)
+별도의 원격 제어를 위한 코딩 없이 다른 주소 공간에서 리모트의 함수나 프로시저를 실행 할 수 있게 해주는 프로세스간 통신
+
+* RTS ( Reliable Transfer Service)
+
+30. 화이트박스 테스트와 관련한 설명으로 틀린것은
+* 화이트박스 테스트의 이해를 위해 논리흐름도 (Logic - Flow Diagram)를 이용할 수 있다. 
+* 테스트 데이터를 이용해 실제 프로그램을 실행함으로써 오류를 찾는 동적 테스트 ( Dynatic Test) 에 해당한다.
+* 프로그램의 구조를 고려하지 않기 때문에 테스트 케이스는 프로그램 또는 모듈의 요구나 명세를 기초로 결정한다. (X)
+	* 블랙박스 테스트 = 프로그램 구조를 고려하지 않는다.
+* 테스트 데이터를 선택하기 위하여 검증기준 (Test Coverage)를 정한다.
+
+31. 알고리즘과 관련한 설명으로 틀린것은 ?
+* 주어진 작업을 수행하는 컴퓨터 명령어를 순서대로 나열한 것으로 볼 수 있다.
+* 검색 ( Searching)은 정렬이 되지 않은 데이터 혹은 정렬이 된 데이터 중에서 키 값에 해당되는 데이터를 찾는 알고리즘이다.
+* 정렬( Sorting )은 흩어져 있는 데이터를 키 값을 이용하여 순서대로 열거하는 알고리즘이다.
+* 선형 검색은 검색을 수행하기 전에 반드시 데이터의 집합이 정렬되어 있어야 한다.(x) 
+	* 선형검색 은 처음부터 끝까지 하니씩 순서대로 비교하며 원하는 값을 찾아내는 검색이다.
+	* 이진검색 은 검색을 수행하기 전에 데이터의 집합이 정렬되어 있어야 한다.
+	
+	
+	
+32. 버블정렬을 이용하여 다음 자료를 오른차순으로 정렬할 경우 PASS 1의 결과는 ?
+
+9 , 6 ,7 ,3 ,5
+
+* 버블정렬 은 첫위치부터 시작해서 오른쪽값과 비교 
+PASS 1 첫 버블정렬이 끝난 상태 
+96 비교 -&gt; 69735 -&gt; 67935 -&gt; 93비교 -&gt; 67395 -&gt; 95비교 -&gt; 67359 
+
+33. 다음은 인스펙션 ( Inspection ) 과정을 표현한 것이다. 
+
+계획 -&gt; (가) -&gt; (나) -&gt;  (다)   
+↑						|	
+|						↓
+└ -------------------- (라) -&gt;  (마)
+
+가 - 사전교육
+나 - 준비
+다 - 인스펙션회의
+라 - 수정 
+마 - 후속조치 
+
+34. 소프트웨어를 보다 쉽게 이해할 수 있고 적은 비용으로 수정할 수 있도록 겉으로 보이는 동작의 변화 없이 내부 구조를 변경하는 것은? Refactoring (코드의 구조 재조정)
+Architecting - 설계관련
+Specification - 명세서
+Renewal - 유지보수 
+* 유지보수 와 리팩토링 은 다른 개념이다.
+
+35. 단위테스트 ( Unit Test) 와 관련한 설명으로 틀린것은
+* 구현단계에서 각 모듈의 개발을 완료한 후 개발자가 명세서의 내용대로 정확히 구현되었는지 테스트한다.
+* 모듈 내부의 구조를 구체적으로 볼 수 있는 구조적 테스트를 주로 시행한다.
+* 필요데이터를 인자를 통해 넘겨주고 테스트 완료 후 그 결과값을 받는 역할을 하는 가상의 모듈을 테스트 스텁(stub)이라고 한다. (x)
+	* 필요데이터를 인자를 통해 넘겨주고 테스트 완료 후 그 결과값을 받는 역할을 하는 가상의 모듈을 테스트드라이버 ( test driver)라고 한다. 반대로 테스트 스텁(test stub)은 인자를 통해 받은 값을 가지고 수행한 후 그 결과를 테스트할 모듈에 넘겨주는 역할을 한다.
+* 테스트할 모듈을 호출하는 모듈도 있고 테스트할 모듈이 호출하는 모듈도 있다.
+
+36. IDE ( Intergrated Development Environment ) 도구의 각 기능에 대한 설명으로 틀린것은
+* Coding = 프로그래밍 언어를 가지고 컴퓨터 프로그래밍을 작성할 수 있는 환경을 제공 
+* Complie - 저급언어의 프로그램을 고급언어 프로그램으로 변환하는 기능 (x)
+	* 주어진 언어로 작성된 컴퓨터 프로그램을 다른 언어의 동등한 프로그램으로 변환하는 기능 
+	컴파일은 고급언어 (사람이 인식하는 언어)에서 저급언어 (기계어) 로 바꾸는 변환하는 기능 
+* Debugging - 프로그램에서 발견되는 버그를 찾아 수정할 수 있는 기능
+* Deployment - 소프트웨어를 최종 사용자에게 전달하기 위한 기능 ( O)
+
+
+37. 아래 Tree 구조에 대하여 후위 순회 (Postorder) 한 결과는 ?
+d-&gt;b&gt;g-&gt;h-&gt;e-&gt;f-&gt;c-&gt;a
+
+전위 운행 ( preOrder ) =&gt; Root , Left , Right 순서 
+중위 운행 (InOrder) =&gt; Left , Root ,Right 순서 
+후위 운행 (PostOrder ) =&gt; Left, Right, Root 순서 
+
+pre_order (전위순회) : 뿌리 먼저 방문
+In_order (중위순회): 왼쪽 하위 노드 방문 후 뿌리 방문
+post_order (후위순회) : 하위 노드 모두 방문 후 뿌리 방문
+
+
+38. 인터페이스 구현시 사용하는 기술로 속성 - 값 쌍 (Attribute-Value Pairs)으로 이루어진 데이터 오브젝트를 전달하기 위해 사용하는 개방형 표준 포맷은? JSON 
+
+* JSON (JavaScript Object Notation) : 속성 - 값 쌍으로 이루어진 데이터 오브젝트를 전달하기 위해 사용하는 개방형 표준 포맷이다. AJAX(Asynchronous Javascript and XML)에서 많이 사용되고 XML을 대체하는 주요 데이터 포맷이다. 언어 독립형 데이터 포맷으로 다양한 프로그래밍 언어에서 사용되고 있다.
+
+39. 순서가 있는 리스트에서 데이터의 삽입(Push), 삭제(POP)가 한 쪽끝에서 일어나며 LIFO (Last - In -First - Out )의 특징을 가지는 자료구조는 ? Stack 
+* Stack = LIFO , 한쪽 끝에서 일어남
+* Queue = FIFO , 양방향에서 일어남
+* Tree &amp; Graph 은 비선형구조
+
+
+40. 다음 중 단위테스트 도구로 사용될 수 없는것은? lgpUnit(존재x)
+
+cppUnit - C++ 프로그래밍 언어용 단위테스트도구
+JUnit - 자바 프로그래밍 언어용 단위테스트도구
+HttpUnit - 웹 브라우저 없이 웹사이트 테스트를 수행하는데 사용되는 오픈소스 소프트웨어 테스트프레임워크 
+
+
+</code></pre><p id="dc125f0d-2f81-4cf9-a34c-58a849b30012" class="">
+</p><blockquote id="c2264c30-96e1-4cd6-8f6e-d47c1ae0789b" class=""><strong>데이터베이스 구축</strong></blockquote><p id="becf7803-6da4-4409-8340-6d5196f2c25f" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2f90ee00-013e-43db-b9ea-b15d6e2e51de" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">41. 다음 조건을 모두 만족하는 정규형은?
+테이블 R에 속한 모든 도메인이 원자값만으로 구성되어 있다.
+테이블 R에서 키가 아닌 모든 필드가 키에 대해 함수적으로 종속되며 키의 부분 집합이 결정자가 되는 부분 종속이 존재하지 않는다. 
+테이블 R에 존재하는 모든 함수적 종속에서 결정자가 후보키이다.
+*결정자 라는 키워드 가 있어 BCNF 
+정규형과정 [도부이결다조]
+1NF : 모든 &lt;도&gt;메인이 원자값만으로 구성 
+2NF : 기본키가 아닌 속성이 기본키에 대한 완전 함수적 종속을 만족 &lt;부&gt;분적 함수종속을 제거한 정규형 
+3NF : 기본키가 아닌 모든 속성이 기본키에 대해 &lt;이&gt;행적 함수종속 관계를 만족하지 않는 정규형 
+BCNF : 모든 &lt;결&gt;정자가 후보키인 정규형, 종속성 보존 X 
+4NF : &lt;다&gt;치 종속이 성립하는 경우 R의 모든 속성이 A에 함수적 종속관계 를 만족 
+5NF : 모든 &lt;조&gt;인 종속이 R의 후보키를 통해서만 성립되는 정규형 
+
+42. 데이터베이스의 트랜잭션 성질들 중에서 다음 설명에 해당하는 것은 ? Atmoicity (원자성) 
+트랜잭션의 모든 연산들이 정상적으로 수행완료 되거나 아니면 전혀 어떠한 연산도 수행되지 않은 원래 상태가 되도록 해야 한다.
+
+
+* 원자성 ( Atmoicity ) :완전하게 수행완료 되지 않으면 전혀 수행되지 않아야함
+* 일관성 ( Consistency ) : 시스템의 고종 요소는 트랜잭션 수행 전후에 같아야 함 
+* 격리성 ( Isonlation, 고립성) : 트랜잭션 실행 시 다른 트랜잭션의 간섭을 받지 않아야함 
+* 영속성 ( Durability, 지속성) : 트랜잭션의 완료 결과가 데이터베이스에 영구히 기억됨 
+
+43. 분산 데이터베이스 시스템과 관련한 설명으로 틀린것은
+* 물리적으로 분산된 데이터베이스 시스템을 논리적으로 하나의 데이터베이스 시스템처럼 사용할 수 있도록 한것이다.
+	* 병행 투명성 (Concurrency Transparency): 다중 사용자들이 자원들을 자동으로 고유할 수 있다.
+* 물리적으로 분산되어 지역별로 필요한 데이터를 처리할 수 있는 지역 컴퓨터 (Local Computer) 를 분산 처리기 (Distributed Processor)라고 한다. 
+	* 중복(복제) 투명성 ( Replication Transparency ) : 사용자에게 통지할 필요없이 시스템 안에 파일들과 자원들의 부가적인 복사를 자유롭게 할 수 있다. 
+* 분산 데이터베이스 시스템을 위한 통신 네트워크 구조가 데이터 통신에 영향을 주므로 효율적으로 설계해야 한다. 
+	* 장애 투명성 (Failure Transparency): 사용자들은 어느 위치의 시스템에 장애가 발생했는지 알 필요가 없다. 
+* 데이터베이스가 분산되어 있음을 사용자가 인식할 수 있도록 분산 투명성 (Distribution Transparency)를 배제해야 한다. (x) : 위치 투명성 (Location Transparency) 하드웨어와 소프트웨어의 물리적 위치를 사용자가 알 필요가 없다. 
+
+44. 다음 테이블을 보고 강남지점의 판매량이 많은 제품부터 출력되도록 할때 다음 중 가장 적절한 SQL구문은? (단, 출력은 제품명과 판매량이 출력되도록 한다.)
+
+SELECT 제품명, 판매량 FROM 푸드 
+WHERE 지점명 = &#x27;강남지점&#x27;
+ORDER BY 판매량 DESC; 
+
+45. 데이터베이스의 인덱스와 관련한 설명으로 틀린것은 
+1. 문헌의 색인, 사전과 같이 데이터를 쉽고 빠르게 찾을 수 있도록 만든 데이터 구조이다.
+2. 테이블에 붙여진 색인으로 데이터 검색 시 처리속도 향상에 도움이 된다. 
+	* 데이터베이스 성능에 많은 영향을 주는 DBMS 의 구성요소로 테이블과 클러스터에 연관되어 독립적인 저장공간을 보유하며 데이터베이스에 저장된 자료를 더욱 빠르게 조회하기 위하여 별도로 구성한 순서 데이터를 말한다.
+3. 인덱스의 추가, 삭제 명령어는 각각 ADD, DELETE이다.(x)
+	* 인덱스 생성 :CREATE, 인덱스 삭제 : DROP
+4. 대부분의 데이터베이스에서 테이블을 삭제하면 인덱스도 같이 삭제된다. 
+
+46. 물리적 데이터베이스 구조의 기본 데이터 단위인 저장 레코드의 양식을 설계할때 고려사항이 아닌것은 ? *트랜잭션 모델링
+* 저장 레코드 양식 설계 시 고려사항 은 데이터 타입, 데이터 값의 분포, 접근 빈도가 있다. 
+* 트랜잭션 모델링 은 개념적 설계 단계에서 한다. 트랜잭션을 개념적 시스템 독립적으로 정의한다. 트랜잭션의 입출력 기능, 형태만 정의한다. 검색, 갱신, 혼합(검색,갱신)
+
+47. SQL의 기능에 따른 분류 중에서 REVOKE 문과 같이 데이터의 사용권한을 관리하는데 사용하는 언어는 ? DCL (Data Control Language)
+DCL 종류 : COMMIT(수행된 결과를 실제 물리적 디스크로 저장하고 명령어로 수행을 성공적으로 완료하였음을 선언) , GRANT , REVOKE(데이터베이스 사용자로부터 사용 권한 취소한다), ROLLBACK (명령어로 수행을 실패했음을 알리고 수행된 결과를 원상복구 한다.)
+DDL : CREATE (SCHEMA 스키마, DOMAIN 도메인, TABLE 테이블 ,VIEW뷰,INDEX 인덱스 를 정의) , ALTER (TABLE에 대한 정의를 변경하는데 사용) , DROP (SCHEMA, DOMAIN, TABLE, VIEW , INDEX 를 삭제) 
+DML : SELECT (테이블에서 조건에 맞는 튜플을 검색), INSERT (테이블에 새로운 튜플을 삽입), DELETE(테이블에서 조건에 맞는 튜플을 삭제), UPDATE (테이블에서 조건에 맞는 튜플의 내용 변경)
+
+48. 데이터 사전에 대한 설명으로 틀린것 
+* 시스템 카탈로그 또는 시스템 데이터베이스 라고 한다.
+* 데이터 사전 역시 데이터베이스의 일종이므로 일반 사용자가 생성, 유지 및 수정 할 수 있다. (x)
+	* 시스템 자신이 필요로 하는 여러 가지 객체(기본 테이블, 뷰, 인덱스, 데이터베이스, 패키지, 접근 권한 등)에 관한 정보를 포함하고 있는 시스템 데이터베이스이다. 
+	* 시스템 카탈로그, 메타데이터라고도 한다.
+	* 시스템 카탈로그 자체도 시스템 테이블로 구성되어 있어 SQL 문을 이용하여 내용 검색이 가능하다.
+	* 사용자가 시스템 카탈로그를 직접 갱신할 수 없다.
+	* SQL 문으로 여러가지 객체에 변화를 주면 시스템이 자동으로 갱신한다. 
+* 데이터베이스에 대한 데이터인 메타데이터 (Metadata)를 저장하고 있다.
+* 데이터 사전에 있는 데이터에 실제로 접근하는 데 필요한 위치 정보는 데이터 디렉토리(Data Directory)라는 곳에서 관리한다.
+
+49. 데이터베이스에서 릴레이션에 대한 설명으로 틀린것은 
+* 모든 튜플은 서로 다른 값을 가지고 있다. ** (튜플의 유일성)
+* 하나의 릴레이션에서 튜플을 특정한 순서를 가진다. (x)
+	* 튜플의 무순서성 : 하나의 릴레이션에 튜플에 순서는 없다.
+* 각 속성은 릴렝션 내에서 유일한 이름을 가진다.
+	* 속성의 무순서성 : 각 속서은 릴레이션내에서 유일한 이름을 가지며 순서는 큰 의미가 없다. 
+* 모든 속성 값은 원자값을 가진다.
+
+50. 데이터베이스에서의 뷰(View)에 대한 설명으로 틀린것은 ?
+* 뷰는 다른 뷰를 기반으로 새로운 뷰를 만들 수 있다. 
+* 뷰는 일종의 가상 테이블이며 update에는 제약이 따른다.
+* 뷰는 기본 테이블을 만드는 것처럼 create view를 사용하며 만들 수 있다.
+* 뷰는 논리적으로 존재하는 기본 테이블과 다르게 물리적으로만 존재하며 카탈로그에 저장된다. (x) 뷰는 논리적으로만 존재 
+
+51. 트랜잭션의 상태 중 트랜잭션의 마지막 연산이 실행된 직후의 상태로 모든 연산의 처리는 끝났지만 트랜잭션이 수행한 최종 결과를 데이터베이스에 반영하지 않은 상태는 ? Partially Committed 
+
+마지막 연산이 실행된 직후의 상태로 아직 Commit 연산 실행전 
+Committed : 트랜잭션이 실행을 성공적으로 완료하여 Commit연산을 수행한 상태 
+		--&gt;	partially committed	--&gt; committed
+active  |			|
+		|			↓
+		--&gt;  	  failed		--&gt; aborted(rollback연산)
+
+
+52. SQL의 명령을 사용용도애 따라 DDL, DML, DCL로 구분할 경우 그 성격이 나머지 셋과 다른것은 ? GRANT
+* DML : SELECT , INSERT , UPDATE , DELETE
+* DCL : COMMIT , ROLLBACK , GRANT , REVOKE
+
+53. 키의 종류 중 유일성과 최소성을 만족하는 속성 또는 속성들의 집합은 ? Candidate Key (후보키) 
+* Super Key (슈퍼키) - 속성들의 집합으로 구성된 키, 릴레이션을 구성하는 모든 튜플들 중 슈퍼키로 구성된 속성의 집합과 동일한 값은 나타나지 않는다. 
+* Candidate Key (후보키) - 튜플을 유일하게 식별하기 위해 사용하는 속성들의 부분집합
+
+54. 데이터베이스에서 개념적 설꼐 단계에 대한 설명으로 틀린것은 
+* 산출물로 E-R Diagram을 만들 수 있다.
+* DBMS 에 독립적인 개념 스키마를 설계한다.
+* 트랜잭션 인터페이스를 설계 및 작성한다. (x)
+* 논리적 설계 단계의 앞 단계에서 수행된다. 
+	* 개념 설계 : 트랜잭션 모델링, 독립적인 개념 스키마 모델링, 개념스키마 설계, E-R 다이어그램 &gt; 논리 설계 : 인터페이스 설계, DBMS에 맞는 논리 스키마 설계, 테이블 설계, 논리적 매핑, 스키마 평가 및 정제 &gt; 물리설계 : 트랜잭션 세부 설계 , 레코드 집중의 분석, 설계 , 저장 레코드 양식 설계, 저장 구조 및 액세스 경로 설정 
+	
+	
+	
+55. 테이블의 기본키  (Primary Key)로 지정된 속성에 관한 설명으로 가장 거리가 먼것은 
+* NOT NULL로 널 값을 가지지 앟는다. 
+* 릴레이션에서 튜플을 구별할 수 있다.
+* 외래키로 참조될 수 있다.
+* 검색할때 반드시 필요하다. (x) : 검색할때 반드시 필요한 것은 아니지만 기본키로 검색하면 유일한 튜플을 조회할 수 있다. 
+	* 기본키 - 후보키 중에서 선정된 주키 (MAIN KEY)로 중복된 값을 가질수 없다. 한 릴레이션에서 특정 튜플을 유일하게 구별할 수 있는 속성 
+	* 기본키는 후보키의 성질을 갖는다. 즉 기본키로 설정된 속성에는 NULL값이 있어서는 안된다.
+	
+	
+56. 데이터 모델의 구성 요소 중 데이터 구조에 따라 개념 세계나 컴퓨터 세계에서 실제로 표현된 값들을 처리하는 작업을 의미하는 것은 ?  Operation
+	* 데이터 모델의 구성 요소 : 구조 ( Structure) 논리적인 개체 타입들간의 관계, 데이터 구조 및 정적 성질을 표현, 연산 (Operation) 실제 데이터를 처리하는 작업에 대한 명세로 조작하는 기본 도구, 제약조건(Constraint) DB에 저장 될 수 있는 실제 데이터의 논리적인 제약 조건 
+	
+57. 다음 [조건]에 부합되는 SQL 문의 빈칸에 들어갈 내용으로 옳은것 
+이름이 &#x27;정도일&#x27;인 팀원이 소속된 팀 코드를 이용하여 해당 팀에 소속된 팀원들의 이름들을 출력하는 SQL문 작성 
+SELECT  이름 
+FROM 직원 
+WHERE 팀코드 = &#x27; [ SELECT 팀 코드 FROM 직원 WHERE 이름 = &#x27;정도일&#x27;]&#x27;
+
+58. 무결성 제약조건 중 개체 무결성 제약 조건에 대한 설명으로 옳은것은 ?
+* 기본키는 NULL 값을 가져서는 안되며 릴레이션 내에 오직 하나의 값만 존재해야 한다. 
+-개체무결성 : 각 릴레이션의 기본키를 구성하는 속성은 NULL 값이나 중복된 값을 가질 수 없다. 
+- 참조무결성 : 외래키 값은 NULL 이거나 참조하는 릴레이션의 기본키 값과 동일해야한다. 
+- 도메인 무결성 : 속성들의 값은 정의된 도멘인에 속한 값이어야 한다.
+- 고유 무결성 : 특성 속성에 대해 고유한 값을 가지도록 조건이 주어진 경우 릴레이션의 각 튜플이 가지는 속성 값들은 서로 달라야 한다.
+- NULL 무결성 : 릴레이션의 특정 속성 값은 NULL 될 수 없다.
+- 키 무결성 : 각 릴레이션은 최소한 한 개 이상의 키가 존재해야 한다. 
+
+*기본키 (Primary Key): 테이블의 각 레코드를 고유하게 식별하는 필드/필드의 집합, 테이블에 기본키 설정은 필수가 아니다. 기본키를 설정하지 않고도 다른 테이블과의 관꼐를 설정 할 수 있다. 기본키는 혼합속성(다수 필드)에 설정할 수 있다. 
+
+59. 관계 데이터 모델에서 릴레이션에 포함되어 있는 튜플의 수를 무엇이라고 하는가 ? Cardinality
+카디널리티 (Cardinality) :튜플의 수 (기수) VS 차수(DEGREE): 속성의 수 
+
+60. 사용자 &#x27;PARK&#x27;에게 테이블을 생성 할 수 있는 권한을 부여하기 위한 SQL문의 구성으로 빈칸에 적합한 내용은 ?
+GRANT ( CREATE TABLE TO ) PARK;
+
+
+* 권한취소 : REVOKE CREATE TABLE FROM PARK;
+
+
+</code></pre><p id="c608371e-9d9d-4f42-9f32-adab1a0f5308" class="">
+</p><blockquote id="0faaeb8b-dc12-497b-b25b-8e3f0cb332fb" class="">4과목 프로그래밍 언어 활용</blockquote><ol type="1" id="1b7d4195-7120-4b17-bb97-a44925559b81" class="numbered-list" start="61"><li>C언어에서 문자열 처리 함수의 서식과 그 기능의 연결로 틀린것은 ? </li></ol><ul id="9f1228c3-950a-421f-ac45-5b6257c57e98" class="bulleted-list"><li style="list-style-type:disc">stlen(s) : s의 길이를 구한다.</li></ul><ul id="5da66cc9-7ffc-4c24-83f4-c2fd0ae7aa42" class="bulleted-list"><li style="list-style-type:disc">strcpy(s1, s2) : s2를 s1으로 복사한다.</li></ul><ul id="0428e03e-35d0-44c3-b298-28544ddeaa49" class="bulleted-list"><li style="list-style-type:disc">strcmp(s1, s2) : s1과 s2를 연결한다. (X) <ul id="b7123503-eb91-4dec-a2e2-764f3e9835d8" class="bulleted-list"><li style="list-style-type:circle">strcmp : 문자열 비교, strcat : 문자열 연결 함수</li></ul></li></ul><ul id="a1e939a7-7f27-462e-b1d6-c5c3b26299b2" class="bulleted-list"><li style="list-style-type:disc">strrev(s) : s를 거꾸로 변환한다. </li></ul><p id="1854a02d-4ac1-4e98-9de2-0468b08c43b0" class="">
+</p><ol type="1" id="5bb34f0b-c7a3-4409-9781-1e25279b5425" class="numbered-list" start="62"><li>다음 C언어 프로그램이 실행되었을때 실행 결과는?</li></ol><figure id="b206b59a-ee21-4722-b81d-c95d7a31e9b6" class="image"><a href="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled.png"><img style="width:329px" src="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled.png"/></a></figure><p id="965917a0-a9f9-47b1-a8be-774a6336ec07" class="">
+</p><p id="273f94d3-efdb-4f8b-997c-b010213cbccf" class="">a &amp;&amp; b → 1 AND 연산</p><p id="224a20ce-c0e4-4019-8001-e5a080ec35b9" class="">A || B → 1 OR연산</p><p id="f765e064-1fa6-405c-960a-af8429a56c82" class="">!C → 0 NOT 연산</p><p id="37d09891-fc7c-4744-9691-32b398007948" class="">C언어 연산자에서는 0이 아닌 모든 값은 1(TRURE)로 본다. 그래서 a=1, b=1, c=1로 바꿔서 대입해도 같은 결과가 나온다.</p><p id="183d9df8-634d-4ad6-a169-69b4bbe271e3" class="">
+</p><p id="6f4a0c19-1175-4084-8c7b-68fb5d92b678" class="">INT a,b,c 에 정의된 값들을 조건절에 대입</p><p id="85dc7dc1-853d-461f-b997-54ecbc8811bd" class="">t1 = 1&amp;&amp;2 , *&amp;&amp;는 좌우가 참이여야함 좌우에 모든값이 존재함으로 1= 참</p><p id="01b106d0-1aba-45de-8570-d3847c88c149" class="">t2=1||2 * ||는 좌우중 1개만 참이여도 참, 좌우 모든 값이 존재함으로 1 = 참</p><p id="11db8c75-55e8-499a-a3f8-f9cbee38221f" class="">t3 = !C * !는 NOT연산으로 3의 값이 없음을 말하기에 0 거짓</p><p id="2d3349d7-535a-4abf-9112-d4c8b790e9c7" class="">그래서 1+1+0=2</p><p id="7ecf30bb-8cc8-4455-93da-06edb71fff5b" class="">
+</p><p id="b1bb083a-611f-4749-90d4-d8ac1c7661ef" class="">
+</p><ol type="1" id="f6e97667-e4f8-4e8c-a066-ced274e8ce59" class="numbered-list" start="63"><li>C언어 프로그램</li></ol><div id="ec194eca-9506-4f5a-b993-7f52c39da6a3" class="column-list"><div id="5ec9a910-cc28-4f3e-9ff1-be4eba23c1af" style="width:43.75%" class="column"><figure id="08acb309-7f71-4d69-9f47-d867c3708387" class="image"><a href="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%201.png"><img style="width:352px" src="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%201.png"/></a></figure><blockquote id="b00a56b7-c562-40da-8d4b-c649397c7014" class=""><strong>값 : 60</strong></blockquote><p id="0d7fa7c2-1d6a-4c5f-b451-f0414509257f" class="">
+</p></div><div id="6af3e1f6-efa0-4d86-abf2-e344dc4f23c3" style="width:56.25%" class="column"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b16edb7d-229a-4ae1-99c1-1a247f736fa9" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">ob1.c[i] = i,
+ob2.c[i] = i + i
+ob1.a = ob1.a + ob1.c[i] = ob1.c[i] = i
+
+= 0 + 2 + 4 + 6 + 8 = 20
+ob2.a = ob2.a + ob2.c[i]  = 0b2.c[i] = 2i
+i = 0, 2, 4, 6, 8
+ob2.c[i] = 0, 4, 8, 12, 16
+= 0+4+8+12+16 = 40
+20 + 40 = 60
+
+int a와 int c[10]에 따라 아래처럼 생성
+ob1 a=0 
+		c=(10칸)
+ob2 a=0
+	c=(10칸)
+
+이후 for를 따라서 ob1,2의 c칸들을 채움
+ob1.c[i] = i (0부터 9까지 쭉 채운다)
+ob2.c[i] = ob1.c[1] + i (ob1의 c의 자리값과 i의 값을 더해서 생성)
+
+** 더하다 보면 알겠지만 ob2.c 는 2씩 증가함
+그러면 아래의 값이 나온다.
+ob1 a = 0
+	  c = 0 1 2 3 4 5 6 7 8 9
+ob2 a = 0
+		c = 0 2 4 6 8 10 12 14 16 18
+이후 두번째 for을 따라서 a의 값을 구하자
+ob.1=ob1.a + ob1.c[i]
+* ob1.a의 기존 값과 ob2.c의 자리 숫자를 더해서 ob1.a에 넣어라
+
+i가 0일 경우 기존 ob1.a인 0과 ob1.c의 0번째인 0을 더하면 0+0 = 0
+ob1 a = 0 
+		c = 0 1 2 3 4 5 6 7 8 9
+i가 2일 경우 기존 ob1.a인 과 c의2번째 인 2를 더하면 0+2=2
+a= 2
+c = 0 1 2 3 4 5 6 7 8 9
+이런식으로 ob1 a=24
+c = 0 1 2 3 4 5 6 7 8 9
+ob2 a = 40
+c = 0 1 2 3 4 5 6 7 8 9
+이후 ob1.a + ob2.a 맞춰 더하면 24+40으로 60이 출력된다. 
+
+ob1.a = 0&gt;0&gt;2&gt;6&gt;!2&gt;20
+
+a랑 b는 리스트 i가 0일때 a[0]=0, b[0]=0
+i가 1일때 a[1]=1, b[1]=2(a[1]=1에 i=1를 더한거 1+1=2)
+ </code></pre></div></div><p id="aa760f8b-8e5d-42f5-b8bc-4837460d8ea0" class="">
+</p><ol type="1" id="af641e0f-4353-4183-accb-a9009a0ba67d" class="numbered-list" start="64"><li>IP프로토콜에서 사용하는 필드와 해당 필드에 대한 설명으로 틀린것은 ?</li></ol><ul id="7307e6df-c502-485b-8d6a-c82f85ca1e4a" class="bulleted-list"><li style="list-style-type:disc"><strong>Header Length</strong>는 <strong>IP 프로토콜</strong>의 <strong>헤더길이를 32비트</strong> <strong>워드 단위</strong>로 <strong>표시</strong>한다.</li></ul><ul id="b52f4046-2c65-47d5-97d1-00aa1b1a020e" class="bulleted-list"><li style="list-style-type:disc"><strong>Packet Length</strong>는 IP헤더를 제외한 패킷 전체의 길이를 나타내며 <strong>최대 크기는 2^32 - 1비트</strong>이다.<ul id="e33d007c-8835-4b40-94a9-24cc0314b8a3" class="bulleted-list"><li style="list-style-type:circle"><strong>Total Packet Length </strong>(<strong>16bits</strong>) : <strong>IP해더 </strong>및 <strong>데이터</strong>를 포함한 <strong>IP패킷 전체 길이</strong>를 <strong>바이트 길이</strong>로 <strong>표시</strong>(<strong>최대값은 65,535 = 2 ^ 16 -1</strong>)</li></ul></li></ul><ul id="aad7e7e2-d5f8-4fe8-a3f1-6e32a82b1fdb" class="bulleted-list"><li style="list-style-type:disc"><strong>Time TO Live </strong>는 <strong>송신 호스트</strong>가 <strong>패킷을 전송하기 전 네트워크에서 생존할 수 있는 시간</strong>을 <strong>지정</strong>한것이다.</li></ul><ul id="6bd8538c-8d04-4f34-85d6-59cfc5817a56" class="bulleted-list"><li style="list-style-type:disc"><strong>Version Number</strong>는 <strong>IP프로토콜의 버전번호</strong>를 나타낸다. (O) </li></ul><p id="a910b416-818d-4967-bb57-ff62c6edde17" class="">
+</p><ol type="1" id="effed076-4b07-4b16-826a-6228f0d2f303" class="numbered-list" start="65"><li>Python 프로그램 실행결과 </li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d36f9679-4eae-4212-a68c-40c0ccaaaeb9" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">x = 20
+
+if x== 10:
+	print(&#x27;10&#x27;)
+
+(  elif  ) == 20 :
+	print(&#x27;20)
+else :
+   print(&#x27;other&#x27;)</code></pre><ul id="76cd1d81-7872-4810-b67a-d725b28720a0" class="bulleted-list"><li style="list-style-type:disc">파이썬에는<strong> if, elif, else</strong>로 이루어지낟. ( <strong>else if 가 없다 !</strong>!)</li></ul><p id="ec5f31e8-55b9-4f27-978b-d2b97804bd3e" class="">
+</p><ol type="1" id="28a42c4a-0fc3-4242-a106-22d3fd7dced6" class="numbered-list" start="66"><li><span style="border-bottom:0.05em solid"><strong>RIP 라우팅 프로토콜</strong></span>에 대한 설명으로 트린 것은?</li></ol><ul id="f35266bd-21b2-4b8b-a5e3-32f756bafbd3" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>경로 선택 메틀릭</strong></span>은 <span style="border-bottom:0.05em solid"><strong>홉 카운트 (hop count)</strong></span>이다.<ul id="8ca936d9-019b-4434-9f50-7bf3372b1e3c" class="bulleted-list"><li style="list-style-type:circle"><strong>최단의 경로를 산출</strong>하기 위한 정보로서 <strong>홉(거리 값)만을 고려</strong>하므로 RIP을 선택한 경로가 <span style="border-bottom:0.05em solid">최적의 경로가 아닌 경우</span>가 많이 발생한다.</li></ul><ul id="c23e833c-17c3-4c2d-af2e-ff9d4b86c16c" class="bulleted-list"><li style="list-style-type:circle"><strong>최대 홉 카운트</strong>를 <strong>15홉 이하</strong>로 한정하고 있다. <strong>소규모 네트워크 환경</strong>에 적합하다. </li></ul></li></ul><ul id="394e471b-6ab5-4e48-845b-1c26edeedba5" class="bulleted-list"><li style="list-style-type:disc"><strong>라우팅 프로토콜을 IGP와 EGP로 분류</strong>했을떄 EGP에 해당한다.<ul id="252ff4cc-807d-48b1-a49c-d1eae9db1bf6" class="bulleted-list"><li style="list-style-type:circle"><strong>EGP </strong>(Exterior Gateway Protocol, 외부 게이트웨이 프로토콜) , <strong>학내망과 다른 학내망의 라우팅</strong>에 사용, 즉 <strong><span style="border-bottom:0.05em solid">AS간의</span></strong> 라우팅에 사용되는 프로토콜</li></ul><ul id="f9a875cc-d681-4b2c-8a8a-6433907e1c93" class="bulleted-list"><li style="list-style-type:circle"><strong>IGP </strong>(Interior Gateway Protocaol, 내부 게이트웨이 프로토콜), <strong>학내망 내부에서 라우팅</strong> 하는것, 즉 <span style="border-bottom:0.05em solid"><strong>하나의 AS내에서 </strong></span>라우팅에 사용되는 프로토콜</li></ul><ul id="53ea60f8-c2f5-477e-b775-c8f837097843" class="bulleted-list"><li style="list-style-type:circle">RIP는 OSPF와 함께 IGP(내부게이트웨이 프로토콜)에 해당한다.</li></ul></li></ul><ul id="d7d18e48-8865-4625-a7b3-7a8774a403eb" class="bulleted-list"><li style="list-style-type:disc"><strong>최단 경로 탐색</strong>에 <strong>Bellman-Ford 알고리즘</strong>을 사용한다. <ul id="f8d22732-8f30-44f2-8b75-3a170de2d087" class="bulleted-list"><li style="list-style-type:circle"><strong>거리 백터 라우팅 프로토콜</strong></li></ul></li></ul><ul id="02038794-daeb-445f-9c4e-e8940a75474e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>각 라우터</strong></span><span style="border-bottom:0.05em solid">는 </span><span style="border-bottom:0.05em solid"><strong>이웃 라우터들로부터 </strong></span><span style="border-bottom:0.05em solid">수신한 정보를 이용하여 </span><span style="border-bottom:0.05em solid"><strong>라우팅 표를 갱신</strong></span><span style="border-bottom:0.05em solid">한다.</span></li></ul><p id="f7800c27-91f1-4c87-85a2-84ec8397dde5" class="">
+</p><ol type="1" id="52e4e120-ee33-429d-80fc-5d0b54b00767" class="numbered-list" start="67"><li>다음에서 설명하는 프로세스 스케줄링은 ? <strong>HRN 스케줄링</strong></li></ol><ul id="fcf791f3-cffc-4dcd-8702-5b14fce2c804" class="bulleted-list"><li style="list-style-type:disc"><strong>최소 작업 우선 </strong>(SJF)기법의 약점을 보완한 <strong>비선점 스케쥴링 기법</strong>으로 다음과 같은 식을 이용해 <strong>우선순위를 판별</strong>한다. </li></ul><ul id="2b0a931d-de77-4693-ac52-6884210a998e" class="bulleted-list"><li style="list-style-type:disc"><strong>우선순위 </strong>= (<strong>대기한 시간 + 서비스를 받을 시간</strong>) / 서비스를 받을 시간 <ul id="9c513e9d-7c2d-47f1-8a12-8bf3b6ebe911" class="bulleted-list"><li style="list-style-type:circle"><strong>HRM 스케줄링 방식 </strong>: 비선점 스케줄링 - <strong>실행시간이 긴 프로세스</strong>에 불리한 <strong>SJF을 보완하기 위해</strong> <strong>대기시간 </strong>및 <strong>서비스 시간</strong>을 이용, 긴 작업과 짧은 작업 간의 <strong>지나친 불평등을 해소</strong>할 수 있다. <strong>우선순위를 계산 숫자가 높은 것</strong>부터 <strong>낮은 순으로 순위 부여</strong>, (대기시간 + 서비스 시간) / 서비스시간 = 우선순위값 : 값이 클수록 우선순윅 높다.</li></ul></li></ul><p id="1a692c8b-eb4a-454f-84cf-e68510771232" class="">
+</p><ol type="1" id="c6e14bc7-686b-44bf-bd19-410adaf826d9" class="numbered-list" start="68"><li><strong>UNIX 운영체제</strong>에 관한 특징으로 틀린것은</li></ol><ul id="ab13afdb-8ca2-4195-a46f-bf21a3e15117" class="bulleted-list"><li style="list-style-type:disc">하나 이상의 작업에 대하여 <strong>백그라운드에서 수행이 가능</strong>하다.</li></ul><ul id="c9799781-18b3-4265-ae80-dea4ffee6635" class="bulleted-list"><li style="list-style-type:disc">Multi-User는 지원하지만 Multi-Tasking은 지원하지 않는다 (x)<ul id="f40b7e16-21c1-4bba-9778-11a1ec2bf67e" class="bulleted-list"><li style="list-style-type:circle"><strong>UNIX 운영체제</strong>는 주로 <strong>서버용 컴퓨터</strong>에서 사용된다. <strong>time sharing system</strong>을 위해 설계된 <strong>대화식 운영체제</strong>이다. <strong>c언어</strong>로 작성되어 <strong>이식성이 높고 장치간 호환성이 높다</strong>. <strong>Multi User, Multi tasking </strong>모두 지원한다. <strong>트리 구조의 파일 시스템</strong>이다.</li></ul></li></ul><ul id="c57c70d7-7e4f-467a-b16d-7aac24c724fd" class="bulleted-list"><li style="list-style-type:disc"><strong>트리 구조의 파일 시스템</strong>을 갖는다.</li></ul><ul id="11629ed6-48ec-4fe1-b937-54fdcc5a7815" class="bulleted-list"><li style="list-style-type:disc"><strong>이식성이 높으며 </strong>장치 간의 <strong>호환성이 높다</strong>.</li></ul><p id="4745c48d-43e3-4b5d-b507-337e18257b44" class="">
+</p><ol type="1" id="ff1bbcd9-6380-4017-82ed-6cea38b67c81" class="numbered-list" start="69"><li><span style="border-bottom:0.05em solid"><strong>UDP (User Datagram Protocol)</strong></span>프로토콜의 특징이 아닌것은?</li></ol><ul id="7dc83272-8ccc-4436-a1d8-058b18fd6d9a" class="bulleted-list"><li style="list-style-type:disc"><strong>비연결형 서비스를 제공</strong>한다.<ul id="895334aa-df35-4aeb-b9e1-cbdd588818d7" class="bulleted-list"><li style="list-style-type:circle"><strong>비연결형 </strong>및 <strong>비신뢰성 </strong>전송서비스를 제공한다.</li></ul></li></ul><ul id="5d48fc25-5b01-4bd5-a67b-d9e9551b4f7e" class="bulleted-list"><li style="list-style-type:disc"><strong>단순한 헤더 구조</strong>로 <strong>오버헤드가 적다</strong>.<ul id="7ba49d17-4a6f-4037-a774-b31a8557bd9e" class="bulleted-list"><li style="list-style-type:circle">흐름 제어나 <strong>순서 제어가 없어</strong> <strong>전송 속도가 빠르다.</strong></li></ul><ul id="6ab65616-436e-4a73-85d0-f8912963dfbe" class="bulleted-list"><li style="list-style-type:circle">수신된 <strong>데이터의 순서 재조정 기능</strong>을 <strong>지원하지 않는다</strong>. <strong>복구기능을 제공하지 않는다</strong>.</li></ul></li></ul><ul id="c8db1002-0954-4573-8b32-0e306a3464df" class="bulleted-list"><li style="list-style-type:disc"><strong>주로 주소를 지정</strong>하고 경로를 설정하는 기능을 한다.(x)<ul id="a80690dd-6977-47e9-a096-8ea2fcb0ca4e" class="bulleted-list"><li style="list-style-type:circle">IP Protocol : 주로 주소를 지정하고 경로를 설정하는 기능을 한다. </li></ul></li></ul><ul id="11e009d8-0e30-4ec9-bdea-8e1fc26a7a4a" class="bulleted-list"><li style="list-style-type:disc"><strong>TCP</strong>와 같이 <strong>트랜스포트 계층</strong>에 존재한다. </li></ul><p id="cef83bd9-80bf-4ca0-b3a4-6f7ee2e26e2f" class="">
+</p><ol type="1" id="7d49c54f-fb17-496d-8b82-046c89e38fec" class="numbered-list" start="70"><li>Python 데이터 타입 중 <strong>시퀀스(Sequence) 데이터 타입</strong>에 해당하며 다양한 데이터 타입들을 <strong>주어진 순서에 따라 저장</strong>할 수 있으나 <strong>저장된 내용을 변경 할 수 없는 것</strong>은? <strong>튜플(tuple)타입</strong></li></ol><ul id="5bf79956-7d19-421a-aa3a-224d3c3bc9e0" class="bulleted-list"><li style="list-style-type:disc">리스트 : 가변형 ( 변경 가능), 튜플타입( 불변형) </li></ul><ul id="f7b86c70-25fa-4fa7-81fc-7c73911b2f2c" class="bulleted-list"><li style="list-style-type:disc">시퀀스 - 리스트 : 순서있고, 가변 [1, 2, 3]</li></ul><ul id="22d473f9-bddd-432f-b837-d70d50c2ee45" class="bulleted-list"><li style="list-style-type:disc">시퀀스 - 튜플 : 순서있고, 불변 {1, 2, 3}</li></ul><ul id="3077ef19-c292-448d-b579-08656385718e" class="bulleted-list"><li style="list-style-type:disc">세트 - 세트 : 순서없고 중복 x {1,2,3}</li></ul><ul id="bb8a11be-6059-46f2-91c9-aefb6a17fbac" class="bulleted-list"><li style="list-style-type:disc">맵 - 딕셔너리 : 순서없고 key-value 쌍 { ‘a: 1’, ‘b’:2 , ‘c’:3}  </li></ul><p id="cdd0a56d-3150-4746-877a-c4918241680f" class="">
+</p><ol type="1" id="0888a6ee-e61f-4d25-bf70-a521447a8266" class="numbered-list" start="71"><li>다음 JAVA프로그램이 실행되었을때 실행결과는 ? </li></ol><div id="71df9410-cc5c-4503-823c-90a8d609ed61" class="column-list"><div id="a5fca574-294d-4c96-999c-eba9051978be" style="width:31.25%" class="column"><figure id="67a17d58-a398-434b-95a1-3587cc8d937b" class="image"><a href="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%202.png"><img style="width:302px" src="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%202.png"/></a></figure></div><div id="c11c9a5c-ac59-44c8-9a5c-11dcdfa8749a" style="width:68.75%" class="column"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e9047cb7-62a6-4f11-88f4-25ef33ea64fb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+0에서 시작해서 4보다 작은 정수 ?
++는 1씩 증가 ?
+
+0 1 2 3
+
+int temp[] = new int[4] temp는 int 배열이 4개 0, 1, 2, 3
+for (int i = 0; i&lt;temp.length; i++)
+temp[0] = 0
+temp[1] = 1
+temp[2] = 2
+temp[3] = 3
+
+int iarr[] : iarr은 int로 되어 있는 배열
+iarr은 int 배열이 return 값으로 되는 marr() 함수다.
+즉, iarr은 marr() 함수이다. marr() 함수 결과와 같다. 
+따라서 답은 0 1 2 3
+
+</code></pre></div></div><p id="0f6a79fa-ec89-46f8-ad41-69092fdcde8e" class="">
+</p><ol type="1" id="90a591f8-b89c-434d-9b89-f260c008a0aa" class="numbered-list" start="72"><li>JAVA 프로그램</li></ol><div id="da417123-567f-4c5a-8be4-48a44a505a8f" class="column-list"><div id="d0c5f9d6-9b85-49f7-b152-656eb853f71f" style="width:50%" class="column"><figure id="86c844af-0e35-4c35-9bb3-e205378c1713" class="image"><a href="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%203.png"><img style="width:296px" src="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%203.png"/></a></figure></div><div id="088b9ab9-6d73-4147-82e5-b7a4e4bbbda4" style="width:50%" class="column"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4f3775b9-6ed2-427e-8461-52c5c3a56f71" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">main 함수실행
+
+mx = a &lt; b ?
+앞이 참이면 b가 값, 거짓이면 a
+대입 
+1 &lt; 2 ? 값 mx=2
+
+mx가 2이므로 else 실행
+mn b &lt; mx ? false c가 답 mn=c=3</code></pre></div></div><p id="3e176ba9-ec46-463a-8e4d-d2015bf74a75" class="">
+</p><ol type="1" id="993a58ff-b6f8-407a-9e1b-2b70e3937bec" class="numbered-list" start="73"><li>다음 중 Myers가 구분한 응집도 (Cohesionn)의 정도에서 가장 낮은 응집도를 갖는 단계는? 우연적 응집도</li></ol><p id="25df776b-eafa-4e96-95f6-bbaf6e715b3d" class="">응집도 </p><p id="82fee99a-fe85-4ada-bde2-20dac254551d" class=""><strong>(강함)</strong></p><p id="93a985b1-0c80-408f-a924-177ce8d0b5ac" class=""><strong>기능적 응집도 &gt; 순차적 응집도 &gt; 교환적 응집도 &gt; 절차적 응집도 &gt; 시간적 응집도 &gt; 논리적 응집도 &gt; 우연적 응집도(약함)</strong></p><p id="574829e0-98f9-45b8-bc98-569edb64f4ee" class="">
+</p><p id="2c0dbc3c-78fd-429f-80ef-38b88fed0be6" class="">74.c언어</p><div id="baa1c174-ba47-4f41-b8f8-51c3b6ebe524" class="column-list"><div id="1f106fce-04a4-444c-b8e7-4494ca1eaed2" style="width:50%" class="column"><figure id="fbec1fef-0e7c-4e48-afce-4cd2ab6a84a8" class="image"><a href="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%204.png"><img style="width:268px" src="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%204.png"/></a></figure></div><div id="2190799f-1166-4477-9d79-be87ccfebe9f" style="width:50%" class="column"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="da4ea0c8-e5c5-4264-8e87-d8c330d200ee" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">c언어는 값이 있다면 true, 1로본다.
+아니면 0
+
+r1 = true || false or은 1
+r2 = 0
+r3 = false &amp;&amp; false = 0
+0-0+1
+1</code></pre></div></div><ol type="1" id="8ac0b8b2-cedd-4c8a-b886-d11c7e4da4c7" class="numbered-list" start="75"><li><strong>IP프로토콜</strong>의 주요 특징에 해당하지 않는 것은?</li></ol><ul id="0fe7b437-1f6d-48fa-a75d-dcf57ea57a54" class="bulleted-list"><li style="list-style-type:disc"><strong>체크섬(Checksum)기능</strong>으로 데이터 체크섬(Data CheckSum)만 제공한다. (x)<ul id="d41a4566-dc23-416b-9ec0-5aeb9e5ba5b9" class="bulleted-list"><li style="list-style-type:circle">데이터 체크섬은 제공하지 않느다. <strong>헤더 체크섬만 제공</strong></li></ul></li></ul><ul id="abbe487a-a6bb-47e0-a6e7-3ca4cd84879e" class="bulleted-list"><li style="list-style-type:disc"><strong>패킷</strong>을 <strong>분할</strong>, <strong>병합</strong>하는 기능을 수행하기도 한다.</li></ul><ul id="6a9a2fc3-a0de-4465-b40a-d15f5af7ce04" class="bulleted-list"><li style="list-style-type:disc"><strong>비 연결형 서비스를 제공</strong>한다.</li></ul><ul id="347356d0-4388-432c-9e41-99bfafcae399" class="bulleted-list"><li style="list-style-type:disc"><strong>Best Effort원칙</strong>에 따른 <strong>전송기능을 제공</strong>한다.</li></ul><p id="c62c5326-f6ef-4459-b46d-3aa6157eeb5e" class="">
+</p><p id="a22b7d1b-a1d7-41a5-9907-678ae7d0f29a" class="">
+</p><ol type="1" id="4778bdbe-60fd-4fbd-8289-e9268a9fe3dc" class="numbered-list" start="76"><li>4개의 페이지를 수용할 수 있는 주기억장치가 있으며 초기에는 모두 비어있다고 가정한다. 다음의 순서로 페이지참조가 발생할때 LRU페이지 교체 알고리즘을 사용할 경우 몇 번의 페이지 결함이 발생하는가? 5회</li></ol><ul id="e858a774-219a-4f6d-b5f6-3a8752d46692" class="bulleted-list"><li style="list-style-type:disc">페이지 참조 순서 1,2,3,1,2,4,1,2,5</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1deb58d6-8775-4fcd-b2e9-753a203fc42f" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">1 | 1 [결함(부재)]
+2 | 1 2 [결]
+3 | 1 2 3 [결]
+1 | 1 2 3 [적재되어 있는 1 참조]
+2 | 1 2 3 [적재되어 있는 2 참조]
+4 | 1 2 3 4 [결]
+1 | 1 2 3 4 [적재되어있는 1 참조]
+2 | 1 2 3 4 [적재되어있는 2 참조]
+5 | 1 2 5 4 [결, 최근까지 남아있던 LRU기법 3을 제거 , 5적재]
+</code></pre><p id="9cb323b5-a3bf-442a-94a9-d4031c7cfe61" class="">
+</p><ol type="1" id="5ffe14ae-7c35-45a4-a53e-752b0c86d83d" class="numbered-list" start="77"><li><strong>사용자 수준에서 지원되는 스레드</strong>(thread)가 커널에서 지원되는 스레드에 비해 가지는 장점으로 <strong>옳은것은</strong>?</li></ol><ul id="3e84c07b-e4fd-4aad-b915-53504f6d7017" class="bulleted-list"><li style="list-style-type:disc"><strong>한 프로세스</strong>가 운영체제를 호출할 때 전체 프로세스가 <strong>대기할 필요가 없으므로 </strong>시스템 성능을 높일 수 있다. : <strong>커널 수준 스레드</strong></li></ul><ul id="c713dd78-1a8e-4ede-8ee0-d82e90c9745c" class="bulleted-list"><li style="list-style-type:disc"><strong>동시에 여러 스레드</strong>가 <strong>커널에 접근할 수 있으므로 </strong>여러 스레드가 <strong>시스템 호출을 동시</strong>에 <strong>사용</strong>할 수 있다. - <strong>커널 수준 스레드</strong></li></ul><ul id="42f44b2c-b87c-4ac4-ac35-0c30a8bb4469" class="bulleted-list"><li style="list-style-type:disc"><strong>각 스레드</strong>를 <strong>개별적</strong>으로 관리할 수 있으므로 <strong>스레드의 독립적인 스케줄링</strong>이 가능하다. - <strong>커널 수준 스레드 , 사용자 수준 스레드 둘다</strong></li></ul><ul id="88f05268-07f1-4d92-977d-252abd37b8e3" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">커널 모드로의 전환 없이 </span><strong>스레드 교환이 가능</strong>하므로 <strong>오버헤드가 줄어든다</strong>. (ㅇ)</li></ul><p id="4bf232bd-233f-4eca-80b8-6a3c41c7f75b" class="">
+</p><p id="d4aedfec-e2fe-47cc-8f6b-e443f4347772" class=""> 78. 한 모듈이 다른 모듈의 내부 기능 및 그 내부 자료를 참조하는 경우의 결합도는? 내용 결합도</p><ul id="d353aa86-64d7-49d2-bf43-63638ff1caa8" class="bulleted-list"><li style="list-style-type:disc"><strong>내용결합도 </strong>: 하나의 모듈이 <strong>직접적으로 </strong>다른 모듈의 <strong>내용( 내부 기능 및 그 내부 자료)</strong>을 참조할 때 <strong>두 모듈은 내용적으로 결합</strong>되어 있다고 한다.</li></ul><ul id="b488abf5-dd2e-4323-b8e1-3c599120ddbf" class="bulleted-list"><li style="list-style-type:disc"><strong>스템프 결합도</strong> : 두 모듈이 <strong>매개변수</strong>로 <strong>자료를 전달</strong>할때 <strong>자료구조 형태</strong>로 전달되어 이용될때 <strong>데이터가 결합</strong>되어 있다고 한다.</li></ul><ul id="e7ad1c1c-68e8-414a-a052-dbd09910d660" class="bulleted-list"><li style="list-style-type:disc"><strong>공통 결합도 </strong>: 두 모듈이 <strong>동일한 전역 데이터</strong>를 접근한다면 <strong>공통 결합 </strong>되어 있다고 한다.</li></ul><ul id="6cc6b4cc-111c-4696-a50b-f2423d8934bf" class="bulleted-list"><li style="list-style-type:disc"><strong>결함도 </strong>: <strong>두 모듈간의 상호 작용</strong>, 또는 <strong>의존도 정도</strong>를 나타내는 것이다.</li></ul><p id="b53ceb59-a9cb-4c00-8023-6e23f08bd7c2" class="">
+</p><ol type="1" id="0d9e3d44-3ba5-49ca-9ba4-85a4e1008787" class="numbered-list" start="79"><li>a[0]의 주소값이 10일 경우 다음 C언어 프로그램이 실행될대 결과는 18, 10</li></ol><figure id="4ffebf29-5178-4ba5-ad29-f03a88f09c8b" class="image"><a href="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%205.png"><img style="width:295px" src="%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%202022%E1%84%82%E1%85%A7%E1%86%AB04%E1%84%8B%E1%85%AF%E1%86%AF24%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%86%E1%85%AE%E1%86%AB%E1%84%8C%E1%85%A6%2021177f08db1948f28a650b26962ca9b7/Untitled%205.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e00bdf69-2742-4a44-8ad3-522875251dc8" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">	
+			{14          , 22,              30,          38              }
+주소값 10,11,12,13 / 14, 15, 16 ,17 / 18,19,20,21 / 22, 23 , 24, 25
+자리값 a(0)       a(1)              a(2)           a(3)
+*1개의 주소값 : 1Byte
+
+print(&quot;%u, &quot;&amp;a[2]); a[2]자리의 첫번째 주소값 18
+prinf(&quot;%u&quot;, a) : a[0]자리의 첫번째 주소값   10
+
+배열은 자료형이 같은 변수를 메모리에 연속으로 할당한다. int형인 배열 요소 14, 22, 30, 38은 제시된 문제에 따라 메모리 10번지부터 시작하여 4바이트 간격으로 각각 10, 14, 18, 22번지의 주소값을 할당받는다.
+%u &lt;-- 부호 없는 10진수로 출력하는 변환 문자이다.
+printf(&quot;%u, &quot; &amp;a[2]); 은 &amp;a[2]는 &amp;a + 2 또는 10 + ( 2 * sizeof(int))이며 18이다. 18번지부터 21번지까지의 총 4바이트 저장 공간인 주소값을 뜻한다.
+
+&amp;a[2]는 배열 a 의 세번째 요소의 주소를 나타낸다. 여기서 a[2]는 배열 a의 세번째 요소를 가리킨다. 이 요소의 주소를 구하려면 배열 a의 시작 주소부터 몇 바이트 떠렁져 있는지 알아야 한다.
+배열 a의 시작 주소는 &amp;a[0] 또는 단순히 &#x27;a&#x27;  로 표현할 수 있다. 이 주소에서부터 배열 요소들은 연속적으로 저장되어 있다. 
+&amp;a[2]의 주소값은 &amp;a[0]에서부터 몇 바이트 떨어져있는지를 나타내므로 &amp;a[0] + 2와 같다. &amp;a[2]는 &amp;a + 2 또는 a + 2로 표현한다.
+&amp;a + 2는 배열 a의 시작 주소로부터 2개의 int변수가 저장된 크기만큼 떨어진 주소를 의미한다. 주어진 설명에서는 이를 10 + (2*sizeof(int))로 계산한다. 이는 배열 a의 세번째 요소인 a[2]의 주소를 나타내기도 한다. 이 주소는 배열의 세번째 요소부터 4번째 요소까지의 4바이트 공간을 차지하게 된다. 
+
+</code></pre><ol type="1" id="d759dd37-26d1-4692-bc3d-c0d594c049d9" class="numbered-list" start="80"><li><strong>모듈화 (Modularity)</strong>와 관련한 설명으로 틀린것은?</li></ol><ul id="03d90603-f47e-4350-831c-1f367ce375c8" class="bulleted-list"><li style="list-style-type:disc"><strong>시스템</strong>을 <strong>모듈로 분할</strong>하면 <strong>각각의 모듈</strong>은 <strong>별개로 만들고 수정할 수 있기 때문에 </strong>좋은 구조가 된다.</li></ul><ul id="08d1be38-4581-46bb-980e-faa7a99c69d4" class="bulleted-list"><li style="list-style-type:disc"><strong>응집도</strong>는 <mark class="highlight-yellow_background"><strong>모듈과 모듈사이의 상호의존또</strong></mark><mark class="highlight-yellow_background">는 </mark><mark class="highlight-yellow_background"><strong>연관정도</strong></mark><mark class="highlight-yellow_background">를 의미</mark>한다. (x)<ul id="0dc250b2-65ba-49d2-b471-35f845f5d770" class="bulleted-list"><li style="list-style-type:circle"><strong>결합도</strong>가 <strong>모듈과 모듈 사이의 상호 의존 </strong>또는 연관정도를 의미하는 것이다.</li></ul><ul id="1e32ad76-9805-4293-92f9-dec5a6027e60" class="bulleted-list"><li style="list-style-type:circle"><strong>응집도</strong>는 <strong>하나의 모듈</strong>이 <strong>하나의 기능</strong>을 수행하는 요소들 간의 <strong>연관성 척도</strong>(모듈이 독립적인 기능으로 정의되어있는 정도를 의미), <strong>독립적인 모듈이 되기 위해서</strong>는 <strong>응집도가 강해야 한다</strong>.(결합도는 약해야 한다.)</li></ul></li></ul><ul id="f6eadc83-6e2f-47eb-9765-d760b42875e8" class="bulleted-list"><li style="list-style-type:disc">모듈간의<mark class="highlight-yellow_background"> </mark><mark class="highlight-yellow_background"><strong>결합도가 약해야 독립적인 모듈</strong></mark>이 될 수 있다.</li></ul><ul id="0cbe526b-7b9e-49e3-b98e-4b29a99ec5bc" class="bulleted-list"><li style="list-style-type:disc">모듈 내 구성요소들간의 <strong>응집도가 강해야 좋은 모듈 설계</strong>이다. </li></ul><p id="a4de6e29-bed1-4664-8c76-97b7679020ed" class="">
+</p><p id="d6b500b2-fbfd-4347-8575-c4f20f51bef7" class="">
+</p><blockquote id="6bc8e00b-8cff-445b-8b6d-74999720758d" class=""><strong>정보시스템 구축관리</strong></blockquote><p id="aa4016f5-0832-491e-8ef7-2ec5b2b42e9c" class="">
+</p><ol type="1" id="99b5420e-2dc1-4955-9694-762695af640f" class="numbered-list" start="81"><li>소프트웨어 개발에서 정보보안 3요소에 해당 하지 않는 설명은 ?</li></ol><ul id="53873172-70e5-4cbd-8b11-92b935b503e5" class="bulleted-list"><li style="list-style-type:disc">기밀성 : 인가된 사용자에 대해서만 지원 접근이 가능하다.</li></ul><ul id="57c39b90-4001-4c73-b037-2a8b91a50b5b" class="bulleted-list"><li style="list-style-type:disc">무결성 : 인가된 사용자에 대해서만 자원수정이 가능하며 전송중인 정보는 수정되지 않는다. </li></ul><ul id="52cd8a0f-39c2-46aa-89db-9a289fda4ca4" class="bulleted-list"><li style="list-style-type:disc">가용성 : 인가된 사용자는 권한범위 내에서 언제든 자원접근이 가능하다.</li></ul><ul id="c8789b2f-7712-40e1-acd5-e973e89cc29b" class="bulleted-list"><li style="list-style-type:disc">휘발성 : 인가된 사용자는 수행항 데이터는 완료즉시 폐기되어야 한다. (x)<ul id="326ada61-9a08-46e9-bfd9-6fd1bebddbc4" class="bulleted-list"><li style="list-style-type:circle">정보보안 3요소 : 무결성, 기밀성, 가용성 (무기가)</li></ul></li></ul><p id="0ab97c4e-ef3d-4995-a7a4-4e7e30981275" class="">
+</p><ol type="1" id="cf606940-eb24-4bd6-a684-4bb9b1eae1a6" class="numbered-list" start="82"><li>어떤 외부 컴퓨터가 접속되면 인가 여부를 점검해서 인가된 경우에는 접속이 허용되고 그 반대의 경ㅇ우에는 거부할 수 있는 접근제어 유티리는 ?<strong>  tcp wrapper</strong><ul id="1f732c81-4dd8-4529-8342-c0bfa454541b" class="bulleted-list"><li style="list-style-type:disc">tci/ip통신애서<strong> tcp는 3-handshake를 통해 통신이 원할히 이뤄질 수 있게</strong> 통합한다.</li></ul></li></ol><p id="bb10b608-99c2-46f7-b48f-3478ff5c8b7c" class="">
+</p><ol type="1" id="790eb43c-0ca5-4395-969f-8b4b79a64e70" class="numbered-list" start="83"><li>기기를 키오스크에 갖다 대면 원하는 데이터를 바로 가져올 수 있는 기술로 10cm 이내 근접거리에서 기가급 속도로 데이터 전송이 가능한 초고석 근무선(NFC : Near File Field Communication) 기술은? Zing <ul id="b7d16c07-02f4-4500-8949-582ecbe09f99" class="bulleted-list"><li style="list-style-type:disc">근거리로 가까이  “지아아앙 소리가 난다고 외우기 !</li></ul><ul id="04d49fbf-dd4b-4727-a8d0-1d03fccd40c1" class="bulleted-list"><li style="list-style-type:disc">BCN(Boardband Coverage Network)<ul id="627b3bea-bd5d-4795-9d49-ddac5d184d89" class="bulleted-list"><li style="list-style-type:circle">음성, 데이터, 유무선 등 통신 * 방송 * 인터넷이 융합된 품질 보장형 광대역 멀티미디어 서비스를 공간에 제한 없이 실시간으로 이용할 수 있는 차세대 네트워크 환경이다.</li></ul></li></ul><ul id="d6fb3605-c728-4aa5-a6ae-c4deaf71a831" class="bulleted-list"><li style="list-style-type:disc">Marine Navi<ul id="0737af3c-8f75-4610-8f69-b0957a943549" class="bulleted-list"><li style="list-style-type:circle">소형 선박에 설치된 GPS 기반 선박자동 식별장치(AIS : Automatic identification System)을 기본으로 주변 선박의 이동 속도와 위치를 파악한다.</li></ul></li></ul><ul id="6415dc95-6bc0-46ac-8fbd-c0a6a9ac72b8" class="bulleted-list"><li style="list-style-type:disc">C-V2X (Celluar Vehicle To Everything) <ul id="6db3e02b-e83b-4749-b098-a568ea6a3061" class="bulleted-list"><li style="list-style-type:circle">LTE, 5G와 같은 셀룰러 이동통신망을 통해 차량이 다른 차량이나 교통 인프라, 보행자, 네트워크 등과 정보를 서로 주고받는 차량 통신기술</li></ul></li></ul></li></ol><p id="1ff2e491-13e4-4f7c-9721-932b8838ea0f" class="">
+</p><ol type="1" id="7ee99f88-c0d2-4b94-a07b-0f77cc01c7d9" class="numbered-list" start="84"><li><strong>취약점 관리</strong>를 <strong>응용 프로그램</strong>의 설정 거리가 먼것은?<ul id="6e271a94-766c-4f59-8b79-59011dd9b3bc" class="bulleted-list"><li style="list-style-type:disc">서버 관리실 출입 통제 (x)<ul id="ffb7fb51-771d-4c47-8b3d-cd2e848d0239" class="bulleted-list"><li style="list-style-type:circle"><strong>취약점 분석 </strong>: 환경 및 시설 (도난, 정전-오작동, 천재지변), 하드웨어(고장-오작동, 데이터 유실), 소프트웨어(소프트웨어 장애, 정보유출, 데이터 소실)</li></ul></li></ul><ul id="1cdfba99-d819-4652-9ba0-6c6fec373370" class="bulleted-list"><li style="list-style-type:disc"><strong>실행 프로세스 권한 설정</strong></li></ul><ul id="1a5f0113-4440-4700-a454-02f4caf9973c" class="bulleted-list"><li style="list-style-type:disc"><strong>운영체제</strong>의 <strong>접근 제한</strong></li></ul><ul id="107a15f3-7ed6-423f-ac07-d7a292925758" class="bulleted-list"><li style="list-style-type:disc">운영 체제의 <strong>정보 수집 제한</strong><ul id="0da1ae4a-36fd-4386-b26b-e19577ac2b8e" class="bulleted-list"><li style="list-style-type:circle">응용프로그램 취약점 관리 <ul id="502ca822-9da1-4d9d-9188-d9b7259c34de" class="bulleted-list"><li style="list-style-type:square">패치관리(응용프로그램에 대한 패치 또는 서비스 팩 적용), 응용프로그램 실행 권한의 제한 필요, 운영체제의 접근 제한, 정보 수집 제한, 불필요한 서비스 및 악성 프로그램의 확인 및 제거, 시스템 무결성 검사 (주요 파일을 검사하여 변경내역 확인)</li></ul></li></ul></li></ul></li></ol><p id="27cb2583-08d8-4a16-a3eb-bcd7bb858885" class="">
+</p><ol type="1" id="146745d1-19fb-4a9a-987a-3214c0b6dac9" class="numbered-list" start="85"><li><strong>소프트웨어 개발 프레임워크</strong>와 관련한 설명으로가장 적절하지 않은 것은?</li></ol><ul id="abef0308-ff9b-425b-8c98-107fd319d7da" class="bulleted-list"><li style="list-style-type:disc"><strong>반제품 상태</strong>의 제품을 토대로 <strong>도메인별</strong>로 필요한 <strong>서비스 컨포넌트</strong>를 사용하여 <strong>재사용성 확대</strong>와 <strong>성능</strong>을 보장 받을 수 있게 하는 <strong>개발소프트웨어</strong>이다.</li></ul><ul id="ca6c69da-0e23-4d74-b080-c28149e488bd" class="bulleted-list"><li style="list-style-type:disc">라이브러리와는 달리 <strong>사용자 코드에서 프레임워크를 호출</strong>해서 사용하고 그에 대한 <strong>제어도 사용자 코드가 가지는 방식</strong>이다. (x) : 라이브러리<ul id="b383cda7-c1b1-4db0-81c6-a27c6a5cfa21" class="bulleted-list"><li style="list-style-type:circle"><strong>라이브러리</strong>가 <strong>사용자 코드에서 호출</strong>해서 사용하고 그에 대한 <strong>제어를 할 수 있다 VS</strong>. <strong>프레임워크</strong>는 <strong>이미 정해진 코드</strong>를 <strong>호출</strong>해 사용하고 <strong>자체적인 흐름</strong>을 가지고 있다.</li></ul></li></ul><ul id="2858e740-dd0c-4262-abdd-b711e03dfe95" class="bulleted-list"><li style="list-style-type:disc">설계 관점에 <strong>개발 방식을 패턴화</strong>시키기 위한 노력의 결과물인 <strong>소프트웨어 디자인 패턴</strong>을 <strong>반제품 소프트웨어 상태</strong>로 <strong>집적화 </strong>시킨것으로 볼 수 있다.</li></ul><ul id="1c1c5c85-0bbd-4625-b165-b5c4a7f96883" class="bulleted-list"><li style="list-style-type:disc">프레임워크의 동작 원리를 그 <strong>제어 흐름</strong>의 <strong>일반적일 프로그램 흐름과 반대로 동작</strong>한다고 해서 <strong>IoC</strong>(<strong>Inversion Of Control)</strong>이라고 설명하기도 한다. </li></ul><p id="6effd5d2-d332-479b-8a43-22c67f134b16" class="">
+</p><ol type="1" id="d6fb4f4d-3aff-4a00-88b3-b025327fc208" class="numbered-list" start="86"><li><strong>클라우드 기반 HSM</strong>(<strong>Cloud-based Hardware Security Module</strong>)에 대한 설명으로 틀린것은?</li></ol><ul id="8a0c5dcf-c0ef-41c1-b4c1-1daf8c3be30b" class="bulleted-list"><li style="list-style-type:disc"><strong>클라우드 </strong>(데이터 센터) 기반 <strong>암호화 키 생성</strong>, <strong>처리</strong>, <strong>저장 </strong>등을 하는 보안 기기이다.</li></ul><ul id="fabd832a-2161-40f0-b86e-396fc16efa04" class="bulleted-list"><li style="list-style-type:disc">국내에서는 <strong>공인인증제의 폐지</strong>와 <strong>전자서명법 개정을 추진</strong>하면서 클라우드 HSM 용어가 자주 등장하였다.</li></ul><ul id="831ab4f5-c91f-4ef9-ba16-09d3e4237747" class="bulleted-list"><li style="list-style-type:disc"><strong>클라우드</strong>에 인증서를 저장하므로 <strong>기존 HSM 기기</strong>나 <strong>휴대폰</strong>에 <strong>인증서를 저장해 다닐 필요가 없다</strong>.</li></ul><ul id="c1dc7959-69a6-4f2a-b485-97f6631b4a5a" class="bulleted-list"><li style="list-style-type:disc">하드웨어가 아닌 <strong>소프트웨어적</strong>으로만 구현되기 때문에 <strong>소프트웨어 식 암호 기술</strong>에 내재된 <strong>보안 취약점</strong>을 해결할 수 없다는 것이 <strong>주요 단점</strong>이다. (x)<ul id="2e28a49d-a8f3-4bd4-900d-17fed87c2c65" class="bulleted-list"><li style="list-style-type:circle"><strong>하드웨어적</strong>으로 구현되므로 <strong>소프트웨어식 암호 기술</strong>에 내재된 <strong>보안 취약점</strong>을 <strong>해결</strong> 할 수 있다.</li></ul></li></ul><p id="96976db7-3fc4-47b4-af09-eb9ea3b51ffe" class="">
+</p><p id="2a48d2b3-0f43-497e-9dd5-a2a0de608b01" class="">
+</p><ol type="1" id="0aa56007-83d8-4232-b37e-c429b4af259c" class="numbered-list" start="87"><li>다음 내용이 설명하는 기술로 가장 적절한것은? Mesh(그물) Netowrk </li></ol><ul id="cdaa0e06-ca27-467d-9424-03d8c8404922" class="bulleted-list"><li style="list-style-type:disc"><strong>다른 국</strong>을 향하는 <strong>호출</strong>이 <strong>중계에 의하지 않고 직접 접속</strong>되는 <strong>그물모양의 네트워크</strong>이다.</li></ul><ul id="f62f5052-a5af-42dd-8724-71dd0e4a2d89" class="bulleted-list"><li style="list-style-type:disc"><strong>통신량이 많은</strong> <strong>비교적 소수</strong>의 국 사이에 구성될 경우 <strong>경제적</strong>이며 <strong>간편</strong>하지만 <strong>다수의 국 사이</strong>에는 <strong>회선이 세분화</strong>되어 <strong>비경제적</strong>일수 도 있다.</li></ul><ul id="c3c213fe-1f71-4d2f-9230-32f7406aa6b1" class="bulleted-list"><li style="list-style-type:disc">해당 형태의 <strong>무선 네트워크</strong>의 경우 <strong>대용량을 빠르고 안전하게 전달</strong>할 수 있어 <strong>행사장이나 군</strong> 등에서 많이 활용된다. </li></ul><p id="574e1a0e-ddcb-4627-8fae-45e65319d015" class="">
+</p><ol type="1" id="129514e0-d5c2-40e0-81ec-62d90aec1914" class="numbered-list" start="88"><li><strong>물리적 위협</strong>으로 인한 문제에 해당하지 않은 것은?</li></ol><ul id="0f5111d0-649e-4e3c-8826-4080d5ae0ec5" class="bulleted-list"><li style="list-style-type:disc">화재, 홍수 등 천재지변으로 인한 위협</li></ul><ul id="42d40dae-a417-44e3-8a7f-189ad4290130" class="bulleted-list"><li style="list-style-type:disc">하드웨어 파손, 고장으로 인한 장애</li></ul><ul id="3c882ed2-f998-4312-b7cb-0519f31de000" class="bulleted-list"><li style="list-style-type:disc">방화 ,테러로 인한 하드웨어와 기록장치를 물리적으로 파괴하는 행위</li></ul><ul id="ab527662-743f-4163-aeae-df5b7f42266b" class="bulleted-list"><li style="list-style-type:disc"><strong>방화벽 설정</strong>의 잘못된 조작으로 인한 네트워크 , 서버 보안 위협(X) - <strong>기술적 위협</strong></li></ul><p id="a1444d0f-a468-4529-9ef2-b01efbc1d63a" class="">
+</p><ol type="1" id="0ab877c8-252d-4c60-bf4d-28baba3275da" class="numbered-list" start="89"><li>악성코드의 유형 중 다른 컴퓨터의 취약점을 이용하여 <strong>스스로 전파</strong>하거나 <strong>메일로 전파</strong>되며 <strong>스스로를 증식</strong>하는것은? <strong>Worm</strong></li></ol><ul id="2e8d407d-b19a-462f-84e7-16fde8680449" class="bulleted-list"><li style="list-style-type:disc"><strong>Rogue Ware </strong>(Rogue security software : <strong>가짜 백신 소프트웨어</strong>) : 사용자가 <strong>컴퓨터에 바이러스가 있다고 잘못 믿게 하고</strong> 컴퓨터에 <strong>실제로 악성 프로그램을 설치</strong>하거나 <strong>가짜 악성 프로그램 제거 도구</strong>에 대한 <strong>비용을 지불</strong>하도록 설득함, <strong>공포심</strong>을 통해 사용자를 조종</li></ul><ul id="5238e45a-433f-4b3b-b726-94dcdacc18b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Adware </strong>: 특정 소프트웨어를 실행할때 또는 <strong>자동으로 활성화되는 광고프로그램</strong>으로 이 자체는 악성코드로 보기는 힘들지만 <strong>무분별한 광고 팝업</strong>을 뜨게 하는 등의 <strong>악용 위험성으로 위험코드로 분류</strong>되기도 함</li></ul><ul id="1fc200b6-b17e-4659-965e-c6b73b050ada" class="bulleted-list"><li style="list-style-type:disc"><strong>Reflection Attack</strong>(반사공격): <strong>송신자</strong>가 <strong>생성한 메시지</strong>를 <strong>가로챈 공격자</strong>가 그 <strong>메시지를 다시 송신자에게 재전송</strong>하여 <strong>접근 권한을 얻는 형태</strong>의 공격방법<ul id="658bc8fb-cc0e-4a13-be44-3f30e2ce7830" class="bulleted-list"><li style="list-style-type:circle">사전에 <strong>암호 키를 공유</strong>한 <strong>송신자</strong>와 <strong>수신자</strong>는 <strong>상대방 식별을 위하여</strong> 각각 <strong>난수값을 생성</strong>하여 전송하고 이에 대한 <strong>암호값</strong>을 <strong>요청</strong>한 후 <strong>수신된 암호값</strong>을 <strong>복호화</strong>하여 그 결과 값이 자신이 송신하였던 <strong>난수값</strong>과 <strong>일치</strong>하는지 여부를 확인하여 <strong>상대방을 인증한다</strong>. 이때 <strong>공격자</strong>는 송신자가 보낸 <strong>난수값에 대한 암호값</strong>을 알기 위해 <strong>송신자가 보낸 난수값을 송신자에게 재전송</strong>하고 이를 <strong>수신자의 난수 값</strong>으로 인식한 <strong>송신자</strong>는 이에대한 <strong>암호값을 공격자에게 전송</strong>하게 된다. 공격자는 이 암호값을 다시 송신자에게 전송함으로써 <strong>자신을 인증시키고 그 결과 접근 권한을 획득</strong></li></ul></li></ul><p id="fea5ed4d-cead-4c6b-9b78-1739f704f6bd" class="">
+</p><p id="762bbbce-66da-4684-99bb-1a1d752884d6" class="">90 시스템 공격 기법 중 하나로 <strong>허용범위 이상의 ICMP 패킷을 전송</strong>하여 대상 <strong>시스템의 네트워크를 마비</strong>시킨다 :  <strong>Ping of Death</strong>(ICMP가 패킷을 많이 쏘니 핑 하고 죽어삣네)</p><ul id="0c79445a-1717-4e59-ab09-5ed94547e1a0" class="bulleted-list"><li style="list-style-type:disc"><strong>Session Hijacking(세션 가로채기)</strong> : 컴퓨터 시스템의 정보나 서비스에 무단으로 접근하기 위해 유효한 컴퓨터 세션(세션키라고도 함)을 이용하는것, 일반적인 예로 두 컴퓨터 간에 활성화된 상태(즉 로그인된 상태)에서 공격자가 피 공격자의 로그인 정보를 활용하여 자신에게 필요한 행위를 하는것을 뜻한다.</li></ul><ul id="966ec56d-97a5-41f1-9f35-277d54dc4364" class="bulleted-list"><li style="list-style-type:disc"><strong>Piggyback Attack(피그백 공격)</strong> : 공격자가 다른 사용자의 연결에서 계정을 사용하지 않는 비활성 기간(비활성 간격)을 이용하여 시스템 엑세스(접근)한다. 이는 간선(회선 간) 공격이라고도 불린다. 시스템에 대한 합법적인 권한을 가진 사용자가 시스템에 접근할때 활성화된 기간(직접 로그인을 받아야 하는 상황)에는 공격자가 비활성화된 기간(합법자 사용자가 시스템에 접근 인증을 받는 상황)에 마치 사용자와 관련있는 사람인 듯이 태그를 붙여 몰래 뒤따라 들어가는 것이라 할 수 있다.</li></ul><ul id="05c5158c-6323-44d1-b134-1139cae9ed6f" class="bulleted-list"><li style="list-style-type:disc"><strong>XSS (크로스 사이트 스크립팅)</strong> : 웹사이트에 악성 스크립트를 주입하는 행위, 공격자가 상대방의 브라우저에 스크립트가 실행되도록 해 사용자의 세션을 가로채거나 웹사이트를 변조하거나 악의적 콘텐츠를 삽입</li></ul><p id="ac805b0d-e7ce-42f4-943f-0556a47e9677" class="">
+</p><ol type="1" id="8bf13d40-95cc-4dd9-95f8-cffd43c31028" class="numbered-list" start="91"><li>다음 소프트웨어는? 소프트웨어 개발프레임워크</li></ol><ul id="581a260b-785e-4fc5-887d-2304114211ed" class="bulleted-list"><li style="list-style-type:disc">개발해야 할 <strong>애플리케이션</strong>의 일부분이 <strong>이미 내장된 라이브러리</strong>로 구현되어 있따.</li></ul><ul id="44394844-f194-47a7-b854-8fa230f2fe08" class="bulleted-list"><li style="list-style-type:disc">따라서 그 기반이 되는 <strong>이미 존재하는 부분을 확장 및 이용</strong>하는 것으로 볼 수 있다.</li></ul><ul id="6e5c4da8-31cf-4331-a56a-7153b9c236e1" class="bulleted-list"><li style="list-style-type:disc">JAVA기반의 대표적인 소프트웨어로 <strong>스프링이 </strong>있다.</li></ul><p id="a4d1fdbc-0a96-4bfb-adc4-bc0a9bff6579" class="">
+</p><ol type="1" id="ae4bc32f-16cf-446a-b9e5-50249b051626" class="numbered-list" start="92"><li>소프트웨어 개발 방법론 중 <strong>애자일(Agile)방법론</strong>의 특징과 가장 거리가 먼 것은?</li></ol><ul id="f0a0dd40-30d1-42f3-989b-9231a22ce8e2" class="bulleted-list"><li style="list-style-type:disc">각 단계의 <strong>결과가 완전히 확인 </strong>된 후 다음 <strong>단계 진행 (x) : 폭포수 모형</strong></li></ul><ul id="c160372a-ccd3-41bb-8c3d-8aa2c10a09d6" class="bulleted-list"><li style="list-style-type:disc">소프트웨어 개발에 참여하는 <strong>구성원들 </strong>간의 <strong>의사소통 중시</strong></li></ul><ul id="90900632-fa54-4d65-b127-cef26aedefd8" class="bulleted-list"><li style="list-style-type:disc"><strong>환경변화</strong>에 대한 <strong>즉시 대응</strong></li></ul><ul id="e49d39ae-88f8-4ba6-879f-9aa5c2e0bc25" class="bulleted-list"><li style="list-style-type:disc"><strong>프로젝트 상황</strong>에 따른 <strong>주기적 조정</strong> </li></ul><p id="52fce7e3-bb51-4f3e-ad92-20525204cde9" class="">
+</p><ol type="1" id="b33b19a4-be21-4e7c-b9a3-8d01590df36e" class="numbered-list" start="93"><li>대칭 암호 알고리즘과 비대칭 암호 알고리즘에 대한 설명으로 틀린것</li></ol><ul id="6f5c0744-9b6f-40ab-8af8-f14cba9825eb" class="bulleted-list"><li style="list-style-type:disc"><strong>대칭 암호 알고리즘</strong>은 비교적 <strong>실행속도가 빠르기 때문</strong>에 다양한 <strong>암호의 핵심 함수</strong>로 사용될 수 있다. </li></ul><ul id="b9883eef-ad80-4cd1-9451-1ad7cb0f96f1" class="bulleted-list"><li style="list-style-type:disc"><strong>대칭 암호 알고리즘</strong>은 비밀키 전달을 위한 <span style="border-bottom:0.05em solid">키 교환이 필요하지 않아 </span><strong>암호화 및 복호화의 속도가 빠르다</strong>.(x)<ul id="8f9ee09a-33f6-4b2a-a086-c03c4ee218ce" class="bulleted-list"><li style="list-style-type:circle">대칭 암호화 알고리즘은 키 교환이 필요하기 때문에 키를 교환하는 중 키가 탈취될 수 있다는 문제가 있다. 공개 암호화 방식에 비해 속도가 빠르다.</li></ul></li></ul><ul id="5f21ef28-fe19-437f-a310-2496866565e2" class="bulleted-list"><li style="list-style-type:disc"><strong>비대칭 암호 알고리즘</strong>은 자신만이 보관하는 <strong>비밀키를 이용</strong>하여 <strong>인증</strong>, <strong>전자서명 </strong>등에 적용이 가능하다.</li></ul><ul id="386a6517-57ff-4f17-8525-3f933d192f2d" class="bulleted-list"><li style="list-style-type:disc">대표적인 <strong>대칭키 암호 알고리즘</strong>으로 <strong>AES, IDEA</strong>등이 있다. </li></ul><p id="68f419a8-c4cd-49c5-93dc-734649c01e05" class="">
+</p><ol type="1" id="726d2025-6bd7-4293-9f45-38abc6888a9f" class="numbered-list" start="94"><li>두 명의 개발자가 5개월에 걸쳐 10000라인의 코드를 개발하였을때 월별 (man-month)<strong>생산성 측정</strong>을 위한 계산방식으로 가장 적합한것은? <strong>10000/(5X2)</strong></li></ol><ul id="b47bb560-2af6-41fb-afff-fa79cf33f4a9" class="bulleted-list"><li style="list-style-type:disc">생산성 = LOC / 노력(인월) = <strong>10000/(5X2)</strong></li></ul><ul id="0f7510c4-9f00-42e3-b6a9-4f52dfd4844a" class="bulleted-list"><li style="list-style-type:disc"><strong>노력 측정 </strong>= 개발기간 X 투입인원</li></ul><ul id="ad29d21d-4e5b-411f-a480-f604fcd75096" class="bulleted-list"><li style="list-style-type:disc"><strong>개발비용 측정 </strong>= 개발기간 X 투입인원 x 단위비용</li></ul><ul id="285f620e-5a49-4a5b-a8b5-f4f43707a9d4" class="bulleted-list"><li style="list-style-type:disc"><strong>개발 기간 측정 </strong>= 예측전 LOC(라인) / (투입인원 X 1인당 월평균 LOC)</li></ul><ul id="e934c5f2-535c-4093-93fc-2bdaca6fd34e" class="bulleted-list"><li style="list-style-type:disc"><strong>생산성 측정 </strong>= 개발된 LOC / (투입인원 X 개발기간) </li></ul><p id="c37e28a3-fbb4-4c9b-99ad-2b20813bc928" class="">
+</p><ol type="1" id="2eede897-cfbe-4125-8a82-f4d6ed686125" class="numbered-list" start="95"><li><strong>접근 통제 방법 </strong>중 조직내에서 <strong>직무, 직책 </strong>등 <strong>개인의 역할에 따라 </strong>결정하여 부여하는 접근 정책은 ? <strong>RBAC</strong></li></ol><ul id="c124c526-b661-48bd-b09a-169c16aa87ca" class="bulleted-list"><li style="list-style-type:disc"><strong>RBAC </strong>( Role Based Access Control) :<strong> 역할 기반 접근 통제</strong> , 권한이 있는 사용자들만 접근할 수 있는 보안방법, 개벌적인 <strong>신분이 아니라</strong> 조직 내 <strong>그룹/ 역할에 따라 부여</strong></li></ul><ul id="c92d25db-6cc6-4265-98ab-27c76c35bdf8" class="bulleted-list"><li style="list-style-type:disc"><strong>DAC </strong>(Disrctionary Access Control) <strong>임의</strong> 접근통제, <strong>사용자 또는 신분</strong></li></ul><ul id="fea7e704-486f-41bc-86ea-e6ea528c9b7c" class="bulleted-list"><li style="list-style-type:disc"><strong>MAC </strong>(Mandatory Access Control) <strong>강제</strong>접근 통제, <strong>미리 정해진 자원</strong>의 <strong>보안 레벨</strong>과 사용자에게 <strong>허락된 접근권한 비교</strong></li></ul><p id="14c586d0-55a0-4c4b-8c69-afa545d69ebb" class="">
+</p><ol type="1" id="35720288-5848-4ee2-aa21-ef836cb1aa59" class="numbered-list" start="96"><li><strong>COCOMO</strong> (Constructive Cost Model)모형의 특징이 아닌것은?</li></ol><ul id="73612188-bcb6-4601-b450-f322a41aa480" class="bulleted-list"><li style="list-style-type:disc">프로젝트를 완성하는데 필요한 <strong>man-month(투입노력)</strong>로 산정 결과를 나타낼 수 있다.</li></ul><ul id="6827d388-5fe1-4661-ae0e-73ea37c23604" class="bulleted-list"><li style="list-style-type:disc"><strong>보헴(Boehm)이 제안</strong>한 것으로 <strong>원시코드 라인 수에 의한 비용 산정 기법</strong>이다.<ul id="6f37e52d-a820-452f-93e4-d090c498d70f" class="bulleted-list"><li style="list-style-type:circle">원시 프로그램 규모(LOC)에 의한 비용 산정 기법</li></ul></li></ul><ul id="8c36dd95-f7a3-44ed-be3a-1338f8a41180" class="bulleted-list"><li style="list-style-type:disc"><strong>비교적 작은 규모</strong>의 <strong>프로젝트 기록</strong>을 통계 분석하여 얻은 결과를 반영한 모델이며 <strong>중소 규모 소프트웨어 </strong>프로젝트 비용 <strong>추정에 적합</strong>하다.</li></ul><ul id="d5e1baf3-2615-4141-a82d-1e91bdc708fa" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">프로젝트 개발 유형에 따라</span><strong> object, dynamic, function의 3가지 모드로</strong> 구분한다. : 럼바우 (x)<ul id="54bf6a48-6180-4797-8023-310a378312fd" class="bulleted-list"><li style="list-style-type:circle"><strong>개발유형에 </strong>따라 조직형(<strong>Organic</strong>) 5만라인 이하, 사무 처리용, 업무용, 과학용 소프트웨어 개발에 적합, 반분리형(Semi-Detached) 30만 라인 이하 , 컴파일러, 인터프리터 개발에 적합, 내장형(Embedded) 30만 라인 이상, 미사일 유도 시스템, 실시간 처리 시스템 개발에 적합 로 구분한다</li></ul><ul id="cc47dd18-ef03-4f15-bd3c-e50b26053bb4" class="bulleted-list"><li style="list-style-type:circle"><strong>럼바우(Rumbaugh) ⇒ 객체 object,동적 dynamic, 기능 function의 3가지</strong></li></ul></li></ul><p id="a189680b-1323-4572-8876-776124f034b1" class="">
+</p><ol type="1" id="850f2121-f9dc-46aa-9db9-7365f06ab26b" class="numbered-list" start="97"><li>각 사용자 인증의 유형에 대한 설명으로 가장 적절하지 않은 것은?</li></ol><ul id="ea580872-b7e3-423f-886c-b097d5a7bba4" class="bulleted-list"><li style="list-style-type:disc">지식 : 주체는 ‘그가 알고 있는 것’을 보여주며 예시로는 패시워드, PIN 등이 있다.</li></ul><ul id="b0cf9d14-1800-4bc1-abd0-741ad3b2eacc" class="bulleted-list"><li style="list-style-type:disc">소유 : 주체는 ‘그가 가지고 있는 것’을 보여무조 예시로는 토큰, 스마트카드 등이 있다.</li></ul><ul id="b8038a05-3156-454d-be02-27258e585ca7" class="bulleted-list"><li style="list-style-type:disc">존재: 주체는 ‘그가 대체하는 것’을 보여주며 예시로는 패턴 , QR등이 있다. (x) <ul id="dce50557-4542-4922-b0b3-4cd4ee25f935" class="bulleted-list"><li style="list-style-type:circle">‘그가 나타내는것’ , 홍채 , 지문</li></ul></li></ul><ul id="ed37a715-9ad5-4be5-86ac-d766f450de41" class="bulleted-list"><li style="list-style-type:disc">행위 : 주체는 ‘그가 하는 것’을 보여주며 예시로는 서명, 움직임, 음성 등이 있다.</li></ul><p id="de73a5af-220b-4fae-8e2c-2b28f8d41594" class="">
+</p><ol type="1" id="5c08a7e4-f553-4b8e-842c-03129b395d6b" class="numbered-list" start="98"><li>시스템의 사용자가 로그인하여 명령을 내리는 과정에 대한 시스템의 동작 중 다음 설명에 해당하는 것은? <strong>Authentication (인증)</strong><ul id="b33ab3e0-7015-4663-9e7c-ca33788251fb" class="bulleted-list"><li style="list-style-type:disc">자신의 <strong>신원(Identity)를 시스템에 증명</strong>하는 과정이다.</li></ul><ul id="da6785cf-7350-4746-ac0f-d7e1b38617b8" class="bulleted-list"><li style="list-style-type:disc"><strong>아이디와 패스워드를 입력</strong>하는 과정이 가장 일반적인 예시라고 볼 수 있다.<ul id="260499b6-590e-4267-a467-580c22e01164" class="bulleted-list"><li style="list-style-type:circle"><strong>인증(Authentication)은</strong> 자<strong>신의 신원을 시스템에 증명</strong>하는 과정, 인가(Authorization)와 헷갈리지 않게 혼동 주의 ! </li></ul></li></ul></li></ol><p id="bf2768a9-28c8-44f3-8062-edbea923758c" class="">
+</p><ol type="1" id="8761a23d-ab0b-4b2f-a367-48139d8627f5" class="numbered-list" start="99"><li>다음 IT 기술은? <strong>SDN(Soft Defined Networking)</strong><ul id="f47e3f91-47a9-47c5-a4ec-fbfdfd598e92" class="bulleted-list"><li style="list-style-type:disc"><strong>네트워크</strong>를 <strong>제어부, 데이터 전달부</strong>로 <strong>분리</strong>하여 네트워크 관리자가 보다 효율적으로 네트워크를 제어, 관리할 수 있는 기술</li></ul><ul id="c060f3a1-48fc-48f2-b27a-0a5467677547" class="bulleted-list"><li style="list-style-type:disc">기존의 <strong>라우터, 스위치 </strong>등과 같이 하드웨어에 의존하는 <strong>네트워크 체계에서 안정성</strong>, <strong>속도, 보안 </strong>등을 <strong>소프트웨어로 제어, 관리하기 위해 개발됨</strong></li></ul><ul id="fbd02c3b-3276-44f5-9360-852a9689cf79" class="bulleted-list"><li style="list-style-type:disc">네트워크 장비의 <strong>펌웨어 업그레이드</strong>를 통해 <strong>사용자의 직접적인 데이터 전송 경로 관리가 가능</strong>하고 <strong>기존 네트워크에는 영향을 주지 않으면서</strong> 특정 서비스의 전송 경로 <strong>수정을 통하</strong>여 <strong>인터넷상에서 발생하는 문제를 해결 할 수 있음 </strong>: </li></ul></li></ol><p id="bc6d0156-0e2d-44d6-9276-15aabc89fa8f" class=""><div class="indented"><ul id="8916e29e-2f24-4c4d-b4cb-6d879dfae2d4" class="bulleted-list"><li style="list-style-type:disc"><strong>NFS (Network File System) </strong>: <strong>네트워크 </strong>상에서 <strong>공유되는 파일 시스템</strong>, <strong>다른 원격 호스트의 파일 시스템</strong>을 <strong>로컬 디스크에 접근하듯</strong> 간단하게 접근하여<strong> 자신의 디렉토리 </strong>처럼 사용 할 수 있다.</li></ul><ul id="b9d6d0a8-9529-4a30-9a61-8be7d498df59" class="bulleted-list"><li style="list-style-type:disc"><strong>Network Mapper:</strong> 네트워크 보안을 위한 <strong>유틸리티</strong>, 네트워크의 <strong>보안을 위해</strong> <strong>물리적 연결</strong>과<strong> 어떤 서버와 운영 체제가 작동 중인지</strong> 따위를 조사하는 응용프로그램</li></ul><ul id="a69f96e1-a4a8-4a06-a754-517c1637589c" class="bulleted-list"><li style="list-style-type:disc"><strong>ADE Network</strong> (Activity On Edge Network )  어떤 프로젝트를 <strong>마치기까지 수행되는 작업의 각 단계(상태)를 그래프의 정점(Vertex)으로 표현</strong>하고 작업 하나가 완료되어 다음 단계로 넘어가는 시간을 <strong>그래프의 간선 (Edge) 로 나타낸 방향 그래프</strong></li></ul></div></p><p id="2d60aa22-5ac0-4607-ab5f-ae38339db5f9" class="">
+</p><ol type="1" id="37010257-be07-4876-872a-c9a7eb8e63c3" class="numbered-list" start="100"><li>프로젝트 일정 관리 시 사용하는 <strong>PERT차트</strong>에 대한 설명에 해당하는 것은</li></ol><ul id="df14688b-f19e-479a-b168-03552934a96b" class="bulleted-list"><li style="list-style-type:disc">각 작업들이 <strong>언제 시작하고 언제 종료하는지에 대한</strong> 일정을 <strong>막대 도표</strong>를 이용하여 표시한다. : GANT 차트 (<span style="border-bottom:0.05em solid"><strong>PERT 차트</strong></span><span style="border-bottom:0.05em solid">는 </span><span style="border-bottom:0.05em solid"><strong>네트워크 도표</strong></span><span style="border-bottom:0.05em solid">를 이용</span>)</li></ul><ul id="dbac79b1-d3a5-453d-a67d-3ae4968746c4" class="bulleted-list"><li style="list-style-type:disc"><strong>시간선(</strong>Time-Line)차트라고도 한다. : <strong>GANT 차트</strong></li></ul><ul id="01cc1e7a-2513-4ea0-b7e7-a53be87ed196" class="bulleted-list"><li style="list-style-type:disc"><strong>수평 막대의 길이</strong>는 <strong>각 직업의 기간을 나타낸다 </strong>: GANT 차트.</li></ul><ul id="0f7ae3d8-74c6-4554-a1d2-18f48c1d3ab6" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">작업들의 </span><span style="border-bottom:0.05em solid"><strong>상호 관련성</strong></span><span style="border-bottom:0.05em solid">, </span><span style="border-bottom:0.05em solid"><strong>결정 경로</strong></span><span style="border-bottom:0.05em solid">, </span><span style="border-bottom:0.05em solid"><strong>경계 시간</strong></span><span style="border-bottom:0.05em solid">, </span><span style="border-bottom:0.05em solid"><strong>자원 할당 </strong></span><span style="border-bottom:0.05em solid">등을 제시한다. (O)</span></li></ul><p id="663b6c08-376a-4adb-9aaf-3954f2b75953" class="">
+</p><p id="ee66dced-e226-424b-91e0-34dd5774ac22" class="">
+</p><p id="f0dfd38a-8947-48a5-9bf8-26ecba1bca5b" class="">
+</p><p id="8dd8914a-feaf-4e10-848f-3557885e7c94" class="">
+</p><p id="0f1c9dbe-a37b-4657-94ce-1288839a6bf8" class="">
+</p><p id="320364b1-a84f-4bc8-851a-8ec31d6d613d" class="">
+</p><p id="ba72aa43-34a5-43a3-a00a-c16e120e7c81" class="">
+</p><p id="924fb443-be25-4c4d-a6b5-04d854104859" class="">
+</p><p id="e95e474c-0c02-4a66-9d5b-eba18205aa86" class="">
+</p><p id="d4e74f0f-9887-4797-abad-bc23cd91f36d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

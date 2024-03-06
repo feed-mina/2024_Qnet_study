@@ -1,0 +1,844 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>4장 자료의 구조</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="29dab69e-5fb1-4acc-a88f-4f1ea89fcb6d" class="page sans"><header><h1 class="page-title">4장 자료의 구조</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 17일</time></td></tr></tbody></table></header><div class="page-body"><p id="e22777b7-456d-4da2-bc83-843239071223" class="">
+</p><blockquote id="1e539369-9887-447f-a90a-168a6ba77022" class=""><strong>스택 (Stack)</strong></blockquote><ol type="1" id="c682e035-00a2-4622-9bc2-e85b18dc8f8f" class="numbered-list" start="1"><li>리스트 내의<strong> 데이터 삽입, 삭제</strong>가 <strong>한쪽 끝</strong>에서 이루어지는 데이터 구조를 무엇이라 하는가?</li></ol><ul id="3f6fdabb-4a90-457b-8c6a-b4bb8c2a1d89" class="bulleted-list"><li style="list-style-type:disc">스택<ul id="e527a812-7701-4550-8f82-516375da99fd" class="bulleted-list"><li style="list-style-type:circle">스택의 가장 큰 특징은 삽입과 삭제가 리스트의 한쪽 끝에서 이루어진다는 점이다.</li></ul></li></ul><p id="500ec2fe-a104-48ff-ac9d-5391e5490fb0" class="">
+</p><ol type="1" id="2988a9e9-d56e-46c0-9b0a-acf8dce9bc6d" class="numbered-list" start="2"><li>다음 설명이 의미하는 내용과 가장 관련이 있는것은</li></ol><ul id="6c722d9d-e130-45e1-9b18-1f1b618afb4d" class="bulleted-list"><li style="list-style-type:disc">An ordered list in which insertions and deletions are made at<strong> one </strong>and <strong>called the top</strong><ul id="1a66072a-49e7-476c-9bb3-3564f6c9f32f" class="bulleted-list"><li style="list-style-type:circle">Stack</li></ul></li></ul><ul id="02333576-8d06-4a5f-b8b5-89a5d3caaf0c" class="bulleted-list"><li style="list-style-type:disc">순서 리스틀서<strong> Top이라 불리는 한쪽 끝에서 삽입과 삭제</strong>가 일어나는 것</li></ul><p id="2d6ea2bd-d284-4f88-bb3a-a84d3d58d4c6" class="">
+</p><ol type="1" id="7886c64f-35dd-464f-a7fe-60f376be1cb4" class="numbered-list" start="3"><li>스택 알고리즘에서 T가 스택 포인터이고 m이 스택의 길이일때 서브루틴 AA가 처리해야 하는 것은?</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="98667a56-bfe6-435f-9df8-b890879ce485" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">T &lt;- T + 1
+If T &gt; m Then
+	goto AA
+Else
+	X(T) &lt;- Y</code></pre><ul id="ddfb6879-d5e2-4bbd-b63f-f43ac8970616" class="bulleted-list"><li style="list-style-type:disc">스택 포인터를 증가시켰는데 스택의 포인터가 스택의 크기를 나타내는 m보다 커져 자료를 삽입할 수 없게 되는 경우 를 의미한다. 이때는 오버플로 처리를 한다.</li></ul><p id="5e69d8f7-0a96-4994-a8ee-30454770f7df" class="">
+</p><p id="c1b087a6-ef69-4a82-ac94-0ec4fd41522b" class="">
+</p><p id="bd83a6e8-85a3-492c-bb23-a8ae861f102d" class="">
+</p><p id="a3e34bfd-ea40-437d-8faa-690135857724" class="">
+</p><ol type="1" id="ed166ae4-c3ec-4296-b883-23fa53079785" class="numbered-list" start="4"><li>스택(Stack)의 응용 분야와 거리가 먼 것은?</li></ol><ul id="f2ce4bbd-c490-40b7-84f0-dffab0684ef1" class="bulleted-list"><li style="list-style-type:disc"><strong>인터럽트의 처리</strong></li></ul><ul id="4128d2a7-4ef7-4ad7-8871-0c15415dd22a" class="bulleted-list"><li style="list-style-type:disc"><strong>수식의 계산</strong></li></ul><ul id="835fcce6-b8b9-4b3b-a926-bd3547683a49" class="bulleted-list"><li style="list-style-type:disc"><strong>서브 루틴의 복귀 번지 저장</strong></li></ul><ul id="a26f30b8-f0de-464b-9a64-bdc82c7768b2" class="bulleted-list"><li style="list-style-type:disc">운영 체제의 작업 스케줄링<ul id="8973ca43-13a9-4146-a652-12da1b1a9856" class="bulleted-list"><li style="list-style-type:circle"><strong>운영체제의 작업 스케줄링은 Queue 큐를 이용</strong>한다.</li></ul></li></ul><p id="e06feca1-a6a5-4d60-a88b-ed769c0c90b4" class="">
+</p><p id="c2e1f30d-e6ec-4daa-a2a0-68138dc0af13" class="">
+</p><ol type="1" id="2c2396c9-42fb-4b39-b311-c6f76a76b095" class="numbered-list" start="5"><li>Which of the following is a linear list in that elements are accessed, <strong>created and deleted in a last-in-first-out order</strong>?</li></ol><ul id="857f70b5-672e-4ca0-a66e-3bf51a0f1543" class="bulleted-list"><li style="list-style-type:disc"><strong>Queue</strong></li></ul><ul id="26de599e-a93d-434b-8514-d00f8cc3d077" class="bulleted-list"><li style="list-style-type:disc">요소들이 <strong>후입선출</strong>(Last-In-Fart-Out)의 순서로 접근되고 생성 및 삭제되는 순차 리스트</li></ul><p id="b14ccf3e-8f0b-4d3a-ad16-4abd5f317fde" class="">
+</p><p id="36c09e25-b30e-47c0-8d0a-7a0157b2c8d4" class="">
+</p><ol type="1" id="b0c4dcce-87a5-469c-aa8c-2e8cf79ac1d7" class="numbered-list" start="6"><li>순서가 A, C , B, D로 정해진 입력 자료를 스택에 입력하였다가 출력한 결과가 될 수 없는 것은? B-A-D-C 순은 출력 할 수 없다.</li></ol><p id="5a9ee5ef-a4be-4f04-b0f9-0b624d0c6ef5" class=""> 단 보기 항에서 좌측 값부터 먼저 출력된 순서이다.</p><ul id="7d7802f4-abfd-49d9-8ded-755c8dcc66e3" class="bulleted-list"><li style="list-style-type:disc">PUSH A - PUSH C - POP C -PUSH B - POP B - POP A - PUSH D - POP D</li></ul><p id="ad9d7a10-a88d-4716-bbaf-76764df5f547" class="">
+</p><ol type="1" id="23cb93cf-de75-4a7f-891e-24cfb8154f50" class="numbered-list" start="7"><li>스택(Stack)의 삽입 (Insert) 알고리즘이다. (   )안의 내용으로 옳게 짝지어진 것은 ( 단. n:스택의 크기, Top : 스택 포인터, S : 스택의 이름 )</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="32a064c8-e5d5-4073-b81f-e5b52b8b2e1b" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Procedure add
+	TOP = TOP (  ㄱ  ) 1 ㄱ = +
+	IF TOP (   ㄴ  ) n then (  ㄷ  ) ㄴ = &gt; , ㄷ = Overflow
+	else S[TOP} = Item</code></pre><p id="a7b4f1f0-260b-4267-b2b9-4a98b27524d9" class="">
+</p><p id="f3dfe62d-7590-4975-97d9-88e3e58b4a01" class="">삽입할 때는 삽입 하기 전에 먼저 스택 포인터(TOP)를 증가시키고 오버플로를 검사한 다음 아이템을 삽입합니다. 스택 포인터를 증가시키기 전에 오버플로를 검사했다면 자료를 스택에 넣기 전에 스택 포인터를 증가시킨다.</p><p id="7184bf20-46e9-408a-9ad6-e35dfd01814a" class="">
+</p><p id="900e02ac-4edb-4839-8564-ef0456a09327" class="">
+</p><blockquote id="71f4b00c-71b2-426d-8cae-42e094cd87f6" class="">큐(queue)와 데크(Deque)</blockquote><p id="c261b87f-0ca1-4424-9015-17ed03f557fd" class="">
+</p><ol type="1" id="54c29225-4609-43c5-b802-0cf37e19dbd4" class="numbered-list" start="1"><li>리스트에서<strong> FIFO(First in First Out)</strong>의 특성을 지닌 추상적 자료형으로서<strong> 시작과 끝을 표시하는 두개의 포인터를 갖는 자료 구조</strong>는?</li></ol><ul id="75144cab-9a2a-4546-9e3f-035baa146fee" class="bulleted-list"><li style="list-style-type:disc"><strong>큐</strong></li></ul><p id="d6fd2c9a-1a8b-4b60-b2e4-8c4422a8d450" class="">
+</p><p id="cf4ff2a0-143f-4829-88dd-0e9f0e4f2250" class="">
+</p><p id="abea6112-b4da-4c99-b2e3-4c5374816d4c" class="">2 노드의<strong> 삽입 작업은 선형 리스트의 한쪽 끝에서 제거 작업</strong>은 다른 쪽 끝에서 수행되는 잘 구조는?<strong> 큐</strong></p><ul id="5f146e4c-f651-499c-ba55-4df200ea3061" class="bulleted-list"><li style="list-style-type:disc">한쪽 끝에서 삽입과 삭제가 이루어지는 것은 스택, 한쪽에서는 삽입 반대쪽에서는 삭제가 이루어지는것은 큐, <strong>양쪽에서 삽입과 삭제가 모두 이루어지는 것은 데크</strong>이다.</li></ul><p id="bf5729be-5583-41ed-8bde-664616dacd21" class="">
+</p><p id="a6e14239-d1ba-4e62-9f5b-cfc308c475fe" class="">
+</p><p id="3fbe7c3c-8b39-4738-bcc5-96c8d964b3f6" class="">
+</p><ol type="1" id="77b6fab6-064c-4e0f-b499-00b2749f2eaa" class="numbered-list" start="3"><li>(  ) is an ordered list in which all insertions take place at one end, the rear, while aldeletions take place at the ohter end, the front</li></ol><p id="faab1488-f720-4e0b-a676-163a5dbccaf4" class="">A stack</p><ul id="f621a6e9-3b0c-426a-b219-d082c267d903" class="bulleted-list"><li style="list-style-type:disc">모든 삽입은 리어(Rea)라는 한쪽 끝에서 발생하고 모든 삭제는 프론트(Front)라는 다른 한쪽 끝에서 발생하는 순서리스트이다.</li></ul><p id="f1289541-f9ed-4fa8-bcad-436121b56d50" class="">
+</p><p id="04c960a7-227e-42a2-88d2-c736f74c5f29" class="">
+</p><p id="31d652e9-3f04-4c91-bfba-8a16c0018674" class="">
+</p><p id="59220bbc-30da-4a85-9995-5f88e259c62f" class="">
+</p><ol type="1" id="03fdacf0-891a-42ad-8712-b7fab627ef70" class="numbered-list" start="4"><li>운영체제의 작업 스케줄링 등에 응용되는 것으로 가장 적합한 자료구조는 ? 스택</li></ol><ul id="5b9d994a-4ba6-4b54-a52b-fd05b42be4dd" class="bulleted-list"><li style="list-style-type:disc">작업은 먼저 들어온 작업을 먼저 처리하는 큐가 적합하다. 큐를 이용한 작업스케줄링은 운영체제에서 사용된다.</li></ul><p id="25687c10-37b2-4c27-9682-2389d6092775" class="">
+</p><ol type="1" id="665c3a22-9a97-4513-b5a2-fc5ff9fb0027" class="numbered-list" start="5"><li>삽입과 삭제가 리스트의 양쪽 끝에서 발생하는 형태이다. 입력이 한쪽에서만 발생하고 출력은 양쪽에서 일어날 수 있는 입력 제한과 입력은 양쪽에서 일어나고 출력은 한곳에서만 이루어지는 출력제한이 있다. : 데크</li></ol><p id="9e61de4a-fb22-4fe0-ae95-3cb67085ce1e" class="">
+</p><p id="81c21ff5-1a89-4c54-9ad4-0f9ef189a6aa" class="">
+</p><ol type="1" id="70ff854d-f1c2-477d-99b2-530ef3a8ba94" class="numbered-list" start="6"><li>데크에 관한 설명으로 옳지 않은것</li></ol><ul id="09dc130d-77de-4021-b289-23b02f8ad330" class="bulleted-list"><li style="list-style-type:disc">삽입과 삭제가 양쪽 끝에서 일어난다.</li></ul><ul id="ff174c23-df39-40ab-9d6d-167816621c22" class="bulleted-list"><li style="list-style-type:disc"><strong>스택과 큐를 복합</strong>한 형태이다.</li></ul><ul id="587797eb-dc4e-4f23-ba42-412c178c2958" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">사용하는 포인터는 한개이다.</span><ul id="2f5ffdd0-0412-4412-89af-e88fedef2557" class="bulleted-list"><li style="list-style-type:circle">사용하는 포인터는 <strong>두개</strong>이다.</li></ul></li></ul><ul id="b9ad00ca-544d-4a18-b976-8963edb617f9" class="bulleted-list"><li style="list-style-type:disc">입력 제한 테크를 Scroll이라고 한다.</li></ul><p id="7f3e62a1-06b4-48f7-bb15-9ea43fe0ad67" class="">
+</p><ol type="1" id="f129a4ec-b709-425e-b02c-71e1271b6a39" class="numbered-list" start="7"><li>큐(Queue)에 대한 설명으로 옳지 않은 것은</li></ol><ul id="849dfb8a-c8bd-4bbc-a6b5-5c86ddba3fe5" class="bulleted-list"><li style="list-style-type:disc">입력은 리스트의 한쪽에서 출력은 그 상대편 끝에서 일어난다.</li></ul><ul id="3ebabb97-c70d-48b9-84ad-0fb360c75ec3" class="bulleted-list"><li style="list-style-type:disc">운영체제의 작업 스케줄링에 사용된다.</li></ul><ul id="0fdc64c7-8c28-4ef0-9c0c-aa8000df754e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">오버플로는 발생될 수 있어도 언더플로는 발생되지 않는다.</span><ul id="d4056bdf-1d9b-41bb-994c-b76a3cd62388" class="bulleted-list"><li style="list-style-type:circle">오버플로는 큐가 꽉 채워져 있는 상태로 더 이상 자료를 삽입할 수 없는 상태이고 언더플로는 자료가 없어서 자료를 제거할 수 없는 상태를 말하는 것이므로 큐는 오버플로와 언더플로가 모두 발생할 수 있다.</li></ul></li></ul><ul id="46dd37fa-6512-4a15-a26b-b73db1de6c96" class="bulleted-list"><li style="list-style-type:disc">가장 먼저 삽입된 자료가 가장 먼저 삭제되는 FIFO 방식으로 처리된다.</li></ul><p id="028fe452-6473-4a51-8bf3-2805c77404a5" class="">
+</p><ol type="1" id="a2e55105-2cb0-4ab0-808e-9005015b069f" class="numbered-list" start="8"><li>삽입과 삭제 양쪽 끝에서 이루어지므로 두 개의 포인트 End1과 End2를 사용하는 선형자료구조는 ?</li></ol><ul id="8afc63c4-2485-44ae-a16a-7012667f177e" class="bulleted-list"><li style="list-style-type:disc">데크 </li></ul><p id="bbff4fd6-7b11-462d-ae45-b1711fab4fc4" class="">
+</p><blockquote id="94a04214-a5ee-41fe-8bc4-6a0b089bb815" class="">트리</blockquote><p id="f9ed0f48-8430-4a2d-8b37-12666fb48fae" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cc0e67e2-26ff-4dd2-a5dd-4bfa7e9e133f" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">* 트리는 정점(Node,노드)와 선분(Branch, 가지)를 이용하여 사이클을 이루지 않도록 구성한 그래프의 특수한 형태이다.
+
+노드 : 트리의 기본 요소로서 자료 항목과 다른 항목에 대한 가지를 합친것
+근 노드 : 트리의 맨위에 있는 노드
+디그리 : 각 노드에서 뻗어나온 가지의 수 (= 차수)
+단말 노드 : 자식이 하나도 없는 노드 , 즉 디그리가 0인 노드 
+조상 노드 : 임이의 노드에서 근 노드에 이르는 경로상에 있는 노드들
+자식 노드 : 어떤 노드에서 연결된 다음 레벨의 노드들
+부모 노드 : 어떤 노드에서 연결된 이전 레벨의 노드들
+형제 노드 : 동일한 부모를 갖는 노드들
+Level : 근 노드의 Level을 1로 가정 후 어떤 Level이 L이면 자식 노드는 L+1
+깊이 : Tree에서 노드가 가질 수 있는 최대의 레벨
+숲 : 여러 개의 트리가 모여 있는 것
+트리의 디그리 : 노드들의 디그리 중에서 가장 많은 수
+터미널 노드 = 단말 노드 = 잎 노드 (리프노드) : 자식이 하나라도 없는 노드, 즉 디그리가 0이 아닌 노드 
+
+
+</code></pre><p id="06d995fa-3ff7-4788-ab44-281a124365b9" class="">
+</p><ul id="852df2a7-5344-4e55-b0b8-30d69f4e37c5" class="bulleted-list"><li style="list-style-type:disc">트리의 구조에서 각 노드에서 파생된 직계 노드의 수를 의미하는 것은 : Degree<ul id="d732cb79-dfd8-4b90-9c22-5d50b42d7328" class="bulleted-list"><li style="list-style-type:circle">노드의 수 = 디그리 (차수)</li></ul></li></ul><p id="77172892-c17c-4ce2-b70f-18610f46d226" class="">
+</p><blockquote id="d13396e6-8432-4ecd-996b-8f68c5404485" class=""><mark class="highlight-red">이진 트리의 운행법</mark></blockquote><ul id="bba00718-8b88-414b-a14d-120aec0db54c" class="bulleted-list"><li style="list-style-type:disc">Preorder 운행 : 루트 → left → right 순으로 운행 </li></ul><ul id="093155f3-1236-4fc0-8141-faf7fcde96a6" class="bulleted-list"><li style="list-style-type:disc">Inorder운행 : Left → 루트 → Right</li></ul><ul id="ff68fd0d-907c-405d-ba34-e3ca0f704cf8" class="bulleted-list"><li style="list-style-type:disc">Postorder 운행 : Left → Right → 루트 순으로 운행 </li></ul><ul id="62d4494c-4eac-4453-aa59-5fd100d62916" class="bulleted-list"><li style="list-style-type:disc">전위 표기법 : 연산자 → Left → Right, +AB = PreFix</li></ul><ul id="17c3aee8-4274-475a-b2d5-dfc6426a0a0b" class="bulleted-list"><li style="list-style-type:disc">중위 표기법 : Left → 연산자 → Right , A + B = InFix</li></ul><ul id="000d127c-3920-4338-9b76-70ea839dbca8" class="bulleted-list"><li style="list-style-type:disc">후위 표기법 : Left → Right → 연산자 AB+ = PostFix</li></ul><p id="8ee525ce-fd73-4250-8f28-bea0cde001ca" class="">
+</p><p id="d9ea6db0-5a7e-45ed-beef-e1f1aa03cfe1" class="">
+</p><blockquote id="d7d324b8-9219-40bc-a7ea-1067ad61cb4f" class="">그래프</blockquote><ul id="422619e4-a497-4674-9bac-813a6ff13cdb" class="bulleted-list"><li style="list-style-type:disc">인접행렬(Adjacency Matrix) : 방향 그래프에서 V(i)V(j) 관계를 나타내는 행렬의 원소를 P(ij)라 할때 방향 간선이 있으면 행렬의 P(ij) = 1 , 없으면 P(ij) = 0</li></ul><ul id="1ac27e5e-1f17-464e-b593-4a1d861d639d" class="bulleted-list"><li style="list-style-type:disc">최소 비용 신장 트리는 가중치 (각 간선에 기술된 값)가 가장 작은 간선들을 사이클을 이루지 않도록 연결시켜 만든 그래프이다.</li></ul><ul id="12d852dd-c0a4-4600-bbc9-0653df4e6ef8" class="bulleted-list"><li style="list-style-type:disc">간선 작업 그래프 AOE 네트워크 = 간선 작업 네트워크는 프로젝트 해결을 위해 수행되는 작업 순서를 나타내는 방향이다. </li></ul><ul id="a12b2eaf-a5b5-4d3c-af59-d7ebcaa1ded7" class="bulleted-list"><li style="list-style-type:disc">간선은 작업과 작업시간을 나타내고 정점이 공정을 나타낸다.</li></ul><ul id="8f547bf4-e351-42a1-ba25-acbe74082f0a" class="bulleted-list"><li style="list-style-type:disc">임계 경로 : 최장 길이를 갖는 경로</li></ul><p id="c0c778b0-9e51-4431-9234-eeee96d0c858" class="">
+</p><ul id="5a7cddd9-316b-4cd8-b87b-601ce7ac1cf3" class="bulleted-list"><li style="list-style-type:disc">신장 트리 : 신장 트리는 사이클을 이루지 않도록 연결시켜 만든 그래프이다.</li></ul><ul id="0494662f-ab1f-4707-9203-865a8198d82d" class="bulleted-list"><li style="list-style-type:disc">그래프로 표현하기에 적절하지 않은것 : 행렬<ul id="a8ba569e-d48e-4b49-a451-cb37b16967ab" class="bulleted-list"><li style="list-style-type:circle">그래프로 유기화학 구조식, 통신 연결망, 철도 교통망에 적절하다. </li></ul><ul id="3958dc1c-7ed5-41ca-ae66-25970550a986" class="bulleted-list"><li style="list-style-type:circle">행렬은 행과 열이 규칙적으로 배열된 것으로 선형 자료 구조에 적절한 형태이다.</li></ul></li></ul><ul id="16071cf0-ab84-4751-9116-e3850b49fc84" class="bulleted-list"><li style="list-style-type:disc">n개의 노드로 구성된 무방향 그래프의 최대 간선수<ul id="26d97e79-ee71-48c9-aea0-ede41ba4a735" class="bulleted-list"><li style="list-style-type:circle">n(n-1)/2 </li></ul></li></ul><p id="80b14c57-4f59-44f4-be88-bc0726d16958" class="">
+</p><p id="c93411c2-88ad-4572-b182-87ee3711f4cd" class="">
+</p><p id="07e3ea80-8263-4d33-8a31-707105ea8ade" class="">
+</p><blockquote id="83b8a2f7-112e-4063-aa7d-dc97df3b1dda" class="">내부 정렬 </blockquote><ul id="4139d7a5-87a6-4398-8b92-ebad73aefe06" class="bulleted-list"><li style="list-style-type:disc">삽입 정렬 : 가장 간단한 정렬 방식으로 이미 순서화된 파일에 새로운 하나의 래코드를 순서에 맞게 삽입시켜 정렬한다. <ul id="4b19d473-78fd-4d6d-b596-089ef34d620f" class="bulleted-list"><li style="list-style-type:circle">평균과 최악 모두 수행 시간 복답도는 O(n^2)이다.</li></ul></li></ul><p id="6bf992b0-6702-4ed5-afd2-d2c76fc9afcf" class="">
+</p><ul id="1ab9ff04-3505-4188-9f7b-03b4884080e0" class="bulleted-list"><li style="list-style-type:disc">쉘 정렬 : 입력 파일을 어떤 매개변수 (h)의 값으로 서브 파일을 구성하고 각 서브파일을 Insertion 정렬 방식으로 순서 배열하는 과정을 반복하는 정렬 방식 , 즉 임의의 레코드 키와 h값 만큼 떨어진 곳의 레코드 키를 비교하여 순서화 되어 있지 않으면 서로 교환하는 것을 반복하는 정렬방식이다. <ul id="d6b8ee10-78d6-4513-a54b-7665d7851205" class="bulleted-list"><li style="list-style-type:circle">입력 파일이 부분적으로 정렬되어 있는 경우에 유리한 방식이다.</li></ul></li></ul><ul id="0c71b6f9-4932-41ae-a23e-b838ab224b40" class="bulleted-list"><li style="list-style-type:disc"><strong>선택 정렬 </strong>: 선택정렬은 <strong>n개의 레코드 </strong>중에서 <strong>최소 값을 찾아 </strong>첫번째 레코드 위치에 놓는 방식을 반복하여 정렬하는 방식이다.  <ul id="77610225-745f-465f-9f54-31277a6cd741" class="bulleted-list"><li style="list-style-type:circle">평균, 최악 모두 수행 시간 복잡도는 O(n^2)이다.</li></ul></li></ul><p id="a5fdfb34-76df-46ff-8555-ec453e4f8910" class="">
+</p><ul id="10afcd53-8fe7-4739-ac01-63eaaf9cbc98" class="bulleted-list"><li style="list-style-type:disc"><strong>버블 정렬 </strong>: 버블정렬은 주어진 파일에서 <strong>인접한 두 개의 레코드 키 값을 비교하여 </strong>그 크기에 따라 레코드 위치를 서로 교환하는 정렬 방식이다. <ul id="374d15a9-2727-46ef-ab48-55fd2d29bc90" class="bulleted-list"><li style="list-style-type:circle">평균, 최악 모두 수행 시간 복잡도는 O(n^2)이다.</li></ul></li></ul><p id="1d957f73-e1de-453e-a9fb-5e778d0d378e" class="">
+</p><ul id="89427e49-03a8-40a2-b7cd-defcadaf7fbe" class="bulleted-list"><li style="list-style-type:disc"><strong>퀵 정렬 </strong>: 퀵 정렬은 레코드의 많은 자료 이동을 없애고 하나의 파일을 부분적으로 나누어 가면서 정렬하는 방법으로 <strong>키를 기준으로 작은 값은 왼쪽에</strong>, <strong>큰 값은 오른쪽 서브파일</strong>로 분해시키는 방식으로 정렬한다.<ul id="d385e6c2-fc4e-4326-ba4d-d6d219b0b1d7" class="bulleted-list"><li style="list-style-type:circle">위치에 관계 없이 임의의 키를 분할 원소로 사용할 수 있다</li></ul><ul id="25575b39-b277-4d4a-9fed-c2adad6c0962" class="bulleted-list"><li style="list-style-type:circle">정렬 방식 중에서 가장 빠른 방식이다. 프로그램에서 되부름을 이용하기 때문에 스택이 필요하다.</li></ul><ul id="39392a9d-599d-4d5c-a491-6ace00a3b327" class="bulleted-list"><li style="list-style-type:circle">평균 수행 시간 복잡도는 O(nlog2n)이고 최악 시간복잡도는 O(n^2)이다.</li></ul></li></ul><p id="3777b085-9eb0-42c7-945e-85b286c23517" class="">
+</p><ul id="43276971-b879-4aa4-8a1a-f7d9d0ff5886" class="bulleted-list"><li style="list-style-type:disc"><strong>힙 정렬 </strong>: 힙 정렬은 <strong>전 이진 트리를 이용</strong>한 정렬 방식이다. <ul id="83e4eefc-b648-45f8-b518-0faa12a655cc" class="bulleted-list"><li style="list-style-type:circle">구성된 전이진 트리를 Heap Tree로 변환하여 정렬한다. 평균과 최악 모두 시간복잡도는 O(nlog2n)이ㅏㄷ.</li></ul></li></ul><p id="d3b43763-26d0-4f85-983f-91f24a554cdc" class="">
+</p><ul id="769895ea-5e1e-4886-ba18-7f8ea64e974c" class="bulleted-list"><li style="list-style-type:disc"><strong>2-Way 합병 정렬 : 이미 정렬 되어 있는 두 개의 파일을 한 개의 파일로 합병하는 정렬 </strong>방식이다.<ul id="944c612c-3c58-4029-8e7c-a3cf4074d864" class="bulleted-list"><li style="list-style-type:circle">두 개의 키들을 한 쌍으로 하여 각 쌍에 대하여 순서를 정한다. 순서대로 정렬된 각 쌍의 키들을 합병하여 하나의 정렬된 서브리스트로 만든다. 위 과정에서 정렬된 서브리스트들을 하나의 정렬된 파일이 될때까지 반복한다. </li></ul><ul id="6d04f9d1-4611-438f-9a5b-ca64075b4279" class="bulleted-list"><li style="list-style-type:circle">평균과 최악모두 시간복잡도는 O(nlog2n) 이다.</li></ul></li></ul><p id="961c328b-81d9-473d-a906-78bfd31d17b5" class="">
+</p><ul id="bd5c66a8-4414-4ada-8288-9aa3a2b495dd" class="bulleted-list"><li style="list-style-type:disc"><strong>기수 정렬 </strong>(Radix Sort) = Bucket Sort : 기수 정렬은 <strong>큐를 이용하여 자릿수(Digit)별로 정렬</strong>하는 방식이다.<ul id="f5834d51-3067-441f-904a-af3ad099ef48" class="bulleted-list"><li style="list-style-type:circle">레코드의 키 값을 분석하여 같은 수 또는 같은 문자 끼리 <strong>그 순서에 맞는 버킷에 분배하였다가 </strong>버킷의 순서대로 레코드를 꺼내어 정렬한다. </li></ul><ul id="bc80bdd2-5e55-4a09-a77e-f15ecdaaa8fa" class="bulleted-list"><li style="list-style-type:circle">평균과 최악 시간복잡도는 O(dn)이다.</li></ul></li></ul><p id="af18cd76-370a-4383-831f-807bd30df720" class="">
+</p><ol type="1" id="da90f7d4-9c8b-459f-b961-176d5622dbfb" class="numbered-list" start="1"><li>삽입 정렬 방법 <p id="0b398167-21be-4435-8d94-9134968d7f36" class="">20, 19, 14, 16, 18</p><p id="7037d3aa-f4c8-49b9-bb4e-523f1c8d270e" class="">1) 19 20 14 16 18</p><p id="8b880b56-b61d-48bb-8ef1-fa4e57554cdb" class="">2) 14 19 20 16 18</p><p id="371c4833-c213-4d73-bb9d-02f6d13ec385" class="">3) 14 16 19 20 18</p><p id="f58cad6e-4dc7-487f-994e-221d63987dfb" class="">4) 14 16 18 19 20</p><p id="910a257c-3ec4-4460-9abe-70808ed40dc8" class="">
+</p><p id="ee99c43b-4201-4768-bf04-8334b2505d6b" class="">
+</p></li></ol><ol type="1" id="7d6efb1d-25a4-46a9-9a03-f3cac14b9508" class="numbered-list" start="2"><li>선택 정렬을 적용하여 오름차순으로 정렬한 경우 Pass 2를 진행 한 후 정렬된 값</li></ol><p id="093d40af-ffac-4747-bf61-3cc7a54418ef" class="">9 4 5 11 8</p><p id="3f534083-0e55-4006-bd6a-e0771aed4834" class="">1) 4 9 5 11 8</p><p id="47507c16-af3e-451c-84c9-bec7330d1018" class="">2) 4 5 9 11 8</p><p id="bdc3fbf2-9618-4ee9-ad4b-753a46089f6d" class="">
+</p><ol type="1" id="a501282a-f5df-4504-ae7c-ba985fcf54fe" class="numbered-list" start="3"><li><strong>선택정렬 (Selection Sort)</strong></li></ol><ul id="5ad75dbf-461b-4752-83f6-1a6612f330fa" class="bulleted-list"><li style="list-style-type:disc"><strong>n개의 레코드 </strong>중에서 <strong>최솟값을 찾아 </strong>첫번째 레코드 위치에 놓고 나머지 (n-1)개 중에서 다시 최솟값을 찾아 두번째 레코드 위치에 놓는 방식을 반복하여 정렬 </li></ul><p id="a2dfff78-1733-48de-9cb0-f17e57586614" class="">
+</p><ol type="1" id="0409eb48-370f-41de-8c01-fc810ce3d9db" class="numbered-list" start="4"><li>레코드의 많은 자료 이동을 없애고 하나의 파일을 부분적으로 나누어 가면서 정렬하는 방법으로 키를 기준으로 <strong>작은 값을 왼쪽에 큰 값을 오른쪽에 모이도록 </strong>서로 교환시키는 부분 교환 정렬법 </li></ol><ul id="2cbac26e-9c03-492a-9e88-6f78beb8a23b" class="bulleted-list"><li style="list-style-type:disc"><strong>퀵 정렬 </strong></li></ul><p id="2a02349f-2671-4812-b2fa-2ef0b73689c4" class="">
+</p><ol type="1" id="96cb7772-5307-4a70-8d8c-c43218f7ef4c" class="numbered-list" start="5"><li>2-Way 합병 정렬</li></ol><ul id="17d0a70a-068f-4923-88db-3ea4b516ffa2" class="bulleted-list"><li style="list-style-type:disc"><strong>두 개의 키들을 한 쌍으로 하여</strong> 각 쌍에 대하여 순서를 정한다.</li></ul><ul id="c20c84ce-2ca2-4a5c-8402-ada5f15272d8" class="bulleted-list"><li style="list-style-type:disc">순서대로 정렬된 각 쌍의 키들을 합병하여 하나의 정렬된 서브리스트로 만든다.</li></ul><ul id="27725cdc-2cc1-4849-8ed0-982bac12e6cc" class="bulleted-list"><li style="list-style-type:disc">위 과정에서 정렬된 서브리스트들을 하나의 정렬된 파일이 될때까지 반복한다.</li></ul><p id="54c24b51-9c5e-4c37-a012-def1c59f1401" class="">
+</p><ol type="1" id="bfd2d96a-a549-4f4e-931d-923621567101" class="numbered-list" start="6"><li>입력 데이터가 R = ( 71, 2, 38, 5, 7, 61,11, 26, 53, 42)일때 2-Way MErge Sort를 2회전 한 후 결과는?</li></ol><p id="a753988d-9f90-4c4f-afb8-c3973e65e58a" class="">2, 71, 5, 38, 7,61,11,26,42,53</p><p id="91bb16f0-69de-4a0c-b6f6-3dde1e7751db" class="">2, 5, 38, 71, 11, 26, 42, 53 </p><p id="c83b7459-e697-47bc-9b6d-4cde4a89a318" class="">
+</p><ol type="1" id="588f4801-f67b-4390-a58b-80e60e43964d" class="numbered-list" start="7"><li>정렬 기법 중 레코드의 키 값을 분석하여 같은 수 또는 같은 문자 끼리 그 순서에 맞는 <strong>버켓에 분배하였다가 버켓의 순서대로 </strong>레코드를 꺼내어 정렬하는 기법 : <strong>기수 정렬</strong></li></ol><p id="4e1a7ebd-379d-485c-8b11-183418a2db8c" class="">
+</p><ol type="1" id="82056c53-85cb-43c4-96ad-fa99bd108394" class="numbered-list" start="8"><li>버블정렬을 이용해 오름차순으로 정렬 할 경우 PASS 2의 결과는 </li></ol><p id="f35f126a-67dc-42b6-90c5-295aa4a7d0a5" class="">9, 6, 7, 3, 5</p><p id="dd140ba3-aed7-46b9-b3b3-ede11be5a533" class="">6 9 7 3 5 → 6 7 9 3 5 → 6 7 3 9 5 → 6 7 3 5 9</p><p id="23548d83-f8c5-4e76-a49a-9c93f1e02a00" class="">6 7 3 5 9 → 6 3 7 5 9 → 6 3 5 7 9</p><p id="9f795ce1-eb25-47be-8f80-c3f311bf6ba0" class="">
+</p><p id="a38b4ed1-ee84-41c8-acd7-77b32471b9cd" class="">
+</p><ol type="1" id="f40caca3-895f-4257-8931-2065f4521506" class="numbered-list" start="9"><li>두번째 키와 첫번째 키를 비교해 순서대로 나열(1회전) 하고 이어서 세번째 키를 첫번째, 두번째 키와 비교해 순서대로 나열(2회전), 계속해서 <strong>n번째 키를 앞의 (n-1)개 키와 비교하여 알맞은 순서에 위치</strong>시키는 방법</li></ol><ul id="fa8f3483-500b-40ee-9bc8-46df068e7701" class="bulleted-list"><li style="list-style-type:disc"><strong>선택 정렬(Insertion Sort)</strong></li></ul><p id="eddce564-3d39-499f-80a3-06becf3cb8ea" class="">
+</p><blockquote id="798dda3b-cb36-459d-8dea-51bf7ae70190" class=""><strong>검색-해싱 (Hashing)</strong></blockquote><ul id="aaf558e8-3261-4d07-9e45-1caf04256e43" class="bulleted-list"><li style="list-style-type:disc"><strong>해싱</strong>은 <strong>Hash Table </strong>이라는 <strong>기억 공간을 할당</strong>하고 해시 함수를 이용하여 <strong>레코드 키에 대한 Hash Table</strong>내의 <strong>Home Address를 계산 </strong>한 후 <strong>주어진 레코드를 해당 기억장소에 저장</strong>하거나 <strong>검색 작업</strong>을 수행하는 방식</li></ul><ul id="fcd011fb-3116-490a-b302-8b5afed2d45d" class="bulleted-list"><li style="list-style-type:disc">해싱은 DAM (<strong>직접 접근)파일을 구성할 때 사용</strong>되며 <strong>접근 속도는 빠르나 기억 공간이 많이 요구</strong>된다.</li></ul><ul id="26c767ba-2ae7-4070-95e1-320cbb3fb089" class="bulleted-list"><li style="list-style-type:disc">다른 방식에 비해 검색 속도가 가장 빠르다.</li></ul><ul id="aa262976-c28d-4ccc-ad91-f0cb85ca28f0" class="bulleted-list"><li style="list-style-type:disc"><strong>삽입, 삭제 작업의 빈도가 많을 때</strong> 유리한 방식이다.</li></ul><ul id="6ab478d7-ea08-4eea-bb06-ed8f7ce89037" class="bulleted-list"><li style="list-style-type:disc"><strong>키 - 주소 변환 방법</strong>이라고도 한다.</li></ul><p id="c18261cb-deb2-455c-b84a-caa17e06402f" class="">
+</p><p id="e4229dff-67f3-4322-ba9a-8edb9b91bc7b" class=""><strong>해시 테이블</strong>(Hash Table, 해시표) : 해시 테이블은 <strong>레코드를 한 개 이상 보관할 수 있는 Bucket</strong>들로 구성된 기억공간으로 <strong>보조기억장치에 구성 할 수도 있고 주기억 장치에 구성 할 수도 있다</strong>.</p><p id="aa365784-338b-44ed-8bd7-69514a1aef67" class=""><strong>버킷 </strong>: <strong>하나의 주소를 갖는 파일의 한 구역</strong>을 의미하며 <strong>버킷의 크기</strong>는 <strong>같은 주소에 포함될 수 있는 레코드 수</strong>를 의미</p><p id="6a4e41f8-bf5b-497e-ab1d-6b6546e8a5e4" class="">슬롯 : 한 개의 레코드를 저장할 수 있는 공간으로 n개의 슬롯이 모여 하나의 버킷을 형성한다.</p><p id="5e510c66-8df9-488e-bfd5-c2249dda0ea9" class=""><strong>Collision(충돌현상) </strong>: 서로 <strong>다른 두개 이상의 레코드가 같은 주소</strong>를 갖는 현상</p><p id="d8272e33-b6f2-440c-ae37-b60b7f651238" class=""><strong>Syn]onym </strong>: <strong>충돌로 인해 같은 Home Address를 갖는 레코드들의 집합</strong></p><p id="10d9688d-e28c-44b4-883d-9f097bbdae6d" class=""><strong>Overflow </strong>: 계산된 Home Address의 Bucket 내에 <strong>저장할 기억 공간이 없는 상태</strong>로 <span style="border-bottom:0.05em solid">Bucket을 구성하는 Slot이 여러개 일때 Collision은 발생해도 Overflow는 발생하지 않을 수 있다</span>.</p><p id="8bc8a738-c71d-4134-9288-cef79045ff5b" class="">해싱 함수 </p><p id="1e7f2331-a382-47af-8e34-d203863c8fce" class="">제산법 : 레코드 키(K)를 해시표(Hash Table)의 크기보다 큰 수 중에서 가장 작은 소수(Prime, Q)로 나눈 나머지를 홈 주소로 삼는 방식 h(K) = K mod Q</p><ul id="548c5be7-3b8e-4fb9-93c3-b50cee7dcb7d" class="bulleted-list"><li style="list-style-type:disc">적어도 5000개의 레코드를 수용 할 수 있는 해시표에 키 값이 123456789인 레코드가 저장되는 홈 주소는? <ul id="3468f61e-3fb5-4648-8ce2-335a1fc5000d" class="bulleted-list"><li style="list-style-type:circle">5000 보다 큰 수 중 가장 작은 소수는 5003 이므로, h(K) = 123456789 mod 5003 = 2761</li></ul></li></ul><p id="b3fb6513-981f-4d27-abde-505786bf7a18" class="">제곱법 : 제곱(Mid-Square)법은 레코드 키 값(K)를 제곱한 후 그 중간 부분의 값을 홈 주소로 삼는 방법이다. </p><ul id="5cd790fa-df8a-4b5b-870f-e805422b8443" class="bulleted-list"><li style="list-style-type:disc">키 값이 200120473인 레코드가 저장되는 홈 주소는 ? 단 8~11번째 자리의 4자리 숫자를 홈 주소로 삼는다.<ul id="3c7b4078-b9b8-4ac4-b90d-bed8a1e9dccc" class="bulleted-list"><li style="list-style-type:circle">200120473 ^ 2 = 40048203713743729 ⇒ h(K) = 3713</li></ul></li></ul><p id="70053be3-9575-499c-9d80-30b0e6bb2d39" class="">폴딩법 : 폴딩법은 레코드 키 값(K)를 여러 부분으로 나눈 후 각 부분의 값을 더하거나 XOR(배타적 논리합)한 값을 홈 주소로 삼는 방식이다.</p><p id="8f51ebfd-5c68-4193-9330-6cd8d94606bb" class="">shift Folding : 각 부분의 값들을 왼쪽 또는 오른쪽 끝자리에 맞추어서 계싼</p><p id="1f2488d2-47e7-4f52-bb05-eb41d03b42e0" class="">Fold Boundary : 경계 지점을 접었을때 마주치는 자리 그대로 계싼</p><p id="19a5d3ef-6f5d-4b15-b767-3416c1a0a344" class="">기수 변환법 : 기수변환법은 키 숫자의 진수를 다른 진수로 변환시켜 주소 크기를 초과한 높은 자릿수는 절단하고 이를 다시 주소 범위에 맞게 조정하는 방법이다.</p><p id="9c6fbf91-292a-4218-80b9-dc64607691c6" class="">대수적 코딩법 : 대수적 코딩법은 키 값을 이루고 있는 각 자리의 비트 수를 한 다항식의 계수로 간주하고 이 다항식을 해시표의 크기에 의해 정의된 다항식으로 나누어 얻은 다항식의 계수를 홈 주소로 삼는 방식이다.</p><p id="7a88e09d-4ffa-4ab2-8964-7ad6ad44b46d" class="">계수 분석법(숫자 분석법) : 계수 분석법은 키 값을 이루는 숫자의 분포를 분석하여 비교적 고른 자리를 필요한 만큼 택해서 홈 주소로 삼는 방식이다.</p><p id="6f88daf2-ba66-4f93-b12e-1f882349d3e7" class="">무작위법 : 무작위법은 난수를 발생시켜 나온 값을 홈 주소로 삼는 방식이다.</p><p id="1620a740-08d7-4b75-9655-35b7ecd6f639" class="">
+</p><p id="528ab112-b476-4d0a-8a15-4e09a55a16d2" class="">overflow 해결방법 </p><p id="f9f72719-0e07-4520-a090-065c8d07d4a9" class="">개방주소법 : 선형방법이라고도 하는데 Collision이 발생했을때 순차적으로 그 다음 빈 버킷을 저장하는 방법이다.</p><p id="ceff91a8-5cfe-45c5-8c34-7ee1039a36e7" class="">패쇄주소법 : Overflow된 레코드들을 별도의 Overflow 영역에 저장하고 Chain(Pointer)으로 홈 버킷에 연결한다. <div class="indented"><ul id="712d2a08-a125-4dca-a15c-831f40ad3be1" class="bulleted-list"><li style="list-style-type:disc">Direct Chaining: 해시표 내의 빈자리에 Overflow 레코드를 보관한다.</li></ul><ul id="2f65ae46-8881-499b-a2de-7ea5c16de0ad" class="bulleted-list"><li style="list-style-type:disc">Indirect Chaining : 해시표와는 별도의 기억 공간에 Overflow 레코드를 보관한다.</li></ul></div></p><p id="e3d1487e-5253-4c97-a1d4-1a302d5c1dff" class="">
+</p><p id="a58aaf9f-3aff-4516-8e93-cdb0d94e27c9" class="">재해싱 : Collision이 발생하면 새로운 해싱 함수로 새로운 홈 주소를 구하는 방식이다.</p><p id="cd495bf0-75da-47f4-9deb-60f8c4c5e8a6" class="">
+</p><p id="e23506de-587d-414c-b4c2-bf4d11cdefb6" class="">
+</p><ol type="1" id="63844bab-565a-463f-bf91-83cbff0c49f4" class="numbered-list" start="1"><li>해시 (Hash) 함수와 밀접한 관계가 있는 파일은? DAM파일</li></ol><ul id="b7e9b14e-baad-4670-a557-975f860dac3f" class="bulleted-list"><li style="list-style-type:disc">해시 함수는 기억장치를 한번에 직접 접근하기 위한 주소를 구하기 위해 사용된다. </li></ul><p id="61fa5a2c-c3d0-449d-adc2-84346a436f6f" class="">
+</p><ol type="1" id="f3faa4f7-da3d-43e3-8c09-101bdaee91d8" class="numbered-list" start="2"><li>해싱 함수의 값을 구한 결과 키 K1, K2가 같은 값을 가질 때 이들 키 K1, K2의 집합을 무엇이라 하는가? Synonym</li></ol><ul id="24faa8d7-93de-4c04-878d-cee5eb083c26" class="bulleted-list"><li style="list-style-type:disc">같은 집 주소</li></ul><p id="48a08a11-29cd-4d15-b90c-f0f10052cbef" class="">
+</p><ol type="1" id="609a2dbd-dd0f-4272-8c31-832a95393680" class="numbered-list" start="3"><li>해싱(Hashing)에 관한 설명으로 옳지 않은것은?</li></ol><ul id="b32e51a1-1af3-41be-b5f5-0026217ddfef" class="bulleted-list"><li style="list-style-type:disc">버킷이란 하나의 주소를 갖는 파일의 한 구역을 의미하며 버킷의 크기는 같은 주소에 포함될 수 있는 레코드 수를 의미한다.</li></ul><ul id="eda2fd62-4ae2-4325-b6d6-78006b134eb3" class="bulleted-list"><li style="list-style-type:disc">슬롯이란 한 개의 레코드를 저장할 수 있는 공간으로 n개의 슬롯이 모여 하나의 버킷을 형성한다.</li></ul><ul id="d5aa3f0b-75c9-403e-bed5-716056a20e23" class="bulleted-list"><li style="list-style-type:disc">충돌(Collision)이란 레코드를 삽입할 때 두개의 상이한 레코드가 똑같은 버킷으로 해싱되는것을 의미한다.</li></ul><ul id="e9c62a5c-175e-4621-80d7-97181b8cab37" class="bulleted-list"><li style="list-style-type:disc">해싱은 충돌이 되면(Collsion) 항상 오버플로(Overflow)가 발생한다. (x)</li></ul><p id="6f52198c-2e01-43fc-a2d7-bf95eac99215" class="">
+</p><ol type="1" id="06e5023e-082b-41a6-a574-98a68ba37738" class="numbered-list" start="4"><li>키 값을 여러 부분으로 분류하여 분류한 부분을 더하거나 XOR 하여 주소를 계산하는 해싱 함수의 종류는</li></ol><ul id="332da2fe-bbcf-4409-b36e-3e1f18605f29" class="bulleted-list"><li style="list-style-type:disc">접지함수 = 폴딩법 </li></ul><p id="179f9370-0f43-41b9-8014-582b23d12c1d" class="">
+</p><ol type="1" id="e6d8e5ca-6d28-45c2-90b6-66af2eed8845" class="numbered-list" start="5"><li>해싱에서 <strong>한 개의 레코드를 지정할 수 있는 공간</strong>을 의미하는 것은</li></ol><ul id="74b82fff-3e5b-469a-a839-036a1acf788a" class="bulleted-list"><li style="list-style-type:disc"><strong>Slot </strong></li></ul><p id="1cf05fd8-4114-42dc-8661-89dc5354b8ad" class="">
+</p><ol type="1" id="a40a2018-9054-4ea7-9d18-9e1a45bc1b82" class="numbered-list" start="6"><li>해싱에서 서로 다른 두 개 이상의 레코드가 동일한 주소를 갖는 현상을 의미하는 것은</li></ol><ul id="0ca12f82-ffa7-4a5b-b29b-8bfa826c29c2" class="bulleted-list"><li style="list-style-type:disc">Collision<ul id="c639c7b7-fde6-4453-9105-a16e60d3be22" class="bulleted-list"><li style="list-style-type:circle">Collision이 발생한 레코드를 모아놓은 것이 Synonym이다.</li></ul></li></ul><p id="f672b041-1b7b-4a72-bc4f-f54b0a8598f5" class="">
+</p><ol type="1" id="f61632b9-4f62-495b-baa1-3a93d5dd4c37" class="numbered-list" start="7"><li>주어진 모든 키 값들에서 그 키를 구성하는 자릿수들의 분포를 조사하여 비교적 고른 분포를 보이는 자릿수들을 필요한 만큼 택하는 방법을 취하는 해싱함수 기법은</li></ol><ul id="fb795ec7-3900-4dd5-8f2d-cfa408ce16f8" class="bulleted-list"><li style="list-style-type:disc">계수 분석 방법</li></ul><p id="86d8eb0a-cefa-46c3-881d-226f30f034be" class="">
+</p><ol type="1" id="9fa1a2c3-c711-424d-b4ea-809f3c24f57c" class="numbered-list" start="8"><li>해싱 함수 기법 중 어떤 기법으로 표현된 <strong>주어진 레코드 키 값을 다른 진법으로 간주하고 키 값을 변환하여 홈 주소로 취하는 형식</strong>은</li></ol><ul id="5028622f-d53b-4e9c-ab92-f33bafa7866b" class="bulleted-list"><li style="list-style-type:disc"><strong>기수변환법</strong></li></ul><p id="728a2c16-6378-4075-b0a5-f630044ce41f" class="">
+</p><ol type="1" id="1acef17a-427a-4ebc-afef-c28a0e4dced1" class="numbered-list" start="9"><li>Generally, the population of the keys is greater than the number of records in the data file, In this case thenrs is a possibility that more than one key will be hased to the same address in the file. It is called (____)</li></ol><ul id="77e670de-6a38-4852-9916-da6bee527427" class="bulleted-list"><li style="list-style-type:disc">collision</li></ul><p id="72453876-19a0-402e-8844-8e69ff84bc2f" class="">
+</p><p id="d2ae2e7f-d9f6-475b-b9dc-0b353e8a7eb4" class="">해싱 결과 서로 다른 두개 이상의 레코드가 같은 주소를 갖는 현상은 Collision이고 Collision으로 인해 같은 주소에 저장된 서로 다른 두개 이상의 레코드의 집합을 Synonym이라고 한다.</p><p id="8cd24c04-fb1f-4320-9d71-bec5c625f171" class="">
+</p><blockquote id="2ef9f70c-3cc3-4632-9939-f8e7a634fc3c" class="">파일 편성</blockquote><ul id="532a1de2-3fae-417d-a571-ba510a95fbe6" class="bulleted-list"><li style="list-style-type:disc">순차 파일 = 순서 파일 (Sequential File)<ul id="ac33e7c3-7f95-4047-91b4-87c35ad9415b" class="bulleted-list"><li style="list-style-type:circle">순차 파일은 입력되는 데이터들을 논리적인 순서에 따라 물리적 연속 공간에 순차적으로 기록하는 방식이다.</li></ul><ul id="54a96853-5ff4-4780-95e1-57de5b26e67f" class="bulleted-list"><li style="list-style-type:circle">주로 순차 접근이 가능한 자기 테이프에서 사용된다. 기록 밀도가 높아 기억 공간을 효율적으로 사용할 수 있다. 매체 변환이 쉬워 어떠한 매체에도 적용할 수 있다. 레코드가 키 순서대로 편성되어 취급이 용이하다. 레코드를 기록할때 사용한 키 순서대로 레코드를 처리하는 경우, 다른 편성법보다 처리속도가 빠르다.</li></ul><ul id="513aef2e-c9a7-4cbb-83bf-c7d5a32e06b9" class="bulleted-list"><li style="list-style-type:circle">파일에 새로운 레코드를 삽입하거나 삭제하는 경우 파일 재구성을 위해 복사해야 하므로 시간이 많이 소요된다. 데이터 검색시 처음부터 순차적으로 검색하기 때문에 검색 효율이 낮고 시간 및 응답 시간이 느리다.</li></ul></li></ul><p id="e6a008b4-dcad-4299-a63a-67834af5b8d4" class="">
+</p><ul id="c60e84c2-5c0a-49a8-a1ce-68d67b407ff4" class="bulleted-list"><li style="list-style-type:disc">색인 순차 파일 (Indexed Sequential FIle)<ul id="09f0828e-a75c-4852-81d3-ff957f36ace8" class="bulleted-list"><li style="list-style-type:circle">색인 순차 파일은 순차 처리와 랜덤 처리가 모두 가능하도록 레코드들을 키 값 순으로 정렬(Sort)시켜 기록하고 레코드의 키 항목만을 모든 색인을 구성하여 편성하는 방식이다.</li></ul><ul id="40b76266-99ce-4c61-b854-4a5550870934" class="bulleted-list"><li style="list-style-type:circle">색인을 이용한 순차적인 접근 방법을 제공하여 ISAM(Index Sequential Access Method)라고 한다.</li></ul><ul id="41bd0d29-5243-4c72-a8c3-f012302e214b" class="bulleted-list"><li style="list-style-type:circle">레코드를 참조할때 색인을 탐색한 후 색인이 가리키는 포인터(주소)를 사용하여 직접 참조할 수 있다.</li></ul><ul id="57694d9a-96db-4a46-b000-58752bf9a24c" class="bulleted-list"><li style="list-style-type:circle">일반적으로 자기 디스크에 많이 사용되며 자기 테이프에서는 사용할 수 없다.</li></ul><ul id="284c184f-d200-401f-b0c8-e345ad087e7b" class="bulleted-list"><li style="list-style-type:circle">색인 순차 파일은 기본 구역, 색인 구역, 오버플로 구역으로 구성된다. 기본구역 (Prime Area) - 실제 레코드들을 기록하는 부분으로 각 레코드는 키 값 순으로 저장된다. 색인 구역 - 기본 구역에 있는 레코드들의 위치를 찾아가는 색인이 기록되는 부분으로 트랙 색인 구역, 실린더 색인 구역, 마스터 색인 구역이 있다. </li></ul><ul id="154759cd-61ec-47dc-8380-d61bd79fddbc" class="bulleted-list"><li style="list-style-type:circle">오버플로 구역 : 기본 구역에 빈 공간이 없어서 새로운 레코드의 삽입이 불가능할때를 대비하여 예비적으로 확보해 둔 부분이다. </li></ul><ul id="0ff75a88-a2b7-4bdc-995a-d35aad487741" class="bulleted-list"><li style="list-style-type:circle">색인 순차 파일의 장점 : 순차 처리와 랜덤 처리가 모두 가능하므로 목적에 따라 융통성 있게 처리할 수 있다. 효율저긴 검색이 가능하고 레코드의 삽입, 삭제, 갱신이 용이하다. 레코드를 추가 및 삽입하는 경우, 파일 전체를 복사할 필요가 없다.</li></ul><ul id="7711fa70-47dd-4e00-b059-7fc521044551" class="bulleted-list"><li style="list-style-type:circle">색인 순차 파일의 단점 : 색인 구역과 오버플로 구역을 구성하기 위한 추가 기억공간이 필요하다. 파일 사용 중 오버플로 레코드가 많아지면 파일을 재편성해야 한다. 파일이 정렬되어 있어야 하므로 추가, 삭제가 많으면 효율이 떨어진다. 색인을 이용한 액세스를 하기 때문에 액세스 시간이 랜덤 편성 파일보다 느리다.</li></ul></li></ul><ul id="858b9078-453b-46c2-9eb7-b79b0d79864b" class="bulleted-list"><li style="list-style-type:disc">정적인덱스 : 정적 인덱스는 데이터 파일에 레코드가 삽입되거나 삭제되어도 인덱스의 구조가 변경하지 않고 내용만 변하는 구조로 정적 인덱스를 사용하는 대표적인 파일이 ISAM이다. 동적인덱스 : 동적인덱스는 인덱스 파일이나 데이터 파일을 블록으로 구성하고 각 블록에는 추가로 삽입될 레코드를 감안하여 빈 공간을 미리 예비해두는 인덱스 방법으로 동적 인덱스를 사용하는 대표적인 파일이 VSAM이다. 블록에 레코드가 가득차면 동적으로 분열되고 일정 수의 레코드가 유지되지 않는 블록은 합병된다.</li></ul><p id="f92827b8-ba9c-4260-9b79-62bf616f39a4" class="">
+</p><ul id="b2adb5fa-0599-4e99-8061-6e3468bfd100" class="bulleted-list"><li style="list-style-type:disc">VSAM 파일 (Virtual Storage Access Method) 동적 인덱스 방법을 이용한 색인 순차파일이다. 제어 구간(데이터 레코드가 저장되는 부분), 제어 구역(몇 개의 제어구역을 모아 놓은것), 순차 세트(제어 구역에 대한 인덱스를 저장한것), 인덱스 세트(순차 세트의 상위인덱스) 제어 구역에 가변 길이 레코드를 쉽게 수용할 수 있다. </li></ul><ul id="32538b6f-2548-4cea-bdd8-a194b84aaf07" class="bulleted-list"><li style="list-style-type:disc">직접 파일 : 직접 파일은 파일을 구성하는 레코드를 특정 순서 없이 임의의 물리적 저장공간에 기록하는 것으로 랜덤 파일(Random File), DAM (Direct Access Method)파일이라고도 한다.</li></ul><ul id="ad098935-214c-48c4-a4a6-b3bc7db9fece" class="bulleted-list"><li style="list-style-type:disc"><strong>직접파일은 데이터가 저장된 위치를 한번에 접근하기 위해서 매핑함수인 해시 함수를 사용한다. </strong></li></ul><ul id="6a9bceb9-31c7-451d-844c-16df34951698" class="bulleted-list"><li style="list-style-type:disc">다중 키 파일 : 하나의 데이터 파일에 여러 개의 접근 방법을 지원하는 구조이다. 검색 속도가 빠른 시간 내에 정보를 얻고자 하는 시스템에 적합하다.</li></ul><p id="a1e58868-147b-4105-ae46-277a15edaf7b" class="">
+</p><ol type="1" id="04a04085-9e47-4549-968b-eea7ce27bd4d" class="numbered-list" start="1"><li>색인 순차 파일의 인덱스에 해당하지 않는 것은 ? Prime 인덱스</li></ol><ul id="14abed45-e30e-4b66-b8b1-ebd0883ea5b8" class="bulleted-list"><li style="list-style-type:disc">색인 순차 파일의 인덱스에는 트랙 인덱스, 실린더 인덱스 , 마스터 인덱스가 있다.</li></ul><p id="e6e171c4-30fe-4008-96c1-d60093655aea" class="">
+</p><ol type="1" id="90e8ecef-a6b4-4d65-9271-40af944e72b8" class="numbered-list" start="2"><li>색인 순차 파일에 관한 설명으로 옳지 않은것은</li></ol><ul id="3d477a99-8799-4522-a543-f7bd72ec349a" class="bulleted-list"><li style="list-style-type:disc">순차 처리와 랜덤처리가 모두 가능하다.</li></ul><ul id="1243d43e-965b-493d-a8d3-e6fea458bb65" class="bulleted-list"><li style="list-style-type:disc">레코드를 추가 및 삽입하는 경우, 파일 전체를 복사할 필요가 없다.</li></ul><ul id="b452a917-5227-4b2c-8a67-3e049903d81b" class="bulleted-list"><li style="list-style-type:disc">기본 구역(Prime Data Area), 색인 구역(Index Area), 오버플로구역(Overflow Area)로 구성되어 있다.</li></ul><p id="c434af61-70b5-4a05-8350-508b179937fc" class="">
+</p><ul id="dba9cee3-5688-4422-bfc6-e9061f2cd787" class="bulleted-list"><li style="list-style-type:disc"><strong>해시 함수를 사용</strong>하여 <strong>레코드를 저장할 위치</strong>를 결정한다 : <strong>직접파일</strong></li></ul><p id="0326de36-bcd0-44e7-b0a4-e16202dcd507" class="">
+</p><ol type="1" id="a975bf06-3358-4680-b5eb-570c972b28c5" class="numbered-list" start="3"><li>인덱스나 데이터 파일을 블록으로 구성하고 각 블록에는 추가로 삽입될 레코드를 감안하여 빈 공간을 미리 예비해 두는 인덱스 방법은 : 동적 인덱스 방법</li></ol><p id="ca589b83-5135-4fc7-a3d1-72d07ec957c7" class="">
+</p><ol type="1" id="8765c76d-4721-46f1-a1a2-559080ce618d" class="numbered-list" start="4"><li>색인 순차 파일에 대한 설명으로 옳지 않은것은 </li></ol><ul id="92bcdeec-f6a5-4a82-b4b9-935f4b0e02a7" class="bulleted-list"><li style="list-style-type:disc">순차 처리와 직접 처리가 모두 가능하다.</li></ul><ul id="358031c9-8c65-4b5e-b676-efdb16e2ded2" class="bulleted-list"><li style="list-style-type:disc">레코드의 삽입, 삭제, 갱신이 용이하다. </li></ul><ul id="500ab068-9d65-45f5-901d-4f67a6e0b208" class="bulleted-list"><li style="list-style-type:disc"><strong>인덱스를 이용하여 해당 데이터 레코드에 접근하기 때문에 처리 속도가 랜덤 편성 파일보다 느리다. </strong></li></ul><ul id="c078a848-2f79-4c25-a945-4340c9a9c1c2" class="bulleted-list"><li style="list-style-type:disc">인덱스를 저장하기 위한 공간과 오버플로우 처리를 위한 별도의 공간이 필요없다 (x) →<ul id="dc23c451-be73-453b-b7ea-fbeab2e5ff7e" class="bulleted-list"><li style="list-style-type:circle">세 개의 색인 구역과 두 개의 오버플로 구역이 있따.</li></ul></li></ul><p id="6bc1cbc6-6daf-455b-bb95-4ae3347a5f4e" class="">
+</p><ol type="1" id="f1eac4d3-85a8-4fea-9078-cb8cd8b0feee" class="numbered-list" start="5"><li>파일에 대한 설명 중 옳지 않은 것은</li></ol><ul id="feca552d-b7bd-452d-bdae-f065ed0c2000" class="bulleted-list"><li style="list-style-type:disc">순차 파일(Sequential File)은 생성되는 순서에 따라 레코드를 순차적으로 저장하므로 저장 매체의 효율이 가장 높다. </li></ul><ul id="12d76016-e07b-4537-9d9a-c6beff385778" class="bulleted-list"><li style="list-style-type:disc">직접 파일(Direct File)은 특정 레코드에 접근하기 위해서 디스크의 물리적인 주소로 변환할 수 있는 함수를 사용한다.</li></ul><ul id="951ccedd-d2f9-4f46-bf95-b4a0d4ed5e95" class="bulleted-list"><li style="list-style-type:disc">색인 순차 파일(Indexed Sequential File)은 순차 및 직접 접근 형태를 모두 지원할 수 있으나 기억 장소의 낭비를 초래한다.</li></ul><ul id="dbd68a1f-3121-4c86-903d-e9ba40780ae3" class="bulleted-list"><li style="list-style-type:disc">VSAM 파일 (Virtual Storage Access Method File)은 검색 속도를 빠르게 하기 위하여 기본 데이터 구역과 오버플로 구역을 구분하여 갖추어야 한다. (x)<ul id="3314388a-c620-483f-94e3-1f06373dd2a1" class="bulleted-list"><li style="list-style-type:circle">VSAM파일은 기본 데이터 영역과 오버플로 영역을 구분하지 않는다.</li></ul></li></ul><p id="9f6ec2bd-0e9c-461e-9d90-e047e6954b0e" class="">
+</p><ol type="1" id="2aa72de0-bbfa-4db8-8e3c-3a789cf66aca" class="numbered-list" start="6"><li>파일 조직 기법 중 순차 파일에 대한 설명으로 옳지 않은 것은</li></ol><ul id="eb7dcb9c-9da8-420f-a0ea-c764d98251f5" class="bulleted-list"><li style="list-style-type:disc">레코드 사이에 빈 공간이 존재하지 않으므로 기억장치의 효율적 이용이 가능하다.</li></ul><ul id="eaab0f12-2448-44df-85b7-3f5b86b38e8f" class="bulleted-list"><li style="list-style-type:disc">레코드들이 순차적으로 처리되므로 대화식 처리보다 일괄 처리에 적합한 구조이다.</li></ul><ul id="d9006bdc-23b2-48ac-81a1-6d76b828e409" class="bulleted-list"><li style="list-style-type:disc">필요한 레코드를 삽입, 삭제하는 경우 파일을 재구성해야 하므로 파일 전체를 복사해야 한다.</li></ul><ul id="055d0ba9-a7b7-45dd-94ad-7798384eec59" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">데이터 검색 시 검색 효율이 높다. </span><ul id="647d91ea-720c-4eae-87a5-00a144dae6cd" class="bulleted-list"><li style="list-style-type:circle">순차 파일 편성은 레코드를 논리적인 처리 순서에 따라 연속된 물리적 저장 공간에 기록하는 것으로 데이터 검색 시 무조건 처음부터 차례대로 검색하므로 검색 효율이 낮다.</li></ul></li></ul><p id="e6d7cf22-a19b-464f-bd85-8017122007de" class="">
+</p><p id="340520e8-9884-4959-8b07-0d5eb01b05a8" class="">
+</p><p id="bfb3a951-0aa1-4758-9b8c-e69eda5c9505" class="">
+</p><p id="fe07affd-5b45-429d-b91c-e43fcd4c9e1e" class="">
+</p><p id="91b19dca-ada4-4f60-a19b-38eb46964c39" class="">
+</p><p id="5f72e08a-1d41-4370-ba8f-ea09b218545f" class="">
+</p><p id="9951745b-eaac-42e4-9e3f-b957e9564bd7" class="">
+</p><p id="9245cc86-8bc6-478c-b4c6-2201cee4d0be" class="">
+</p><p id="b3e61ea8-cff3-4c44-9be5-1f023113a04b" class="">
+</p><p id="b78b74ff-a15a-4208-9ce2-1d24bdbfec71" class="">
+</p><p id="6e4b195b-fb73-499c-bc3b-7871d74d1b50" class="">
+</p><p id="bfb1a074-9e03-41a3-8ce3-af096917be95" class="">
+</p><p id="83151c4c-9d63-47a7-8a8a-29ea69b60ec8" class="">
+</p><p id="98506f35-d378-44bc-9837-e3d9432239df" class="">
+</p><p id="b7ff7ade-8ee5-42ad-9867-fb8ac6da5906" class="">
+</p><p id="90ae0e55-6c9b-4c36-8220-96e86e4aaf97" class="">
+</p><p id="63ae624a-e259-4e20-979d-18d5ed82582a" class="">
+</p><p id="32931c6b-f7a9-48fc-8267-f64a7084a468" class="">
+</p><p id="7101ed71-a10f-41c3-a303-03ff5075c7a3" class="">
+</p><p id="25efb288-4eac-4b21-8dc5-69d452ce52ba" class="">
+</p><p id="4bfaebef-3c3d-4442-8a50-1b3a7e618130" class="">
+</p><p id="ce7d40bc-aec2-4107-9975-ac4e1e0bb4f0" class="">
+</p><p id="746e01cf-c1ba-4f1a-a3ca-7d663676194c" class="">
+</p><p id="ea904006-5130-4a4b-8d9d-eb86dcea5142" class="">
+</p><p id="c7a1be13-c404-4a76-8366-d676dd6ef694" class="">
+</p><p id="3efed171-510d-45a0-b9a7-1f99cfcd11f8" class="">
+</p><p id="ff26bd49-468b-47c5-bea7-236c71b0b0d5" class="">
+</p><p id="edcbda9e-0e0c-4a47-8032-0e921b617457" class="">
+</p><p id="618cd816-7f89-47af-aeeb-cdd55f2f569a" class="">
+</p><p id="5725b68a-3db2-4490-8d12-9003a5dbcee8" class="">
+</p><p id="b5680988-e60f-42f2-8c2c-e98aa25f852f" class="">
+</p><p id="30e36e0b-4a35-4443-9c77-ca454b5b1a2b" class="">
+</p><p id="cb7a72a5-eceb-4c9f-bb15-edb6af1b0ea6" class="">
+</p><p id="1a4b185f-70d7-4c28-a8d2-d04c6bad353e" class="">
+</p><p id="08c2a70a-8163-4ea8-9297-e16bc20044e5" class="">
+</p><p id="db312bce-eaa6-444a-8469-3a1cb25912da" class="">
+</p><p id="1bd1300f-6c52-42e1-8add-49e797a352cf" class="">
+</p><p id="38c36ad8-58d6-436a-82a4-53f67bff893b" class="">
+</p><p id="904a739d-5b9d-407d-b564-fe01ccb26954" class="">
+</p><p id="345f7d13-d018-4f01-adc0-e12c06b34bad" class="">
+</p><p id="ab321267-2935-4c47-b741-677fadd1703d" class="">
+</p><p id="78efd832-7495-4805-a5b4-63488ff877b8" class="">
+</p><p id="029d4c54-17f4-4da1-98c5-d6cae3d1dd12" class="">
+</p><p id="7e5ad6f3-ed3c-4905-a022-20b4f6a25ac1" class="">
+</p><p id="305ed894-4a82-4d5c-97d0-36dc87d4dc9f" class="">
+</p><p id="ef11eb11-c0a0-42e1-80a3-d232dd7d2bc4" class="">
+</p><p id="94ce4f6d-9365-45df-a1ca-c9a6991a0980" class="">
+</p><p id="b1926f62-8813-4b36-9bf8-9a8a98818ff4" class="">
+</p><p id="74265ccc-5c5d-4d2e-bbc2-30d182044d8f" class="">
+</p><p id="32da7fe9-9e2a-4403-8b20-f8305ee4134a" class="">
+</p><p id="094a5cbd-bb09-4882-80b7-dcfb776e6c42" class="">
+</p><p id="27e24a04-0c9a-41a2-b2f6-1fe767d22b58" class="">
+</p><p id="7b60a24c-71d4-4fbd-9b71-2d6ddb80c6e2" class="">
+</p><p id="af8114ea-ec68-402f-8ea2-87a137544432" class="">
+</p><p id="90bfab6d-6132-430c-b507-2a0c87ca97ff" class="">
+</p><p id="374eadf9-300f-4714-b7c6-8f1333265a04" class="">
+</p><p id="fdfa6409-f43f-4994-9593-71a8f796ff9d" class="">
+</p><p id="1d3d3ed0-2ee1-4b13-90f3-48fe103333e8" class="">
+</p><p id="216490e9-d4d7-4c28-9b5e-922db0caa911" class="">
+</p><p id="3b436230-1746-4565-a8bb-0780c650f21c" class="">
+</p><p id="12d348c7-0806-447e-ad3f-73bf3df3b1a7" class="">
+</p><p id="7d2945e8-3903-4c9a-91a4-d0bbac0ab938" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

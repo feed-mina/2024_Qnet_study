@@ -1,0 +1,780 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5장 입력 및 출력</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="784779a7-eea6-4b17-a858-8289be56f257" class="page sans"><header><h1 class="page-title">5장 입력 및 출력</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 24일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="a2195bc5-e09c-489d-a964-8b8c8740266d" class=""><strong>입 * 출력의 기본 </strong></blockquote><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4db7d264-d049-400a-9bfa-39f1f44e379b" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">	                                   
+                                            키보드        프린터        자기디스크
+          ┌ 데이터 채널                        ↑↓          ↑↓                ↑↓
+	        |                                 인터페이스   인터페이스     인터페이스
+기억장치 ┃ ←---→ ┃  DMA 제어기            ┃───────────────────────────────────────┃
+  MBR            ┃ 또는 채널 제어기 ←---→ ┃            입 * 출력 버스             ┃
+	 ↑↓                                     ┃──────────────────────────────────────┃
+	 AC    ┃                                 인터페이스    인터페이스     인터페이스    ***
+  CPU    ┃                                    ↑↓            ↑↓             ↑↓
+	                                           마우스       자기 테이프   카드 판독기   ***</code></pre><p id="faf84682-7817-417e-8234-db5091259783" class="">
+</p><p id="e4f71de2-7470-4662-a3b4-7186cbda5c15" class=""><mark class="highlight-yellow_background"><strong>입*출력제어장치</strong></mark><strong> </strong><span style="border-bottom:0.05em solid">: </span><span style="border-bottom:0.05em solid"><strong>데이터 버퍼 레지스터</strong></span>를 이용하여 두 장치간의 속도 차를 조절한다. <strong>제어 신호</strong>의 <strong>논리적</strong>, <strong>물리적 변환</strong> 그리고 <strong>오류를 제어</strong>한다. <strong>DMA</strong>, <strong>채널</strong>, <strong>입*출력 프로세서</strong>, <strong>입 * 출력 컴퓨터 </strong>등이 입 * 출력 제어장치에 해당한다.</p><p id="836125d5-ade7-4691-a3a2-ee578d6e0c56" class="">
+</p><p id="992edb48-7a13-4c6e-a2d0-de22070319d0" class=""><mark class="highlight-yellow_background"><strong>입 * 출력 인터페이스</strong></mark><strong> </strong>: 동작방식이나 데이터 형식이 서로 다른 컴퓨터 내부의 <strong>주기억장치</strong>나 <strong>CPU의 레지스터</strong>와 <strong>외부 입*출력 장치</strong>간의 <strong>2진 정보</strong>를 원할하게 전송하기 위한 방법을 제공한다. <strong>입 * 출력 인터페이스</strong>는 <strong>컴퓨터</strong>와 <strong>각 주변장치와의 차이점</strong>을 해결하는것이 목적이다. ( 1) 전자기 혹은 기계적인 주변장치와 <strong>전자적인 CPU</strong>나 <strong>메모리 간 동작방식 차이 </strong>, 2) 주변장치와 CPU간의 <strong>데이터 전송의 차이</strong>, 3) 주변장치의 <strong>데이터 코드</strong>와 <strong>CPU</strong>나 <strong>메모리의 워드 형식의 차이 </strong>, 4) <strong>전송 사이클의 길이 </strong>등 <strong>동작 방식이 서로 다른 주변 장치들의 간섭 없는 제어</strong>)</p><p id="0a82922c-9792-4d03-b5c4-15edc683751b" class="">
+</p><p id="c8a35aed-0471-487c-afe6-b7ef0ec6ab89" class=""><mark class="highlight-yellow_background"><strong>입 * 출력 버스 </strong></mark><mark class="highlight-yellow_background">:</mark> 입 *출력 버스는 <strong>주기억 장치</strong>와 <strong>입 * 출력 장치 </strong>사이의 <strong>데이터 전송</strong>을 위해 <strong>모든 주변 장치의 인터페이스</strong>에 <strong>공통으로 연결된 버스</strong>이다. 입 * 출력 버스는 <span style="border-bottom:0.05em solid"><strong>데이터 버스</strong></span><span style="border-bottom:0.05em solid">, </span><span style="border-bottom:0.05em solid"><strong>주소 버스</strong></span><span style="border-bottom:0.05em solid">, </span><span style="border-bottom:0.05em solid"><strong>제어 버스</strong></span>로 구성된다.</p><p id="13f7a4f3-6a0a-4ad8-aca0-510fd499a3b1" class="">
+</p><p id="8cc05462-44e2-44b2-93c1-6d0e4873570a" class=""><strong>입*출력 장치의 종류</strong> : <strong>CPU</strong>로 처리해야 할 <strong>자료</strong>와 <strong>프로그램</strong>을<strong> 외부로부터 읽어 들어 컴퓨터로 처리할 수 있게 자료</strong>를 <strong>코드로 변환</strong>하여 <strong>주기억장치로 전달</strong>하는 것이<span style="border-bottom:0.05em solid"> </span><span style="border-bottom:0.05em solid"><strong>입력장치</strong></span>이고 <strong>처리된 데이터</strong>를 <strong>사람이 알아볼 수 있는 형태</strong>로 <strong>변환</strong>하여 표시하는 장치를 <span style="border-bottom:0.05em solid"><strong>출력장치</strong></span>라고 한다.</p><p id="c2913895-ea15-4263-a7b6-2cb787a98908" class="">
+</p><p id="827f59c8-ec68-4af6-b842-1dd4ef00ea35" class=""><strong>입력 장치 </strong>: 키보드, 마우스, 스캐너, OMR, OCR, MICR, BCR (Bar Code Recoder),마이크로 필름 입력장치 (CIM, Computer Input Microflim), 라이트 펜, 터치스크린, 디지타이저 등</p><p id="caa8b955-641d-4fef-86d1-3dd3caa361f1" class=""><strong>출력장치 </strong>: 모니터, 프린터, 플로터, 마이크로 필름 출력장치(COM, Computer output Microfilm)등</p><p id="68f3c194-7938-4742-83b0-56f4e61f7333" class=""><strong>보조기억장치(입*출력 겸용 장치)</strong> : 자기 디스크, 자기테이프, 자기 드럼, 플로피 디스크 등 </p><p id="16d43c36-30ee-4322-b317-16d9818e1a7b" class="">
+</p><p id="83b867a2-2606-4973-857e-955291b3ccdd" class="">기억장치와 입출력장치의 동작 차이</p><p id="8e209ef1-8f30-4e67-904b-27aaffba7db4" class=""><strong>기억장치</strong>는 처리 속도가 <strong>nano 단위</strong>인 <strong>전자적인 장치</strong>이고 <strong>입*출력 장치</strong>는 <strong>mili단위</strong>인 <strong>기계적 장치</strong>이다. <strong>기억장치</strong>는 동작의 <strong>속도가 빠르고 </strong>동작의 자율성이 <strong>타율적</strong>이고 <strong>정보의 단위가 Word이고 착오 발생률이 적다</strong>. 반면 <strong>입*출력 장치</strong>는 동작의 <strong>속도가 느리고 </strong>동작의 자율성이 <strong>타율/자율 </strong>둘다 가능하며 정보의 단위는 <strong>Byte(문자)</strong>이고 <strong>착오 발생률이 많다</strong>.</p><p id="05235faf-946e-4cc5-9168-5c792cc31bb1" class="">
+</p><p id="97f52d55-9e7c-417d-be20-1031fa4fb2da" class="">비동기 데이터 전송</p><p id="2f9d1afe-3e42-41a8-a1c9-693281663d9e" class="">두 개의 독립적인 장치 사이의 <strong>비동기적인 데이터 전송</strong>을 이루기 위해서는 <strong>데이터 전송 시각을 알기 위한 제어신호</strong>를 <strong>서로 교환</strong>하여 <strong>송*수신 상태</strong>를 <strong>서로 맞추어야 한다</strong>. 비동기 데이터 전송 방식에는 동기를 맞추기 위해 <strong>제어 신호를 교환하는 방법</strong>에는 <mark class="highlight-yellow_background"><strong>스트로브 펄스</strong></mark><strong>(</strong><span style="border-bottom:0.05em solid"><strong>데이터 버스</strong></span><span style="border-bottom:0.05em solid">와 </span><span style="border-bottom:0.05em solid"><strong>한개의 제어선</strong></span><span style="border-bottom:0.05em solid">을 이용</span>, <strong>두 개의 독립적인 장치 </strong>사이의 비동기적인 데이터 전송을 이루기 위해 전송 시각을 알리는 <strong>제어신호를 스트로브 신호</strong>라고 한다. <span style="border-bottom:0.05em solid"><strong>한 개의 제어선을 통해 상호 교환</strong></span><span style="border-bottom:0.05em solid">한다</span>. <strong>메모리</strong>와 <strong>CPU 사이</strong>에서 <strong>정보를 교환할때 </strong>사용한다.)<strong> </strong>에 의한 방식과 <mark class="highlight-yellow_background"><strong>핸드셰이킹</strong></mark><strong>(</strong>데이터 전송 시 <span style="border-bottom:0.05em solid"><strong>송신측과 수신측</strong></span><span style="border-bottom:0.05em solid">에 </span><span style="border-bottom:0.05em solid"><strong>입*출력의 준비</strong></span><span style="border-bottom:0.05em solid">나 </span><span style="border-bottom:0.05em solid"><strong>완료를 나타내는 신호(RDY, STB)</strong></span><span style="border-bottom:0.05em solid">를 사용</span>하여 <strong>서로의 동작을 확인</strong>하면서 <strong>데이터를 전송</strong>한다. 전송을 시작한 장치에 응답하는 <strong>제2의 제어신호를 전송함</strong>으로써 스트로브 제어방법 보다 <strong>높은 융통성과 신뢰성을 갖는다</strong>. <strong>병렬 입*출력 데이터 전송방식</strong>의 기본으로 널리 사용된다. <strong>2~3개의 제어선</strong>을 이용한다.<strong> )</strong>에 의한 방법이 있다.</p><p id="6f3a1dbe-a4b8-4e91-9790-6ac0bddb6023" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c97400dc-5bf3-4a3c-9c9f-42a1273f1d29" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">스트로브 펄스의 단점 : 전송을 시작한 송신장치는 수신장치가 데이터를 데이터를 받았는지를 알 수 없다. 
+
+        데이터버스                             데이터버스
+          ─────→                                 ───→
+송신장치            수신장치           송신장치           수신장치
+          ─────→                                 ←───
+          스트로브                             스트로브
+
+송신자 개시의 스트로브                   수신자 개시의 스트로브
+
+* 송신자 개시의 데이터 전송은 먼저 전송할 데이터를 버스에 놓고 스트로브 신호를 보내고, 수신자 개시의 데이터전송은 수신자에서 송신자로 스트로브 신호를 보내면 전송할 데이터를 버스에 놓는다.
+
+* 핸드셰이킹
+
+            데이터버스                                 데이터버스
+           ───────→                                    ───────→ 
+송신장치    스트로브          수신장치        송신장치  스트로브     수신장치
+           ───────→                                    ───────→ 
+         데이터 수신 신호                              준비신호
+          ←───────                                     ←───────
+                                        
+
+송신자 개시의 핸드셰이킹                        수신자 개시의 핸드셰이킹
+</code></pre><ul id="d5c1d108-f79f-4123-b9ca-89a2a2b97640" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>스풀링</strong></mark><mark class="highlight-yellow_background"> </mark>(Sppling, Simultaneous Peripheral Operaion On-Line)은 <span style="border-bottom:0.05em solid"><strong>다중 프로그래밍 환경</strong></span>에서 <strong>용량이 크고</strong> <strong>신속한 액세스</strong>가 <strong>가능한</strong><span style="border-bottom:0.05em solid"><strong> 디스크를 이용</strong></span>하여 <strong>각 사용자 프로그램</strong>이 입 * 출력할 데이터를 <strong>직접 I/O 보내지 않고 디스크를 모았다가</strong> <strong>나중에 한꺼번에</strong> 입*출력함으로써 <strong>입 *출력 장치의 공유 </strong>및 <strong>상대적으로 느린 입 * 출력장치의 처리속도를 보완</strong>하는 기법이다.</li></ul><p id="28d228e1-7630-4418-bc91-8d0ef93786dc" class="">스풀링은 <strong>고속의 CPU</strong>와 <strong>저속의 입*출력 장치</strong>가 <strong>동시에 독립적으로</strong> 동작하게 하여 <strong>높은 효율</strong>로 <strong>여러 작업을 병행 수행 </strong>할 수 있도록 해줌으로써 <strong>다중 프로그래밍 시스템의 성능 향상</strong>을 가져올 수 있다. <strong>디스크 일부</strong>를 <strong>매우 큰 버퍼</strong>처럼 사용하<span style="border-bottom:0.05em solid">며 </span><span style="border-bottom:0.05em solid"><strong>큐 방식</strong></span><span style="border-bottom:0.05em solid">의 </span><span style="border-bottom:0.05em solid"><strong>입 * 출력을 수행</strong></span>한다. </p><table id="98ac110c-6a75-431b-a617-015ba562503a" class="simple-table"><tbody><tr id="59c2a196-e149-46fe-9caf-f46c133b9913"><td id="ag~n" class=""></td><td id="wvP;" class="">버퍼링</td><td id="xBT&lt;" class="">스풀링</td></tr><tr id="9a89cb44-f15e-4018-be07-c01c69648e7c"><td id="ag~n" class="">저장위치</td><td id="wvP;" class="">주기억장치</td><td id="xBT&lt;" class="">보조 기억 장치</td></tr><tr id="2bc8428b-4826-4e0e-9fd0-84d1a320360a"><td id="ag~n" class="">운영방식</td><td id="wvP;" class="">단일 작업</td><td id="xBT&lt;" class="">다중 작업</td></tr><tr id="b75ae467-dfa0-4f64-95b9-d52253f6b926"><td id="ag~n" class="">구현방식</td><td id="wvP;" class="">하드웨어</td><td id="xBT&lt;" class="">소프트웨어</td></tr></tbody></table><p id="2e1bdbb1-a385-4c7f-942b-673e19151c2c" class="">
+</p><ol type="1" id="be2ffd13-2e15-4574-a175-219f16093649" class="numbered-list" start="1"><li>출력장치와 기억장치의 데이터 전송을 위하여 <strong>입*출력 제어</strong>가 필요한 가장 중요한 <strong>이유는 </strong>? <strong>동작속도</strong></li></ol><ul id="29663bd2-a5f9-4e0c-b509-f20efc8256ef" class="bulleted-list"><li style="list-style-type:disc">입 * 출력 장치와 기억장치의 가장 큰 차이는 기계적 장치와 전자적인 장치에서 오는 속도 차이가 있다. 데이터 전송을 위한 입 * 출력 제어기가 가장 필요한 이유도 두 장치 간의 속도 차이에 있다. DMA, 채널, 입 * 출력 프로세서 , 입 * 출력 컴퓨터 등이 여기에 속한다. </li></ul><ol type="1" id="6893e314-87da-4d05-a2dd-20f0be6ab028" class="numbered-list" start="2"><li>입 * 출력에 필요한 하드웨어 기능으로서 적합하지 않은것은?메모리 제어기</li></ol><ul id="7e595bbe-43a0-48dd-8287-47757171fecd" class="bulleted-list"><li style="list-style-type:disc">입 * 출력 버스, 입 *출력 인터페이스, DMA 제어기는 입 *출력에 필요한 하드웨어에 속한다.</li></ul><ol type="1" id="4f615328-7cda-4cb9-9546-409703aa759c" class="numbered-list" start="3"><li>입*출력 장치와 기억 장치와의 차이점으로 옳지 않은것은 <strong>: 입*출력 장치</strong>가 착오 발생률이 적다 (x) → <strong>기계적이기 때문에 착오가 더 많이 난다.</strong></li></ol><ul id="208ec7de-51d4-4529-9bec-7a75e52ea103" class="bulleted-list"><li style="list-style-type:disc"><strong>입*출력장치의 동작자율성은 타율/자율 둘다 된다 . 반면 기억장치는 타율적이다 ! </strong></li></ul><ol type="1" id="2236a5a0-5d0a-43ed-ae76-926a732de0b6" class="numbered-list" start="4"><li><strong>입 * 출력 인터페이스</strong>에 대한 설명으로 가장 옳은것: <strong>입 출력 조작 효율을 증대</strong>시키기 위한 <mark class="highlight-yellow_background"><strong>서브시스템</strong></mark>이다.</li></ol><ul id="1478de58-a143-46f4-a6fa-459460169fa1" class="bulleted-list"><li style="list-style-type:disc">CPU와 입출력장치를 기계적으로 연결한다. (x) → <strong>전자기적으로 연결</strong>한다.</li></ul><ul id="1efa66ca-4ac2-4213-a711-72fec4c8af8c" class="bulleted-list"><li style="list-style-type:disc">컴퓨터에는 1개의 인터페이스가 있다. (x) → <strong>수 많은 인터페이스</strong>가 있다.</li></ul><ul id="c4da67a7-e51c-486b-b262-da3069790b7a" class="bulleted-list"><li style="list-style-type:disc">주기억장치 내에 포함된다. (x) →<strong> CPU와 입출력 장치 사이에 위치</strong>한다.</li></ul><ol type="1" id="0ec5e6e6-bd80-41f1-b883-d4f7df494a83" class="numbered-list" start="5"><li>버퍼링과 스풀링에 대한 설명으로 옳지 않은것은? </li></ol><p id="bc11df8d-9db5-4c6b-a70c-85b2779997d5" class="">버퍼링은 디스크를 큰 버퍼처럼 사용하고 스풀링은 주기억장치를 사용한다 (x) </p><p id="cffe34c0-b357-44a1-9523-64396e276d9b" class="">→ <strong>스풀링</strong>이<strong> 디스크를 큰 버퍼처럼 사용</strong>하고 <strong>버퍼링</strong>은 <strong>주기억장치를 사용</strong>한다.</p><ul id="0c9aa2d8-0c76-4bc4-8a25-bd82f7957711" class="bulleted-list"><li style="list-style-type:disc">버퍼링과 스풀링은 <strong>CPU연산과 I/O연산을 중첩시켜</strong> CPU의 효율을 높이기 위하여 사용한다.</li></ul><ul id="2bf8c166-0422-443f-b16d-dc5114d6adfd" class="bulleted-list"><li style="list-style-type:disc"><strong>버퍼링</strong>은 <strong>단일 사용자 시스템</strong>에 사용되고 <strong>스풀링</strong>는<strong> 다중 사용자 시스템</strong>에 사용된다. </li></ul><ol type="1" id="18ec291f-239a-43c3-965c-14eecfd954cc" class="numbered-list" start="6"><li>스풀링에 대한 설명으로 가장 옳지 않은것은? </li></ol><p id="8c660df8-d6ce-4937-a51d-930a98d9b9c4" class="">입*출력이 일어나는 동안 그 데이터를 주기억 장치에 저장하여 처리한다 (x<strong>버퍼링</strong>) → 보조기억장치를 버퍼로 사용한다.</p><ul id="4b7f2564-227a-458f-a040-8acf451c5f13" class="bulleted-list"><li style="list-style-type:disc">용량이 크고 빠른 디스크를 이용하여 각 사용자의 입*출력을 효과적으로 처리하는 기법이다.</li></ul><ul id="00ec64b8-5994-4f0d-afbb-fc5558efd2be" class="bulleted-list"><li style="list-style-type:disc">많은 작업의 입*출력고 계싼을 중복하여 수행 할 수 있다.</li></ul><p id="44a27be4-243a-4642-b9dd-5fac13539b34" class="">
+</p><ol type="1" id="62c93826-9c20-491a-932a-90c9af92f4ad" class="numbered-list" start="7"><li>I/O 효율을 높이기 위해 I/O 내용을 <strong>디스크 등에 모아 두었다가 처리하는 방식</strong>은? <strong>스풀링</strong></li></ol><ul id="bf28c872-ce8d-4059-af14-904fab455f49" class="bulleted-list"><li style="list-style-type:disc">스풀링도 채널이나 DMA에 의해서 처리된다.</li></ul><p id="24ba786c-357c-41f6-8684-9ae0f9a162c4" class="">
+</p><ol type="1" id="8e0a1a7f-afdd-44ea-9553-1b8fc6e24bfd" class="numbered-list" start="8"><li>기억장치와 입*출력 장치간의 차이점이라 볼 수 없는것은 ? 에러보정방식의 차이</li></ol><ul id="21d2706e-713a-4705-b67d-84547013d1b1" class="bulleted-list"><li style="list-style-type:disc">처리속도가 나노단위인 전자적인 장치와 밀리 단위인 기계장치의 차이점을 생각하자 ! </li></ul><p id="8156cb54-d92c-4353-916a-03833e81c8bb" class="">
+</p><ol type="1" id="631e0e03-6b7e-400f-9484-e3716fe48762" class="numbered-list" start="9"><li>입*출력 제어장치의 역할이 아닌것은? DMA제어</li></ol><ul id="202491ff-6ddb-456a-8122-a75c83abcd38" class="bulleted-list"><li style="list-style-type:disc"><strong>DMA</strong>는 입*출력을 제어하는 <strong>입 *출력 제어장치의 한 종류</strong>를 의미한다 ! </li></ul><p id="aaf3d500-0036-414a-9328-28665e649b8c" class="">
+</p><p id="947ca86e-5cf4-49b8-b41e-a2b463ddafd7" class="">
+</p><blockquote id="1dfdc708-c5ec-4cbe-9677-50e5cacb0d1c" class=""><strong>입 * 출력 제어방식</strong></blockquote><p id="08c9b065-0580-4477-9cc3-c8605689a0fd" class="">컴퓨터와 입출력장치 사이의 데이터 전송은 4가지 모드로 나뉜다<strong>. CPU를 중간경로로 이용하여 데이터를 입*출력</strong> 하는것과<strong> CPU를 거치지 않고 메모리와 직접 입 * 출력하는것으로 구분</strong>된다. </p><p id="16998c92-a4b9-4acf-b94a-d77f6fb6ab7d" class="">
+</p><table id="a2d8699c-53a8-43e6-b9b6-d2165f2f9145" class="simple-table"><tbody><tr id="a2f5ccc3-c772-4719-9d47-ffe2f0702d70"><td id="dEf}" class="">제어방식</td><td id="|VCq" class="">CPU 관여 여부</td><td id="^l\w" class="">특징</td><td id="AwOq" class="" style="width:456px"></td></tr><tr id="81be7162-c6c8-41e3-9a03-6a062c9bd307"><td id="dEf}" class=""><strong>program</strong>에 의한 I/O =<strong> 중앙처리장치</strong>에 의한 입출력</td><td id="|VCq" class=""> O</td><td id="^l\w" class="">가장 원시적인 방식</td><td id="AwOq" class="" style="width:456px">원하는 <strong>I/O가 완료되었는지의 여부를</strong> 검사하기 위해서 <strong>CPU가 상태 Flag 를 계속 조사</strong>하여 <strong>I/O 가 완료되었으면</strong> <strong>MDR(MBR)</strong>과 <strong>AC 사이의 자료 전송</strong>도 <strong>CPU가 직접 처리</strong>하는 <strong>I/O 방식 </strong><br/>* 입*출력에 필요한 <br/><strong>대부분의 일</strong>은 <strong>CPU</strong>가 해주므로 <strong>Interface</strong>는 <strong>MDR (Memmory Data Register)</strong>, <strong>Flag</strong>, <strong>장치번호 디코더</strong>로만 구성하면 된다.<br/>* I/O 작업 시 <br/><strong>CPU는 계속 I/O 작업에 관여</strong>해야 하기 때문에 <strong>다른 작업을 할 수 없다</strong>는 단점이 있다.</td></tr><tr id="e952d208-552e-4ad9-a679-f39fb72fa804"><td id="dEf}" class=""><strong>Interupt</strong>에 의한 I/O</td><td id="|VCq" class=""> O</td><td id="^l\w" class="">가장 원시적인 방식</td><td id="AwOq" class="" style="width:456px">입 *출력을 하기 위해 <strong>CPU</strong>가 <strong>계속 Flag를 검사하지 않고 </strong>데이터를 전송할 준비가 되면 <strong>입 * 출력 인터페이스</strong>가 <strong>컴퓨터에게 알려 입 * 출력</strong>이 <strong>이루어지는 방식</strong><br/>* 입 *출력 인터페이스는 <br/><strong>CPU</strong>에게 <strong>인터럽트 신호</strong>를 보내 <strong>입 * 출력이 있음을 알린다</strong>. <br/>* <br/><strong>CPU</strong>는 작업을 수행하던 중 <strong>입 * 출력 인터럽트가 발생</strong>하면 <strong>수행중인 프로그램을 중단</strong>하고 <strong>입 * 출력을 처리</strong>한 후 <strong>원래의 작업으로 돌아와 </strong>작업을 계속 수행한다. <br/>* CPU가 <br/><strong>계속 Flag를 검사하지 않아도 되기 때문에 </strong>프로그램 I/O보다 <strong>효율적이</strong>다. <br/>* <br/><strong>대량의 자료 전송</strong>시 <strong>CPU의 부담을 증가</strong>시킨다.</td></tr><tr id="b9f726ff-5056-49fd-9c18-35259b8628e5"><td id="dEf}" class="">DMA(Direct Memory Access)에 의한 I/O</td><td id="|VCq" class=""> X</td><td id="^l\w" class=""><strong>소형 컴퓨터에서 이용</strong></td><td id="AwOq" class="" style="width:456px">* <strong>DMA</strong>는 <strong>입 *출력 장치</strong>가<span style="border-bottom:0.05em solid"> </span><span style="border-bottom:0.05em solid"><strong>직접 주기억 장치</strong></span><span style="border-bottom:0.05em solid">를 </span><span style="border-bottom:0.05em solid"><strong>접근</strong></span><strong>(Access)</strong>하여 <strong>Data Block</strong>을 <strong>입 * 출력하는 방식</strong>으로 <strong>입 * 출력 전송</strong>이 <span style="border-bottom:0.05em solid"><strong>CPU의 레지스터</strong></span><span style="border-bottom:0.05em solid">를 </span><span style="border-bottom:0.05em solid"><strong>경유하지 않고 수행</strong></span>된다.<br/>*<br/><strong> CPU</strong>는 <strong>I/O 에 필요한 정보를 DMA 제어기에 알려서 </strong>I/O 동작을 개시시킨후 <strong>I/O 동작에 더 이상 간섭하지 않고 다른 프로그램을 할당</strong>하여 수행한다.<br/>* <br/><strong>DMA 방식</strong>은 <strong>입 *출력 자료 전송 </strong>시 <strong>CPU를 거치지 않기 때문에 </strong>CPU의 부담이 없어 보다 <strong>빠른 데이터의 전송이 가능</strong>하다.<br/>* <br/><strong>DMA</strong>는 <strong>인터럽트 신호를 발생</strong>히켜 <strong>CPU에게 입 * 출력 종료를 알린다</strong>. , <span style="border-bottom:0.05em solid"><strong>블록으로 대용량의 데이터를 전송</strong></span><span style="border-bottom:0.05em solid">할 수 있다.</span><br/>*<br/><mark class="highlight-yellow_background"><strong>Cycle Steal 방식</strong></mark>(<strong>다중 프로그래밍 </strong>방식의 경우 <strong>하나의 프로그램</strong>이 <strong>CPU를 할당받아 </strong>실행 도중 <strong>I/O 동작을 맡기고 CPU</strong>는 <strong>작업 준비 큐에 준비 중이던 다른 프로그램을 할당하여 실행</strong>한다. <strong>CPU</strong>와 <strong>Interface</strong>가 <strong>각기 서로 다른 프로그램</strong>에 대한 <strong>작업을 처리하던 중</strong> <strong>DMA</strong>가 <strong>I/O 자료를 전송하기 위해 Memory를 접근할 할때</strong> <strong>CPU</strong>와 <strong>동시에 접근하게 되면</strong> <strong>충돌이 발생</strong>할 수 있다. <mark class="highlight-yellow_background"><strong>DMA제어기</strong></mark>는 <strong>CPU가 실행하고 있던 프로그램을 잠시 대기</strong>시키고 <strong>자신이 직접 Memory를 접근</strong>하여 <strong>I/O 자료를 전송</strong>)을 이용하여 데이터를 전송한다.<br/>* <br/><strong>CPU와 DMA 제어기</strong>는 <strong>메모리와 버스를 공유</strong>한다.<br/>* CPU에서<br/><strong>DMA제어기</strong>로 <strong>보내는 자료</strong> : <strong>I/O 장치의 주소</strong>, 데이터가 있는 <strong>주기억장치의 시작 주소</strong>, <strong>DMA를 시작시키는 명령</strong>, 입 * 출력하고자 하는 <strong>자료의 양</strong>, <strong>입력 또는 출력</strong>을 결정하는 <strong>명령</strong></td></tr><tr id="32bc61d7-9564-4a43-8040-67de198a7383"><td id="dEf}" class="">Channel에 의한 I/O</td><td id="|VCq" class=""> X</td><td id="^l\w" class=""><strong>대형 컴퓨터에서 이용</strong></td><td id="AwOq" class="" style="width:456px"><strong>Channel</strong>은 I/O 를 위한 <strong>특별한 명령어</strong>를 <strong>I/O 프로세서</strong>에게 수행토록 하여 <strong>CPU 관여 없이</strong> <strong>주기억 장치</strong>와 <strong>입출력 장치에서 입 * 출력을 제어</strong>하는 <strong>전용 프로세서 (IOP)</strong>이다. DMA 제어기의 한계를 극복하기 위하여 고안된 방식이다. <strong>DMA의 확장된 개념</strong>으로 볼 수 있다. <strong>체널 제어기</strong>는 <strong>체널 명령어</strong>로 작성된 <strong>채널 프로그램</strong>을 <strong>해독</strong>하고 <strong>실행</strong>하여 <strong>입 * 출력 동작을 처리</strong>한다. 채널은 <strong>CPU로부터 </strong>입 *출력 전송을 위한 <strong>명령어를 받으면 </strong>CPU와는 <strong>독립적으로 동작</strong>하여 <strong>입 *출력을 완료</strong>한다. 채널은 <strong>주기억장치에 기억되어 있는 채널 프로그램의 수행</strong>과 <strong>자료의 전송을 </strong>위하여 <strong>주기억장치에 직접 접근</strong>한다. I/O 장치는 <strong>제어장치를 통해 채널과 연결</strong>된다. <strong>I/O 채널</strong>은 CPU의 I/O 명령을 수행하지 않고 I/O채널 내의 <strong>특수 목적 명령(CCW, Command)를 수행</strong>한다. <strong>채널</strong>은 <strong>CPU와 인터럽트</strong>로 통신한다.</td></tr></tbody></table><p id="2d3ced05-b6a2-488b-8841-83e5cb042b4c" class="">
+</p><ul id="e3fabb3b-8901-4331-9c3f-eb4c739860c2" class="bulleted-list"><li style="list-style-type:disc"><strong>입 * 출력 처리 능력 순서</strong> : <strong>폴링(프로그램) </strong>&lt; <strong>인터럽트 </strong>&lt; <strong>DMA </strong>&lt; <strong>Channel</strong> </li></ul><ul id="e2e7ef69-584e-4b99-8380-3ac7f6559e84" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>DMA의 구성 요소</strong></mark>는 <strong>인터페이스 회로 </strong>(<span style="border-bottom:0.05em solid">CPU와 입*출력 장치와의 통신 </span>담당), <strong>주소 레지스터 및 주소 라인</strong>(<strong>기억 장치의 위치 지정</strong>을 위한 <strong>번지기억 및 전송</strong>), <strong>워드 카운트 레지스터</strong>( 전송되어야 할 <span style="border-bottom:0.05em solid">워드의 수 </span>기억),<strong> 제어 레지스터</strong>(<span style="border-bottom:0.05em solid">전송방식 결정</span>),<strong> 데이터 레지스터</strong>(전송에 사용할 <span style="border-bottom:0.05em solid">자료나 주소를 임시로 기억하는 버퍼 역할</span>을 함)가 있다.</li></ul><ul id="701f422a-81c3-4443-a49c-daec858f459c" class="bulleted-list"><li style="list-style-type:disc"><strong>DMA의 전송 절차</strong></li></ul><p id="e27137f8-a243-4b8e-809b-63c5d505115b" class=""><strong>CPU</strong>가 <strong>DMA 제어기에게 명령을 내린다 </strong>→ <strong>DMA 제어기</strong>가 <strong>CPU</strong>에게 <strong>버스 사용을 요구</strong>한다. <strong>(Bus Request) </strong>→ <strong>CPU</strong>가 <strong>DMA 제어기</strong>에게 <strong>버스 사용 허가</strong>한다 <strong>(Bus Grant) </strong>→ <strong>DMA제어기</strong>가 <span style="border-bottom:0.05em solid"><strong>주기억장치</strong></span><span style="border-bottom:0.05em solid">에서 </span><span style="border-bottom:0.05em solid"><strong>데이터를 읽어</strong></span><span style="border-bottom:0.05em solid"> </span><span style="border-bottom:0.05em solid"><strong>디스크로 전송</strong></span>한다 <strong>( Data Transfer)</strong> → <strong>데이터 전송</strong>이 완료되면 <strong>인터럽트 신호를 보낸다</strong>.</p><p id="d33ed6f3-c07c-4ed5-8d6a-c78a4607994b" class="">
+</p><ul id="8a62b1f5-8247-4c2d-af81-650f8d74609c" class="bulleted-list"><li style="list-style-type:disc">채널 명령어 (CCW Channel Command Word)는 CPU명령어와 구별하기 위해 Command라 부른다. <strong>명령 코드</strong> ( 입 * 출력 명령을 지정함), <strong>데이터 주소 (</strong>블록의 시작 주소를 표시함),<strong>플래그</strong>(<span style="border-bottom:0.05em solid">CCW의 링크 주소 </span>등 통신 목적이나 상태 기록을 위한 부분), <strong>워드 카운터</strong>(전송될 블록의 단어 수를 표시함) 이렇게 4가지로 분류된다.</li></ul><ul id="b6edfbc3-4b4c-474a-b968-fa519a480f1e" class="bulleted-list"><li style="list-style-type:disc"><strong>채널과 DMA 방식</strong>의 <strong>유사점</strong>은 <strong>CPU</strong>에 대해 <strong>완전히 자율적으로 동작하</strong>고 <strong>주기억장치를 직접 접근</strong>하여 <strong>I/O 명령을 수행</strong>하고 자료를 기록하거나 판독한다.</li></ul><ul id="3208ea75-772b-43f3-a2d0-d541a50f89b4" class="bulleted-list"><li style="list-style-type:disc"><strong>채널과 DMA 방식</strong>의 차이점은 <strong>DMA</strong>는 <strong>한개의 Instruction</strong>에 의해 <strong>한 개의 Block만</strong>을 입 * 출력하지만 <strong>채널은 한 개의 Instrunction</strong>에 의해 <strong>여러 개의 Block을 입*출력</strong>한다. </li></ul><ul id="bf0a390d-80da-403d-a775-40be606985c7" class="bulleted-list"><li style="list-style-type:disc"><strong>채널의 종류</strong>는 <strong>선택채널 </strong>(Selector Channel, <span style="border-bottom:0.05em solid">고속 입*출력 장치</span>(자기 디스크, 자기 테이프, 자기 드럼)와 입 출력하기 위해 사용, <span style="border-bottom:0.05em solid">특정한 한 개의 장치를 독점</span>하여 입출력한다), <strong>바이트 다중 채널</strong>(<span style="border-bottom:0.05em solid">Multipliexer </span>Channel, <span style="border-bottom:0.05em solid">저속 입출력장치 </span>(카드리더, 프린터)를 제어하는 채널, <span style="border-bottom:0.05em solid">동시에 여러개의 입*출력 장치</span>를 제어한다), <strong>블록 다중</strong>(Black MultiPlexer Channel, <span style="border-bottom:0.05em solid">고속 입*출력 장치</span>를 제어하는 채널,<span style="border-bottom:0.05em solid">동시에 여러개의 입*출력 장치를 제어</span>)한다. </li></ul><p id="87a9df7b-72fb-48ab-999e-134b12a083a6" class="">
+</p><p id="c694686c-ce3d-4df8-96c1-46657a8f0962" class="">채널의 다른 정의</p><ul id="24ed83fe-d410-4a08-bf32-9910e1e2027b" class="bulleted-list"><li style="list-style-type:disc"><strong>입출력 장치</strong>와 <strong>주기억장치를 연결</strong>하는 <strong>중개 역할</strong>을 담당하는 부분, <strong>입출력 장치</strong>와 <strong>주기억 장치 사이</strong>의 <strong>데이터 전송을 담당</strong>하는 <strong>입출력 전담장치</strong>, <strong>입출력 장치</strong>와 <strong>CPU사이에 존재</strong>하는 <span style="border-bottom:0.05em solid">속도의 차이로 인하여 </span>발생하는 <strong>단점을 해결</strong>하기 위해서 고려된 장치, <strong>CPU의 명령을 받고 </strong>입출력 조작을 개시하면 <span style="border-bottom:0.05em solid">CPU와는 독립적으로 조작</span>을 하는 장치</li></ul><p id="39962934-b686-48bf-939d-e178ef80bac7" class="">
+</p><p id="f6c139c1-e51c-4ca4-a9e5-55f8cab4f8b7" class="">
+</p><ol type="1" id="4b5a7896-1e55-452c-be69-0e8dd98d682a" class="numbered-list" start="1"><li>I/O 채널에 대한 설명으로 틀린것 : Multiplexer채널은 고속 입출력 장치용이고 Selector 채널은 저속 입출력장치이다(x) </li></ol><ul id="0f122657-cba4-4596-95f3-49e74f7aeb46" class="bulleted-list"><li style="list-style-type:disc">채널에는 <strong>Select 채널</strong>(<span style="border-bottom:0.05em solid">한 개의 고속 입 * 출력 장치를 제어</span>), <strong>Multiplexer 채널</strong>(<span style="border-bottom:0.05em solid">여러 개의 저속 입*출력 장치를 제어</span>), <strong>Block Multiplexer</strong>(<span style="border-bottom:0.05em solid">여러개의 고속 입*출력장치를 제어</span>)가가 있다.</li></ul><ul id="15520a0a-630c-49da-a705-ce89775455fe" class="bulleted-list"><li style="list-style-type:disc">I/O 장치는 <strong>제어 장치를 통해</strong> <strong>채널과 연결</strong>된다. I/O 채널은 <strong>CPU의 I/O 명령을 수행하지 않고</strong> I/O 채널 내의 <strong>특수목적 처리명령을 수행</strong>한다.</li></ul><p id="48c1d25d-af08-412b-8091-76b6e0d1e99a" class="">
+</p><ol type="1" id="5d3d3a17-8efe-4d61-ae5d-eed021dc6b0f" class="numbered-list" start="2"><li>컴퓨터의 입*출력장치에 대한 입*출력 방식이 아닌것은? <span style="border-bottom:0.05em solid">버퍼에 의한 입출력</span></li></ol><ul id="8a0de237-dadf-451e-8a97-c758f043563f" class="bulleted-list"><li style="list-style-type:disc">입출력방식의 4가지 종류: <strong>중앙처리장치에 의한 입출력</strong>(프로그램 입출력), <strong>DMA방식</strong>, <strong>채널 제어기에 의한 입출력</strong>, <strong>인터럽트</strong>에 의한 입출력이 있다.</li></ul><ol type="1" id="24700409-2847-492f-b0a7-61fcb6a47253" class="numbered-list" start="3"><li><strong>CPU가 직접 제어하는 방식</strong> 중에서 CPU가 계속 Flag를 검사하지 않고 입출력 장치의 요구가 있을때 데이터를 전송하는 제어방식은? 인터럽트 입출력 제어방식</li></ol><ol type="1" id="c2e747da-26a9-4af1-bf81-4bf00104e577" class="numbered-list" start="4"><li>채널 명령어의 구성요소가 아닌것은 I/O device처리속도 (채널명령구성요소:Data Address, Flag, Operation Code, 워드카운터)</li></ol><ol type="1" id="897ee8f7-6bb1-45c0-b8a0-ab20410703ee" class="numbered-list" start="5"><li>DMA설명이 옳지 않은것 ㅣ * DMA 는 <strong>입*출력 전송</strong>에 따른 <strong>CPU의 부하를 증가</strong>시킬 수 있다. (x) → DMA는 <strong>CPU를 거치지 않고 메모리</strong>와 <strong>입출력 장치</strong>가 <strong>직접 통신</strong>하기 때문에 <mark class="highlight-yellow_background"><strong>CPU에 부하가 증가되지 않는다</strong></mark></li></ol><ul id="cca808fa-9b2e-4146-ba7f-67a59b2a97db" class="bulleted-list"><li style="list-style-type:disc"><strong>DMA</strong>는 <strong>블록으로 대용량의 데이터를 전송</strong>할 수 있다. , <strong>기억장치</strong>와 <strong>주변 장치 </strong>사이의 <strong>직접적인 데이터 전송</strong>을 제공한다.(=<strong>DMA제어기</strong>가 <span style="border-bottom:0.05em solid"><strong>주기억장치</strong></span><span style="border-bottom:0.05em solid">에서 </span><span style="border-bottom:0.05em solid"><strong>데이터를 읽어</strong></span><span style="border-bottom:0.05em solid"> </span><span style="border-bottom:0.05em solid"><strong>디스크로 전송</strong></span>한다 )</li></ul><ol type="1" id="0ca62cd1-3831-41aa-a9a9-26db90c7336a" class="numbered-list" start="6"><li><strong>DMA 제어기</strong>가 <span style="border-bottom:0.05em solid"><strong>한 번에 한 데이터 워드를 전송</strong></span>하고 <strong>버스의 제어를 CPU에게 돌려주는 방법</strong>은? <mark class="highlight-yellow_background"><strong>사이클 스틸링</strong></mark></li></ol><ul id="05ed4359-30ba-4431-83ac-fc7205c3dea2" class="bulleted-list"><li style="list-style-type:disc">핸드셰이킹 은 <strong>비동기 데이터 전송 방식</strong>이다. <strong>(</strong>데이터 전송 시 <strong>송신측과 수신측</strong>에 <strong>입*출력의 준비</strong>나 <strong>완료를 나타내는 신호(RDY, STB)</strong>를 사용하여 <strong>서로의 동작을 확인</strong>하면서 <strong>데이터를 전송</strong>한다)</li></ul><ul id="e0860f89-a8c6-4605-b0ed-794ceee7adb8" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>DMA 에 의한 데이터 제어방식 : Cycle Steal 방식</strong></mark>(<strong>다중 프로그래밍 </strong>방식의 경우 <strong>하나의 프로그램</strong>이 <strong>CPU를 할당받아 </strong>실행 도중 <strong>I/O 동작을 맡기고 CPU</strong>는 <strong>작업 준비 큐에 준비 중이던 다른 프로그램을 할당하여 실행</strong>한다. <strong>CPU</strong>와 <strong>Interface</strong>가 <strong>각기 서로 다른 프로그램</strong>에 대한 <strong>작업을 처리하던 중</strong> <strong>DMA</strong>가 <strong>I/O 자료를 전송하기 위해 Memory를 접근할 할때</strong> <strong>CPU</strong>와 <strong>동시에 접근하게 되면</strong> <strong>충돌이 발생</strong>할 수 있다. <mark class="highlight-yellow_background"><strong>DMA제어기</strong></mark>는 <strong>CPU가 실행하고 있던 프로그램을 잠시 대기</strong>시키고 <strong>자신이 직접 Memory를 접근</strong>하여 <strong>I/O 자료를 전송</strong>)을 이용하여 데이터를 전송한다.</li></ul><p id="e9197697-151e-4fdd-951d-88fb685aee35" class="">
+</p><ol type="1" id="ba90fec1-1dd4-4022-ac4c-5c0365ebdf70" class="numbered-list" start="7"><li><strong>입*출력장치</strong>와 <strong>CPU </strong>사이에 존재하는 <strong>속도의 차이</strong>로 인하여 발생하는 <strong>단점을 해결하기 위해 </strong>고려된것은? <strong>채널 제어장치</strong></li></ol><ul id="2de84e57-bb55-4c8f-ae70-b353e3bd0ce5" class="bulleted-list"><li style="list-style-type:disc"><strong>채널</strong>이나 <strong>DMA </strong>등 <strong>입 *출력 제어기</strong>의 <strong>궁극적인 목적</strong>은 <strong>주변장치와 CPU의 속도 차이</strong>의 해결이다.</li></ul><p id="0654f156-0b42-4b8c-81f6-8d16e746f5af" class="">
+</p><ol type="1" id="911d3854-1bc5-48b0-9dc6-c1d18a665cf8" class="numbered-list" start="8"><li>채널에 관한 설명중 옳지 않은것 ? 자체적으로 자료의 수정 또는 코드 변환 등의 기능을 수행할 수 없다.(x)</li></ol><p id="e71b100a-65f8-47cd-8c6e-65ed3d0a152e" class="">→ <strong>채널</strong>은 <strong>CPU로부터 입출력 명령을 받으면 주기억장치에서</strong> 채널 프로그램을 읽어와 <strong>명령을 해독</strong>하고 <span style="border-bottom:0.05em solid"><strong>코드를 변환</strong></span>하여 <strong>입출력을 직접 수행</strong>한다.</p><ul id="f4147607-a436-4c07-bbde-38c6fad6f4bb" class="bulleted-list"><li style="list-style-type:disc">신호를 보낼 수 있는 <strong>전송로</strong>이다. <strong>DMA방법으로도 수행</strong>한다. 입 출력 수행 중 <strong>어떤 오류 조건</strong>에서 <strong>중앙처리장치에서 인터럽트를 걸 수 있다</strong>. </li></ul><ul id="6b477ff3-b96f-472f-a557-79512caf9478" class="bulleted-list"><li style="list-style-type:disc">채널은 <strong>입출력 만을 담당하는 프로세서</strong>, 즉, <strong>하나의 컴퓨터</strong>이다. </li></ul><p id="a6715ef7-2cd9-4383-82b6-791b853d21f3" class="">
+</p><ol type="1" id="01b229ee-f16e-4e7e-a44f-74ddad8f2d4b" class="numbered-list" start="9"><li><strong>고속의 입*출력 장치</strong>에서 사용되며 <strong>채널 제어기가 임의의 시점</strong>에서 볼때 마치 <strong>어느 한입 출력 장치의 전용</strong>인것처럼 운용되는 채널은 ? selector채널 </li></ol><ol type="1" id="b51f1a53-f442-409e-8ab2-e4c6bedc8a8e" class="numbered-list" start="10"><li>입출력 스루풋(Throughput)비율이 증가하는 순서를 옳게 나열한것은<strong> 폴링 &lt; 인터럽트 &lt; DMA &lt; 채널</strong></li></ol><ol type="1" id="d9094492-a0ae-406a-982a-3bf018402074" class="numbered-list" start="11"><li><strong>중앙처리장치의 지시를 받아</strong> <strong>입출력 장치</strong>와 <strong>주기억장치사이에서</strong> 데이터 <strong>중개역할</strong>을 담당하는 부분을 무엇이라고 하는가 &gt; 채널</li></ol><ol type="1" id="cbc400c8-1871-45cb-8302-aaf3e0bcef66" class="numbered-list" start="12"><li>Card Register나 Printer와 같은 비교적 저속의 입*출력 장치를 여러개 제어하는 채널은? Multiplexer Channel</li></ol><ol type="1" id="fa236578-9feb-4db7-8b6b-8d28039496b7" class="numbered-list" start="13"><li><strong>여러 대의 고속 입출력장치</strong>가 동시에 <strong>하나의 채널을 공유</strong>하고 <strong>데이터를 전송할수 있는 채널방식</strong>은? 입출력 블록 다중 채널방식 (Block Multiplexer Channel)</li></ol><ol type="1" id="82f76a04-d49c-437d-bae0-dc61b32f40c4" class="numbered-list" start="14"><li><strong>중앙처리장치를 통하지 않고</strong> <strong>직접 주기억장치를 접근</strong>하여 입출력을 하는 방식으로 <strong>한 번에</strong> <strong>한 블록씩 전송</strong>하는 방법은?  DMA (Direct Memmory Access) </li></ol><ol type="1" id="4ee8bd7a-4e1b-45a1-b792-d843cf6d8d90" class="numbered-list" start="15"><li><strong>채널의 기능이 아닌것</strong>은? <strong>입출력 데이터 저장</strong></li></ol><ul id="5e603ecb-1210-43e7-89dc-9eab5164eb52" class="bulleted-list"><li style="list-style-type:disc"><strong>채널은 입출력 명령 해독</strong>, <strong>실행등의 입출력을 제어(지시</strong>),<strong> 입출력 데이터 실행</strong>한다.</li></ul><p id="d88a6caa-4801-4de6-b6d6-0fb3d6fa9b5a" class="">
+</p><blockquote id="466eae39-5598-4d10-baea-5837965b5a89" class=""><strong>인터럽트의 개념</strong></blockquote><p id="3eac55fc-1440-4f20-9060-a4be3b626167" class=""><strong>인터럽트 </strong>는 프로그램을 실행하는 도중에 예기치 않은 상황이 발생할 경우 <strong>현재 실행중인 작업을 즉시 증단</strong>하고 발생된 상황을 <strong>우선 처리한 후 실행중 이던 작업으로 복귀</strong>하여 <strong>계속 처리</strong>하는 것을 말한다. 일명 “끼어들기”라고도 한다. <strong>외부나 내부 인터럽트</strong>는 <strong>CPU의 하드웨어에서의 신호에 의해 발생</strong>하고 <strong>소프트웨어 인터럽트</strong>는 <strong>명령어의 수행에 의해 발생</strong>한다.</p><p id="9bb1f7ad-0b45-412a-93cf-caf4f07b8737" class="">인터럽트는 <strong>외부 인터럽트(전원 이상 인터럽트 Pover Fail Interrupt</strong>-<span style="border-bottom:0.05em solid">정전</span>이 되거나 <span style="border-bottom:0.05em solid">전원 이상</span>이 있는 경우, <strong>기계착오 인터럽트 Machie Check Interruput</strong>-<span style="border-bottom:0.05em solid">CPU의 기능적인 오류 동작</span>이 발생한 경우, <strong>외부신호인터럽트 Externel Interrupt</strong>-<span style="border-bottom:0.05em solid">타이머</span>에 의해 규정된 시간을 알리는 경우, 키보드로 <span style="border-bottom:0.05em solid">인터럽트 키</span>를 누른 경우, <span style="border-bottom:0.05em solid">외부 장치로부터</span> 인터럽트 요청이 있는 경우<strong>), 내부 인터럽트(</strong><span style="border-bottom:0.05em solid">잘못된 명령이나 데이터를 사용할때 </span>발생하며 <strong>트랩</strong>이라고도 부른다.<strong>,입*출력 인터럽트</strong>(<strong>Input-output-Interrupt</strong>, <span style="border-bottom:0.05em solid">입출력 Data의 오류</span>나 <span style="border-bottom:0.05em solid">이상 현상이 발생</span>한 경우, <span style="border-bottom:0.05em solid">입출력 장치가 데이터의 전송을 요구하거나 전송이 끝났음을 알릴 경우</span>)  <strong>프로그램 검사 인터럽트 (Program check Interrupt)</strong>: <span style="border-bottom:0.05em solid">0으로 나누기</span>가 발생한 경우, <span style="border-bottom:0.05em solid">overflow /underflow</span>가 발생한 경우, 프로그램에서 <span style="border-bottom:0.05em solid">명령어를 잘못 사용</span>한 경우, <span style="border-bottom:0.05em solid">부당한 기억장소의 참조와 같은 프로그램 상의 오류</span><strong>), 소프트웨어 인터럽트(</strong>프로그램 처리 중 <span style="border-bottom:0.05em solid">명령의 요청에 의해 발생</span>, 감시 프로그램을 호출하는 <strong>SVC (SuperVisor Call)인터럽트)(사용자</strong>가 <strong>SVC명령을 써서 </strong>의도적으로 호출한 경우, <strong>복잡한 입출력 처리</strong>를 해야 하는 경우, <span style="border-bottom:0.05em solid"><strong>기억장치 할당</strong></span><span style="border-bottom:0.05em solid"> 및 </span><span style="border-bottom:0.05em solid"><strong>오퍼레이터와 대화</strong></span><span style="border-bottom:0.05em solid">를 하는 경우</span>)로 분류한다.</p><ul id="c0da9d71-0ea3-4fc2-90bc-90d5b7921149" class="bulleted-list"><li style="list-style-type:disc">인터럽트 발생시 <strong>CPU가 확인할 사항</strong>은 <strong>프로그램 카운터</strong>의 내용, <strong>사용한 모든 레지스터</strong>의 내용, <strong>상태조건</strong>의 내용(PSW)  </li></ul><ul id="8e360867-17ad-4a7d-9aa0-8206ba830612" class="bulleted-list"><li style="list-style-type:disc">인터럽트의 동작원리</li></ul><table id="99908601-9581-4d2e-a284-6e7fdca8d4c7" class="simple-table"><tbody><tr id="dbf608d1-7781-443b-8d77-6791e1d956bd"><td id=";rcT" class="" style="width:56px">메모리</td><td id="N^oj" class="" style="width:76px"></td><td id="bnGq" class="" style="width:55px"></td><td id="DNW?" class="" style="width:105px">① 인터럽트 요청</td><td id="uyOu" class="" style="width:35px"></td><td id="mXRQ" class="" style="width:44px"></td><td id="tL&lt;}" class="" style="width:51px"></td><td id="O|Gg" class="" style="width:87px"></td><td id="`?jw" class="" style="width:39px"></td><td id="XtKs" class=""></td></tr><tr id="b8752541-82ef-4bed-9827-ee62efd4379e"><td id=";rcT" class="" style="width:56px">46<br/><br/>0<br/></td><td id="N^oj" class="" style="width:76px">JMP 300<br/><br/>    1<br/></td><td id="bnGq" class="" style="width:55px">………</td><td id="DNW?" class="" style="width:105px">명령어실행중<br/><br/>       45<br/></td><td id="uyOu" class="" style="width:35px"><br/><br/>46<br/></td><td id="mXRQ" class="" style="width:44px"></td><td id="tL&lt;}" class="" style="width:51px"></td><td id="O|Gg" class="" style="width:87px">인터럽트 처리 루틴<br/>    300<br/></td><td id="`?jw" class="" style="width:39px"></td><td id="XtKs" class="">인터럽트<br/>서비스(취급)루틴<br/>       401<br/></td></tr><tr id="d768b16e-b639-4c9b-a769-25a6ad00935d"><td id=";rcT" class="" style="width:56px">③⑥</td><td id="N^oj" class="" style="width:76px"></td><td id="bnGq" class="" style="width:55px">④</td><td id="DNW?" class="" style="width:105px">             ②</td><td id="uyOu" class="" style="width:35px"></td><td id="mXRQ" class="" style="width:44px"></td><td id="tL&lt;}" class="" style="width:51px"></td><td id="O|Gg" class="" style="width:87px"></td><td id="`?jw" class="" style="width:39px">⑤</td><td id="XtKs" class=""></td></tr><tr id="3677bf7f-d877-4865-8e9e-593f77bf8ba2"><td id=";rcT" class="" style="width:56px"></td><td id="N^oj" class="" style="width:76px"></td><td id="bnGq" class="" style="width:55px"></td><td id="DNW?" class="" style="width:105px"></td><td id="uyOu" class="" style="width:35px">46</td><td id="mXRQ" class="" style="width:44px"></td><td id="tL&lt;}" class="" style="width:51px"></td><td id="O|Gg" class="" style="width:87px"></td><td id="`?jw" class="" style="width:39px"></td><td id="XtKs" class=""></td></tr></tbody></table><p id="e750cec3-005c-4e27-9df5-3957dc549fa7" class="">1) 45번지 명령을 실행하던 중 <strong>인터럽트 요청 신호가 발생</strong>한다.</p><p id="a85340ed-2acd-46bc-bc54-d393b8d43745" class="">2) <strong>프로그램 실행을 중단</strong>한다. : <strong>현재 실행중이던 명령어는 끝까지 실행</strong>한다.</p><p id="b8255c2f-c507-4cd5-8fa0-dc17169ce331" class="">3) <strong>현재의 프로그램 상태를 보존한다</strong>. : 프로그램 상태는 <strong>다음에 실행할 명령의 번지</strong>를 말하고 이걸 PC가 가지고 있다. PC가 가지고 있는 값 46을 <strong>메모리의 0번지에 보관</strong>한다. </p><p id="2d3bfb45-6ee4-498b-8e49-292a38ac3c1e" class="">4) <strong>인터럽트 처리 루틴을 실행</strong>한다 : 300번지로 이동한 후 인터럽트처리루틴을 실행하여 <strong>인터럽트를 요청한 장치를 식별</strong>한다. </p><p id="976f0868-e8f1-4092-85e3-baeb5fc1ece4" class=""><strong>인터럽트 반응시간 </strong>- <strong>인터럽트 요청 신호를 발생한 후부터 인터럽트 취급(서비스)루틴의 수행이 시작될때까지</strong>의 시간을 인터럽트 반응시간이라고도 한다.</p><p id="085e36f8-edc9-40b6-92d5-8e94a28d8364" class="">5) <strong>인터럽트 서비스(취급)루틴을 실행</strong>한다 : 401번지로 이동하여 실질적인 인터럽트를 처리한다. <strong>인터럽트 서비스 프로그램</strong>이 실행중이어도 <strong>현재 처리하는 인터럽트</strong> 보다 <strong>우선 순위가 높은 인터럽트가 발생하면 그 인터럽트를 먼저 처리</strong>해야 한다.</p><p id="2f5b04f4-5464-4b81-8f1b-c6bccb7b4574" class="">6) <strong>상태 복구</strong>: 인터럽트 요청신호가 발생했을때 <strong>보관한 PC의 값을 다시 PC에 저장</strong>한다.</p><p id="1238ec2b-ba28-4d2e-af4b-c7ae5846e920" class="">7) <strong>중단된 프로그램 실행 재개</strong>  : PC의 값을 이용하여 <strong>인터럽트 발생 이전에 수행중이던 프로그램을 계속 실행</strong>한다.</p><ol type="1" id="ba37a67f-a7b6-479f-b4a2-1e734447c00f" class="numbered-list" start="1"><li>전자계신기에서 어떤 특수한 상태가 발생하면 그것이 원인이 되어 현재 실행하고 있는 프로그램이 일단 중단되고 그 특수한 상태를 처리하는 프로그램으로 옮겨져 처리한 후 다시 원래의 프로그램을 처리하는 현상은? 인터럽트</li></ol><p id="c6f57bbd-b877-4279-b9d0-f7574da2c9ec" class="">
+</p><ol type="1" id="4c85c72b-7b5f-4a61-9028-d8ef1ea6b1fb" class="numbered-list" start="2"><li>인터럽트 수행 후에 처리되는 것은? 인터럽트 처리시 보존시켰던 PC 및 제어상태 데이터를 PC와 제어상태 레지스터에 복구한다. </li></ol><ol type="1" id="511c946a-f4db-4db8-9803-14ca189248e6" class="numbered-list" start="3"><li><strong>시스템 타이머(Timer)</strong>에서 <strong>일정한 시간이 만료된 경우</strong>나 <strong>오퍼레이터가</strong> <strong>키보드에서 인터럽트 키를 입력한 경우</strong>에 발생하는 인터럽트는? <strong>익스터널 인터럽트</strong></li></ol><p id="6d35a50f-ccf0-4c62-be2e-05e26da64e10" class="">4.Interrupt 발생 원인이 아닌것은 ? 임의의 부 프로그램에 대한 호출  </p><p id="664ab817-b3f0-4789-93b9-704e0184027b" class="">임의의 부 프로그램에 대한 호출  → 순서에 입각하여 정산적으로프로그램의 제어를 옮겨 처리하는것 </p><p id="c522baa1-8d34-4427-a7bb-c9fe5dff1455" class=""><span style="border-bottom:0.05em solid">인터럽트를 하드웨이적으로 구현된 부 프로그램 이라 한다</span>. <strong>복귀주소를 </strong>저장하는 장소를 <strong>모두 스택을 사용</strong>한다는 점이 여기에 속한다. </p><ul id="a6c5349d-d50d-440a-8969-bce6c964ca40" class="bulleted-list"><li style="list-style-type:disc">Interrupt 발생 원인 : 정전<strong>(전원 이상 인터럽트 )</strong> , 기억 공간 내 허용되지 않은 곳에서의 시도(<strong>프로그램 검사 인터럽트 )</strong>, Operator의 조작(<strong>소프트웨어 인터럽트)</strong></li></ul><ol type="1" id="b68e21a6-468c-44be-bea5-bef70c79287d" class="numbered-list" start="5"><li>입*출력 수행, 기억장치 할당 및 오프레이터와 대화 등 프로그램 수행 중 명령의 요청에 의해 발생하는 인터럽트는? <strong>SVC (SuperVisor Call)인터럽트</strong></li></ol><ol type="1" id="c14180c3-ace1-4c09-9555-df12d2b182cf" class="numbered-list" start="6"><li>프로그램의 실행 오류로 인해 발생하는 인터럽트를 수행중인 프로그램에서 0으로 나누는연산이 스택의 오버플로우 등 과 같은 오류가 발생했을때 일어나는 인터럽트는 무엇인가? 프러그램검사인터럽트</li></ol><ol type="1" id="bd9d5f67-a300-4183-b642-10361a450551" class="numbered-list" start="7"><li>인터럽트 반응시간에 대한 설명으로 옳은것은? 인터럽트 요청 신호를 발생한 후부터 인터럽트 취급루틴의 수행이 시작될때까지</li></ol><ol type="1" id="3a077c59-91de-4e08-aff5-bf57427277bd" class="numbered-list" start="8"><li><strong>Interrupt 발생시 복귀주소를 기억</strong>시키게 하는데 사용되는것은? <mark class="highlight-yellow_background"><strong>스택</strong></mark></li></ol><ul id="b7d4a8be-5bdb-4d8c-abb8-a293ccc912fe" class="bulleted-list"><li style="list-style-type:disc"><strong>스택 : 부 프로그램, 0 주소, 인터럽트, 역 폴리시, 후입선출(LIFO_, 재귀,)</strong></li></ul><ol type="1" id="8d479a58-409f-4e57-aa02-9a235b49a6b9" class="numbered-list" start="9"><li>인터럽트 체제의 동작을 나열한것이다. 수행순서를 올바르게 표현한것은?</li></ol><ol type="1" id="8a0afa49-19b8-49a6-8aa2-c02ef4082feb" class="numbered-list" start="10"><li>인터럽트 요ㅓㅇ신호 발생 → 현재 수행중인 명령을 완료하고 상태를 기억시킨다 → 어느 장치가 인터럽트를 요청했는가 찾는다. → 인터럽트 취급 루틴을 수행</li></ol><p id="22c43cc7-c25b-4727-86f0-08d050c23874" class="">10. 인터럽트 요인 이 받아들여졌을때 CPU가 확인항야 할 사항이 아닌것 : 스택메모리의 내용</p><ul id="1c03b1e2-7be6-4bcb-9c0b-07dd19c4d4a1" class="bulleted-list"><li style="list-style-type:disc">프로그램 카운터 내용, 상태 조건의 내용, 레지스터의 내용은 인터럽트 요인이 받아들여졌으때 CPU가 확인해야 할 사항이다.</li></ul><p id="fd2ad6a4-359d-4b8d-af1e-e7c039008e98" class="">11.인터럽트 체제의 기본적인 요소에 속하지 않은것은 ? 인터럽트 상태와 DMA</p><p id="b1b413aa-fcd1-4922-b147-746e7331508a" class="">*인터럽트 체제의 기본적 요소란 인터럽트 처리 과정에 속하는 요소를 말한다.</p><ol type="1" id="92959e77-42d8-4bb6-80f6-17a715eafaac" class="numbered-list" start="12"><li>인터럽트 서비스 루틴을 수행하기 전에 반드시 사용되는 레지스터는? PC (Program Counter)</li></ol><ol type="1" id="93cf64a2-58bd-4e7e-8421-ebea2bd0d5f2" class="numbered-list" start="13"><li></li></ol><ul id="16c9d612-4c35-4d47-b879-fdbcaa00114f" class="bulleted-list"><li style="list-style-type:disc">인터럽트 동작 원리를 알면 인터럽트 서비스 루틴을 수행하기 전에 현재의 상태를 기억하기 위해서 PC의 값을 저자안다. </li></ul><p id="63851563-7d26-42a5-b049-bb3b50ceee88" class="">13.프로그램 실행중에 트랩이 발생이 아닌 것은? <strong>패리티 오류 </strong></p><ul id="e15e19f5-b6dc-4512-8898-c8b2064f5344" class="bulleted-list"><li style="list-style-type:disc">트랩은 내부 인터럽트를 의미, </li></ul><p id="d9cd3fe1-a612-40c4-9b93-ab20e1749adf" class="">
+</p><p id="8449846b-964d-4263-9b47-b28b15517d27" class=""> </p><blockquote id="c8b30fcb-56ca-4078-9379-8cfcc34962e0" class=""><strong>인터럽트 우선순위 체제</strong></blockquote><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="18dee728-4cdf-434c-925a-2565a44c1d7c" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">전원 이상(Power Fail)              
+			↓                                ↑
+기걔 착오(Machine Check)              높음
+			↓
+ 입 *출력(I/O)
+			↓
+ 명령어 잘못                            ↓
+			↓                               낮음
+프로그램 (Program Check)             
+			↓
+SVC(Supervisor Call)</code></pre><p id="7d86cef8-caa6-4fdc-ae83-710b54ccfedf" class="">
+</p><p id="9fb61b40-a68b-4d7d-9278-4162903079da" class=""><strong>인터럽트 우선순위 체제의 목적 </strong>은 CPU에 연결되어 있는 <strong>여러 장치에서 동시에 하나 이상의 </strong>인터럽트가 발생했을때 먼저 서비스 할 장치를 결정하기 위해서이다. <strong>인터럽트 우선순위 체제의 기능</strong>은 <strong>각 장치에 우선순위를 부과하는 기능</strong>, <strong>인터럽트를 요청한 장치의 우선순위를 판별하는 기능</strong>, <strong>우선순위가 높은것을 먼저 처리할 수 있는 기능</strong>이 있다. </p><p id="1496d9a0-c9b9-486b-bb26-bcd43a3fe4c9" class="">
+</p><ul id="2072fabd-dc66-4c17-8391-7ee0fe22c99d" class="bulleted-list"><li style="list-style-type:disc"><strong>소프트웨이적 인터럽트 </strong>우선순위 판별방법 : <strong>Pooling (폴링)</strong></li></ul><p id="11ea7101-1351-4781-8714-51bdbdd17de2" class="">Interrupt 발생 시 <strong>우선순위가 가장 높은 인터럽트 자원(Source)</strong>부터 <strong>인터럽트 요청 플래그를 차례로 검사</strong>하여 찾고 이에 해당하는 <strong>인터럽트 서비스 루틴을 수행</strong>하는 방식이다. <strong>우선순위 변경이 쉬우며</strong> <strong>자기디스크</strong>와 같이 <strong>속도가 빠른 장치</strong>에 <strong>높은 등급</strong>을 부여한다. <strong>회로가 간단</strong>하고 <strong>융통성이 있으며 별도의 하드웨어가 필요 없으므로 경제적</strong>이다. 많은 인터럽트가 있을때 그들을 <strong>모두 조사</strong>하는데 <strong>많은 시간이 걸려 반응시간이 느린다</strong>는 단점이 있다.</p><p id="bdf7e698-0f56-40a6-81c7-4aeba5c22b3d" class="">
+</p><ul id="faa75945-daec-4c27-a712-1671206fca07" class="bulleted-list"><li style="list-style-type:disc"><strong>하드웨이적인 인터럽트</strong> 우선순위 판별방법 : <strong>Vectored Interrupt (백터 인터럽트)</strong></li></ul><p id="c84d1134-efb2-45f6-8ec7-63667c638c98" class=""><strong>하드웨이 우선순위 인터럽트</strong>는 <span style="border-bottom:0.05em solid"><strong>CPU</strong></span><span style="border-bottom:0.05em solid">와 </span><span style="border-bottom:0.05em solid"><strong>Interrupt</strong></span><span style="border-bottom:0.05em solid">를 요청할 수 있는 장치 사이에 </span><span style="border-bottom:0.05em solid"><strong>장치 번호</strong></span><span style="border-bottom:0.05em solid">에</span> 해당하는 <span style="border-bottom:0.05em solid"><strong>버스</strong></span><span style="border-bottom:0.05em solid">를 </span><span style="border-bottom:0.05em solid"><strong>병렬</strong></span><span style="border-bottom:0.05em solid">이나 </span><span style="border-bottom:0.05em solid"><strong>직렬</strong></span><span style="border-bottom:0.05em solid">로 연결하여 </span><span style="border-bottom:0.05em solid"><strong>요청 장치의 번호를 CPU에 알리는 방식</strong></span>이다.</p><p id="fe8de2b6-f336-444c-9099-9fca43f5bc6b" class=""><strong>인터럽트 백터는</strong> (백터 인터럽트 방식에서 <span style="border-bottom:0.05em solid"><strong>인터럽트를 발생한 장치가 프로세스에게 분기할 곳에 대한 알려주는 정보</strong></span><strong>)</strong>를 의미한다. 하드웨이적인 방법은 <strong>장치 판별을 위한</strong> 별도의 <strong>프로그램 루틴이 없어 응답 속도가 빠르다</strong>. 그리고 <strong>회로가 복잡하고 융통성이 없으며 추가적인 하드웨어가 필요하므로 비경제적이다</strong>. 하드웨이적인 방법은 <strong>직렬과 병렬 우선순위 부여 방식</strong>이 있다.</p><p id="a848fdc7-a9fe-4106-90b2-b00141ce1791" class="">
+</p><p id="9cd266ab-19f2-4bd6-8e1e-5e97f9ef7793" class=""><strong>직렬 우선순위 부여방식 </strong>: <strong>데이지 체인 </strong>(Daisy-Chain)방식</p><p id="4edbfbf2-2b08-4829-9fb2-5269f596da10" class="">직렬 우선순위 부여방식은 <strong>인터럽트가 </strong>발생하는 <strong>모든 장치를 한 개의 회선</strong>에 <strong>직렬로 연결</strong>한다. <strong>우선 순위</strong>가 <strong>높은 장치</strong>를 <strong>위치시키고 </strong>나머지를 우선순위에 따라 <strong>차례로연결한다.</strong> </p><p id="4f687c31-950b-4f3b-81aa-57e758f1bd31" class="">
+</p><p id="985f8ab7-c152-43da-94b2-6649079e8d4f" class=""><strong>병렬 우선순위 부여방식 </strong>: <strong>Mask Register (</strong>인터럽트 요청에 대한 허락을 제어할 수 있는 레지스터)</p><p id="1a6c5433-4ca0-4b3c-a465-114051353418" class="">병렬 우선순위 부여방식은 <strong>인터럽트</strong>가 <strong>발생하는 각 장치</strong>를 <strong>개별적인 회선으로 연결</strong>한다. 각 장치의 인터럽트 요청을 제어하기 위해 <strong>각 비트를 개별적으로 Set 할 수 있는 Mask Register</strong>를 사용한다. <strong>우선순위는 Mask Register의 비트 위치에 의해서 결정된다</strong>. 마스크 레지스터는 우선순위가 높은 것이 서비스 받고 있을때 <strong>우선순위가 낮은 것을 비활성화 </strong>시킬수 있다<strong>. 우선순위가 높은 Interrupt</strong>는 <strong>낮은 Interrupt 가 처리되는 중에도 우선 처리</strong>된다. </p><p id="686dab45-84cc-422b-b2fd-e1d915242f2e" class="">
+</p><ol type="1" id="6409322b-1f09-4431-ba85-4e790d04132f" class="numbered-list" start="1"><li>소프트웨어에 의한 우선순위 체제의 특성을 설명한 것으로 옳지 않은것은?(x) <strong>정보량이 매우 적은 시스템에 적합하다</strong>.</li></ol><ul id="fba8287c-bf91-44d9-b6b7-0cfdfa0c7ce5" class="bulleted-list"><li style="list-style-type:disc">정보량이 매우 적은 시스템은 하드웨어에 의한 우선순위 체제를 사용하는것이 효과적이다.</li></ul><ul id="033d05e7-0fe2-4121-95d7-a9e980d8479a" class="bulleted-list"><li style="list-style-type:disc">소프트웨어에 의한 우선순위 체제는 경제적이고 융통성이 있고 반응속도가 느리다.</li></ul><p id="9635817a-2a69-4d9e-90ce-cfbd5ca3bcac" class="">
+</p><ol type="1" id="9c52ae2c-c425-4c02-a106-1a7d9d7e0166" class="numbered-list" start="2"><li>Interrupt 중에서 최우선권(Top Priority)이 주어지는 것은? Power Fail Interrupt</li></ol><p id="54272530-f94b-42f2-9a7e-a6f353f12635" class="">인터럽트의 우선순위 : 정전 → 기계 고장 → 외부 신호 → 입 * 출력 → 프로그램 오류 → SVC</p><p id="9e90cadb-f66b-41b3-b5ee-289e4d0cb7e4" class="">
+</p><p id="0e998558-e10d-4774-abcf-9272e9c748fc" class="">3, 인터럽트 요청 판별방법에 관한 내용 중 옳지 않은것은 H/W에 의한 판별방법은 S/W에 의한 판별방법보다 속도가 느리다.(x)</p><ul id="cd70e269-c21d-4ff3-8016-2e95363160c7" class="bulleted-list"><li style="list-style-type:disc">S/W에 의한 판별 방법은 폴링에 의한 방법이라고 하며, 인터럽트 처리 루틴이 수행된다.</li></ul><ul id="ca423f7e-ff1f-4e5f-8d1f-1dbdb838c08e" class="bulleted-list"><li style="list-style-type:disc">H/W에의한 판별방법은 인터럽트 처리 루틴이 수행된다. </li></ul><ul id="730ce59c-3aef-4608-aadc-1ff440df83aa" class="bulleted-list"><li style="list-style-type:disc">보통 하드웨이적인것이 빠르고 비싸고 회로가 복잡하고 융통성이 없다.</li></ul><p id="1b5cbe30-276b-47fc-b015-ef7eb60cc2a6" class="">
+</p><ol type="1" id="b5d34864-a36b-476c-8cd0-39ab5910c19e" class="numbered-list" start="4"><li>우선순위 인터럽트 가운데 소프웨이적 처리기법은 ? 폴링 방법 </li></ol><ol type="1" id="b3332116-b2fe-4d85-9e85-ad38597c7234" class="numbered-list" start="5"><li>인터럽트가 처리 과정 중 하드웨어를 이용하여 우선순위를 결정하는 장치는? <strong>데이터 체인을 이용한 방법(직렬)</strong></li></ol><ol type="1" id="284f162f-d56e-495e-a5e3-5cc770accca6" class="numbered-list" start="6"><li>인터럽트가 발생하는 모든 장치들을 인터럽트의 우선순위에 따라 직렬로 연결함으로써 이루어지는 우선순위 인터럽트 처리방법은 ? Daisy-Chain</li></ol><ol type="1" id="0b975d12-4268-453e-8eff-e7fb04b4051e" class="numbered-list" start="7"><li>인터럽트를 발생한 <strong>장치가 프로세스에게 분기</strong>할 곳의 정보를 제공해주는것과 관계있는것은? <strong>벡터 인터럽트</strong></li></ol><ol type="1" id="1e31465f-2446-4270-85da-99012222e39b" class="numbered-list" start="8"><li>데이지 체인과 폴링 방식의 설명으로 옳지 않은것은? 폴링 방식이 데이지 체인 방식보다 빠르다 (x)</li></ol><ol type="1" id="81dcabaf-4bf8-43a3-978c-98d367092cd1" class="numbered-list" start="9"><li><strong>인터럽트 요청</strong>에 대한 <strong>허락을 제어할 수 있는 레지스터</strong>는? Interrupt Mask Register</li></ol><ol type="1" id="f45fec01-1bfd-4fd6-a132-805847c3de9f" class="numbered-list" start="10"><li>인터럽트 처리 과정 중 인터럽트 <strong>요청 신호 플래그 (Flag)를 차례대로 검사</strong>하여 인터럽트 원인을 판별하는 방식은 ? <strong>폴링</strong></li></ol><ul id="cae97850-2709-433c-b037-a1e4bcc80b9a" class="bulleted-list"><li style="list-style-type:disc">인터럽트 우선순위에 따라 한줄로 연결한 것은 데이지 체인, 인터럽트를 요청한 장치를 차례대로 검사하는 방식은 폴링이다.</li></ul><p id="0431dfb0-e8aa-4a40-b7c8-50dd759952c8" class="">11.데이지 체인 우선순위 인터럽트에 대한 설명으로 옳은것은? 마스크 레지스터를 사용하여 우선순위를 결정한다. (x)</p><p id="8e3d5f42-a3a3-47c1-b2a2-3ebaa93bc41a" class="">하드웨어 우선순위 인터럽트 장치로써 직렬로 연결한다. 우선순위가 가장 높은 장치를 선두에 연결한다. 인터럽트 요구선을 모든 장치에 공통이며 와이어드 논리로 연결되어 있다.</p><p id="02f5e75a-1acc-4ed3-89d1-f3ac8b120260" class="">
+</p><ol type="1" id="fcc01ae2-64f3-43a2-a6d2-dd33169b5ad9" class="numbered-list" start="12"><li>다음중 인터럽트 백터에 필수적인것은? 분기번지</li></ol><ol type="1" id="14c62e67-4ec6-4a0f-a35f-62e4908d11d8" class="numbered-list" start="13"><li>인터럽트 처리에서 I/O 장치들의 우선순위를 지정하는 이유는 ? 여러개의 인터럽트 요구들이 동시에 들어올때 그들 중의 하나를 선택하기 위해서이다.</li></ol><ol type="1" id="ea66df6c-b834-4856-8c10-c268406dcab9" class="numbered-list" start="14"><li>인터럽트의 우선순위 결정과 관련이 적은것은? 트랩방식</li></ol><ul id="3a0cd652-9386-4042-a500-77eb358894d5" class="bulleted-list"><li style="list-style-type:disc">소프트웨이적으로 우선순위를 결정하는 것이 폴링방식이고 하드웨이적으로 우선순위를 결정하는 것이 백터방식이며, 백터 방식 중 직렬로 우선순위를 부여하는 방식이 데이지 체인 방식이다.</li></ul><ol type="1" id="e33c2955-93f0-472c-b1ec-b00481ab4052" class="numbered-list" start="15"><li>인터럽트에 대한 설명으로 옳지 않은것은?  하드웨어에 의한 우선순위 부여는 유연성이 있고 인터럽트 반응 시간이 빠르다. </li></ol><ul id="de7a6ab2-31c2-433e-afd7-4a8d01226ed8" class="bulleted-list"><li style="list-style-type:disc">하드웨어에 의한 우선순위 부여방식은 소프트웨어에 의한 우선순위 부여 방식에 비해 반응시간은 빠르지만 유연성은 떨어진다.</li></ul><ul id="02da2a83-4ba8-4789-bb82-25941ef6fb01" class="bulleted-list"><li style="list-style-type:disc">주변 장치의 우선순위는 일반적으로 속도가 빠른 장치에 높은 우선순의를 부여한다.</li></ul><p id="5acb6126-7b3c-4aab-aa91-6298d66fa65b" class="">
+</p><ol type="1" id="69001e3c-173e-40e8-a9a9-3bad4d56e7b0" class="numbered-list" start="16"><li>인터럽트 처리를 위한 우선순위 체제의 기능으로 가장 옳지 않은것은</li></ol><ul id="13d2a915-82f7-418d-9ac1-ce4c61c56e1a" class="bulleted-list"><li style="list-style-type:disc">인터럽트를 동시에 처리할 수 있도록 멀티인터럽트를 요청하는 기능 → 인터럽ㅌ, 우선순위 체제는 동시에 하나 이상의 인터럽트가 발생했을때 이 중 어느 하나를 먼저 서비스 할것인지 결정</li></ul><ul id="c283e316-14a3-4efb-87e6-8597119f4a1c" class="bulleted-list"><li style="list-style-type:disc"><strong>트랩은 내부 인터럽트(</strong><span style="border-bottom:0.05em solid">잘못된 명령이나 데이터를 사용할때 )</span>발생한다.</li></ul><p id="8db33d14-49de-4321-b6c7-3f5a7a6dd656" class="">
+</p><p id="6769f748-3a55-43ca-8c54-0a740ea660cf" class="">
+</p><p id="b7d8a086-bdf6-45c5-909f-43e5acb3cb5d" class="">
+</p><p id="cc53c5bd-6202-4ab0-980f-88c1ab5c60d0" class="">
+</p><p id="b50cf27f-1e15-42ba-b534-4bc9f9d5aa08" class="">
+</p><p id="fac7de5c-bfb9-47bd-ba58-4ac14dbeb681" class="">
+</p><p id="a454b1de-2c40-4bf6-88bf-21f6430b220d" class="">
+</p><p id="802a7875-7604-4284-884d-4f76c0a2d799" class="">
+</p><p id="2e62c1a4-a446-4bd0-963a-927d5e09069a" class="">
+</p><p id="6bc36abe-a407-422f-ad11-da0b16b284b4" class="">
+</p><p id="e3f8130d-2f28-488b-b1c6-d2499d4e642e" class="">
+</p><p id="70755334-3fbb-468d-820b-4dd74d57faff" class="">
+</p><p id="fdf35816-2547-4227-91ed-91a504dded21" class="">
+</p><p id="c90c55e6-cfbe-43af-9582-18b29da44674" class="">
+</p><p id="f5d176c0-3029-4a2e-8861-7cf102721c60" class="">
+</p><p id="25e29973-ebb8-49e5-9468-8bf6ed7ab1de" class="">
+</p><p id="559b1ff2-5f02-4445-97bf-2cdc9c6752c3" class="">
+</p><p id="244fe80d-772d-42db-927d-a7fe99ed2c86" class="">
+</p><p id="b06b2b99-52c7-470d-a767-6a7127a35764" class="">
+</p><p id="d7d23174-88aa-457c-929e-a4355e404d6c" class="">
+</p><p id="82a80b4f-f154-4ac3-9d2a-998bed0b5a1e" class="">
+</p><p id="ed0fb108-4c5c-459e-a391-e3cfe178b0ea" class="">
+</p><p id="b82280e0-1f84-43cb-9fd3-30433f04ab38" class="">
+</p><p id="81789481-e832-42b8-a4cf-a1fd53416ddb" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

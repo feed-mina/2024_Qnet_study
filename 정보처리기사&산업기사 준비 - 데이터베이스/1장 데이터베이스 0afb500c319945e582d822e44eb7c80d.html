@@ -1,0 +1,715 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1장 데이터베이스</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0afb500c-3199-45e5-82d8-22e44eb7c80d" class="page sans"><header><h1 class="page-title">1장 데이터베이스</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 9일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="4cf6756b-3d76-40da-a255-4889bc160c7d" class=""><strong>데이터베이스의 개념</strong></blockquote><ol type="1" id="4a669ece-7b86-434b-b193-6d8239591d3c" class="numbered-list" start="1"><li>데이터베이스의 특성이 아닌것</li></ol><ul id="a797d28a-58e6-4b20-a870-b59929d6fbd4" class="bulleted-list"><li style="list-style-type:disc">실시간 접근성 (Real-Time Accessibility)</li></ul><ul id="4ed5caf1-667f-4ea2-9ae5-53e44ea82ca8" class="bulleted-list"><li style="list-style-type:disc">내용에 의한 참조(Content Reference)</li></ul><ul id="aa18ca8b-724d-4f94-9967-757a70076bce" class="bulleted-list"><li style="list-style-type:disc">동시 공유(Concurrent Sharing)</li></ul><ul id="938ceb33-0766-4091-89fc-4ea6dd94798f" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">이산적 변화 (Discreate Evolution)  </span><ul id="8776e221-be0d-429f-a1af-72c27a969e08" class="bulleted-list"><li style="list-style-type:circle">이산적이란 비연속적이란 뜻이다. 데이터베이스의 특징 중 하나는 <mark class="highlight-yellow_background">계속적인 변화로 최신의 데이터를 유지</mark>한다는 것이다.</li></ul></li></ul><p id="737ede9d-e0a6-48dd-a76c-c6ba878970ad" class="">
+</p><p id="ef427824-e066-422f-94f3-807913bf3859" class="">
+</p><ol type="1" id="26202ea2-faf6-4a4b-9b9a-26d462376c60" class="numbered-list" start="2"><li>“데이터베이스의 정의 중 데이터베이스는 <strong>어떤 조직의 고유기능을 수행하기 위해 반드시 필요한 데이터를 의미</strong>한다 “에 해당하는 것은?</li></ol><ul id="ae7330f9-455f-4cb2-932c-63cc6971391a" class="bulleted-list"><li style="list-style-type:disc"><strong>운영 데이터 (Operational Data)</strong></li></ul><p id="7212b8c6-07c6-409d-a6d0-1c7fde343f2e" class="">
+</p><ul id="94406123-d228-430a-af3d-c7a9b67a0f79" class="bulleted-list"><li style="list-style-type:disc">통합된 데이터 (Intergrated Data)</li></ul><ul id="197630b2-0d68-499c-b82e-effbe03272f5" class="bulleted-list"><li style="list-style-type:disc">저장 데이터(Stored Data)</li></ul><ul id="30936d14-eed4-4626-9426-3e678e2e51de" class="bulleted-list"><li style="list-style-type:disc">공용 데이터(Shared Data)</li></ul><p id="0b03bf1b-0465-4911-b01f-fa22a190a61e" class="">
+</p><ol type="1" id="be4101b1-ec20-4e62-bfda-9c4d24c4158e" class="numbered-list" start="3"><li>데이터 베이스의 정의로 가장 적합한것은?</li></ol><ul id="59c865fb-5f6e-471e-94f5-98288460f6ab" class="bulleted-list"><li style="list-style-type:disc"><strong><span style="border-bottom:0.05em solid">공용 데이터</span></strong><strong>(Shared Data)</strong>,<strong> </strong><strong><span style="border-bottom:0.05em solid">통합 데이터 </span></strong><strong>(Intergrated Data)</strong>, 통신데이터(Communication Data), <strong><span style="border-bottom:0.05em solid">운영 데이터</span></strong><strong>(Operational Data)</strong></li></ul><ul id="be470414-ca2f-466d-ad74-a5c506d067a9" class="bulleted-list"><li style="list-style-type:disc">색인 데이터(Indexed Data) , <strong><span style="border-bottom:0.05em solid">저장 데이터</span></strong><strong>(Stored Data)</strong></li></ul><p id="6a76f478-481c-4524-947f-c63fbfd09c9b" class="">
+</p><ol type="1" id="3c8d20de-43f9-450b-80ec-7d982f7d752d" class="numbered-list" start="4"><li>데이터베이스의 특성으로 옳지 않은 것은?</li></ol><ul id="5e1c0351-ea97-45b0-a451-f66e15b4a601" class="bulleted-list"><li style="list-style-type:disc">같은 내용의 데이터를 여러 사람이 동시에 공용 할 수 있다.</li></ul><ul id="2a22cb9a-9550-428b-bcba-e8e30da60cda" class="bulleted-list"><li style="list-style-type:disc">데이터베이스는 데이터의 삽입, 삭제 , 갱신으로 내용이 계속적으로 변한다.</li></ul><ul id="2a383f6d-6874-41f5-a433-2943de61b44f" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid">수시적이고 비정형적인 질의에 대하여 실시간 처리로 응답할 수 있어야 한다</span></mark></strong>.</li></ul><ul id="cf87d343-3d3f-440e-9176-fa8c3c730b2a" class="bulleted-list"><li style="list-style-type:disc">데이터의 참조는 저장되어 있는 데이터 레코드들의 주소나 위치에 의해서 이루어진다.<ul id="9a62cb36-0715-4c5d-82b0-8a9b908c17f0" class="bulleted-list"><li style="list-style-type:circle">데이터베이스는 데이터 참조 시 <span style="border-bottom:0.05em solid">데이터 위치나 주소가 아닌 </span><strong>값을 이용해서 참조</strong>한다. : “<strong>내용에 의한 참조”</strong></li></ul></li></ul><p id="ea944e5c-9b3a-4aa1-a711-10e50cd7d952" class="">
+</p><ol type="1" id="6fd609a0-150f-4bd6-91d9-747ef3051857" class="numbered-list" start="5"><li>데이터베이스의 특성 중 다음 설명에 해당하는 것은</li></ol><ul id="adbd05fd-d679-4286-8b2c-e5efb513852f" class="bulleted-list"><li style="list-style-type:disc">어느 한 시점에서 데이터베이스가 저장하고 있는 내용은 곧 데이터베이스의 상태를 의미한다. 데이터베이스의 상태는 정적이 아니라 <strong>동적이다</strong>. 즉 데이터베이스는 새로운 데이터의 삽입, 삭제, 갱신을 통해 <strong>현재의 정확한 자료를 유지하면서 변화</strong>한다는 것이다.<p id="b6e6c7c4-e48a-4f9c-8780-d0f96ef2a321" class="">= <strong>Continuous Evolution</strong>(자료를 유지하면서 계속 변화한다.)</p><p id="a9264f47-b8d8-409b-8486-5eb1a57e03a2" class=""> * Real-Time Accessiblity(x) </p></li></ul><p id="78be3008-7beb-47ad-9dd1-19c109249dd1" class="">
+</p><ol type="1" id="03870f1a-5688-489c-b832-537dd913eebf" class="numbered-list" start="6"><li>데이터베이스의 특성 중 다음 설명에 해당하는 것은</li></ol><ul id="1dfa9ce8-bb69-4a53-85d0-1d8fa456a78e" class="bulleted-list"><li style="list-style-type:disc">데이터베이스 환경하에서 <strong>데이터 참조는 </strong>데이터베이스에 저장된 레코드들의 위치나 주소에 의해서가 아니라 <strong>사용자가 요구하는 데이터의 내용, 즉 데이터 값에 따라 참조된다</strong>.</li></ul><p id="171d0768-f6b2-4e76-bdf5-a87c8ec6fe4b" class="">= <strong>Content Reference </strong></p><p id="cd2135c3-3153-4ba0-bf81-bf5d37614c8e" class="">
+</p><ol type="1" id="cd1ce1b9-1ec7-4709-8217-e5f1248d89b4" class="numbered-list" start="7"><li>데이터베이스의 특성으로 옳은 내용 모두를 나열한것</li></ol><ul id="b04806c0-ec3b-4cb6-a790-f032ab68f52e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">실시간 접근성</span>, <span style="border-bottom:0.05em solid">동시 공용</span>, <span style="border-bottom:0.05em solid">계속적인 변화 </span>, 주소에 의한 참조<ul id="92249fdb-7e09-46e4-9b40-2e2bfca8acd4" class="bulleted-list"><li style="list-style-type:circle">주소에 의한 참조가 아닌 <strong>내용에 의한 참조</strong>다.</li></ul></li></ul><p id="64d407fd-fa02-4444-b272-2a72068ff0ef" class="">
+</p><ol type="1" id="c4c8b063-83e5-4743-b80f-630b75300e98" class="numbered-list" start="8"><li>데이터베이스는 어느 한 조직의 여러 응용 시스템들이 공용할 수 있도록 통합되고 저장된 운영 데이터의 집합이라고 정의할 수 있다. 이 정의가 함축하고 있는 의미 중 <strong>효율성 증진을 위하여 불가피하게 최소의 중복</strong>(Minimal Redundary) 또는 <strong>통제된 중복</strong>(Controlled Redundancy)<strong>을 허용하는 것</strong>으로 설명되는 항목은</li></ol><ul id="5cbb9349-dc14-4a3c-b0bf-b88572d49fc3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>통합된 데이터(Intergrated Data)</strong></mark></li></ul><p id="c8075dd4-2ae4-40b3-b470-7a2c7cfdf102" class="">
+</p><ol type="1" id="506e52a0-4538-4994-93aa-c061ace675c6" class="numbered-list" start="9"><li>데이터베이스의 정의로 옳지 않은 것은</li></ol><ul id="edbce70a-c40e-49f2-a05b-bfac05e76a7a" class="bulleted-list"><li style="list-style-type:disc">조직의 존재 목적이나 유용성 면에서 존재 가치가 확실한 필수적 데이터이다.</li></ul><ul id="2433d227-b4e9-4ffd-ba47-7f2844cf82a9" class="bulleted-list"><li style="list-style-type:disc">정보 소유 및 응용에 있어 지역적으로 유지되어야 한다. (x)<ul id="f8a36bd1-02d0-4b49-b92a-4111257ad798" class="bulleted-list"><li style="list-style-type:circle">여러 응용 시스템들이 공동으로 소유하고 유지하는 자료로서 <strong>전역적으로 유지 되어야한다.</strong></li></ul></li></ul><ul id="4283d304-80e7-49cc-b615-22acc10aca9a" class="bulleted-list"><li style="list-style-type:disc">컴퓨터가 접근할 수 있는 저장 매체에 저장된 자료이다.</li></ul><ul id="09344323-00b0-4fbc-b6fa-a3dac1a9d038" class="bulleted-list"><li style="list-style-type:disc">동일 데이터의 중복성을 최소화해야 한다. </li></ul><p id="432f2562-a7c9-4e19-be24-0d1490619ca0" class="">
+</p><blockquote id="8d9bc822-dae4-4235-bfc3-672d7ff08131" class=""><strong>DBMS의 기능</strong></blockquote><ol type="1" id="58f2c225-8a12-494d-b9e9-3a14042ec065" class="numbered-list" start="1"><li>데이터베이스의 등장 이유로 보기 어려운것은?</li></ol><ul id="f6d55b3e-6d3e-41dc-94a2-fbb83faf8c16" class="bulleted-list"><li style="list-style-type:disc"><strong>여러 사용자가 데이터로 공유</strong>해야 할 필요가 생겼다.</li></ul><ul id="3715069b-8f23-4fd7-9d7a-b7568081c873" class="bulleted-list"><li style="list-style-type:disc">데이터의 <strong>수시적인 구조 변경</strong>에 대해 <strong>응용 프로그램을 매번 수정하는 번거로움</strong>을 줄여보고 싶었다.</li></ul><ul id="5b1c0dc8-443d-4d04-95c4-b63aa3902386" class="bulleted-list"><li style="list-style-type:disc">데이터의 가용성 증가를 위해 <strong>중복을 허용하고 싶었다</strong>. (x) <ul id="bc8af414-743f-4615-bb9d-7c93587c3f22" class="bulleted-list"><li style="list-style-type:circle">데이터베이스 등장의 가장 큰 이유는 <mark class="highlight-yellow_background">데이터의 종속성과 중복성을 배제하기 위해서다</mark>.</li></ul></li></ul><ul id="db6d7d0a-3026-4af8-a1ed-01bc3dd8f2f3" class="bulleted-list"><li style="list-style-type:disc"><strong>물리적인 주소가 아닌 데이터 값에 의한 검색</strong>을 수행하고 싶었다.</li></ul><p id="7549407f-a38f-43e6-847a-d2e388a4f071" class="">
+</p><ol type="1" id="81befbeb-0fb3-49b6-89dc-741e4c010de6" class="numbered-list" start="2"><li>DBMS의 필수 기능 중 모든 응용 프로그램들이 요구하는 데이터 구조를 지원하기 위해 <strong>데이터베이스에 저장될 데이터의 타입과 구조에 대한 정의</strong>, 이용 방식, 제약 조건 등을 명시하는 것은<ul id="ddc03eef-3517-4c5e-af5d-f560b0b77003" class="bulleted-list"><li style="list-style-type:disc">Definition 기능</li></ul></li></ol><p id="962d65a6-9f84-4138-8361-9e5662425f16" class="">
+</p><ol type="1" id="9cd881c2-5aeb-41d6-9307-18a1ccc0239d" class="numbered-list" start="3"><li>(___________) is the activity of copying databases so that they will be preserved in case of equipment failure or other catastrophe</li></ol><ul id="9377de1a-06e4-493d-a6ad-56db3bb724b7" class="bulleted-list"><li style="list-style-type:disc">Backup<ul id="69d65633-f117-4f53-a68e-3414c057cd33" class="bulleted-list"><li style="list-style-type:circle">데이터베이스가 장비 고장 또는 다른 비상시에 <strong>보존되도록 복사하는 </strong>활동 : <strong>백업</strong></li></ul></li></ul><p id="7a9a1c4a-9898-4a9d-a5eb-9099d39e7a51" class="">
+</p><ol type="1" id="99da2d07-54ed-49e6-a321-ced013247bdb" class="numbered-list" start="4"><li>DBMS 필수 기능 중 데이터베이스를 접근하여 데이터의 검색, <strong>삽입, 삭제, 갱신 </strong>등의 <strong>연산 작업</strong>을 위한 사용자와 데이터베이스 사이의 인터페이스 수단을 제공하는 기능은 </li></ol><ul id="03ba0b29-1527-417d-83ad-7d86a86423ca" class="bulleted-list"><li style="list-style-type:disc"><strong>조작 기능</strong></li></ul><p id="cc3d4915-a94a-4c62-aa80-8b039b2bb743" class="">
+</p><ol type="1" id="cdbd9da8-5e93-480b-b038-7416cbb5a731" class="numbered-list" start="5"><li>데이터베이스 관리 시스템(DBMS) 의 주요 필수 기능과 거리가 먼것은</li></ol><ul id="4d099139-bde6-4e62-8baa-180aee28825e" class="bulleted-list"><li style="list-style-type:disc">데이터베이스 구조를 정의할 수 있는 <strong>정의 기능</strong></li></ul><ul id="51dc42b4-32e0-4633-873c-da5cc517935e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">데이터 사용자의 통제 및 보안 기능</span></li></ul><ul id="1d68cba7-d5eb-406f-a53d-d30c77583f84" class="bulleted-list"><li style="list-style-type:disc">데이터베이스 내용의 정확성과 안정성을 유지할 수 있는 <strong>제어 기능</strong><span style="border-bottom:0.05em solid"> </span></li></ul><ul id="4fb8899b-b909-4822-9387-5afbccca3f33" class="bulleted-list"><li style="list-style-type:disc">데이터 조작어로 데이터베이스를 조작할 수 있는 <strong>조작기능</strong></li></ul><p id="004b11fe-9fb9-4958-b3b6-8c8b8a6e956b" class="">
+</p><p id="0d2100d4-5856-40d7-ab20-f04af0e5d748" class=""> </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="610f0a1a-9d5b-4541-948a-b8e774ccf973"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>데이터베이스 DBMS의 주요 필수 기능은 정의, 조작 제어이다.</strong></div></figure><p id="9458827d-8c0a-4f76-8412-a2972b818810" class="">
+</p><p id="5173f585-5dab-40a2-ba69-dfdea86ed35d" class="">
+</p><p id="a90ed228-1b4c-4185-9175-39fe3ac3aff0" class="">
+</p><ol type="1" id="1372d589-8b2d-45d5-bcbc-80839033d85b" class="numbered-list" start="6"><li>데이터베이스 관리 시스템(DBMS)의 필수 기능 중 <strong>제어기능</strong>에 대한 설명으로 거리가 먼 것은</li></ol><ul id="8d902418-653e-4cc2-94a0-bc31ea5a5297" class="bulleted-list"><li style="list-style-type:disc">데이터베이스를 접근하는 <strong>갱신, 삽입, 삭제 작업</strong>이 정확하게 수행되어 <strong>데이터의 무결성이 유지</strong>되도록 제어하야한다. </li></ul><ul id="a3549707-0b68-4124-9759-1561b6a37799" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">데이터의 논리적 구조와 물리적 구조 사이에 변환이 가능하도록 두 구조 사이의 사상을 명시하여야 한다</span>.<ul id="2bfb0b7d-c8b0-421b-a9d6-515ddb2ee2e1" class="bulleted-list"><li style="list-style-type:circle">└ 데이터베이스를 생성하기 위한 <strong>정의 기능</strong>을 의미</li></ul><p id="cca27127-b917-4fc2-87dc-67ea0a9228a6" class="">
+</p></li></ul><ul id="d4245d28-6b88-491a-9ede-5e3378a3baf2" class="bulleted-list"><li style="list-style-type:disc">정당한 사용자가 <strong>허가된 데이터만 접근</strong>할 수 있도록 <strong>보안을 유지</strong>하고 <strong>권한을 검사</strong>할 수 있어야 한다.</li></ul><ul id="d398e5d3-ec1b-4812-bafc-5cd711a1a0e6" class="bulleted-list"><li style="list-style-type:disc">여러 사용자가 데이터베이스를 <strong>동시에 접근</strong>하여 데이터를 처리할때 <strong>처리결과가 항상 정확성을 유지하도록 병행 제어</strong>를 할 수 있어야 한다. </li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1da81849-721e-4c73-ac8f-b23125ed7280"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">데이터베이스 DBMS <strong>제어 기능</strong>의 핵심은 <strong>무결성, 보안, 권한, 병행제어</strong>이다.</div></figure><p id="71db0b72-9000-441f-97df-5182b6775fef" class="">
+</p><ol type="1" id="8a65da46-6edb-4481-a5a9-038303aa2440" class="numbered-list" start="7"><li>데이터베이스 구성의 장점이 아닌것은</li></ol><ul id="a1dcb6f9-40f1-4395-8f2f-266f7cb42146" class="bulleted-list"><li style="list-style-type:disc">데이터 <strong>중복 최소화</strong></li></ul><ul id="193c54e6-d35f-4cf5-b0f9-d14a0028fa83" class="bulleted-list"><li style="list-style-type:disc">여러 사용자에 의한<strong> 데이터 공유</strong></li></ul><ul id="7bb4bf90-98a8-4e9a-86c8-d0fac9b465f5" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">데이터 간의 종속성 유지 (X)</span><ul id="1e5fa61b-f754-4b62-bc13-3c90b1ca28a1" class="bulleted-list"><li style="list-style-type:circle">DBMS의 발전 배경 2가지 : <strong>1) 종속성 배제 2) 중복성의 배제</strong></li></ul></li></ul><ul id="5329ecce-b3f6-45c5-bb99-fffbe509cba0" class="bulleted-list"><li style="list-style-type:disc">데이터 내용의 <strong>일관성 유지 </strong></li></ul><p id="c48c4928-6a4f-4f23-9618-b466ae652bae" class="">
+</p><ol type="1" id="262fefca-0b3d-4987-8d65-56d49ae404c9" class="numbered-list" start="8"><li>DBMS를 사용했을때의 장점으로 거리가 먼 것은</li></ol><ul id="d02a2d37-82da-49b9-afb0-3452f6dbb7ab" class="bulleted-list"><li style="list-style-type:disc"><strong>표준화</strong>의 <strong>범기관적 시행</strong></li></ul><ul id="9f10864a-e9b6-4a2a-9cfe-ce9a6edca1a7" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">단순한 예비와 회복 기법</span><ul id="9942eb97-9aa2-4d41-8ce4-87db4d1e5b12" class="bulleted-list"><li style="list-style-type:circle"><strong>DBMS단점 </strong>: 시스템이 <strong>복잡</strong>하여 <strong>파일의 예비와 회복이 어렵다</strong>.</li></ul></li></ul><ul id="b6356953-4551-4bd2-b7c1-50fe5d4f0f76" class="bulleted-list"><li style="list-style-type:disc">데이터의 <strong>보안 보장이 용이</strong></li></ul><ul id="11170de2-984d-4aae-b488-cab3320ed0f9" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터 무결성 </strong>및 <strong>일관성 유지</strong></li></ul><p id="4370913a-5c84-4bfb-9bf8-8eef02fd1e87" class="">
+</p><blockquote id="2e84c3ff-dadd-4958-864e-83caae39bc42" class=""><strong>스키마</strong></blockquote><ol type="1" id="43c0e2ff-70e3-407a-9bd0-4c2440a8d78a" class="numbered-list" start="1"><li>데이터베이스 시스템의 3단계 구조인 내부 스키마, 개념 스키마, 외부 스키마에 대한 설명의 연결이 옳은것 </li></ol><ul id="75440c1d-2bd7-4505-b59f-6d6559515841" class="bulleted-list"><li style="list-style-type:disc">내부스키마 - 데이터의 실제 저장 방법을 기술</li></ul><ul id="13bc7ab2-798d-41ea-a400-8ab330a215c9" class="bulleted-list"><li style="list-style-type:disc"><strong>개념 스키마 - 저장된 데이터와 그들의 관계를 기술  </strong></li></ul><ul id="529632a7-a709-462e-a71e-b6c4b6cd37c0" class="bulleted-list"><li style="list-style-type:disc"><strong>외부 스키마 - 데이터베이스 사용자의 관점을 기술</strong> </li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="293fad33-1f39-4b58-8e17-4f562912b897"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>내부스키마 </strong>- 데이터의 <strong>실제 저장 방법을 기술 : 저장 스키마</strong><p id="2b643d4e-2074-4a5a-88aa-62ae4d0c0132" class=""><strong>개념 스키마 - 저장된 데이터와 그들의 관계를 기술 : 전체적인 뷰(View)  </strong></p><p id="ab0270b3-edb7-4822-9a77-73339303ee9a" class=""><strong>외부 스키마 - 데이터베이스 사용자의 관점을 기술</strong></p></div></figure><ol type="1" id="9052021a-7dd0-49e3-acd9-af15c057334a" class="numbered-list" start="2"><li>데이터베이스 스키마의 설명으로 옳지 않은것</li></ol><ul id="554b58c6-07ca-4394-a05f-1ccf90f7c214" class="bulleted-list"><li style="list-style-type:disc"><strong>스키마</strong>는 <strong>데이터베이스의 구조</strong>와 <strong>제약조건</strong>에 관한 <strong>전반적인 명세를 기술</strong>한다.</li></ul><ul id="fb60333d-aa74-4c50-9f1d-c6225f34d783" class="bulleted-list"><li style="list-style-type:disc"><strong>외부 스키마</strong>는 <strong>응용 프로그래머가 데이터베이스를 바라보는 관점</strong>이다.</li></ul><ul id="f71015ea-cf5e-4ba1-9e77-17ed3cd970e7" class="bulleted-list"><li style="list-style-type:disc"><strong>개념 스키마</strong>는 조직이나 기관의 <strong>총괄적인 입장에서 본 데이터베이스의 전체적인 논리적 구조</strong>이다.</li></ul><ul id="bc8f2dc1-d0d4-47d7-85a1-ca2704bac84d" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">하나의 데이터베이스 시스탬에는 내부, 외부, 개념 스미카가 각각 하나씩만 존재한다.</span><ul id="bb307309-95b2-492b-828c-5f07138325f3" class="bulleted-list"><li style="list-style-type:circle">개념 스키마와 내부 스키마는 하나만 존재한다. 그러나 외부 스키마는 여러 개 존재 할 수 있다.</li></ul></li></ul><p id="077e14c8-503f-4f95-b0b9-4ff7c3ffcef8" class="">
+</p><ol type="1" id="51509b70-8863-4236-8ee4-6dd245294851" class="numbered-list" start="3"><li>데이터베이스 구조를 전반적으로 기술한 것을 스미카라고 한다. 3층 스키마에 해당하지 않는 것은</li></ol><ul id="d3cc0ad2-ccd4-4a7f-8b38-27a849518d20" class="bulleted-list"><li style="list-style-type:disc"><strong>외부 스키마, 개념 스키마, 내부스키마 : 3중 스키마</strong></li></ul><ul id="8e41561f-da16-4b08-9c1a-40b2b602cb32" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">논리 스키마</span></li></ul><p id="f75cba29-a47e-4609-96b2-c9d7c5ec4997" class="">
+</p><ol type="1" id="b2eed34d-7320-4356-b82a-1547b9c77d39" class="numbered-list" start="4"><li>데이터베이스를 구성하는 <strong>데이터 객체, 이들의 성질</strong>, <strong>이들 간에 존재하는 관계 </strong>, <strong>그리고 데이터 조작 또는 이들 데이터 값</strong>들이 갖는 <strong>제약조건에 관한 정의를 총칭</strong>하는것</li></ol><ul id="db589193-1a2d-4be6-a096-80d631ce564e" class="bulleted-list"><li style="list-style-type:disc"><strong>Shema</strong></li></ul><p id="27684c93-77d3-4798-af77-f2caa7894e9c" class="">
+</p><ol type="1" id="5b7ca0e2-c4da-4e44-919f-da31a5983f91" class="numbered-list" start="5"><li>데이터베이스의 3단계 스키마 구조에 대한 설명으로 옳지 않은것</li></ol><ul id="2cb53ae1-6724-493d-9e74-9de5ad6807e0" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">내부적 스키마는 데이터베이스의 논리적 저장구조를 묘사한다</span>.<ul id="3e2dfd7d-66d8-4036-bdec-0d036be67091" class="bulleted-list"><li style="list-style-type:circle"><strong>내부적 스키마</strong>는 데이터베이스의 <strong>물리적 저장 구조</strong>를 묘사한다.</li></ul></li></ul><ul id="827d6827-9960-4672-bbb6-1687de95a83c" class="bulleted-list"><li style="list-style-type:disc"><strong>외부적 스키마</strong>는 데이터베이스 전체에서 <strong>특정 사용자 그룹</strong>이 관심을 가지고 있는 <strong>일부분만을 묘사</strong>한다.</li></ul><ul id="40132016-93ac-4989-8512-1a9cca70e2a0" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">데이터베이스 관리 시스템은 </mark><mark class="highlight-yellow_background"><strong>외부적 스키마</strong></mark><mark class="highlight-yellow_background">에 따라 </mark><mark class="highlight-yellow_background"><strong>명시된 사용자의 요구</strong></mark><mark class="highlight-yellow_background">를 </mark><mark class="highlight-yellow_background"><strong>개념적 스키마</strong></mark><mark class="highlight-yellow_background">에 적합한 형태로 변경하고 </mark><mark class="highlight-yellow_background"><strong>이를 다시 내부적 스키마에 적합한 형태로 변환</strong></mark><mark class="highlight-yellow_background">한다.</mark></li></ul><ul id="bc65a8e1-6e7c-4c2c-8d59-068868f153ae" class="bulleted-list"><li style="list-style-type:disc"><strong>개념적</strong> 수준에서는 사용자 집단을 위한 <strong>전체 데이터베이스의 구조를 묘사</strong>한다.</li></ul><p id="efa55a36-08e6-4876-bd6d-f682710fdc01" class="">
+</p><p id="c213325d-59d4-4757-86c0-804fd31a1830" class="">
+</p><ol type="1" id="fa7cbad3-5fdf-448c-abb0-bb486e780fdd" class="numbered-list" start="6"><li><strong>개체 간의 관계와 제약 조건을 나타내고 </strong>데이터베이스의 <strong>접근 권한</strong>, <strong>보안 및 무결성 규칙 명세가 있는 스키마</strong></li></ol><ul id="f804fa46-1968-4843-b215-4177a785d26e" class="bulleted-list"><li style="list-style-type:disc"><strong>내부 스키마, </strong></li></ul><p id="ca27a848-da80-4b0f-abf1-5602ef6a4b65" class="">
+</p><p id="1ef9cddc-6555-4afd-bbe9-954a729b5e96" class="">
+</p><ol type="1" id="b481e930-e938-4e41-9353-2bd57cce56a9" class="numbered-list" start="7"><li>개념 스키마에 대한 설명으로 옳지 않은것은</li></ol><ul id="45b05db9-9576-42eb-a72a-ffbc6ef9cd0f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>데이터베이스 파일에 저장되느 데이터의 형태를 나타낸것으로 단순 스키마라고도 한다</strong></mark>.</li></ul><ul id="4de4c348-7d72-4121-948f-5541e4d48cff" class="bulleted-list"><li style="list-style-type:disc">범기관적 입장에서 데이터베이스를 정의한 것이다.</li></ul><ul id="36109a76-0ee7-4447-878e-8fcf1a6d9e91" class="bulleted-list"><li style="list-style-type:disc">모든 응용 시스템과 사용자가 필요로 하는 데이터를 통합한 조직 전체의 데이터베이스로 하나만 존재한다.</li></ul><ul id="83f70c48-1bee-4b60-9f47-9f6c12f494d8" class="bulleted-list"><li style="list-style-type:disc"><strong>개개 사용자</strong>나 <strong>응용프로그래머</strong>가 접근하는 데이터베이스를 정의한 것이다.<ul id="9394e6c8-bb92-4435-a3d4-9f000f48e3c2" class="bulleted-list"><li style="list-style-type:circle">└ <strong>외부스키마</strong></li></ul></li></ul><p id="c7e4594c-7c72-4464-89e9-ebbcc2a5c98a" class=""><strong> </strong></p><ol type="1" id="6b4bef22-24c2-4c47-a93f-10b18a621764" class="numbered-list" start="8"><li>사용자나 응용프로그래머가 각 개인의 입장에서 필요로 하는 데이터베이스의 논리적 구조를 나타내는 것은</li></ol><ul id="f770aa00-7ecf-41c1-b05a-e6ea36b87c30" class="bulleted-list"><li style="list-style-type:disc">외부 스키마</li></ul><p id="e6d10225-3a93-40d2-b762-1ca7936d8fc0" class="">
+</p><ol type="1" id="de0ae717-9afa-4a87-ba11-30fb0442cefa" class="numbered-list" start="9"><li><strong>물리적 저장 장치의 입장</strong>에서 본 데이터베이스 구조로서 <strong>실제로 데이터베이스에 저장될 레코드 형식</strong>을 정의하고 저장 데이터 항목의 표현방법, <strong>내부 레코드의 물리적 순서</strong> 등을 나타내는 스키마는 </li></ol><ul id="303fadfd-a46a-473e-ba10-e709eac8fc18" class="bulleted-list"><li style="list-style-type:disc">Internal schema / <strong>내부 스키마</strong></li></ul><p id="45537b97-ac53-4f28-92df-3f7bdb23fdfd" class="">
+</p><ol type="1" id="07bb517a-eda1-4bdd-abc4-5727ff316b6e" class="numbered-list" start="10"><li>It is collection of metadata describing the structure and constraint of a database. It defines data entities, attributes, relations, and constraints on data manipulation.</li></ol><ul id="0aa90436-4b56-4967-a30d-44c86c13e264" class="bulleted-list"><li style="list-style-type:disc">Schema<ul id="2073cd99-d320-4bcc-ace2-7d55a880842f" class="bulleted-list"><li style="list-style-type:circle"><strong>데이터베이스의 구조</strong>와 <strong>제약사항이 묘사된 메타데이터</strong>들의 집합</li></ul><ul id="e528573e-9d9b-44fa-a5bf-8b303aade94b" class="bulleted-list"><li style="list-style-type:circle">데이터 개체, 속성, 관계와 데이터를 조작할때의 <strong>제약사항들을 정의</strong></li></ul><p id="112a66a8-cc74-4c72-9913-7a0a434e9f46" class="">: <strong>스키마</strong></p></li></ul><p id="a52476c9-ff6c-450f-9b24-56f589402bf7" class="">
+</p><p id="c63a6143-21d4-4bdc-a4b3-6524fe206d33" class="">
+</p><p id="3b8e39da-944a-407f-a135-1947bee97363" class="">
+</p><p id="69af597a-813b-403b-aa0e-cf2f4173f7d4" class="">
+</p><p id="6d68652d-6186-4653-a32e-ed127963c710" class="">
+</p><p id="ea4bd855-3114-489a-847d-d511dd108446" class="">
+</p><p id="f79e89eb-d5ec-4e73-bb40-4796300d2734" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

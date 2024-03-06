@@ -1,0 +1,814 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1장 논리회로</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f71cafb7-a562-4e26-905a-a370aac75270" class="page sans"><header><h1 class="page-title">1장 논리회로</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>날짜</th><td><time>@2024년 2월 21일</time></td></tr></tbody></table></header><div class="page-body"><blockquote id="1f650a1e-0b72-482e-a109-cf068754b799" class=""><strong>불 대수</strong></blockquote><ul id="d2563f48-716c-41c4-845c-bb1cfdee0022" class="bulleted-list"><li style="list-style-type:disc">AND 입력 정보의 값이 모두 1일때만 결과가 1이 된다. 입력되는 값이 A,B라며 A AND B 또는 A * B로 표현한다.</li></ul><ul id="58ada8c8-5541-4ca7-ae67-e399066235c7" class="bulleted-list"><li style="list-style-type:disc">OR 입력 정보의 값 중 한개라도 1이면 결과가 1이 된다. 입력되는 값이 A,B라 하면 A OR B 또는 A + B로 표현</li></ul><ul id="243da5f0-0392-43f5-aeff-09f95d914c4b" class="bulleted-list"><li style="list-style-type:disc">NOT 입력되는 정보의 반대값이 출력된다. 입력되는 값이 A라면 NOT A , A’ 로 표현</li></ul><ul id="56c39862-a7b5-4be3-9d4d-0ee66c529bcd" class="bulleted-list"><li style="list-style-type:disc">분배법칙 : A * (B+C) = A * B + A * C , A + B * C = (A + B ) * (A + C) </li></ul><ul id="59f6624f-a687-4149-acc2-a68b3b2302ae" class="bulleted-list"><li style="list-style-type:disc">교환법칙 : A + B = B + C , A * B = B * A</li></ul><ul id="13cc9252-ff11-41be-a731-ee54d85b3d52" class="bulleted-list"><li style="list-style-type:disc">결합법칙 : A + (B + C) = ( A + B) + C , A * (B * C ) = ( A * B ) * C</li></ul><ul id="985bc4b5-059f-4cf6-8225-1ceab14a6840" class="bulleted-list"><li style="list-style-type:disc">멱등법칙 A + A =A, A*A=A</li></ul><ul id="5d75ae30-ef80-42ef-9963-616955afc4df" class="bulleted-list"><li style="list-style-type:disc">보수 법칙 A  + <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">A&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> = A , A * <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">A&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> = 0</li></ul><ul id="b0425432-514d-4f5d-86ec-05dd494a955d" class="bulleted-list"><li style="list-style-type:disc">항등법칙 A + 0 = A , A + 1 = 1, A * 0 = 0 , A * 1 = A</li></ul><ul id="6e66ea3c-07be-45b1-82c3-0f97aa057cdb" class="bulleted-list"><li style="list-style-type:disc">콘센선스 AB + BC + C<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">A&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> = AB + C<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">A&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> , (A + B)(B + C)(C + <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">A&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>) = (A+B)(C +<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">A&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>)</li></ul><ul id="2861b362-99eb-43ef-b336-4d416d0175d6" class="bulleted-list"><li style="list-style-type:disc">드모르강 (A + B)&#x27; = A&#x27; * B&#x27; , (A * B)&#x27; = A&#x27; + B&#x27;</li></ul><ul id="efba8a58-a2b9-4197-8efb-c759d57046fc" class="bulleted-list"><li style="list-style-type:disc">합의 곱 표현은 곱의 합 표현으로 변환한다.</li></ul><ul id="6e785c19-d7e3-40f1-b943-dfdaef1df6ca" class="bulleted-list"><li style="list-style-type:disc">A+A*B = A * 1 + A*B = A * (1+B) = A * 1 = A</li></ul><ul id="8a62ee1e-f76f-46f8-ab56-721a7ccc8077" class="bulleted-list"><li style="list-style-type:disc">A(A+B) = A*A + A*B = A + A * B = A * ( 1 + B ) = A * 1 = A</li></ul><ul id="ef7c7b65-1740-4699-9aea-dd8ca229c228" class="bulleted-list"><li style="list-style-type:disc">A + A’ * B = ( A + A’)(A+B) = 1 * (A+B) = A +B </li></ul><ul id="e3c34872-1607-437f-926f-4cd52684aafc" class="bulleted-list"><li style="list-style-type:disc">A(A’ + B) = A * A’ + A * B = 0 + A * B = A *B </li></ul><ul id="790e3804-b488-48b0-9a0d-e3f0dbb89856" class="bulleted-list"><li style="list-style-type:disc">Y = AB + AB’ + A’B = A(B + B’) + A’B = A(1) + A’B = A + A’B = (A+A’)(A+B) = 1 * (A+B) = A + B</li></ul><ul id="963b7b23-7901-49f2-ac49-511b85df352d" class="bulleted-list"><li style="list-style-type:disc">카르노맵 : 카르노맵은 설계된 논리식을 도표로 표현하여 최소화 하는 방법이다. 변수(입력선)의 개수에 따라 표의 크기가 달라지며 칸의 위치에 따라서 각 칸의 볼 함수가 정해진다.</li></ul><p id="3c2d21ff-b0b7-41db-a215-35052586006c" class="">
+</p><ol type="1" id="ff63c95a-7793-456d-97f7-7a8d34a5bb7e" class="numbered-list" start="1"><li>논리식 Y  = AB + AB’ + A’B 를 최소화 <ul id="b8801f1d-0e75-44c0-8c43-2b51f226ea9e" class="bulleted-list"><li style="list-style-type:disc">=A(B+B’) + A’B = A(1) + A’B = A + A’B = (A+A’)(A+B) = 1 * (A +B) = A + B </li></ul></li></ol><p id="563b3b3e-5957-400a-8324-eafc5594caa1" class="">
+</p><ol type="1" id="93ab1a0f-f32b-49cd-a9b5-b1d7d1e6055e" class="numbered-list" start="2"><li>볼 대수가 옳지 않은것은: A + A = 1 </li></ol><ul id="6f6823f5-d039-4553-831f-5df4f1ad1384" class="bulleted-list"><li style="list-style-type:disc">A + A’ * B = A + B , A*(A’ + B) = A * B , A + A * B A </li></ul><p id="b80da089-ec4c-43c3-86b5-c638ab26607f" class="">     </p><p id="08420b2f-5f7c-43fd-9d19-8df19a4ddf47" class=""> 3. 볼 대수가 옳지 않은 것</p><ul id="39a53d90-1bc9-4adf-b0a9-c6699ae52e20" class="bulleted-list"><li style="list-style-type:disc">A + A’B = A = (A+A’)(A+B) = 1 * (A+B) = A + B</li></ul><ul id="4e762157-0c23-46da-985d-b2d1019d1fa4" class="bulleted-list"><li style="list-style-type:disc">A * A = A , <strong>A + A * B’ = A </strong></li></ul><ul id="3ed0b551-e69f-422b-b121-c7b0ab22fe40" class="bulleted-list"><li style="list-style-type:disc"><strong>A * (A+B) = A</strong></li></ul><p id="e9eb5de0-b850-4682-b3e7-68a7c02946bc" class="">
+</p><ol type="1" id="b9c840f6-8457-4281-b58b-18ea05a3f443" class="numbered-list" start="5"><li>논리식 Y = (ABC)’ + AB’C + A(BC)’</li></ol><p id="881577a4-f11d-4c0e-8fe4-48dd9d5a2cdf" class="">= (AB)’(C’+C)+AB’(C+C’) = (AB)’(1) + AB’(1)= (AB)’ + AB’ = B’(A’ + A) = B’ </p><p id="32558c69-38ee-41ac-9d9d-c1b1cd21a90d" class="">
+</p><p id="04097a9e-7752-4a19-9f57-09ad00ffda60" class="">
+</p><blockquote id="a994cebc-fcb5-4d7d-9b9d-5b06e05c3f93" class="">논리 게이트</blockquote><p id="4e2426de-d814-4bae-9c78-66dab08e5a66" class="">AND 입력 신호가 모두 1일때 1 출력 Y = A * B , Y = AB</p><p id="561d5941-9f52-45f1-afe3-919777b1e2d3" class="">OR 입력 신호 중 1개만 1이여도 1 출력 Y = A + B</p><p id="6ce87555-16b9-4da5-90c7-a9336b04d150" class="">NOT 입력된 정보를 반대로 출력 Y = A’</p><p id="96a4a5ff-6c09-4133-9855-d87594f4335c" class="">BUFFER 입력된 정보를 그대로 출력 Y = A</p><p id="1b113871-bc4e-46da-9a1e-8509545dff64" class="">NAND NOT + AND 즉 AND의 부정 , Y = (A*B)’</p><p id="743b7d0b-8f08-4095-9be3-de7544987721" class="">NOR NOT + OR 즉 OR의 부정 Y = (A+B)’</p><p id="f63a603c-e8ca-477e-bd19-f787c663f101" class="">XOR 입력되는 것이 모두 같으면 0, 한개라도 다르면 1 출력 Y = A’B + AB’ = (A’+A)(B+A)(A’+B’)(B+B’)=(1)(B+A)*(A’+B’)(1)=(A+B)(A’+B’)</p><p id="370d218a-8b42-4f9e-95f8-217917819cec" class="">XNOR NOT + XOR 즉 XOR의 부정 Y = AB + A’B’ = (A’+B)(A+B’) = (AB)+(A+B)’</p><p id="c4653449-ef0f-4f26-84d3-1c9781d5cf68" class="">
+</p><p id="b68dc549-d43c-421c-a9e9-33cdcfb666ff" class="">논리회로 NOT , AND. OR 순으로 우선순위가 적용</p><p id="c6ae6bdc-8fa3-4173-a4a5-2f2c4bced851" class="">
+</p><p id="a75a27b3-c92e-46c8-ad00-5adacea7e325" class="">⊙ĀΘ</p><ol type="1" id="d0ff5556-dbe9-4015-ab49-3a6b974da59a" class="numbered-list" start="1"><li></li></ol><p id="da5af2fb-0b53-4683-b121-ad6a9549f78a" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="062bf4e5-ccbd-42d8-87ec-40b13dbd8667" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+(A*B)&#x27;
+				((A*B)&#x27;* (A*B)&#x27;)&#x27;  -&gt; 드모르강 법칙 (A*B)&#x27;&#x27; + (AB)&#x27;&#x27; 
+
+(A*B)&#x27;
+
+
+
+부정의 부정은 긍정, 흡수 법칙에 의해 드모르강 법칙 (A*B)&#x27;&#x27; + (AB)&#x27;&#x27; 는 (AB) + (AB) 
+A+A = A다. 따라서 (AB) + (AB) = AB이다.
+</code></pre><p id="605fc652-412c-41e7-8eff-aa3a5aa2e5be" class="">
+</p><ol type="1" id="0d2065e7-1b78-4f15-9856-a1c8275bb655" class="numbered-list" start="2"><li>논리회로에 의해 계산된 결과 X는 (NOT, AND, OR Gate)가 있다.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="071474fe-4a41-4cfb-afee-19e2fedfbe17" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">A&#x27;   A&#x27;*B
+
+						A&#x27;*B + A*B&#x27;   
+
+
+B&#x27;    A*B&#x27;</code></pre><p id="eb2bf533-bceb-4e7f-ad56-ddde46c7fac9" class="">
+</p><p id="cf2096ed-6ae8-4c4d-8ebe-9b5a08d542b1" class="">
+</p><ol type="1" id="52a57cd0-6157-4e1b-9688-d0463c88d50f" class="numbered-list" start="3"><li></li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1939a9b7-a45a-42a9-b1de-fccef024e9a7" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+A = 1, B = 1, C=0, D=1일때 ((AB XOR C) + C’D)’ + (A XOR CD)’ =&gt; 1
+(AB&#x27;C + BC&#x27;) XOR (A&#x27;+C&#x27;)(B&#x27; + AD&#x27;)  =&gt; 0
+
+
+XOR은 입력되는 것이 모두 같으면 0, 한개라도 다르면 1 출력
+
+(1 XOR 0) = 1  + OR이므로 ( 1 OR 1) 은 1 = 0
+C&#x27;=1 AND D(1) = 1 
+1 XOR C(0) AND D(1) =&gt; 1 XOR 0 =&gt; 1&#x27; = 0
+0 OR 0 = 0
+   
+      1
+(AB&#x27;C + BC&#x27;) XOR (A&#x27;+C&#x27;)(B&#x27; + AD&#x27;) 
+A(1) AND B&#x27;(0) ==&gt; 0 AND C(0) =&gt; 0
+0 OR (1 AND 1) =&gt; O OR 1 =&gt; 1   
+(A&#x27;(0) OR C&#x27; (1) ) AND (B&#x27;(0) OR A(1) AND D&#x27;(0))
+        1 AND ( 0 OR 0) 
+( 0 OR 0)  =&gt; 1 
+1 AND 1 = 1
+
+
+
+
+</code></pre><p id="718cac72-5ea3-4dcf-a375-3188cfcb8e80" class="">
+</p><p id="29533cf5-baa0-40f9-8eca-674e431aff09" class="">
+</p><p id="4579cc3e-19b4-40c5-817d-93f894f92a94" class="">4.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="48e09272-b07e-4ae8-baa1-be359cbdc4b5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">1 : AB&#x27;
+2 : ( ① * B&#x27;)&#x27; 
+((AB&#x27;)B&#x27;)&#x27; = (AB&#x27;)&#x27; + B&#x27;&#x27; 드모르강 법칙 
+= (A+B)(B&#x27;+B) 분배법칙 = (A+B)*1 = A + B 
++는 OR 표시이다. </code></pre><p id="655ec57a-42bc-4105-9274-020bb2df8d9e" class="">5.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0509d730-b4bd-4350-8e2f-20cc08ba5433" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">(A AND B )&#x27; -(1)
+
+										(1) OR (2) : (AB)&#x27; OR (AB)&#x27; =  (AB)&#x27; + (AB)&#x27; = (AB)&#x27; = A&#x27; + B&#x27; 
+(A AND B )&#x27; -(2)
+OR은 + 표싱다.</code></pre><p id="87e822e5-df3f-4635-818a-5cd6f526d4ae" class="">
+</p><ol type="1" id="c2f47ed4-3632-4d06-ba0f-087fa71300fc" class="numbered-list" start="6"><li>입력        |        출력<p id="ce7f1012-1fff-4893-8a05-0e3fde095d7d" class="">X    Y         |        Z</p><p id="6d35d1d0-eea8-4de1-beb4-1f9c8413de99" class="">0    0       |     0</p><p id="02457501-03ab-4940-a3ab-b866613b7769" class="">0   1       |        1</p><p id="63131523-675c-47b6-9265-a970405301e7" class="">1     0      |    1</p><p id="de8c66bb-c663-4cec-93cb-e46f70c44ead" class="">1     1      |     0</p><ul id="f1da5d2a-4196-4dd1-bdac-3161ce95bd6a" class="bulleted-list"><li style="list-style-type:disc">입력이 모두 같으면 0, 한개라도 다르면 1을 출력하는 회로 Z = X XOR Y  = X’Y AND XY’<ul id="616020f9-9a43-4ee8-af46-c280b57dbcf8" class="bulleted-list"><li style="list-style-type:circle">XOR은 EXCLUSIVE OR gate</li></ul></li></ul></li></ol><p id="3cc4db96-2186-4808-bb53-b7dc4ec1a1f6" class="">
+</p><p id="df5015f3-8831-416f-96ba-bb28c48eba26" class="">
+</p><p id="20569c5f-f1a8-49e8-8e56-77a45dcf8eb1" class="">7.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="79d94020-2e06-443e-ae7f-2d2b406b6460" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">A = 1010 , B = 1100
+(1) A OR B  ===&gt; ( A OR B) AND ( A AND B)&#x27; ===&gt; (A+B)*(A+B)&#x27; 
+(2) A AND B ==&gt; ( A AND B)&#x27; 
+
+
+1010
+       OR
+       ===&gt;              1110
+1100
+													AND
+													=====&gt;   0110
+
+1010
+      AND
+      =====&gt;   NOT(1000) ====&gt; 0111
+1100</code></pre><p id="90a61d6e-f04e-4fdd-a775-37aea234d28c" class="">
+</p><ol type="1" id="c1baaf98-7e0f-4bce-bc8b-58501774008d" class="numbered-list" start="8"><li>입력이 모두 같으면 0, 한개라도 다르면 1 ⇒ XOR</li></ol><p id="8f75bbad-7875-46c6-bbe3-40477967d66b" class="">입력이 모두 같으면 1, 한개라도 다르면 0  =⇒ XNOR 게이트</p><p id="7e4c9dcd-2295-4cfa-9537-f3b823e36672" class="">
+</p><blockquote id="fa333ca0-4759-4f47-b4fb-53c634d9baa7" class="">조합논리회로 - 반가산기, 전가산기</blockquote><ul id="7713f355-194b-49e7-8e3e-a18f26a1be72" class="bulleted-list"><li style="list-style-type:disc">순서논리회로는 프립플롭, 래지스터, 카운터, RAM, CPU등이 있다. </li></ul><ul id="7a74eaa2-c17d-4da7-a0dd-f40b1124b706" class="bulleted-list"><li style="list-style-type:disc">조합논리회로는 임의의 시간에서의 출력이 이전의 입력에는 관계 없이 현재의 입력 조합 (0 또는 1)으로부터 직접 결정되는 논리회로이다. 이에 반해 순서논리회로는 외부로부터의 입력과 현재 상태에 따라 출력이 결정된다.</li></ul><ul id="b34fb667-667b-4726-a45a-db46ca9c9bad" class="bulleted-list"><li style="list-style-type:disc">조합논리회로 : 반가산기, 전가산기, 병렬가산기, 반감산기, 전감산기, 디코더, 인코더, 멀티플레서, 디멀티플랙서, 다수결회로, 비교기 등이 있다. </li></ul><ul id="9c6a4304-9883-4aaa-8c7f-2b0c45aec384" class="bulleted-list"><li style="list-style-type:disc">반가산기는 1Bit짜리 2진수 두개를 덧샘한 합(S)와 자리올림수 (C)를 구하는 조합논리회로이다.</li></ul><p id="b152d4f1-1e26-48c2-933b-84e41fde923a" class="">
+</p><table id="ff9828f0-8785-4633-ba77-e3ab5ac77754" class="simple-table"><tbody><tr id="982acccf-ce03-424a-9bbf-5e74134a07d3"><td id="Hrm^" class="">A</td><td id="|FAa" class="" style="width:121px">B</td><td id="Ob|{" class="">S</td><td id="J=np" class="">C</td></tr><tr id="f9af1a1d-9261-4b22-951a-ff0f9f14b6ce"><td id="Hrm^" class="">0</td><td id="|FAa" class="" style="width:121px">0</td><td id="Ob|{" class="">0</td><td id="J=np" class="">0</td></tr><tr id="4d975d69-a718-4a76-ba42-7f9ebb638426"><td id="Hrm^" class="">0</td><td id="|FAa" class="" style="width:121px">1</td><td id="Ob|{" class="">1</td><td id="J=np" class="">0</td></tr><tr id="32f3fcc6-d866-4bdf-adc2-5f91ac225626"><td id="Hrm^" class="">1</td><td id="|FAa" class="" style="width:121px">0</td><td id="Ob|{" class="">1</td><td id="J=np" class="">0</td></tr><tr id="ea92471f-f77a-48ad-a0fb-f8929f726cd2"><td id="Hrm^" class="">1</td><td id="|FAa" class="" style="width:121px">1</td><td id="Ob|{" class="">0</td><td id="J=np" class="">1</td></tr></tbody></table><p id="87eb6ad4-57b2-42e6-abac-ad905f1a80a9" class="">C = A * B, S = A’ * B + A * B’ = A XOR B</p><p id="e6b20650-00d1-41f7-9dac-cb1b4bdd8747" class="">
+</p><blockquote id="643ed282-5e6d-4f28-9721-0e31596e2ae1" class="">전가산기 FA, Full Adder</blockquote><p id="e0a01ea4-8ab9-466c-b44c-510509a8771e" class="">전가산기는 뒷자리에서 올라온 자리올림수(C)를 포함하여 1Bit 크기의 2 진수 3자리를 더하여 합(S)과 자리올림수(C)를 구하는 회로이다.</p><table id="6e8ffc5d-71dc-42bd-a58e-961055a6af49" class="simple-table"><tbody><tr id="c7896acd-d7ca-4322-bb20-712478f585c4"><td id="nEwf" class="">A</td><td id="oc=;" class="">B</td><td id=":lB\" class="">C₁   </td><td id="qE^~" class="">S</td><td id="bAMi" class="">C₂</td></tr><tr id="6aa727be-8216-4173-96e6-00764d07d9b8"><td id="nEwf" class="">0</td><td id="oc=;" class="">0</td><td id=":lB\" class="">0</td><td id="qE^~" class="">0</td><td id="bAMi" class="">0</td></tr><tr id="0e125bd4-5be0-48d6-9a21-023d3f49bb97"><td id="nEwf" class="">0</td><td id="oc=;" class="">0</td><td id=":lB\" class="">1</td><td id="qE^~" class="">1</td><td id="bAMi" class="">0</td></tr><tr id="9820978d-be01-48dd-941f-f50e96e4483c"><td id="nEwf" class="">0</td><td id="oc=;" class="">1</td><td id=":lB\" class="">1</td><td id="qE^~" class="">0</td><td id="bAMi" class="">1</td></tr><tr id="23c3f9d2-5932-4338-9954-fc0bde150a68"><td id="nEwf" class="">1</td><td id="oc=;" class="">0</td><td id=":lB\" class="">0</td><td id="qE^~" class="">1</td><td id="bAMi" class="">0</td></tr><tr id="b557dbed-e0ed-4585-8660-8bcb0a598fe6"><td id="nEwf" class="">1</td><td id="oc=;" class="">0</td><td id=":lB\" class="">1</td><td id="qE^~" class="">0</td><td id="bAMi" class="">1</td></tr><tr id="346cdca9-d8fb-4a22-b279-0d57113b3be5"><td id="nEwf" class="">1</td><td id="oc=;" class="">1</td><td id=":lB\" class="">0</td><td id="qE^~" class="">0</td><td id="bAMi" class="">1</td></tr><tr id="d1c8dbcc-6521-486b-bf03-d7e4e7034bec"><td id="nEwf" class="">1</td><td id="oc=;" class="">1</td><td id=":lB\" class="">1</td><td id="qE^~" class="">1</td><td id="bAMi" class="">1</td></tr><tr id="e2d066d7-59c1-4ded-a3a0-b6bf8d66f4b8"><td id="nEwf" class=""></td><td id="oc=;" class=""></td><td id=":lB\" class=""></td><td id="qE^~" class=""></td><td id="bAMi" class=""></td></tr></tbody></table><p id="b09ae0df-22c2-49bf-a3d7-6b9b6591d0d7" class="">전산기는 두개의 반가산기 (HA)와 한 개의 OR Gate로 구성된다.</p><p id="b3e50fb4-88d5-40f0-a0a3-d8f0482f7605" class="">
+</p><p id="dec0db4d-eba1-473e-ac66-4c121d512fd2" class="">
+</p><p id="edd816bc-6586-4ce8-b6f0-f1eb55b76922" class="">
+</p><p id="23dfd599-7e3f-409d-a42a-ee72a9ac5b6e" class="">논리식</p><p id="dd7a5742-0d50-4c47-9bf6-0d12d9efab8f" class="">S = A’B’C₁  + A’BC₁ ‘ + AB’C₁ ‘ + ABC₁ <div class="indented"><p id="1ed7185f-c1d8-40be-88b7-ce05fe14e28f" class="">= (A’B’ + AB)C₁ +(A’B+AB’)C₁ ‘</p><p id="54ba3690-647b-432b-82f1-16aa8f30b7dc" class="">= ( A XOR B)’C₁  + ( A XOR B)C₁ ‘   ←- A’B’ + AB = ( A XOR B)’, A’B + AB’ = A XOR B</p><p id="29c0f019-6d34-411c-961c-77e0ff6ed078" class="">= ( A XOR B) XOR C₁  ←- A XOR B 를 X라 하면 X’C₁ +XC₁ ‘ = X XOR C₁  = ( A XOR B) XOR C₁ </p></div></p><p id="7bbd1714-69b7-4b5d-9289-25e7e095a5e1" class="">
+</p><p id="bc1e4922-6e88-4bf2-822b-1ccd2827dc6c" class="">C₂ = A’BC₁ +AB’C₁ +ABC₁ +ABC₁ <div class="indented"><p id="75156764-598c-444d-a1e0-11929d5e78db" class="">= (A’B+AB’)C₁ +AB(C₁ ‘ + C₁ ) ←- A’B + AB’ = A XOR B , C₁ ‘ + C₁  = 1</p><p id="62824aa9-55fe-4d7a-9804-d7f02a0e8e21" class="">= ( A XOR B)C₁ + AB</p><p id="5eb8eb78-c1ce-4f4c-9528-38b61f539351" class="">
+</p><p id="b4fb7e4f-d121-4ebb-bcc8-804a9b5aa3f4" class="">
+</p><ol type="1" id="9c028da9-088d-4773-9eab-d1b56ca18eee" class="numbered-list" start="1"><li>전가산기를 구성하기 위해 필요한 소자를 바르게 나타낸 것은</li></ol><ul id="1f0a7f59-8628-4ac3-a5af-17bd927524e5" class="bulleted-list"><li style="list-style-type:disc">반가산기 2개, or 게이트 1개</li></ul></div></p><p id="ea92d8c3-4bf5-4032-9fe6-c060b541e2b1" class="">
+</p><ol type="1" id="b77fb972-c7d8-4be1-89d4-b18fdb04836e" class="numbered-list" start="2"><li>전가산기의 Sum(S)와 Carry(C₁) 비트를 논리식으로 나타낸것은 </li></ol><ul id="95e9fb1a-3451-44c1-af26-bd8ce1af0ad0" class="bulleted-list"><li style="list-style-type:disc">C₁ = ( A XOR B)C₂ + AB , S = (A XOR B) XOR C₁</li></ul><p id="b4c3161f-cce6-4117-b28e-823e15416e12" class="">
+</p><ol type="1" id="9510b3ea-a3f9-4f63-aeb0-4d9ab51cc305" class="numbered-list" start="3"><li>다음중 조합논리회로가 아닌 것은 : 플립플롭</li></ol><ul id="0170a034-a7ba-4236-9d72-b48aed7fccf2" class="bulleted-list"><li style="list-style-type:disc">조합논리회로 : 반가산기, 저사간기, 병려가산기, 반감산기, 전감산기, 디코더, 인코더, 디멀티플랙서, 멀티플래서, 다수결회로, 비교기</li></ul><ul id="3be14480-21d8-4db5-a9ff-5b8378779d04" class="bulleted-list"><li style="list-style-type:disc">순서논리회로 : 플립플로, 래지스터, 카운터, RAM, CPU</li></ul><p id="a4524003-8012-4abb-8e74-399629ca659d" class="">
+</p><ol type="1" id="5ed2cba6-598a-4a12-a20a-047f43f30cc8" class="numbered-list" start="4"><li>반가산기를 구성하고 있는 논리게이트의 종류는</li></ol><p id="f616eb9f-2e98-42e1-ae51-b9b66ae0b03e" class="">AND , OR 와 NOT </p><p id="80b97c8a-f33e-40b7-8c0a-747d23d63ff0" class="">
+</p><ol type="1" id="d5d1f908-d1f0-43e6-b734-8f47e2c5d7f6" class="numbered-list" start="5"><li>반가산기 논리회로 </li></ol><ul id="c6a6d206-8faa-4adc-b56a-96eff494a225" class="bulleted-list"><li style="list-style-type:disc">S = A XOR B = A’*B + A*B’ </li></ul><ul id="b24dd14a-209a-43c2-a144-fa6315f144a4" class="bulleted-list"><li style="list-style-type:disc">C = A AND B = AB</li></ul><p id="ff3bec50-53c7-44fa-b5f6-7d2e58b2da1b" class="">
+</p><ol type="1" id="0304dc35-86c2-48e9-926c-31b4ab10bec3" class="numbered-list" start="6"><li>전가산기의 합의 출력을 얻는 논리회로는? XOR </li></ol><ol type="1" id="320d75f0-cb75-4d04-9f43-695ef0919b19" class="numbered-list" start="7"><li>하나의 AND 회로와 Exclusive-OR 회로를 조합한 회로는?</li></ol><ul id="729144f5-8779-426a-af71-ac825f931c8a" class="bulleted-list"><li style="list-style-type:disc">반가산기</li></ul><p id="9f96ed2e-38b6-455d-9687-478a13738385" class="">
+</p><ol type="1" id="3dd276fb-77c1-4bbf-a41c-cc4fb9e698e9" class="numbered-list" start="8"><li>전가산기의 입력이 A=1, B=0, C=1일때 출력 S와 C는?</li></ol><ul id="cdc98744-374a-4360-bbba-5f3692083ca4" class="bulleted-list"><li style="list-style-type:disc">C = 1 , S = 0</li></ul><p id="740ba007-8352-4893-8abb-a218fd91de72" class="">
+</p><ol type="1" id="25a6567c-3a20-4777-b235-39410183b10f" class="numbered-list" start="9"><li>Half Adder는 2Bit(X,Y)를 산술적으로 가산하는 조합회로이며 이에 해당하는 진리표는 아래와 같다. 캐리와 합을 논리적으로 구한것은</li></ol><ul id="67c77f8d-ebee-4217-b862-644e99b5ee56" class="bulleted-list"><li style="list-style-type:disc">S = X XOR Y, C = XY</li></ul><p id="056493b7-39db-4483-81db-99f059e195d1" class="">
+</p><blockquote id="a2d46165-ac1f-4802-adfb-7783f73c04b1" class="">기타 조합논리회로</blockquote><ul id="ac80b276-2d9d-484e-80f9-6613c4d3f60f" class="bulleted-list"><li style="list-style-type:disc">병렬가산기(PA, Parallel Adder) 병렬가산기는 n Bit로 된 2진수 A, B에 대한 덧샘을 n개의 전가산기(FA)를 이용하여 구혀한 실질적인 가산기이다.</li></ul><ul id="72833995-396d-4ee0-94a8-704a9296cf8b" class="bulleted-list"><li style="list-style-type:disc">전파지연을 줄이기 위해 Carry Look Ahead(자리올림 예측 가산기)를 사용한다.<ul id="954398f5-91f4-4d82-aafa-e4afb4c6af66" class="bulleted-list"><li style="list-style-type:circle">병렬가산기는 앞단의 자리올림수가 발생해 다음 단에서 연산이 이루어지므로 연산 시간이 많이 지연된다. 이러한 연산지연시간을 줄이기 위해 Carry Look Ahead 회로를 사용한다.</li></ul></li></ul><ul id="764577ba-56f5-4002-9294-aaabf10148ae" class="bulleted-list"><li style="list-style-type:disc">Link Register = End Around Carry Register = Carry Register = 오버플로 검출기</li></ul><ul id="0a49fe18-6515-4bbd-8572-a29ffc963162" class="bulleted-list"><li style="list-style-type:disc">병렬가산기는 실질적인 덧셈기를 말한다. <ul id="db3a71f1-93fe-430b-8a49-385b0cad72cd" class="bulleted-list"><li style="list-style-type:circle">전파지연 (Propagation Delay)란 논리회로에서 입력된 신호가 출력으로 전파되는데 걸리는 평균 전이 지연시간이다. 전파지연은 ALU Path에서 가장 긴 Delay를 말한다.</li></ul><ul id="3e58df4c-21d7-4eec-9090-03eeae8b3efa" class="bulleted-list"><li style="list-style-type:circle">Gate상의 Operating Speed는 전파지연에 반비례한다.</li></ul><ul id="81ac74eb-e9ef-48f5-b99f-54f8b6c165be" class="bulleted-list"><li style="list-style-type:circle">더 빠른 Gade를 사용함으로써 전파지연시간을 줄일 수 있다.</li></ul><ul id="bc08ae84-e431-49b1-bd4f-9f5a55116d37" class="bulleted-list"><li style="list-style-type:circle">ALU의 Parallel-Adder에서 전파지연을 줄익 위해 Carry Look Ahead를 사용한다.</li></ul></li></ul><p id="0b68ef6f-1025-44e0-b470-8db9d7c4f351" class="">
+</p><ul id="83aff8f9-f965-44ee-ad5e-024221251f89" class="bulleted-list"><li style="list-style-type:disc">반감산기 : 1Bit 짜리 2진수 2자리에 대한 감산을 하는 회로이다.<ul id="67db8943-5e5f-4e7f-bedf-6c8ae5f1fd08" class="bulleted-list"><li style="list-style-type:circle">2진수의 상위 자리 : 10진수에서 사우이 자리의 1은 10이듯이 2진수에서 상위 자리의 1은 2이다.</li></ul></li></ul><table id="e7e983c4-5b9d-4028-b063-447e6a3a8d11" class="simple-table"><tbody><tr id="55cccc72-0dc4-4c3a-a2fd-46da3d5ae5fa"><td id="mWqN" class="">A</td><td id="Eprg" class="">B</td><td id="`UO]" class="">D</td><td id="IDV?" class="">B₁</td></tr><tr id="9e4b777f-83cd-481a-950b-8d87b93dc430"><td id="mWqN" class="">0</td><td id="Eprg" class="">0</td><td id="`UO]" class="">0</td><td id="IDV?" class="">0</td></tr><tr id="669c3437-a3a3-4dcd-a413-0973607df0a8"><td id="mWqN" class="">0</td><td id="Eprg" class="">1</td><td id="`UO]" class="">1</td><td id="IDV?" class="">1</td></tr><tr id="833cc071-d5f9-438d-9da2-b39c494b0b8e"><td id="mWqN" class="">1</td><td id="Eprg" class="">0</td><td id="`UO]" class="">1</td><td id="IDV?" class="">0</td></tr><tr id="9cb2cc1b-6cd0-4c09-b77f-5e3a1860c59f"><td id="mWqN" class="">1</td><td id="Eprg" class="">1</td><td id="`UO]" class="">0</td><td id="IDV?" class="">0</td></tr></tbody></table><p id="c34befa4-e1f0-4388-836d-a54b149e1035" class="">
+</p><p id="4c443fd5-f722-49e6-bd4a-867c3ad674f7" class="">B₁ = A’ * B</p><p id="6c7c2dc6-3cde-4dec-8d35-ef823228fdaa" class="">D = A’ * B + A * B’ = A XOR B</p><p id="d3d4a56a-9948-46df-bd09-80e8c55b7b07" class="">
+</p><ul id="82e3cadc-03db-4aaa-9ced-f378fa7f99de" class="bulleted-list"><li style="list-style-type:disc">디코더 : 디코더는 n Bit의 Code화된 정보를 그 Code의 각 Bit 조합에 따라 2ⁿ개의 출력으로 번역하는 회로이다.</li></ul><ul id="493d75a3-0529-4521-b976-468322fd1eb2" class="bulleted-list"><li style="list-style-type:disc">명령어의 명령부나 번지를 해독할때 사용하는 회로로 주로 AND 게이트로 구성되어 있다.</li></ul><ul id="7d183445-c547-4438-aded-cc8c99de5455" class="bulleted-list"><li style="list-style-type:disc">AND 게이트의 수 : n X 2ⁿ 디코더는 2ⁿ 개의 AND 게이트가 소요된다. 예를 들어 3 X 8 디코더라면 8개의 AND 게이트가 소요된다.</li></ul><ul id="2f8a1530-09bd-443c-9cec-2b355f1a4c3b" class="bulleted-list"><li style="list-style-type:disc">3Bit를 코드화하려면 2³이므로 8개의 출력선이 필요하다. </li></ul><table id="10d3d8fa-95f6-448f-8880-4f346ee42cd6" class="simple-table"><tbody><tr id="8c94dcbb-b1f1-4505-9e7a-ba6423e54cef"><td id="r&gt;t]" class="">A</td><td id="XdTj" class="">B</td><td id="j&lt;uW" class="">D₁</td><td id="cJg}" class="">D₂</td><td id="dXDo" class="">D₃</td><td id="}~O;" class="">D₄</td></tr><tr id="415e5d10-9104-49ec-884a-553d108cd83b"><td id="r&gt;t]" class="">0</td><td id="XdTj" class="">0</td><td id="j&lt;uW" class="">1</td><td id="cJg}" class="">0</td><td id="dXDo" class="">0</td><td id="}~O;" class="">0</td></tr><tr id="27641be1-e07d-495e-b412-2f9d9e60b26c"><td id="r&gt;t]" class="">0</td><td id="XdTj" class="">1</td><td id="j&lt;uW" class="">0</td><td id="cJg}" class="">1</td><td id="dXDo" class="">0</td><td id="}~O;" class="">0</td></tr><tr id="bd4b496d-1bcb-4d5f-9bc7-a1bae613f7c2"><td id="r&gt;t]" class="">1</td><td id="XdTj" class="">0</td><td id="j&lt;uW" class="">0</td><td id="cJg}" class="">0</td><td id="dXDo" class="">1</td><td id="}~O;" class="">0</td></tr><tr id="e37b350d-59aa-45d0-9455-326159e6e970"><td id="r&gt;t]" class="">1</td><td id="XdTj" class="">1</td><td id="j&lt;uW" class="">0</td><td id="cJg}" class="">0</td><td id="dXDo" class="">0</td><td id="}~O;" class="">1</td></tr><tr id="6952ecd2-f15d-49b9-b52e-fcc8c93d5996"><td id="r&gt;t]" class=""></td><td id="XdTj" class=""></td><td id="j&lt;uW" class=""></td><td id="cJg}" class=""></td><td id="dXDo" class=""></td><td id="}~O;" class=""></td></tr></tbody></table><p id="54769157-96bf-42aa-b889-4a39939b05bd" class="">D₁ = A’ * B’</p><p id="e1e8e39b-75de-40c8-bb94-95303f60c142" class="">D₂ = A’ * B</p><p id="f7062800-300c-48b9-9d25-3d6c22135f82" class="">D₃ = A * B’</p><p id="d76db663-c676-429a-ac13-e60496e71b5c" class="">D₄ = A * B</p><p id="4a59884e-8eb3-4496-8794-22f8d2d8fbeb" class="">
+</p><ul id="7b9c4461-d0e5-40d3-8679-67544dd2bea8" class="bulleted-list"><li style="list-style-type:disc">인코더 : 인코더는 디코더의 반대기능을 한다. 2ⁿ개의 입력선으로 입력된 값을 n개의 출력선으로 코드화해서 출력하는 회로이다.</li></ul><ul id="fe4de006-9223-4345-8059-0adb7e49e017" class="bulleted-list"><li style="list-style-type:disc">8개(=2³)의 입력선이 있으면 3개의 출력선이 필요하다.</li></ul><ul id="0a7d40ff-ef3b-4fbb-8cce-b24c9f63179c" class="bulleted-list"><li style="list-style-type:disc">멀티플랙서 (MUX, Muliplexer)<ul id="cd857406-b245-4006-b2e7-c05da761d54d" class="bulleted-list"><li style="list-style-type:circle">멀티플랙서는 2ⁿ의 입력선 중 1개를 선택하여 그 선으로부터 입력되는 값을 1개의 출력선으로 출력시키는 회로이다. 2ⁿ개의 입력선 중 1개의 선을 선택하기 위해 n개의 선택선을 이용한다. 버스 구성에 사용할 수 있다.</li></ul><ul id="f3a8e491-b43d-409f-917f-5ee65a9a6ae0" class="bulleted-list"><li style="list-style-type:circle">8=(2³)개의 입력선이 있으면 그 중에서 1개를 선택하기 위해서 3개의 선택선이 필요하다.</li></ul><p id="92a0922b-82e5-4ea0-86c2-51f76c14b0cb" class="">
+</p><p id="581ff57a-f9c0-42ce-bbf3-e4c22b3012c9" class="">
+</p><p id="42850757-f3eb-4ec3-b8b0-8ca3fad9bf53" class="">
+</p></li></ul><ul id="fecb05a4-85df-4e24-97ac-fc42453ed804" class="bulleted-list"><li style="list-style-type:disc">디멀티플랙서 (DeMUX, DeMultiplexer)<ul id="c7c63395-0c19-44e5-84f8-bdc433c118b3" class="bulleted-list"><li style="list-style-type:circle">디멀티플랙서는 1개의 입력선으로 들어오는 정보를 2ⁿ개의 출력선 중 1개를 선택하여 출력하는 회로이다. 2ⁿ개의 출력선 중 1개의 선을 선택하기 위해 n개의 선택선을 이용한다.</li></ul><ul id="64113bdc-61ee-49cb-8998-e6d7010c5fc5" class="bulleted-list"><li style="list-style-type:circle">8의 출력선이 있으면 그 중에서 1개를 선택하기 위해 3개의 선택선이 필요하다.</li></ul><p id="dd3d527b-a776-4b77-8c8e-0b4b47d22fe8" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0d547db6-5ffb-473a-b991-79df8dd20f7e" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">5. N개의 입력데이터에서 입력선을 선택하여  단일 채널로 송신하는 것은 : 멀티플랙서
+여러 개의 입력선 중에서 하나를 선택하는 것은 멀티플랙서, 여러개의 출력선 중에서 하나를 선택하는 것은 디멀티플랙서이다.
+
+3 X 8 Decoder는 AND 회로 8개로 만들 수 있다. 
+n X 2ⁿ 디코더는 2ⁿ개의 AND 게이트가 사용된ㄷ.ㅏ
+
+
+병렬 가산기를 구성하는 각각의 전가산기 출력 캐리를 미리 예측 및 처리하여 리플캐리 지연을 제거한 가산기로 가장 옳은것은 ?
+Carry Look Ahead Adder
+리플캐리 지연을 제거한다고 해서 Ripple Carray Adder를 선택하면 안된다. 이 문제에서의 핵심은 출력 캐리를 미리 예측한다, 즉 캐리(Carry)를 미리 (Ahead) 내려본다. (Look)는 것이다.
+
+</code></pre><p id="23abb545-1a98-440c-8b63-20ff498d5bce" class="">
+</p><blockquote id="4a66bfa6-9577-49ef-9b5a-502dcb614e4a" class="">순서논리회로</blockquote><p id="60527719-5a3f-4eea-9514-90b2b51ae507" class="">순서논리회로는 외부로부터의 입력과 현재 상태에 따라 출력이 결정되는 회로이다. </p><p id="23b6d433-ad09-42f6-8d90-47736d91a63f" class="">순서논리회로는 논리 게이트 외에 메모리 요소와 귀환 기능을 포함하므로 기억기능이 있다. </p><p id="151f742e-0dbd-493a-ab10-3403ecb3e5cb" class="">순서논리회로는 플립플롭과 논리게이트로 구성된다.</p><p id="97401220-d319-42bb-8c74-23299098e436" class="">순서논리회로는 신호의 타이밍에 따라 동기식과 비동기식으로 나누어진다.</p><p id="571c3302-e9c2-401b-8c0b-ddeeeb46e720" class="">대표적인 순서논리회로에는 플립플롭, 카운터, 레지스터, RAM, CPU 등이 있다.</p><p id="0707282f-1c48-4633-ab1f-b74a29a46e8c" class="">
+</p><p id="5c0d3bd4-4e43-47df-a010-736d1070d9aa" class="">비동기식 동작 : 논리회로가 규칙적인 시간에 관계없이 입력 신호가 입력되면 곧바로 동작하는 것을 의미</p><p id="4df2ea04-f2d7-4f3c-a5b7-7347acf10f18" class="">동기식 동작: 컴퓨터의 모든 구성 요소들이 서로 타이밍을 맞추어 정보를 주고 받기 위하여 일정한 시간 간격을 두고 클럭 펄스 (CP : Clock Pulse)를 발생시켜서 클럭펄스에 동기화되어 동작하는 것을 말한다. 동기식 동작을 하는 시스템에서는 클럭 펄스가 발생하기 전에 어떤 같이 입력되어도 동작하지 않는다.</p><p id="e68d934c-b7bf-47b5-b038-2e42e708af06" class="">
+</p><p id="cffaead2-4d1e-4c13-a8ee-dbde8ff63299" class="">플립플롭은 레지스터나 반도체 메모리(RAM)의 기본 구성요소로서 2진수 1비트를 저장할 수 있는 능력이 있따는것을 기억하세요.</p><p id="02a6104d-eea1-456a-90b0-6d98cfec9bd8" class="">
+</p><p id="86b32fdc-cec7-424d-9822-bcac1bc0fc9e" class="">반도체기억장치</p><p id="2696fa60-4f61-4383-a554-f8feb7c42ec2" class="">플립플롭은 2진수 1자리를 기억하므로 1KByte를 저장하려면 2^10승이다. 2 ^10 X 8개의 플립플롭이 필요하다.</p><p id="9cf9f06f-71c6-4e9a-9b4d-e907af9dc54c" class="">
+</p><p id="0ab001b9-3baa-4a35-a2f4-e5f848376613" class="">플립플롭은 전원이 공급되고 있는 한 상태의 변화를 위한 외부 신호가 발생할때 까지 현재의 상태를 그대로 유지하는 논리회로이다. </p><p id="715d9f1b-5176-4e8d-b8a7-adb94752053d" class="">플립플로 한 개가 1Bit를 구성하는 2진 셀이다.</p><p id="4bda4590-e3f2-4034-b4d7-3c8a5b025fce" class="">반도체 기억장치에서 2진수 1자리 값을 기억하는 메모리 소자이다.</p><p id="095ee062-8d28-4c9d-aa7e-5c528ba10acb" class="">플립플롭은 레지스터 , RAM, 카운터 등을 구성하는 기본소자이다. </p><p id="fabd1cb6-cad6-4036-b33e-9d1a03b106a6" class="">기본적인 플립플롭은 두 개의 NAND 또는 NOR 게이트 를 이용하여 구성한다.</p><p id="582842b5-d477-47d7-b376-f8ec21cfd90f" class="">
+</p><p id="36cada61-e334-48d7-86f8-7ebfd54dcfea" class="">
+</p><p id="3acc0ef5-c8a0-4dd2-9834-73322e3d7cff" class="">D플립플롭은 RS FF의 R선에 인버터를 추가하고 S선과 하나로 묶어서 만든다.</p><p id="98d69cac-a7a1-4eb2-a9f8-ac26fff9ad95" class="">
+</p><p id="fd4db515-7aa3-4538-b935-2f4a29a513ab" class="">D FF 동작원리</p><p id="52b2e2ed-26ae-48bd-b806-f4f8d6a21146" class="">클럭 펄스가 발생할때 입력선 D로 0이 입력되면 플립플롭에는 그 전에 어떤 값이 기억되어 있뜬 상관없이 무조건 0이 기억되고 입력선 D로 1이 입력되면 무조건 1이 기억된다.</p><p id="305bfbef-6f14-4d68-824d-f1797a4e329b" class="">
+</p><p id="17fc2b11-7fff-4a28-af5a-f6f7da4d1680" class="">레이스</p><p id="fba96d54-06a3-40c6-8e28-26f7577cadd5" class="">순서논리회로에서 플립플롭의 입력이 되는 조합회로의 출력을 플립플롭에서 받아들이는 동안에 플립플롭이 변하고 있으면 이 상태가 조합회로와 플립플롭 사이에 있는 피드백 통로를 통하여 조합회로의 입력으로 전달되므로 회로가 불안정한 상태에서 놓이게 되늰데 이를 레이스 현상이라고 한다.</p><p id="e62f9875-94b3-46ce-a429-aec5329d98a8" class="">
+</p><ol type="1" id="cc03df77-f151-4404-bcd8-cd9a5389a641" class="numbered-list" start="1"><li>플립플롭 회로의 설명으로 틀린것은</li></ol><p id="163fc614-544e-4af5-b5e8-3e35785d4359" class="">1비트의 정보량을 기억하는 기능을 가진다.</p><p id="6ae6f14b-c735-4171-8b91-930f72503a6a" class="">레지스터의 구성회로를 널리 사용된다.</p><p id="dc43ee2d-2a84-40db-a4f6-6fed83dcf2ae" class="">대표적인 조합논리회로에 속한다. (x) 플립플롭 회로는 대표적인 순서논리회로에 속한다.</p><p id="a3782725-365f-4a6f-8ca1-c3e5f548e396" class="">어느 한 상태에서 다른 상태로 동작하기 위해서는 외부의 영향이 작용하여야 한다.</p><p id="d1720fd0-100d-4bdf-ae2e-24672cfee99a" class="">
+</p><ol type="1" id="9db1106a-399f-46be-8ea9-583bbbe8d031" class="numbered-list" start="2"><li>JK플립플롭의 트리거 입력과 상태 전환 조건을 설명한 것중 옳지 않은것은</li></ol><p id="00a4a1a9-d41b-4cb1-a544-780f0b43bc33" class="">J=0, K=0일때 반전되지 않는다.</p><p id="db35b53a-76e4-46f4-93ee-992d1fac29a2" class="">J=0, K=1일때 0으로 되돌아간다.</p><p id="57ce4c73-15e1-43ee-8d15-0808308b8e76" class="">J=1, K=0일때 1로 된다.</p><p id="d9ca248d-c767-42dc-bade-3611766aeec8" class="">J=1, K=0일때 반전된다. (x)</p><p id="850e9dd4-3283-4c6d-af69-894f97da68ed" class="">
+</p><p id="418eb515-c31c-4420-8681-6698f0208503" class="">무 *공 * 일 * 보 </p><p id="4aa63d1f-82f4-473e-8fef-7122f1b86c84" class="">00 = 무(상태변화없음), 01 = 공(항상 0), 10 = 일(항상 1), 11 = 보(보수 , 반전) </p><p id="4b892db2-b5b3-4bfb-a08a-1a6d60a7ae58" class="">
+</p><p id="3edb08a0-5152-4dd1-ae0a-2c4e240c057e" class="">
+</p><ol type="1" id="94f39b12-2051-4a6f-88e8-d0ddc4d74320" class="numbered-list" start="4"><li>순서논리회로 </li></ol><ul id="611de13e-7084-4299-a1bb-6d21d6abed01" class="bulleted-list"><li style="list-style-type:circle">플립플롭회로, 레지스터 회로, 카운터 회로</li></ul><ul id="3f8f3a8d-b697-423f-bfff-a3f8fbe3b2a3" class="bulleted-list"><li style="list-style-type:circle">가산기는 조합논리회로이다.</li></ul><p id="261c2da9-fc93-40eb-8719-1313ab6f9cf6" class="">
+</p><p id="b4df2ebc-748e-4c52-b9d6-cf500030824f" class="">
+</p><p id="c8eeaca7-fcc9-4fb5-97d1-dd04f800d67f" class="">
+</p><p id="c2e54af4-5751-468a-8404-ece99f087ea7" class="">
+</p><p id="7bfef010-21ca-4f6a-be09-2baea3e3e8d9" class="">
+</p><p id="b5e7751a-f2e2-4780-9c1a-387735a491c8" class="">
+</p><p id="fc53dae7-229e-4821-bd42-15e97b6d811a" class="">
+</p><p id="cf5b028d-193e-4c09-a698-a43dda47f473" class="">
+</p><p id="7054b8af-407f-460a-9b82-f0d668448be9" class="">
+</p></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
